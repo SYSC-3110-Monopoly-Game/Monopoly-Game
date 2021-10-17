@@ -5,8 +5,8 @@
 - Project Description
 - Set Up and Test Instructions
 - Authors
-- Iterations
-    - Iteration 1
+- Milestones
+    - Milestone 1
         - Folders/Files included
         - Team Responsibilities
         - Detailed Set Up
@@ -26,11 +26,11 @@ This project is a design and implementation of
 - Shizhong Shang
 - Zirui Qiao
 
-# Iterations
+# Milestones
 
-<details><summary>Iteration 1</summary>
+<details><summary>Milestone 1</summary>
 
-# Iteration 1
+# Milestone 1
 
 ## Folders/Files added
 
