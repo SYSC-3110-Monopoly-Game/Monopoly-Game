@@ -1,3 +1,5 @@
+package Model;
+
 public class PropertySquare extends Square{
     public String getName() {
         return null;

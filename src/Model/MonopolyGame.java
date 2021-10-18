@@ -17,7 +17,6 @@ public class MonopolyGame {
     MonopolyGame(MonopolyBoard b, ArrayList<Player> p) {
         board = b;
         players = p;
-        dice = new Dice();
     }
 
     /*
@@ -25,9 +24,7 @@ public class MonopolyGame {
      * */
     private void movePlayer(Player p) {
 //        roll dice and record the distance.
-        int distance = dice.getTotalValue();
-//        print the number of dices
-        System.out.println("The number of the dice is: " + dice.toString());
+        int distance = rollDices();
 //        print current location
         System.out.println("The current square is " + p.getLocation().toString());
 //            Move players to the square
@@ -55,6 +52,25 @@ public class MonopolyGame {
 //        otherwise, return the player
         else
             return players.get(0);
+    }
+
+    /*
+    *do all needed check when rolling dices
+     */
+    private int rollDices() {
+        dice = new Dice();
+//        roll dices
+        dice.rollDice();
+//        if two dices are same, roll again
+        while (dice.hasDoubles()){
+            dice.rollDice();
+        }
+//        distance equals to the sum of 2 dices
+        int distance = dice.getTotalValue();
+//        print the number of dices
+        System.out.println("The number of the dice is: " + dice.toString());
+
+        return distance;
     }
 
     /*
@@ -162,11 +178,10 @@ public class MonopolyGame {
             op = input.next();
         }
         input.close();
+
 //        y->return true | n->return false
-        return switch (op) {
-            case "y" -> true;
-            default -> false;
-        };
+        if (op.equals("y")) return true;
+        else return false;
     }
 
     /*
