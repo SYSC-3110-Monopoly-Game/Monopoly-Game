@@ -5,55 +5,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-    private ArrayList<PropertySquare> squaresOwn; // the player's owned squares
+    private ArrayList<PropertySquare> squaresOwned; // the player's owned squares
     private String name; // the player's name
-    private Color color;
     private Square atSquare;
     private int cashTotal;
 
     /**
      * Constructor of Player
-     * make an array list for the owner's squares called squaresOwn
+     * make an array list for the owner's squares called squaresOwned
      */
     public Player(String name, int i) {
         this.name = name;
-        this.squaresOwn = new ArrayList<>();
-    }
-
-
-    public void addColor(Color c)
-    {
-        color = c;
-    }
-
-    public Color getColor() {
-        return color;
+        this.squaresOwned = new ArrayList<>();
     }
 
     /**
-     * @ param square is removed from the squaresOwn array list
+     * @ param square is removed from the squaresOwned array list
      */
     public void removeSquare(Square square) {
-        this.squaresOwn.remove(square);
+        this.squaresOwned.remove(square);
     }
 
     /**
-     * get all the countries names from the squareOwn array list
+     * get all the countries names from the squaresOwned array list
      * @ return a list of the owner's squares
      */
-    public String getStatus() {
+
+    public String getOwnedSquares() {
         String s = "";
         s += "Player: " + this.name + " has squares:\n";
-        for (Square square : squaresOwn) {
+        for (Square square : squaresOwned) {
             s += "  " + square.printState() + "\n";
         }
         return s + "\n";
     }
 
 
-    public String getSquaresInString(){
+    public String toString(){
         String s="";
-        for(Square c: squaresOwn){
+        for(Square c: squaresOwned){
             s += c.toString();
         }
         return s;
@@ -66,7 +56,7 @@ public class Player {
         return name;
     }
 
-    public void clear(){this.squaresOwn.clear();}
+    public void clear(){this.squaresOwned.clear();}
 
     public Square getLocation() {
         return this.atSquare;
@@ -97,15 +87,15 @@ public class Player {
     }
 
     /**
-     * @ param square is added into the squaresOwn array list
+     * @ param square is added into the squaresOwned array list
      */
     public void buyProperty(Square location) {
         if(location instanceof PropertySquare){
-            this.squaresOwn.add((PropertySquare) location);
+            this.squaresOwned.add((PropertySquare) location);
         }
     }
 
     public ArrayList<PropertySquare> getProperties() {
-        return squaresOwn;
+        return squaresOwned;
     }
 }
