@@ -5,25 +5,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-    private List<Square> squaresOwn; // the player's owned squares
+    private ArrayList<PropertySquare> squaresOwn; // the player's owned squares
     private String name; // the player's name
     private Color color;
+    private Square atSquare;
+    private int cashTotal;
 
     /**
      * Constructor of Player
      * make an array list for the owner's squares called squaresOwn
      */
-    public Player(String name) {
+    public Player(String name, int i) {
         this.name = name;
         this.squaresOwn = new ArrayList<>();
     }
 
-    /**
-     * @ param square is added into the squaresOwn array list
-     */
-    public void addSquare(Square square) {
-        this.squaresOwn.add(square);
-    }
+
     public void addColor(Color c)
     {
         color = c;
@@ -53,12 +50,6 @@ public class Player {
         return s + "\n";
     }
 
-    /**
-     * @ return squaresOwn array list
-     */
-    public List<Square> getSquaresOwn() { // helper method used for getting all the available countries in a printable list for the player
-        return squaresOwn;
-    }
 
     public String getSquaresInString(){
         String s="";
@@ -76,4 +67,45 @@ public class Player {
     }
 
     public void clear(){this.squaresOwn.clear();}
+
+    public Square getLocation() {
+        return this.atSquare;
+    }
+
+    public void setLocation(Square nextSquare) {
+        this.atSquare = nextSquare;
+    }
+
+    public void decreaseCash(int rentFee) {
+        this.cashTotal -= rentFee;
+    }
+
+    public boolean isBankrupt() {
+        if(this.cashTotal <= 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public void increaseCash(int rentFee) {
+        this.cashTotal += rentFee;
+    }
+
+    public int getCash() {
+        return this.cashTotal;
+    }
+
+    /**
+     * @ param square is added into the squaresOwn array list
+     */
+    public void buyProperty(Square location) {
+        if(location instanceof PropertySquare){
+            this.squaresOwn.add((PropertySquare) location);
+        }
+    }
+
+    public ArrayList<PropertySquare> getProperties() {
+        return squaresOwn;
+    }
 }
