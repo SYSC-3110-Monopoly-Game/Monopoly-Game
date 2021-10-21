@@ -1,6 +1,6 @@
 package Model;
 
-public class PropertySquare extends Square{
+public class PropertySquare extends Square {
 
     private int buyPrice; //price for the player buy this land
     private int rentPrice; //the price that other players need to pay to the owner.
@@ -59,16 +59,20 @@ public class PropertySquare extends Square{
         return owner;
     }
 
-
-    public void landOn (Player p){
-        if (p != this.owner){
-            if (p.getCash < getRentPrice()){
+    public void landOn(Player p) {
+        // if player doesn't own property
+        if (p != this.owner) {
+            // if player doesn't have enough cash to pay rent
+            if (p.getCash() < this.rentPrice) {
+                //player pays all the money they have
                 this.owner.increaseCash(p.getCash());
-                p.setCash(p.getCash - this.rentPrice);
+                p.decreaseCash(this.rentPrice);
             }
+            // if player has enough cash to pay rent
             else {
-                p.decreaseCash(getRentPrice());
+                //player pays rent price
                 this.owner.increaseCash(getRentPrice());
+                p.decreaseCash(getRentPrice());
             }
         }
     }

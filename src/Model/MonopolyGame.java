@@ -28,7 +28,7 @@ public class MonopolyGame {
 //        print current location
         System.out.println("The current square is " + p.getLocation().toString());
 //            Move players to the square
-        p.setLocation(MonopolyBoard.getNextSquare(p.getLocation(), distance));
+        p.setLocation(this.board.getNextSquare(p.getLocation(), distance));
 //        print location after moving
         System.out.println("The square after moving is " + p.getLocation().toString());
     }
@@ -130,12 +130,12 @@ public class MonopolyGame {
                         continue;
                     }
 //                    if not bankrupt the landlord get the cash
-                    ((PropertySquare) p.getLocation()).getOwner().increaseCash(((PropertySquare) p.getLocation()).getRentFee());
+                    ((PropertySquare) p.getLocation()).getOwner().increaseCash(((PropertySquare) p.getLocation()).getRentPrice());
 //                    print the landlord get the rent fee
                     System.out.println(((PropertySquare) p.getLocation()).getOwner() + " has received $" + rentFee);
                 }
 //                check if the player has enough money to buy the square
-                if (p.getCash() - ((PropertySquare) p.getLocation()).getPrice() >= 0) {
+                if (p.getCash() - ((PropertySquare) p.getLocation()).getBuyPrice() >= 0) {
 //                    check if the player want to buy the square
                     if (ifWantToBuy((PropertySquare) p.getLocation())) {
 //                        player buy the square
@@ -168,7 +168,7 @@ public class MonopolyGame {
         Scanner input = new Scanner(System.in);
 //        print out the information of the property that the player can buy
         System.out.println("If you want to buy " + square.getName() + "? (y/n)");
-        System.out.println("Price: " + square.getPrice());
+        System.out.println("Price: " + square.getBuyPrice());
         System.out.println("Color: " + square.getColor());
 //        get command from player
         String op = input.next();
@@ -219,7 +219,7 @@ public class MonopolyGame {
         String owner = currentLocation.getOwner().getName();
 //        if the property has owner and is not this player, return the payment amount
         if (owner != null && !owner.equals(p.getName())) {
-            return currentLocation.getRentFee();
+            return currentLocation.getRentPrice();
 //            else the rent fee is 0
         } else {
             return 0;
