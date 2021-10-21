@@ -1,23 +1,76 @@
 package Model;
 
 public class PropertySquare extends Square{
-    public String getName() {
-        return null;
+
+    private int buyPrice; //price for the player buy this land
+    private int rentPrice; //the price that other players need to pay to the owner.
+    private String color;
+    private boolean sold;
+    private Player owner;
+
+
+    public PropertySquare(String name, int number, int buy, int rent, String color, boolean isSold) {
+        super(name, number);
+        this.buyPrice = buy;
+        this.rentPrice = rent;
+        this.color = color;
+        this.sold = isSold;
     }
 
-    public int getPrice() {
-        return 0;
-    }
-
+    /*
+    get the color of the square
+     */
     public String getColor() {
-        return null;
+        return color;
     }
 
+    /*
+     get the land sale price
+     */
+    public int getBuyPrice() {
+        return buyPrice;
+    }
+
+    /*
+    get the land rent price (square toll)
+     */
+    public int getRentPrice() {
+        return rentPrice;
+    }
+
+    /*
+    if the square has an owner
+     */
+    public boolean isSold() {
+        return sold;
+    }
+
+    /*
+    player who buy this land
+     */
+    public void setOwner(Player owner) {
+        this.owner = owner;
+    }
+
+    /*
+    get the player who own this land
+     */
     public Player getOwner() {
-        return null;
+        return owner;
     }
 
-    public int getRentFee() {
-        return 0;
+
+    public void landOn (Player p){
+        if (p != this.owner){
+            if (p.getCash < getRentPrice()){
+                this.owner.increaseCash(p.getCash());
+                p.setCash(0);
+            }
+            else {
+                p.decreaseCash(getRentPrice());
+                this.owner.increaseCash(getRentPrice());
+            }
+        }
     }
+
 }
