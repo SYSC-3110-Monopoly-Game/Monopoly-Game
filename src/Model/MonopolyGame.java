@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class MonopolyGame {
     public static MonopolyBoard board;
     public static ArrayList<Player> players;
+    public static Scanner input;
     private Dice dice;
 
     MonopolyGame() {
@@ -92,12 +93,11 @@ public class MonopolyGame {
      * */
     private static ArrayList<Player> createPlayers() {
         ArrayList<Player> playerTempList = new ArrayList<>();
-        Scanner input = new Scanner(System.in);
         System.out.print("Please input the number of player (2~4): ");
 //        get the number input
         int number = input.nextInt();
 //        if out of range, input again
-        if (number < 2 || number > 4) {
+        while (number < 2 || number > 4) {
             System.out.print("\nPlease input number in the range 2~4: ");
             number = input.nextInt();
         }
@@ -110,7 +110,6 @@ public class MonopolyGame {
 //            add the initiated players to a temp arraylist
             playerTempList.add(new Player(name, board.startingSquare()));
         }
-        input.close();
         return playerTempList;
     }
 
@@ -143,13 +142,11 @@ public class MonopolyGame {
         check what the command is
     * */
     public static boolean checkCommand() {
-        Scanner input = new Scanner(System.in);
         String op = input.next();
         while (op.charAt(0) != 'y' && op.charAt(0) != 'n') {
             System.out.print("\nPlease input a valid command:(y/n) ");
             op = input.next();
         }
-        input.close();
         if (op.charAt(0) == 'y') {
             return true;
         } else {
@@ -165,7 +162,7 @@ public class MonopolyGame {
             System.out.println(p.getName());
             System.out.println("The player has $" + p.getCash());
             System.out.println("The player has properties: " + p.getProperties());
-            System.out.println("The player is at " + p.getLocation().toString());
+            System.out.println("\nThe player is at " + p.getLocation().toString());
         }
         System.out.println();
         board.displayBoard();
@@ -181,6 +178,7 @@ public class MonopolyGame {
 
     public static void main(String[] args) {
         board = new MonopolyBoard();
+        input = new Scanner(System.in);
         MonopolyGame game = new MonopolyGame(board, createPlayers());
         while (!game.playerWin()) {
             game.printPlayersInfo();
@@ -188,6 +186,7 @@ public class MonopolyGame {
             game.refreshPlayer(tempList);
         }
         System.out.println("Game Over, the winner is: " + game.getWinner().getName());
+        input.close();
     }
 
 
