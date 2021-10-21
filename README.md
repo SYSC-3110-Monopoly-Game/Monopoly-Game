@@ -49,6 +49,8 @@ Shizhong Shang
 
 Zirui Qiao
 
+- Implementing MonopolyGame class
+
 
 ## Detailed Set Up
 
