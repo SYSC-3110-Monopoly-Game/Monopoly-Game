@@ -13,11 +13,11 @@ public class Player {
      * Constructor of Player
      * make an array list for the owner's squares called squaresOwned
      */
-    public Player(String name) {
+    public Player(String name, Square square) {
         this.name = name;
         this.squaresOwned = new ArrayList<>();
         this.cashTotal = 1500;
-        this.atSquare = null;
+        this.setLocation(square);
     }
 
     public String toString(){
@@ -92,22 +92,11 @@ public class Player {
 check is the player want to buy the property
 * */
     public boolean ifWantToBuy(PropertySquare square) {
-        Scanner input = new Scanner(System.in);
 //        print out the information of the property that the player can buy
         System.out.println("If you want to buy " + square.getName() + "? (y/n)");
         System.out.println("Price: " + square.getPrice());
         System.out.println("Color: " + square.getColor());
-//        get command from player
-        String op = input.next();
-//        if command not valid, get command again
-        while (MonopolyGame.checkCommand(op) == -1) {
-            System.out.print("\nPlease input a valid command:(y/n) ");
-            op = input.next();
-        }
-        input.close();
 
-//        y->return true | n->return false
-        if (op.equals("y")) return true;
-        else return false;
+        return MonopolyGame.checkCommand();
     }
 }

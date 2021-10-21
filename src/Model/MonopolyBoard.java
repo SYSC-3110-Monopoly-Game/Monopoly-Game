@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.ArrayList;
+
 public class MonopolyBoard {
 
     private static final int SIZE = 40;
@@ -53,7 +55,7 @@ public class MonopolyBoard {
      */
     public Square getNextSquare(Square location, int distance) {
         int i = location.getId() + distance;
-        if (i > squares.length) return squares[i - squares.length];
+        if (i > 21/*squares.length*/) return squares[i - 21];
         else return squares[i];
     }
 
@@ -68,9 +70,9 @@ public class MonopolyBoard {
      * Prints each square of the board
      */
     public void displayBoard() {
-        for (Square square :
-                squares) {
-            square.toString();
+        for (int i=0; i<22;i++) {
+            System.out.println(squares[i].toString());
         }
+        System.out.println();
     }
 }

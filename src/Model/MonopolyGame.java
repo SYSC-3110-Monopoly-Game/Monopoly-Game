@@ -108,9 +108,7 @@ public class MonopolyGame {
             System.out.print("\nPlease input the name for Player " + (i + 1) + ": ");
             String name = input.nextLine();
 //            add the initiated players to a temp arraylist
-            Player p = new Player(name);
-            p.setLocation(board.startingSquare());
-            playerTempList.add(p);//MonopolyBoard.square[0]));
+            playerTempList.add(new Player(name, board.startingSquare()));
         }
         input.close();
         return playerTempList;
@@ -144,13 +142,18 @@ public class MonopolyGame {
     /*
         check what the command is
     * */
-    public static int checkCommand(String op) {
-        if (op.equals("y")) {
-            return 1;
-        } else if (op.equals("n")) {
-            return 0;
+    public static boolean checkCommand() {
+        Scanner input = new Scanner(System.in);
+        String op = input.next();
+        while (op.charAt(0) != 'y' && op.charAt(0) != 'n') {
+            System.out.print("\nPlease input a valid command:(y/n) ");
+            op = input.next();
+        }
+        input.close();
+        if (op.charAt(0) == 'y') {
+            return true;
         } else {
-            return -1;
+            return false;
         }
     }
 
@@ -164,6 +167,7 @@ public class MonopolyGame {
             System.out.println("The player has properties: " + p.getProperties());
             System.out.println("The player is at " + p.getLocation().toString());
         }
+        System.out.println();
         board.displayBoard();
     }
 
