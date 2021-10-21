@@ -17,29 +17,8 @@ public class Player {
     public Player(String name, int i) {
         this.name = name;
         this.squaresOwned = new ArrayList<>();
+        this.cashTotal = cashTotal;
     }
-
-    /**
-     * @ param square is removed from the squaresOwned array list
-     */
-    public void removeSquare(Square square) {
-        this.squaresOwned.remove(square);
-    }
-
-    /**
-     * get all the countries names from the squaresOwned array list
-     * @ return a list of the owner's squares
-     */
-
-    public String getOwnedSquares() {
-        String s = "";
-        s += "Player: " + this.name + " has squares:\n";
-        for (Square square : squaresOwned) {
-            s += "  " + square.printState() + "\n";
-        }
-        return s + "\n";
-    }
-
 
     public String toString(){
         String s="";
@@ -55,8 +34,6 @@ public class Player {
     public String getName() {
         return name;
     }
-
-    public void clear(){this.squaresOwned.clear();}
 
     public Square getLocation() {
         return this.atSquare;
