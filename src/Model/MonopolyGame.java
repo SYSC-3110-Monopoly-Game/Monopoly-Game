@@ -108,7 +108,9 @@ public class MonopolyGame {
             System.out.print("\nPlease input the name for Player " + (i + 1) + ": ");
             String name = input.nextLine();
 //            add the initiated players to a temp arraylist
-            playerTempList.add(new Player(name, board.startingSquare()));//MonopolyBoard.square[0]));
+            Player p = new Player(name);
+            p.setLocation(board.startingSquare());
+            playerTempList.add(p);//MonopolyBoard.square[0]));
         }
         input.close();
         return playerTempList;
