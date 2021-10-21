@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MonopolyGame {
-    private static MonopolyBoard board;
-    private static ArrayList<Player> players;
+    public static MonopolyBoard board;
+    public static ArrayList<Player> players;
     private Dice dice;
 
     MonopolyGame() {
@@ -28,7 +28,7 @@ public class MonopolyGame {
 //        print current location
         System.out.println("The current square is " + p.getLocation().toString());
 //            Move players to the square
-        p.setLocation(MonopolyBoard.getNextSquare(p.getLocation(), distance));
+        p.setLocation(board.getNextSquare(p.getLocation(), distance));
 //        print location after moving
         System.out.println("The square after moving is " + p.getLocation().toString());
     }
@@ -37,8 +37,8 @@ public class MonopolyGame {
      * check if there is a winner
      * */
     private boolean playerWin() {
-//        if more than 1 player exist, return 1 (keep playing game)
-        //        otherwise, return the 0 (end the game)
+//        if more than 1 player exist, return true (keep playing game)
+        //        otherwise, return the false (end the game)
         return players.size() == 1;
     }
 
@@ -108,7 +108,7 @@ public class MonopolyGame {
             System.out.print("\nPlease input the name for Player " + (i + 1) + ": ");
             String name = input.nextLine();
 //            add the initiated players to a temp arraylist
-            playerTempList.add(new Player(name));//MonopolyBoard.square[0]));
+            playerTempList.add(new Player(name, board.startingSquare()));//MonopolyBoard.square[0]));
         }
         input.close();
         return playerTempList;
@@ -160,6 +160,7 @@ public class MonopolyGame {
             System.out.println(p.getName());
             System.out.println("The player has $" + p.getCash());
             System.out.println("The player has properties: " + p.getProperties());
+            System.out.println("The player is at " + p.getLocation().toString());
         }
         board.displayBoard();
     }
@@ -173,7 +174,8 @@ public class MonopolyGame {
 
 
     public static void main(String[] args) {
-        MonopolyGame game = new MonopolyGame(new MonopolyBoard(), createPlayers());
+        board = new MonopolyBoard();
+        MonopolyGame game = new MonopolyGame(board, createPlayers());
         while (!game.playerWin()) {
             game.printPlayersInfo();
             ArrayList<Player> tempList = game.playRound();

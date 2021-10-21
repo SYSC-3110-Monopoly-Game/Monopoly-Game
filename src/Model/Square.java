@@ -19,8 +19,7 @@ public abstract class Square {
     }
 
     public String toString() {
-//        wait for monopolyboard class
-        return "working";
+        return this.name + " at position: " + this.getId() + "\n";
     }
 
     /*

@@ -13,12 +13,11 @@ public class Player {
      * Constructor of Player
      * make an array list for the owner's squares called squaresOwned
      */
-    public Player(String name) {
+    public Player(String name, Square square) {
         this.name = name;
         this.squaresOwned = new ArrayList<>();
         this.cashTotal = 1500;
-//        wait for monopolyboard class
-        this.atSquare = null;
+        this.atSquare = square;
     }
 
     public String toString(){
