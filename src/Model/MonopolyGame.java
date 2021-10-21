@@ -73,6 +73,20 @@ public class MonopolyGame {
         return distance;
     }
 
+    private boolean checkBankrupt(Player p, ArrayList<Player> tempList){
+//                    check if player is bankrupt
+        if (p.isBankrupt()) {
+            // if can sell properties to be not bankrupt?
+            // if so, sell the selected properties
+            // return false;
+//                        print bankrupt information
+            System.out.println(p.getName() + " is bankrupt, removed from player list");
+//                        if so, remove player from the templist
+            tempList.remove(p);
+        }
+        return true;
+    }
+
     /*
      * ask user to input the number of players and their name
      * */
@@ -94,7 +108,7 @@ public class MonopolyGame {
             System.out.print("\nPlease input the name for Player " + (i + 1) + ": ");
             String name = input.nextLine();
 //            add the initiated players to a temp arraylist
-            playerTempList.add(new Player(name, 0));//MonopolyBoard.square[0]));
+            playerTempList.add(new Player(name));//MonopolyBoard.square[0]));
         }
         input.close();
         return playerTempList;
@@ -108,47 +122,11 @@ public class MonopolyGame {
         for (Player p : players) {
 //            move the current player with a random distance
             movePlayer(p);
-            int rentFee;
 
-//            check if the square can be bought
-            if (p.getLocation() instanceof PropertySquare) {
-//            check if the player need to pay rent fee for this property
-                rentFee = checkRent(p);
-//                if the player need to pay rent fee
-                if (rentFee > 0) {
-//                    player's cash decreases
-                    p.decreaseCash(rentFee);
-//                    print the player pay the rentfee
-                    System.out.println(p.getName() + " has paid $" + rentFee);
+            p.getLocation().landOn(p);
+
 //                    check if player is bankrupt
-                    if (p.isBankrupt()) {
-//                        print bankrupt information
-                        System.out.println(p.getName() + " is bankrupt, removed from player list");
-//                        if so, remove player from the templist
-                        tempList.remove(p);
-//                        go to next player
-                        continue;
-                    }
-//                    if not bankrupt the landlord get the cash
-                    ((PropertySquare) p.getLocation()).getOwner().increaseCash(((PropertySquare) p.getLocation()).getRentFee());
-//                    print the landlord get the rent fee
-                    System.out.println(((PropertySquare) p.getLocation()).getOwner() + " has received $" + rentFee);
-                }
-//                check if the player has enough money to buy the square
-                if (p.getCash() - ((PropertySquare) p.getLocation()).getPrice() >= 0) {
-//                    check if the player want to buy the square
-                    if (ifWantToBuy((PropertySquare) p.getLocation())) {
-//                        player buy the square
-                        p.buyProperty(p.getLocation());
-                    }
-                }
-            }
-//        add other types of square here in else if
-
-            //                    check if player is bankrupt
-            if (p.isBankrupt()) {
-//                        if so, remove player from the templist
-                tempList.remove(p);
+            if (checkBankrupt(p, tempList)) {
 //                        go to next player
                 continue;
             }
@@ -162,32 +140,9 @@ public class MonopolyGame {
     }
 
     /*
-    check is the player want to buy the property
-    * */
-    private boolean ifWantToBuy(PropertySquare square) {
-        Scanner input = new Scanner(System.in);
-//        print out the information of the property that the player can buy
-        System.out.println("If you want to buy " + square.getName() + "? (y/n)");
-        System.out.println("Price: " + square.getPrice());
-        System.out.println("Color: " + square.getColor());
-//        get command from player
-        String op = input.next();
-//        if command not valid, get command again
-        while (checkCommand(op) == -1) {
-            System.out.print("\nPlease input a valid command:(y/n) ");
-            op = input.next();
-        }
-        input.close();
-
-//        y->return true | n->return false
-        if (op.equals("y")) return true;
-        else return false;
-    }
-
-    /*
         check what the command is
     * */
-    private int checkCommand(String op) {
+    public static int checkCommand(String op) {
         if (op.equals("y")) {
             return 1;
         } else if (op.equals("n")) {
@@ -207,23 +162,6 @@ public class MonopolyGame {
             System.out.println("The player has properties: " + p.getProperties());
         }
         board.displayBoard();
-    }
-
-    /*
-     * check if the player need to pay rent fee
-     * */
-    private int checkRent(Player p) {
-//        get the square where the player is standing on
-        PropertySquare currentLocation = (PropertySquare) p.getLocation();
-//        get the name of the square's owner
-        String owner = currentLocation.getOwner().getName();
-//        if the property has owner and is not this player, return the payment amount
-        if (owner != null && !owner.equals(p.getName())) {
-            return currentLocation.getRentFee();
-//            else the rent fee is 0
-        } else {
-            return 0;
-        }
     }
 
     /*
