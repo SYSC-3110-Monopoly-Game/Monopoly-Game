@@ -2,11 +2,12 @@ package Model;
 
 public abstract class Square {
 
-    private String name;
-    private int id;
+    private final String name;
+    private final int id;
 
     public Square(String name, int number){
         this.name = name;
+//        wait for monopolyboard class
         this.id = number;
     }
 
@@ -17,11 +18,15 @@ public abstract class Square {
         return name;
     }
 
+    public String toString() {
+        return this.name + " at position: " + this.getId();
+    }
+
     /*
     get the specific id of the square
      */
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public abstract void landOn (Player p);

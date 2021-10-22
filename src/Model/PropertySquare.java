@@ -2,11 +2,11 @@ package Model;
 
 public class PropertySquare extends Square{
 
-    private int buyPrice; //price for the player buy this land
-    private int rentPrice; //the price that other players need to pay to the owner.
-    private String color;
+    private final int buyPrice; //price for the player buy this land
+    private final int rentPrice; //the price that other players need to pay to the owner.
+    private final String color;
     private boolean sold;
-    private Player owner;
+    private Player owner = null;
 
 
     public PropertySquare(String name, int number, int buy, int rent, String color) {
@@ -27,14 +27,14 @@ public class PropertySquare extends Square{
     /*
      get the land sale price
      */
-    public int getBuyPrice() {
+    public int getPrice() {
         return buyPrice;
     }
 
     /*
     get the land rent price (square toll)
      */
-    public int getRentPrice() {
+    public int getRentFee() {
         return rentPrice;
     }
 
@@ -60,15 +60,43 @@ public class PropertySquare extends Square{
     }
 
 
+    /*
+    * action applied when player lands on this square
+    * */
+    @Override
     public void landOn (Player p){
-        if (p != this.owner){
-            if (p.getCash < getRentPrice()){
-                this.owner.increaseCash(p.getCash());
-                p.setCash(p.getCash - this.rentPrice);
+//        set the rent fee of the location to fee
+        int fee = this.getRentFee();
+//            set the price of the location to price
+        int price = this.getPrice();
+//            set the owner of the location to owner
+        Player owner = this.getOwner();
+//            if the square has an owner and the owner is not this player
+        if (p != owner && owner != null) {
+//                if the player can't afford the rent fee
+            if (p.getCash() < fee) {
+//                    if the player can't sell some properties to keep not bankrupt
+                if (!p.selectWhichToSell(fee)) {
+//                        set the amount to pay  to the player's cash
+                    fee = p.getCash();
+                }
             }
-            else {
-                p.decreaseCash(getRentPrice());
-                this.owner.increaseCash(getRentPrice());
+//                owner get the amount to be paid by the player
+            owner.increaseCash(fee);
+            p.decreaseCash(fee);
+
+//                    print the player paid the rent fee
+            System.out.println(p.getName() + " has paid $" + fee);
+//                    print the landlord get the rent fee
+            System.out.println(owner.getName() + " has received $" + fee);
+        } else if (owner == null) {
+//                check if the player has enough money to buy the square
+            if (p.getCash() - price >= 0) {
+//                    check if the player want to buy the square
+                if (p.ifWantToBuy(this)) {
+//                        player buy the square
+                    p.buyProperty(this);
+                }
             }
         }
     }
