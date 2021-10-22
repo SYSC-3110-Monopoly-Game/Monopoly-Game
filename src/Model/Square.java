@@ -19,7 +19,7 @@ public abstract class Square {
     }
 
     public String toString() {
-        return this.name + " at position: " + this.getId();
+        return this.name + " [" + this.getId() + "]";
     }
 
     /*
