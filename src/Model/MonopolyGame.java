@@ -9,15 +9,65 @@ public class MonopolyGame {
     public static Scanner input;
     private Dice dice;
 
-    MonopolyGame() {
-    }
-
-    MonopolyGame(MonopolyBoard board) {
-    }
-
     MonopolyGame(MonopolyBoard b, ArrayList<Player> p) {
         board = b;
         players = p;
+    }
+
+    /*
+     * ask user to input the number of players and their name
+     * */
+    private static ArrayList<Player> createPlayers() {
+        ArrayList<Player> playerTempList = new ArrayList<>();
+        System.out.println("Welcome to Monopoly Game!!");
+        System.out.print("Please input the number of player (2~4): ");
+//        get the number input
+        int number = input.nextInt();
+//        if out of range, input again
+        while (number < 2 || number > 4) {
+            System.out.print("Please input number in the range 2~4: ");
+            number = input.nextInt();
+        }
+//        pass the input item in register
+        input.nextLine();
+        for (int i = 0; i < number; i++) {
+//            input name for each player
+            System.out.print("Please input the name for Player " + (i + 1) + ": ");
+            String name = input.nextLine();
+//            add the initiated players to a temp arraylist
+            playerTempList.add(new Player(name, board.startingSquare()));
+        }
+        return playerTempList;
+    }
+
+    /*
+        check what the command is
+    * */
+    public static boolean checkCommand() {
+        String op = input.next();
+        while (op.charAt(0) != 'y' && op.charAt(0) != 'n') {
+            System.out.print("\nPlease input a valid command:(y/n) ");
+            op = input.next();
+        }
+        if (op.charAt(0) == 'y') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static void main(String[] args) {
+        board = new MonopolyBoard();
+        input = new Scanner(System.in);
+        MonopolyGame game = new MonopolyGame(board, createPlayers());
+        board.displayBoard();
+        while (!game.playerWin()) {
+            game.printPlayersInfo();
+            ArrayList<Player> tempList = game.playRound();
+            game.refreshPlayer(tempList);
+        }
+        System.out.println("Game Over, the winner is: " + game.getWinner().getName());
+        input.close();
     }
 
     /*
@@ -27,11 +77,13 @@ public class MonopolyGame {
 //        roll dice and record the distance.
         int distance = rollDices();
 //        print current location
-        System.out.println("The current square is " + p.getLocation().toString());
+        System.out.println("Current location: " + p.getLocation().toString());
 //            Move players to the square
-        p.setLocation(board.getNextSquare(p.getLocation(), distance));
+        Square nextSquare = board.getNextSquare(p.getLocation(), distance);
+        nextSquare.landOn(p);
+
 //        print location after moving
-        System.out.println("The square after moving is " + p.getLocation().toString());
+        System.out.println("New location: " + p.getLocation().toString() + "\n");
     }
 
     /*
@@ -56,25 +108,27 @@ public class MonopolyGame {
     }
 
     /*
-    *do all needed check when rolling dices
+     *do all needed check when rolling dices
      */
     private int rollDices() {
         dice = new Dice();
 //        roll dices
         dice.rollDice();
 //        if two dices are same, roll again
-        while (dice.hasDoubles()){
+        while (dice.hasDoubles()) {
             dice.rollDice();
         }
 //        distance equals to the sum of 2 dices
         int distance = dice.getTotalValue();
 //        print the number of dices
-        System.out.println("The number of the dice is: " + dice.toString());
+        System.out.println("\t Dice Rolled!!\n" + dice.toString());
+        System.out.println("+-------------------------+");
+
 
         return distance;
     }
 
-    private boolean checkBankrupt(Player p, ArrayList<Player> tempList){
+    private boolean checkBankrupt(Player p, ArrayList<Player> tempList) {
 //                    check if player is bankrupt
         if (p.isBankrupt()) {
             // if can sell properties to be not bankrupt?
@@ -89,40 +143,17 @@ public class MonopolyGame {
     }
 
     /*
-     * ask user to input the number of players and their name
-     * */
-    private static ArrayList<Player> createPlayers() {
-        ArrayList<Player> playerTempList = new ArrayList<>();
-        System.out.print("Please input the number of player (2~4): ");
-//        get the number input
-        int number = input.nextInt();
-//        if out of range, input again
-        while (number < 2 || number > 4) {
-            System.out.print("\nPlease input number in the range 2~4: ");
-            number = input.nextInt();
-        }
-//        pass the input item in register
-        input.nextLine();
-        for (int i = 0; i < number; i++) {
-//            input name for each player
-            System.out.print("\nPlease input the name for Player " + (i + 1) + ": ");
-            String name = input.nextLine();
-//            add the initiated players to a temp arraylist
-            playerTempList.add(new Player(name, board.startingSquare()));
-        }
-        return playerTempList;
-    }
-
-    /*
     A round of playing for every player
     */
     private ArrayList<Player> playRound() {
         ArrayList<Player> tempList = players;
         for (Player p : players) {
 //            move the current player with a random distance
-            movePlayer(p);
+            System.out.println("+----------+");
+            System.out.println("NEXT ROUND : " + p.getName());
+            System.out.println("+----------+");
 
-            p.getLocation().landOn(p);
+            movePlayer(p);
 
 //                    check if player is bankrupt
             if (checkBankrupt(p, tempList)) {
@@ -139,33 +170,17 @@ public class MonopolyGame {
     }
 
     /*
-        check what the command is
-    * */
-    public static boolean checkCommand() {
-        String op = input.next();
-        while (op.charAt(0) != 'y' && op.charAt(0) != 'n') {
-            System.out.print("\nPlease input a valid command:(y/n) ");
-            op = input.next();
-        }
-        if (op.charAt(0) == 'y') {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /*
      * display all needed information about players
      * */
     private void printPlayersInfo() {
+        System.out.println("\n+-------------------+");
         for (Player p : players) {
-            System.out.println(p.getName());
-            System.out.println("The player has $" + p.getCash());
-            System.out.println("The player has properties: " + p.getProperties());
-            System.out.println("\nThe player is at " + p.getLocation().toString());
+            System.out.println("\nPlayer #" + (players.indexOf(p)+1) + " " + p.getName());
+            System.out.println("Cash = $ " + p.getCash());
+            System.out.println("Properties = " + p.getProperties());
+            System.out.println("Current location =  " + p.getLocation().toString());
         }
-        System.out.println();
-        board.displayBoard();
+        System.out.println("+-------------------+\n");
     }
 
     /*
@@ -173,20 +188,6 @@ public class MonopolyGame {
      * */
     private void refreshPlayer(ArrayList<Player> tempList) {
         players = tempList;
-    }
-
-
-    public static void main(String[] args) {
-        board = new MonopolyBoard();
-        input = new Scanner(System.in);
-        MonopolyGame game = new MonopolyGame(board, createPlayers());
-        while (!game.playerWin()) {
-            game.printPlayersInfo();
-            ArrayList<Player> tempList = game.playRound();
-            game.refreshPlayer(tempList);
-        }
-        System.out.println("Game Over, the winner is: " + game.getWinner().getName());
-        input.close();
     }
 
 

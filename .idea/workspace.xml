@@ -3,8 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="43077c38-a935-4d19-b703-437d9de55580" name="Changes" comment="Second Edition">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Monopoly-Game.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Monopoly-Game.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/MonopolyBoard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/MonopolyBoard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/MonopolyGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/MonopolyGame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/PropertySquare.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/PropertySquare.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/Square.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/Square.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/MonopolyBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/MonopolyBoard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/MonopolyGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/MonopolyGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/PropertySquare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/PropertySquare.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Square.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,5 +128,15 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Second Edition" />
     <option name="LAST_COMMIT_MESSAGE" value="Second Edition" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.util.ConcurrentModificationException" package="java.util" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

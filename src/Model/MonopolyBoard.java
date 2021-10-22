@@ -70,7 +70,12 @@ public class MonopolyBoard {
      * Prints each square of the board
      */
     public void displayBoard() {
-        for (int i=0; i<22;i++) {
+        System.out.println("\n+--------------------------+");
+        System.out.println("Board Squares with positions");
+        System.out.println("+--------------------------+\n");
+
+        for (int i = 0; i < 22; i++) {
+
             System.out.println(squares[i].toString());
         }
         System.out.println();

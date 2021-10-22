@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Player {
-    private ArrayList<PropertySquare> squaresOwned; // the player's owned squares
     private final String name; // the player's name
+    private ArrayList<PropertySquare> squaresOwned; // the player's owned squares
     private Square atSquare;
     private int cashTotal;
 
@@ -20,9 +20,9 @@ public class Player {
         this.setLocation(square);
     }
 
-    public String toString(){
-        StringBuilder s= new StringBuilder();
-        for(Square c: squaresOwned){
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        for (Square c : squaresOwned) {
             s.append(c.toString());
         }
         return s.toString();
@@ -63,7 +63,7 @@ public class Player {
      * @ param square is added into the squaresOwned array list
      */
     public void buyProperty(Square location) {
-        if(location instanceof PropertySquare){
+        if (location instanceof PropertySquare) {
 //            add the property to player's properties list
             this.squaresOwned.add((PropertySquare) location);
 //            set the owner of the square to this player
@@ -78,8 +78,8 @@ public class Player {
     }
 
     /*
-    * select from owned properties that which want to be sold
-    * */
+     * select from owned properties that which want to be sold
+     * */
     public boolean selectWhichToSell(int fee) {
 //        if sell some properties and the cash will be greater than 1
 //        return true
@@ -93,9 +93,8 @@ check is the player want to buy the property
 * */
     public boolean ifWantToBuy(PropertySquare square) {
 //        print out the information of the property that the player can buy
-        System.out.println("If you want to buy " + square.getName() + "? (y/n)");
-        System.out.println("Price: " + square.getPrice());
-        System.out.println("Color: " + square.getColor());
+        System.out.println("Do you want to buy " + square.getName() + "? (y/n)");
+        System.out.println("Price: $" + square.getPrice() + "\tColor: " + square.getColor());
 
         return MonopolyGame.checkCommand();
     }
