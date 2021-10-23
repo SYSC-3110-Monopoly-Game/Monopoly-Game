@@ -2,5 +2,13 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Elevator-System-Simulation" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Graph-Reporting-Tool" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Hydrangea" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Merkato-Web-App" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/React-Projects" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Visualize" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Web-Dev-Fundamentals" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/the-shoppies" vcs="Git" />
   </component>
 </project>
