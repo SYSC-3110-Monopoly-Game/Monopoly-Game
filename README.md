@@ -46,14 +46,12 @@ Liya Abebe
 Rebbeca Li
 
 Shizhong Shang
+  
+- Implementing Player class
 
 Zirui Qiao
 
 - Implementing MonopolyGame class
-- Implementing ifWantToBuy method and selectWhichToSell method in class Player
-- Fixed buyProperty method in class Player
-- Fixed landOn method in class PropertySquare
-- Fixed toString method in class Square
 
 
 ## Detailed Set Up
