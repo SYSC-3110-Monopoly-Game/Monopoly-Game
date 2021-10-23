@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="43077c38-a935-4d19-b703-437d9de55580" name="Changes" comment="fixed the problem that when more than 2 players exists, the arraylist using send error">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+    <list default="true" id="fa4109ea-8c6a-4317-9caa-d97b41307364" name="Changes" comment="fixed the problem that when more than 2 players exists, the arraylist using send error">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Monopoly-Game.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Monopoly-Game.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/MonopolyGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/MonopolyGame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/UML and Sequence Diagrams/uml.drawio" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/test.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Dice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Model/Dice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Model/MonopolyGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Model/MonopolyGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/MonopolyBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Model/MonopolyBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/MonopolyGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Model/MonopolyGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Model/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/PropertySquare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Model/PropertySquare.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Model/Square.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/test.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
