@@ -46,8 +46,6 @@ Liya Abebe
 Rebbeca Li
 
 Shizhong Shang
-  
-- Implementing Player class
 
 Zirui Qiao
 

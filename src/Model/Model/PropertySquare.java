@@ -65,6 +65,8 @@ public class PropertySquare extends Square{
     * */
     @Override
     public void landOn (Player p){
+        p.setLocation(this);
+
 //        set the rent fee of the location to fee
         int fee = this.getRentFee();
 //            set the price of the location to price
@@ -86,6 +88,7 @@ public class PropertySquare extends Square{
             p.decreaseCash(fee);
 
 //                    print the player paid the rent fee
+            System.out.println("!!!You need to pay rent!!!");
             System.out.println(p.getName() + " has paid $" + fee);
 //                    print the landlord get the rent fee
             System.out.println(owner.getName() + " has received $" + fee);
