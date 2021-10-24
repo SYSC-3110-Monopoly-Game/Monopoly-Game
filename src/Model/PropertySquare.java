@@ -1,6 +1,6 @@
 package Model;
 
-public class PropertySquare extends Square{
+public class PropertySquare extends Square {
 
     private final int buyPrice; //price for the player buy this land
     private final int rentPrice; //the price that other players need to pay to the owner.
@@ -46,6 +46,13 @@ public class PropertySquare extends Square{
     }
 
     /*
+    get the player who own this land
+     */
+    public Player getOwner() {
+        return owner;
+    }
+
+    /*
     player who buy this land
      */
     public void setOwner(Player owner) {
@@ -53,18 +60,10 @@ public class PropertySquare extends Square{
     }
 
     /*
-    get the player who own this land
-     */
-    public Player getOwner() {
-        return owner;
-    }
-
-
-    /*
-    * action applied when player lands on this square
-    * */
+     * action applied when player lands on this square
+     * */
     @Override
-    public void landOn (Player p){
+    public void landOn(Player p) {
         p.setLocation(this);
 
 //        set the rent fee of the location to fee

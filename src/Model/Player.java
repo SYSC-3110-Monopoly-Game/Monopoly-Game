@@ -78,8 +78,8 @@ public class Player {
     }
 
     /*
-    * select from owned properties that which want to be sold
-    * */
+     * select from owned properties that which want to be sold
+     * */
     public boolean selectWhichToSell(int fee) {
 //        if sell some properties and the cash will be greater than 1
 //        return true

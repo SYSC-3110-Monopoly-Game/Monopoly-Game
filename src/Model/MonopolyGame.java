@@ -175,7 +175,7 @@ public class MonopolyGame {
     private void printPlayersInfo() {
         System.out.println("\n+-------------------+");
         for (Player p : players) {
-            System.out.println("\nPlayer #" + (players.indexOf(p)+1) + " " + p.getName());
+            System.out.println("\nPlayer #" + (players.indexOf(p) + 1) + " " + p.getName());
             System.out.println("Cash = $ " + p.getCash());
             System.out.println("Properties = " + p.getProperties());
             System.out.println("Current location =  " + p.getLocation().toString());
