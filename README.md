@@ -44,6 +44,10 @@ Liya Abebe
 - Initial README setup
  
 Rebbeca Li
+    
+- Implementing Square class
+- Implementing PropertySquare class
+- updating UML
 
 Shizhong Shang
   
