@@ -1,18 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="43077c38-a935-4d19-b703-437d9de55580" name="Changes" comment="Second Edition">
+    <list default="true" id="3275609c-0aa0-48c2-8f0d-0e66a186f1b6" name="Changes" comment="Second Edition">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/MonopolyBoard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/MonopolyBoard.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/MonopolyGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/MonopolyGame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/PropertySquare.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/PropertySquare.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/Square.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/Square.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/MonopolyBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/MonopolyBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/MonopolyGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/MonopolyGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/PropertySquare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/PropertySquare.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Square.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Model/MonopolyGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Model/MonopolyGame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +37,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.29551452" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunManager" selected="Application.MonopolyGame">
     <configuration name="MonopolyBoard" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -89,7 +82,6 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.MonopolyGame" />
-        <item itemvalue="Application.test" />
         <item itemvalue="Application.MonopolyBoard" />
       </list>
     </recent_temporary>
@@ -97,7 +89,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="43077c38-a935-4d19-b703-437d9de55580" name="Changes" comment="" />
+      <changelist id="3275609c-0aa0-48c2-8f0d-0e66a186f1b6" name="Changes" comment="" />
       <created>1634588777488</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />

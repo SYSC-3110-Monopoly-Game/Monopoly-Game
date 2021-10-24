@@ -138,8 +138,9 @@ public class MonopolyGame {
             System.out.println(p.getName() + " is bankrupt, removed from player list");
 //                        if so, remove player from the templist
             tempList.remove(p);
+            return true;
         }
-        return true;
+        return false;
     }
 
     /*
@@ -162,9 +163,8 @@ public class MonopolyGame {
             }
 //            press enter to go to the next player turn
             System.out.println("Press <Enter> to pass your turn to next player");
-            Scanner input = new Scanner(System.in);
             input.nextLine();
-            input.close();
+            input.nextLine();
         }
         return tempList;
     }
