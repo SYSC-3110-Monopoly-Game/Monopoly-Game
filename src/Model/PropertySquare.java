@@ -9,12 +9,12 @@ public class PropertySquare extends Square{
     private Player owner;
 
 
-    public PropertySquare(String name, int number, int buy, int rent, String color, boolean isSold) {
+    public PropertySquare(String name, int number, int buy, int rent, String color) {
         super(name, number);
         this.buyPrice = buy;
         this.rentPrice = rent;
         this.color = color;
-        this.sold = isSold;
+        this.sold = false;
     }
 
     /*
@@ -64,7 +64,7 @@ public class PropertySquare extends Square{
         if (p != this.owner){
             if (p.getCash < getRentPrice()){
                 this.owner.increaseCash(p.getCash());
-                p.setCash(0);
+                p.setCash(p.getCash - this.rentPrice);
             }
             else {
                 p.decreaseCash(getRentPrice());
