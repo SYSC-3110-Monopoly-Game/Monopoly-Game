@@ -5,7 +5,7 @@ public abstract class Square {
     private final String name;
     private final int id;
 
-    public Square(String name, int number){
+    public Square(String name, int number) {
         this.name = name;
 //        wait for monopolyboard class
         this.id = number;
@@ -29,5 +29,5 @@ public abstract class Square {
         return this.id;
     }
 
-    public abstract void landOn (Player p);
+    public abstract void landOn(Player p);
 }
