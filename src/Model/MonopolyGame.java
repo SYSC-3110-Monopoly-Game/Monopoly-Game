@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MonopolyGame {
-    public static MonopolyBoard board;
-    public static ArrayList<Player> players;
-    public static Scanner input;
+    private static MonopolyBoard board;
+    private static ArrayList<Player> players;
+    private static Scanner input;
     private Dice dice;
 
     MonopolyGame(MonopolyBoard b, ArrayList<Player> p) {
