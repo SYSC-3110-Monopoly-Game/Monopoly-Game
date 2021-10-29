@@ -8,6 +8,7 @@ public class FreeParkingSquare extends Square {
 
     @Override
     public void landOn(Player p) {
+        p.setLocation(this);
         System.out.println("!!!Oh, it's free!!!");
     }
 }
