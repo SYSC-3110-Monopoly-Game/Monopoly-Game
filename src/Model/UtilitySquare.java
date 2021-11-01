@@ -11,5 +11,4 @@ public class UtilitySquare extends PropertySquare{
     public int getRentFee() {
         return rentPrice;
     }
-
 }

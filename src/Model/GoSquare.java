@@ -1,5 +1,6 @@
 package Model;
 
+
 public class GoSquare extends Square{
     private final int addMoney;
 

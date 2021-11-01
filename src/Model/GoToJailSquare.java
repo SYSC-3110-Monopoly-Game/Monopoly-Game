@@ -11,4 +11,5 @@ public class GoToJailSquare extends Square {
         p.setLocation(this);
         System.out.println("GO TO JAIL");
     }
+
 }
