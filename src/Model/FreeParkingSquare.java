@@ -7,9 +7,13 @@ public class FreeParkingSquare extends Square {
         super(name, number);
     }
 
+    /** Player gets a free parking
+     *
+     * @param p
+     */
     @Override
     public void landOn(Player p) {
         p.setLocation(this);
-        System.out.println("!!!Oh, it's free!!!");
+        System.out.println("Free Parking for player " + p.getName());
     }
 }

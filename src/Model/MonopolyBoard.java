@@ -1,12 +1,9 @@
 package Model;
 
-import java.util.ArrayList;
-
 public class MonopolyBoard {
 
     private static final int SIZE = 40;
-    private Square[] squares;
-    private int buyPrice = 50, rentPrice = 30;
+    private final Square[] squares;
 
     public MonopolyBoard() {
         squares = new Square[SIZE];
@@ -18,6 +15,8 @@ public class MonopolyBoard {
      */
     private void makeSquares() {
         int i = 0;
+        int buyPrice = 50;
+        int rentPrice = 30;
         squares[i] = new PropertySquare("Mediterranean Avenue", i++, buyPrice, rentPrice, "brown");
         squares[i] = new PropertySquare("Baltic Avenue", i++, buyPrice, rentPrice, "brown");
 
@@ -54,7 +53,7 @@ public class MonopolyBoard {
      * Returns the square located at the specified distance from the specified square
      */
     public Square getNextSquare(Square location, int distance) {
-        int i = location.getId() + distance;
+        int i = location.getNumber() + distance;
         if (i > 21/*squares.length*/) return squares[i - 21];
         else return squares[i];
     }

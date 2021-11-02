@@ -2,14 +2,21 @@ package Model;
 
 public class GoToJailSquare extends Square {
 
-    public GoToJailSquare(String name, int number) {
+    JailSquare jail;
+
+    public GoToJailSquare(String name, int number, JailSquare jail) {
         super(name, number);
+        this.jail = jail;
     }
 
+    /** Sends player to Jail Square when player lands on square
+     *
+     * @param p
+     */
     @Override
     public void landOn(Player p){
-        p.setLocation(this);
-        System.out.println("GO TO JAIL");
+        this.jail.landOn(p);
+        System.out.println("Oh no! You have to go to jail player " + p.getName());
     }
 
 }

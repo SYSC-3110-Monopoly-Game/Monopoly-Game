@@ -1,22 +1,32 @@
 package Model;
 
-
 public class GoSquare extends Square{
     private final int addMoney;
 
+    /** Represents the GO Square
+     *
+     * @param name
+     * @param number
+     * @param money
+     */
     public GoSquare(String name, int number, int money) {
         super(name, number);
         this.addMoney = money;
     }
 
-    private int getAddMoney() {
-        return addMoney;
-    }
+    /** Returns the GO Square money
+     *
+     * @return amount of money a player gets when they pass go
+     */
+    private int getAddMoney() {return addMoney;}
 
+    /** Player passed GO square, gets free money
+     *
+     * @param p
+     */
     @Override
     public void landOn(Player p) {
-        int money = this.getAddMoney();
-        System.out.println("!!!You will get some money!!!");
-        System.out.println(p.getName() + " got $" + money);
+        p.increaseCash(this.addMoney);
+        System.out.println("You passed GO Square! You will get " + this.addMoney);
     }
 }
