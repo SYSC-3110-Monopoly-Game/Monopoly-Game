@@ -3,12 +3,11 @@ package Model;
 public abstract class Square {
 
     private final String name;
-    private final int id;
+    private final int number;
 
     public Square(String name, int number) {
         this.name = name;
-//        wait for monopolyboard class
-        this.id = number;
+        this.number = number;
     }
 
     /*
@@ -19,14 +18,14 @@ public abstract class Square {
     }
 
     public String toString() {
-        return this.name + " [" + this.getId() + "]";
+        return this.name + " [" + this.getNumber() + "]";
     }
 
     /*
     get the specific id of the square
      */
-    public int getId() {
-        return this.id;
+    public int getNumber() {
+        return this.number;
     }
 
     public abstract void landOn(Player p);
