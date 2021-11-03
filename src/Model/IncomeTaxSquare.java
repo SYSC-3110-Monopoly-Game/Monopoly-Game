@@ -1,11 +1,13 @@
 package Model;
 
+import java.awt.*;
+
 public class IncomeTaxSquare extends Square {
 
     private final int incomeTax;
+    public IncomeTaxSquare(String name, int number, int tax, Color color) {
 
-    public IncomeTaxSquare(String name, int number, int tax) {
-        super(name, number);
+        super(name, number, color);
         this.incomeTax = tax;
     }
 

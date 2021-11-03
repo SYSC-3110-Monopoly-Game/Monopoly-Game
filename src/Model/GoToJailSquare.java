@@ -1,11 +1,13 @@
 package Model;
 
+import java.awt.*;
+
 public class GoToJailSquare extends Square {
 
     JailSquare jail;
 
     public GoToJailSquare(String name, int number, JailSquare jail) {
-        super(name, number);
+        super(name, number, Color.BLACK);
         this.jail = jail;
     }
 
