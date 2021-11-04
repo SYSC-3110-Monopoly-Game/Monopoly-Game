@@ -1,15 +1,18 @@
 package Model;
 
+import java.awt.Color;
+import java.util.HashMap;
+
 public class PropertySquare extends Square {
 
     private final int buyPrice; //price for the player buy this land
     private final int rentPrice; //the price that other players need to pay to the owner.
-    private final String color;
+    private final Color color;
     private boolean sold;
     private Player owner = null;
 
 
-    public PropertySquare(String name, int number, int buy, int rent, String color) {
+    public PropertySquare(String name, int number, int buy, int rent, Color color) {
         super(name, number);
         this.buyPrice = buy;
         this.rentPrice = rent;
@@ -20,8 +23,8 @@ public class PropertySquare extends Square {
     /**
      * gets the color of the square
      */
-    public String getColor() {
-        return color;
+    public Color getColor() {
+        return Color.BLACK;
     }
 
     /**
@@ -73,7 +76,8 @@ public class PropertySquare extends Square {
         //if the square has an owner and the owner is not this player
         if (p != owner && owner != null) {
 //            if the owner of this square is in jail
-            if (MonopolyBoard.jail.getMap().containsKey(p)) {
+            HashMap jail = MonopolyBoard.jail.getMap();
+            if (jail != null && jail.containsKey(p)) {
                 System.out.println("The owner is in jail, no need to pay rent fee");
             } else {
                 //owner gets paid by the player

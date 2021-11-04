@@ -20,7 +20,8 @@ public class Dice {
      */
     public int[] rollDice() {
         for (int i = 0; i < 2; i++) {
-            int singleDie = this.random.nextInt(6) + 1;
+
+            int singleDie = this.random.nextInt(6)+1;
             this.dice[i] = singleDie;
         }
         return this.dice;
@@ -45,14 +46,5 @@ public class Dice {
      */
     public String toString() {
         return "Dice #1 = " + this.dice[0] + "\t\t" + "Dice #2 = " + this.dice[1];
-    }
-
-    //to be deleted later. Test for Dice class
-    public static void main(String[] args) {
-        Dice dice = new Dice();
-        int[] d = dice.rollDice();
-
-        System.out.println(dice.toString());
-        System.out.println(d[0] + " " + d[1]);
     }
 }

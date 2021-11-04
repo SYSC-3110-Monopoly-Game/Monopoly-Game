@@ -1,10 +1,15 @@
 package Model;
 
+import java.awt.*;
+
 public class MonopolyBoard {
+
 
     private static final int SIZE = 40;
     private final Square[] squares;
     public static JailSquare jail;
+    private int buyPrice = 50, rentPrice = 30;
+
 
     public MonopolyBoard() {
         squares = new Square[SIZE];
@@ -16,62 +21,59 @@ public class MonopolyBoard {
      */
     private void makeSquares() {
         int i = 0;
-        int buyPrice = 50;
-        int rentPrice = 30;
         int goMoney = 50;
         int incomeTax = 100;
 
-        squares[i] = new GoSquare(i++, goMoney);
-        squares[i] = new PropertySquare("Mediterranean Avenue", i++, buyPrice, rentPrice, "brown");
+        squares[i] = new GoSquare("GO", i++, Color.WHITE, goMoney);
+        squares[i] = new PropertySquare("Mediterranean Avenue", i++, buyPrice, rentPrice, Color.GRAY);
         squares[i] = new FreeParkingSquare("Community Chest", i++);
-        squares[i] = new PropertySquare("Baltic Avenue", i++, buyPrice, rentPrice, "brown");
+        squares[i] = new PropertySquare("Baltic Avenue", i++, buyPrice, rentPrice, Color.GRAY);
         squares[i] = new IncomeTaxSquare("Income Tax", i++, incomeTax);
 
-        squares[i] = new RailRoadSquare("Reading ReilRoad", i++, buyPrice, rentPrice);
-        squares[i] = new PropertySquare("Oriental Avenue", i++, buyPrice, rentPrice, "light blue");
+        squares[i] = new RailRoadSquare("Reading ReilRoad", i++, buyPrice, rentPrice, Color.BLACK);
+        squares[i] = new PropertySquare("Oriental Avenue", i++, buyPrice, rentPrice, Color.CYAN);
         squares[i] = new FreeParkingSquare("Chance", i++);
-        squares[i] = new PropertySquare("Vermont Avenue", i++, buyPrice, rentPrice, "light blue");
-        squares[i] = new PropertySquare("Connecticut Avenue", i++, buyPrice, rentPrice, "light blue");
+        squares[i] = new PropertySquare("Vermont Avenue", i++, buyPrice, rentPrice, Color.CYAN);
+        squares[i] = new PropertySquare("Connecticut Avenue", i++, buyPrice, rentPrice, Color.CYAN);
 
         squares[i] = new JailSquare("Jail", i);
 
         jail = (JailSquare) squares[i];
         i++;
-        squares[i] = new PropertySquare("St. Charles Place", i++, buyPrice, rentPrice, "pink");
-        squares[i] = new UtilitySquare("Electric Company", i++, buyPrice, rentPrice);
-        squares[i] = new PropertySquare("States Avenue", i++, buyPrice, rentPrice, "pink");
-        squares[i] = new PropertySquare("Virginia Avenue", i++, buyPrice, rentPrice, "pink");
+        squares[i] = new PropertySquare("St. Charles Place", i++, buyPrice, rentPrice, Color.PINK);
+        squares[i] = new UtilitySquare("Electric Company", i++, buyPrice, rentPrice, Color.WHITE);
+        squares[i] = new PropertySquare("States Avenue", i++, buyPrice, rentPrice, Color.PINK);
+        squares[i] = new PropertySquare("Virginia Avenue", i++, buyPrice, rentPrice, Color.PINK);
 
-        squares[i] = new RailRoadSquare("Pennsylvania RailRoad", i++, buyPrice, rentPrice);
-        squares[i] = new PropertySquare("St. James Place", i++, buyPrice, rentPrice, "orange");
+        squares[i] = new RailRoadSquare("Pennsylvania RailRoad", i++, buyPrice, rentPrice, Color.BLACK);
+        squares[i] = new PropertySquare("St. James Place", i++, buyPrice, rentPrice, Color.ORANGE);
         squares[i] = new FreeParkingSquare("Community Chest", i++);
-        squares[i] = new PropertySquare("Tennessee Avenue", i++, buyPrice, rentPrice, "orange");
-        squares[i] = new PropertySquare("New York Avenue", i++, buyPrice, rentPrice, "orange");
+        squares[i] = new PropertySquare("Tennessee Avenue", i++, buyPrice, rentPrice, Color.ORANGE);
+        squares[i] = new PropertySquare("New York Avenue", i++, buyPrice, rentPrice, Color.ORANGE);
 
         squares[i] = new FreeParkingSquare("Free Parking", i++);
-        squares[i] = new PropertySquare("Kentucky Avenue", i++, buyPrice, rentPrice, "red");
+        squares[i] = new PropertySquare("Kentucky Avenue", i++, buyPrice, rentPrice, Color.RED);
         squares[i] = new FreeParkingSquare("Chance", i++);
-        squares[i] = new PropertySquare("Indiana Avenue", i++, buyPrice, rentPrice, "red");
-        squares[i] = new PropertySquare("Illinois Avenue", i++, buyPrice, rentPrice, "red");
+        squares[i] = new PropertySquare("Indiana Avenue", i++, buyPrice, rentPrice, Color.RED);
+        squares[i] = new PropertySquare("Illinois Avenue", i++, buyPrice, rentPrice, Color.RED);
 
-        squares[i] = new RailRoadSquare("B.& O. RailRoad", i++, buyPrice, rentPrice);
-        squares[i] = new PropertySquare("Atlantic Avenue", i++, buyPrice, rentPrice, "yellow");
-        squares[i] = new PropertySquare("Ventnor Avenue", i++, buyPrice, rentPrice, "yellow");
-        squares[i] = new UtilitySquare("Water Works", i++, buyPrice, rentPrice);
-        squares[i] = new PropertySquare("Marvin Gardens", i++, buyPrice, rentPrice, "yellow");
+        squares[i] = new RailRoadSquare("B.& O. RailRoad", i++, buyPrice, rentPrice, Color.BLACK);
+        squares[i] = new PropertySquare("Atlantic Avenue", i++, buyPrice, rentPrice, Color.YELLOW);
+        squares[i] = new PropertySquare("Ventnor Avenue", i++, buyPrice, rentPrice, Color.YELLOW);
+        squares[i] = new UtilitySquare("Water Works", i++, buyPrice, rentPrice, Color.WHITE);
+        squares[i] = new PropertySquare("Marvin Gardens", i++, buyPrice, rentPrice, Color.YELLOW);
 
         squares[i] = new GoToJailSquare("Go to jail", i++, jail);
-        squares[i] = new PropertySquare("Pacific Avenue", i++, buyPrice, rentPrice, "green");
-        squares[i] = new PropertySquare("North Carolina Avenue", i++, buyPrice, rentPrice, "green");
+        squares[i] = new PropertySquare("Pacific Avenue", i++, buyPrice, rentPrice, Color.GREEN);
+        squares[i] = new PropertySquare("North Carolina Avenue", i++, buyPrice, rentPrice, Color.GREEN);
         squares[i] = new FreeParkingSquare("Community Chest", i++);
-        squares[i] = new PropertySquare("Pennsylvania Avenue", i++, buyPrice, rentPrice, "green");
+        squares[i] = new PropertySquare("Pennsylvania Avenue", i++, buyPrice, rentPrice, Color.GREEN);
 
-        squares[i] = new RailRoadSquare("Short Line", i++, buyPrice, rentPrice);
+        squares[i] = new RailRoadSquare("Short Line", i++, buyPrice, rentPrice, Color.BLACK);
         squares[i] = new FreeParkingSquare("Chance", i++);
-        squares[i] = new PropertySquare("Park Place", i++, buyPrice, rentPrice, "dark blue");
+        squares[i] = new PropertySquare("Park Place", i++, buyPrice, rentPrice, Color.BLUE);
         squares[i] = new IncomeTaxSquare("Luxury Tax", i++, incomeTax);
-        squares[i] = new PropertySquare("Boardwalk", i, buyPrice, rentPrice, "dark blue");
-
+        squares[i] = new PropertySquare("Boardwalk", i, buyPrice, rentPrice, Color.blue);
     }
 
     /**
@@ -79,7 +81,7 @@ public class MonopolyBoard {
      */
     public Square getNextSquare(Square location, int distance) {
         int i = location.getNumber() + distance;
-        if (i > squares.length) return squares[i - SIZE];
+        if (i >= squares.length) return squares[i - SIZE];
         else return squares[i];
     }
 

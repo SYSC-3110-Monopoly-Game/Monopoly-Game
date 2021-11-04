@@ -1,5 +1,7 @@
 package Model;
 
+import java.awt.Color;
+
 public abstract class Square {
 
     private final String name;
