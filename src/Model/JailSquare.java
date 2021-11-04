@@ -19,21 +19,25 @@ public class JailSquare extends Square {
         map.put(p, map.get(p) + 1);
     }
 
-    /** Adds player to jail hashmap
+    /** Player is passing by and is not in jail
      *
      * @param p
      */
     @Override
     public void landOn(Player p) {
         p.setLocation(this);
-        map.put(p, 1);
     }
 
-    /** Player is passing by and is not in jail
+    /** Adds player to jail hashmap
      *
      * @param p
      */
-    public void passingBy(Player p){
+    public void goJail(Player p) {
         p.setLocation(this);
+        map.put(p, 0);
+    }
+
+    public HashMap<Player, Integer> getMap() {
+        return map;
     }
 }

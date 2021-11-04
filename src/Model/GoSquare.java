@@ -9,8 +9,8 @@ public class GoSquare extends Square{
      * @param number
      * @param money
      */
-    public GoSquare(String name, int number, int money) {
-        super(name, number);
+    public GoSquare(int number, int money) {
+        super("Go", number);
         this.addMoney = money;
     }
 

@@ -1,7 +1,6 @@
 package Model;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Player {
     private final String name;
@@ -21,7 +20,7 @@ public class Player {
     }
 
 
-    /** Returns the name of plater
+    /** Returns the name of player
      * @return name
      */
     public String getName() {
@@ -80,7 +79,7 @@ public class Player {
      * @return boolean
      */
     public boolean isBankrupt() {
-        return this.cashTotal <= 0;
+        return this.cashTotal < 0;
     }
 
     /**
@@ -94,6 +93,17 @@ public class Player {
             ((PropertySquare) location).setOwner(this);
             //reset the player's cash
             this.decreaseCash(((PropertySquare) location).getPrice());
+        }
+    }
+
+    /**
+     * @ param square is removed from the squaresOwned array list
+     */
+    public void sellProperty(Square property){
+        if (property instanceof PropertySquare) {
+            this.squaresOwned.remove(property);
+            ((PropertySquare) property).setOwner(null);
+            this.increaseCash(((PropertySquare) property).getPrice()/2);
         }
     }
 

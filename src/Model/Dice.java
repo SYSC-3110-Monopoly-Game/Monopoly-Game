@@ -20,7 +20,7 @@ public class Dice {
      */
     public int[] rollDice() {
         for (int i = 0; i < 2; i++) {
-            int singleDie = this.random.nextInt(7);
+            int singleDie = this.random.nextInt(6) + 1;
             this.dice[i] = singleDie;
         }
         return this.dice;
