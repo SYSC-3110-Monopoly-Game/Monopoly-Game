@@ -1,15 +1,17 @@
 package Model;
 
+import java.awt.Color;
+
 public class PropertySquare extends Square {
 
     private final int buyPrice; //price for the player buy this land
     private final int rentPrice; //the price that other players need to pay to the owner.
-    private final String color;
+    private final Color color;
     private boolean sold;
     private Player owner = null;
 
 
-    public PropertySquare(String name, int number, int buy, int rent, String color) {
+    public PropertySquare(String name, int number, int buy, int rent, Color color) {
         super(name, number);
         this.buyPrice = buy;
         this.rentPrice = rent;
@@ -20,8 +22,8 @@ public class PropertySquare extends Square {
     /**
      * gets the color of the square
      */
-    public String getColor() {
-        return color;
+    public Color getColor() {
+        return Color.BLACK;
     }
 
     /**

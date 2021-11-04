@@ -1,7 +1,12 @@
 package Model;
 
+import java.awt.Color;
+
 public class GoSquare extends Square{
     private final int addMoney;
+    private Color color;
+
+
 
     /** Represents the GO Square
      *
@@ -9,7 +14,7 @@ public class GoSquare extends Square{
      * @param number
      * @param money
      */
-    public GoSquare(String name, int number, int money) {
+    public GoSquare(String name, int number, Color color, int money) {
         super(name, number);
         this.addMoney = money;
     }
@@ -29,4 +34,8 @@ public class GoSquare extends Square{
         p.increaseCash(this.addMoney);
         System.out.println("You passed GO Square! You will get " + this.addMoney);
     }
+    public int getPrice(){
+        return 0;
+    }
+
 }
