@@ -6,7 +6,7 @@ import java.awt.*;
 public class FreeParkingSquare extends Square {
 
     public FreeParkingSquare(String name, int number) {
-        super(name, number, Color.BLACK);
+        super(name, number);
     }
 
     /** Player gets a free parking

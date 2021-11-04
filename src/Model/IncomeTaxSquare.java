@@ -1,13 +1,13 @@
 package Model;
 
-import java.awt.*;
+import java.awt.Color;
 
 public class IncomeTaxSquare extends Square {
 
     private final int incomeTax;
-    public IncomeTaxSquare(String name, int number, int tax, Color color) {
+    public IncomeTaxSquare(String name, int number, int tax) {
 
-        super(name, number, color);
+        super(name, number);
         this.incomeTax = tax;
     }
 
@@ -29,5 +29,9 @@ public class IncomeTaxSquare extends Square {
         else{
             System.out.println(p.getName() + " is bankrupt");
         }
+    }
+
+    public int getTax() {
+        return this.incomeTax;
     }
 }

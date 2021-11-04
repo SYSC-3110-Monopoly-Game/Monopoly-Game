@@ -1,6 +1,6 @@
 package Model;
 
-import java.awt.*;
+import java.awt.Color;
 
 public class RailRoadSquare extends PropertySquare {
 

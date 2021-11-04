@@ -1,14 +1,14 @@
 package Model;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.HashMap;
 
 public class JailSquare extends Square {
 
     private HashMap<Player, Integer> map;
 
-    public JailSquare(String name,int number, Color color) {
-        super(name,1,color);
+    public JailSquare(String name,int number) {
+        super(name,number);
     }
 
     /**

@@ -7,7 +7,7 @@ public class GoToJailSquare extends Square {
     JailSquare jail;
 
     public GoToJailSquare(String name, int number, JailSquare jail) {
-        super(name, number, Color.BLACK);
+        super(name, number);
         this.jail = jail;
     }
 

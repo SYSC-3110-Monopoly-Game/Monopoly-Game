@@ -8,6 +8,8 @@ public class InfoDisplayGUI extends JPanel {
     public InfoDisplayGUI() {
         this.setBackground(Color.LIGHT_GRAY);
         this.add(new JLabel("Welcome to Tutorials Point"));
+        this.setPreferredSize(new Dimension(400, 600));
+
 
     }
 }

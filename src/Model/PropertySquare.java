@@ -1,6 +1,6 @@
 package Model;
 
-import java.awt.*;
+import java.awt.Color;
 
 public class PropertySquare extends Square {
 
@@ -12,7 +12,7 @@ public class PropertySquare extends Square {
 
 
     public PropertySquare(String name, int number, int buy, int rent, Color color) {
-        super(name, number, color);
+        super(name, number);
         this.buyPrice = buy;
         this.rentPrice = rent;
         this.color = color;
