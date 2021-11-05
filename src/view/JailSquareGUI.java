@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class JailSquareGUI extends JPanel {
+public class JailSquareGUI extends SquareGUI {
     private final JPanel colorTag;
     private final JPanel jailTag;
 
@@ -27,7 +27,7 @@ public class JailSquareGUI extends JPanel {
         this.add(jailTag, BorderLayout.PAGE_END);
     }
 
-    public void addPassingPlayer(String name) {
+    public void addPlayer(String name) {
         PlayerGUI player = new PlayerGUI(name);
         this.colorTag.add(player);
     }

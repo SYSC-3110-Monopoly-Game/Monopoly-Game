@@ -1,5 +1,7 @@
 package Model;
 
+import view.PlayerGUI;
+
 import java.util.ArrayList;
 
 public class Player {
@@ -7,6 +9,8 @@ public class Player {
     private ArrayList<PropertySquare> squaresOwned;
     private Square atSquare;
     private int cashTotal;
+
+    public PlayerGUI playerGUI;
 
     /**
      * Constructor of Player
@@ -17,6 +21,7 @@ public class Player {
         this.squaresOwned = new ArrayList<>();
         this.cashTotal = 300;
         this.setLocation(square);
+        this.playerGUI = new PlayerGUI(name);
     }
 
 

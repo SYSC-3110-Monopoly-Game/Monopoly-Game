@@ -1,11 +1,15 @@
 package Model;
 
+import view.SquareGUI;
+
+import javax.swing.*;
 import java.awt.Color;
 
 public abstract class Square {
 
     private final String name;
     private final int number;
+    public SquareGUI gui;
 
     public Square(String name, int number) {
         this.name = name;
@@ -31,4 +35,6 @@ public abstract class Square {
     }
 
     public abstract void landOn(Player p);
+
+    public abstract void landOff(Player p);
 }

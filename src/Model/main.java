@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class main {
-    public static void main(String[] args) {
+    public main() {
 
-        MonopolyGame game = new MonopolyGame(new MonopolyBoard());
+        MonopolyGame game = new MonopolyGame();
         game.getBoard().displayBoard();
         while (!game.playerWin()) {
             game.printPlayersInfo();
@@ -15,5 +15,9 @@ public class main {
         }
         game.closeScanner();
         System.out.println("Game Over, the winner is: " + game.getWinner().getName());
+    }
+
+    public static void main(String[] args) {
+        new main();
     }
 }

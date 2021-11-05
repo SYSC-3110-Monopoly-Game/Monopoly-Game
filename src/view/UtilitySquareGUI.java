@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class UtilitySquareGUI extends JPanel {
+public class UtilitySquareGUI extends SquareGUI {
 
     private String type;
     private JPanel colorTag;
@@ -34,7 +34,7 @@ public class UtilitySquareGUI extends JPanel {
         this.colorTag.add(player);
     }
 
-    public void removePlayer(String name) {
+    public void removePlayer(String name, boolean inJail) {
         Component components[] = this.getComponents();
         for (Component label : components
         ) {

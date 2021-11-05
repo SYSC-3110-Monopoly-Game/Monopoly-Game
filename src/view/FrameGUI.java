@@ -1,5 +1,7 @@
 package view;
 
+import Model.MonopolyBoard;
+import Model.MonopolyGame;
 import Model.Square;
 
 import javax.swing.*;
@@ -11,13 +13,13 @@ public class FrameGUI extends JFrame {
     public FrameGUI() {
         //adding frame settings
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setPreferredSize(new Dimension(1400, 700));
+        this.setPreferredSize(new Dimension(1700, 1000));
 
         this.setLayout(new BorderLayout(10,10));
 
         //TODO get the square array properly from constructor
-        Square[] squares = new Square[33];
-        SquareGridGUI square = new SquareGridGUI(squares);
+        MonopolyGame game = new MonopolyGame();
+        SquareGridGUI square = new SquareGridGUI(MonopolyGame.getBoard());
         this.add(square, BorderLayout.WEST);
 
         InfoDisplayGUI infoDisplayGUI = new InfoDisplayGUI();

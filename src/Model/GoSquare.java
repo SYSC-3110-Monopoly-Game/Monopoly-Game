@@ -1,9 +1,12 @@
 package Model;
 
+import view.GoSquareGUI;
+
 import java.awt.Color;
 
 public class GoSquare extends Square{
     private final int addMoney;
+    public GoSquareGUI gui;
     private Color color;
 
 
@@ -16,6 +19,7 @@ public class GoSquare extends Square{
      */
     public GoSquare(String name, int number, Color color, int money) {
         super(name, number);
+        this.gui = new GoSquareGUI();
         this.addMoney = money;
     }
 
@@ -34,8 +38,14 @@ public class GoSquare extends Square{
     @Override
     public void landOn(Player p) {
         p.setLocation(this);
+        this.gui.addPlayer(p.getName());
         p.increaseCash(this.addMoney);
         System.out.println("You passed GO Square! You will get " + this.addMoney);
+    }
+
+    @Override
+    public void landOff(Player p) {
+        this.gui.removePlayer(p.getName(), false);
     }
 
 }

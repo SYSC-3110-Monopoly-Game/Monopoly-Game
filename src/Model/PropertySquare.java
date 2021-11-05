@@ -1,5 +1,6 @@
 package Model;
 
+import view.PropertySquareGUI;
 import java.awt.Color;
 import java.util.HashMap;
 
@@ -10,10 +11,12 @@ public class PropertySquare extends Square {
     private final Color color;
     private boolean sold;
     private Player owner = null;
+    public PropertySquareGUI gui;
 
 
     public PropertySquare(String name, int number, int buy, int rent, Color color) {
         super(name, number);
+        this.gui = new PropertySquareGUI(color, name, String.valueOf(buy));
         this.buyPrice = buy;
         this.rentPrice = rent;
         this.color = color;
@@ -68,6 +71,7 @@ public class PropertySquare extends Square {
     @Override
     public void landOn(Player p) {
         p.setLocation(this);
+        this.gui.addPlayer(p.getName());
 
         int fee = this.getRentFee();
         int price = this.getPrice();
@@ -99,6 +103,11 @@ public class PropertySquare extends Square {
                 }
             }
         }
+    }
+
+    @Override
+    public void landOff(Player p) {
+        this.gui.removePlayer(p.getName(), false);
     }
 
 }

@@ -16,6 +16,10 @@ public class MonopolyBoard {
         makeSquares();
     }
 
+    public Square[] getSquares() {
+        return squares;
+    }
+
     /**
      * Populates the board with Squares.
      */

@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class RailRoadSquareGUI extends JPanel {
+public class RailRoadSquareGUI extends SquareGUI {
     private final JPanel colorTag;
 
     public RailRoadSquareGUI(int buyPrice) {
@@ -30,7 +30,7 @@ public class RailRoadSquareGUI extends JPanel {
         this.colorTag.add(player);
     }
 
-    public void removePlayer(String name) {
+    public void removePlayer(String name, boolean inJail) {
         Component[] components = this.getComponents();
         for (Component label : components
         ) {
