@@ -58,6 +58,8 @@ public class SquareGridGUI extends JPanel {
 
         squareList[i] = new PropertySquare("Pacific Avenue", i++, buyPrice, rentPrice, Color.BLACK);
         squareList[i] = new PropertySquare("North Carolina Avenue", i++, buyPrice, rentPrice, Color.BLACK);
+
+        //not used square
         squareList[i] = new PropertySquare("Pennsylvania Avenue", i++, buyPrice, rentPrice, Color.BLACK);
 
         squareList[i] = new PropertySquare("Park Place", i++, buyPrice, rentPrice, Color.BLACK);
@@ -166,30 +168,112 @@ public class SquareGridGUI extends JPanel {
         //12th Square
         c.gridy = 3;
         PropertySquare property8 = (PropertySquare) squareList[12];
-        PropertySquareGUI propertyGUI8 = new PropertySquareGUI(property5.getColor(), property5.getName(), String.valueOf(property5.getPrice()));
+        PropertySquareGUI propertyGUI8 = new PropertySquareGUI(property8.getColor(), property8.getName(), String.valueOf(property8.getPrice()));
 
         this.add(propertyGUI8, c);
 
         //13th Square
         c.gridy = 2;
-        PropertySquare property9 = (PropertySquare) squareList[12];
-        PropertySquareGUI propertyGUI9 = new PropertySquareGUI(property5.getColor(), property5.getName(), String.valueOf(property5.getPrice()));
+        PropertySquare property9 = (PropertySquare) squareList[13];
+        PropertySquareGUI propertyGUI9 = new PropertySquareGUI(property9.getColor(), property9.getName(), String.valueOf(property9.getPrice()));
 
         this.add(propertyGUI9, c);
 
-        //13th Square
+        //14th Square
+        c.gridx = 1;
+        c.gridy = 2;
+        PropertySquare property10 = (PropertySquare) squareList[14];
+        PropertySquareGUI propertyGUI10 = new PropertySquareGUI(property10.getColor(), property10.getName(), String.valueOf(property10.getPrice()));
+
+        this.add(propertyGUI10, c);
+
+        //15th Square
+        c.gridx = 2;
+        c.gridy = 2;
+        PropertySquare property11 = (PropertySquare) squareList[15];
+        PropertySquareGUI propertyGUI11 = new PropertySquareGUI(property11.getColor(), property11.getName(), String.valueOf(property11.getPrice()));
+
+        this.add(propertyGUI11, c);
+
+        //16th Square
+        c.gridx = 3;
+        c.gridy = 2;
+        PropertySquare property12 = (PropertySquare) squareList[16];
+        PropertySquareGUI propertyGUI12 = new PropertySquareGUI(property12.getColor(), property12.getName(), String.valueOf(property12.getPrice()));
+
+        this.add(propertyGUI12, c);
+
+        //17th Square
+        c.gridx = 4;
+        c.gridy = 2;
+        PropertySquare property13 = (PropertySquare) squareList[17];
+        PropertySquareGUI propertyGUI13 = new PropertySquareGUI(property13.getColor(), property13.getName(), String.valueOf(property13.getPrice()));
+
+        this.add(propertyGUI13, c);
+
+        //18th Square
+        c.gridx = 5;
+        c.gridy = 2;
+        PropertySquare property14 = (PropertySquare) squareList[18];
+        PropertySquareGUI propertyGUI14 = new PropertySquareGUI(property14.getColor(), property14.getName(), String.valueOf(property14.getPrice()));
+
+        this.add(propertyGUI14, c);
+
+        //19th Square
+        c.gridx = 6;
+        c.gridy = 2;
+        PropertySquare property15 = (PropertySquare) squareList[19];
+        PropertySquareGUI propertyGUI15 = new PropertySquareGUI(property15.getColor(), property15.getName(), String.valueOf(property15.getPrice()));
+
+        this.add(propertyGUI15, c);
+
+        //20th Square
+        c.gridx = 7;
+        c.gridy = 2;
+        PropertySquare property16 = (PropertySquare) squareList[20];
+        PropertySquareGUI propertyGUI16 = new PropertySquareGUI(property16.getColor(), property16.getName(), String.valueOf(property16.getPrice()));
+
+        this.add(propertyGUI16, c);
+
+        //21st Square (Free Parking)
         c.gridx = 8;
         c.gridy = 2;
-
-        //F property9 = (PropertySquare) squareList[12];
         FreeParkingSquareGUI freeParking = new FreeParkingSquareGUI();
 
         this.add(freeParking, c);
 
-        //F property9 = (PropertySquare) squareList[12];
+        //22nd Square (Go To Gail)
         GoToJailGUI goToJail = new GoToJailGUI();
         c.gridy = 3;
         this.add(goToJail, c);
+
+        //23rd Square
+        c.gridy = 4;
+        PropertySquare property17 = (PropertySquare) squareList[21];
+        PropertySquareGUI propertyGUI17 = new PropertySquareGUI(property17.getColor(), property17.getName(), String.valueOf(property17.getPrice()));
+
+        this.add(propertyGUI17, c);
+
+        //24th Square
+        c.gridy = 5;
+        PropertySquare property18 = (PropertySquare) squareList[22];
+        PropertySquareGUI propertyGUI18 = new PropertySquareGUI(property18.getColor(), property18.getName(), String.valueOf(property18.getPrice()));
+
+        this.add(propertyGUI18, c);
+
+        //24th Square
+        c.gridy = 6;
+        PropertySquare property19 = (PropertySquare) squareList[23];
+        PropertySquareGUI propertyGUI19 = new PropertySquareGUI(property19.getColor(), property19.getName(), String.valueOf(property19.getPrice()));
+
+        this.add(propertyGUI19, c);
+
+        //24th Square
+        c.gridy = 7;
+        PropertySquare property20 = (PropertySquare) squareList[24];
+        PropertySquareGUI propertyGUI20 = new PropertySquareGUI(property20.getColor(), property20.getName(), String.valueOf(property20.getPrice()));
+
+        this.add(propertyGUI20, c);
 
 
     }
