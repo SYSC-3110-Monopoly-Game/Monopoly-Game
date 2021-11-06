@@ -1,5 +1,7 @@
 package Model;
 
+import view.GoToJailGUI;
+
 import java.awt.*;
 
 public class GoToJailSquare extends Square {
@@ -17,7 +19,7 @@ public class GoToJailSquare extends Square {
      */
     @Override
     public void landOn(Player p){
-        this.jail.landOn(p);
+        this.jail.goJail(p);
         System.out.println("Oh no! You have to go to jail player " + p.getName());
     }
 

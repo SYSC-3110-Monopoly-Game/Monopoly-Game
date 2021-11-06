@@ -3,7 +3,7 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
-public class PropertySquareGUI extends JPanel {
+public class PropertySquareGUI extends SquareGUI{
 
     private final JPanel colorTag;
 
@@ -37,7 +37,7 @@ public class PropertySquareGUI extends JPanel {
         this.repaint();
     }
 
-    public void removePlayer(String name) {
+    public void removePlayer(String name, boolean inJail) {
         Component[] components = this.colorTag.getComponents();
         for (Component label : components
         ) {

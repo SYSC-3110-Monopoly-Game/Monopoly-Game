@@ -1,6 +1,8 @@
 package Model;
 
 
+import view.FreeParkingSquareGUI;
+
 import java.awt.*;
 
 public class FreeParkingSquare extends Square {
@@ -18,4 +20,5 @@ public class FreeParkingSquare extends Square {
         p.setLocation(this);
         System.out.println("Free Parking for player " + p.getName());
     }
+
 }

@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
-public class FreeParkingSquareGUI extends JPanel {
+public class FreeParkingSquareGUI extends SquareGUI {
     private final JPanel colorTag;
 
     public FreeParkingSquareGUI() {
@@ -22,12 +22,13 @@ public class FreeParkingSquareGUI extends JPanel {
         this.add(colorTag, BorderLayout.PAGE_START);
     }
 
+    @Override
     public void addPlayer(String name) {
         PlayerGUI player = new PlayerGUI(name);
         this.colorTag.add(player);
     }
 
-    public void removePlayer(String name) {
+    public void removePlayer(String name, boolean inJail) {
         Component[] components = this.colorTag.getComponents();
         Arrays.stream(components).forEach(label -> {
             JLabel player = (JLabel) label;
