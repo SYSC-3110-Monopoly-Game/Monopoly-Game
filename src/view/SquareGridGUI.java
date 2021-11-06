@@ -8,13 +8,13 @@ import java.awt.*;
 public class SquareGridGUI extends JPanel {
     Square[] square;
 
-    public SquareGridGUI(MonopolyBoard board) {
-        this.square = board.getSquares();
+    public SquareGridGUI(Square[] square) {
+        this.square = square;
         this.setBackground(new Color(205, 230, 208));
         this.setLayout(new GridBagLayout());
         this.setPreferredSize(new Dimension(1300, 600));
 
-        //this.makeSquares();
+        this.makeSquares();
         this.createSquareGUI();
 
     }
@@ -65,7 +65,7 @@ public class SquareGridGUI extends JPanel {
 
     }
 
-    private void LoadSquareGUI(Square square, GridBagConstraints c) {
+   /* private void LoadSquareGUI(Square square, GridBagConstraints c) {
         if (square instanceof GoSquare){
             this.add(((GoSquare) square).gui, c);
 
@@ -90,7 +90,7 @@ public class SquareGridGUI extends JPanel {
         } else if (square instanceof FreeParkingSquare) {
             this.add(((FreeParkingSquare) square).gui, c);
         }
-    }
+    }*/
 
     private void createSquareGUI() {
 
@@ -98,11 +98,11 @@ public class SquareGridGUI extends JPanel {
         c.weightx = 0.5;
         c.insets = new Insets(1, 0, 1, 0);  //top padding
 
-        NewMethod(c);
-        //originalMethod(c);
+        //NewMethod(c);
+        originalMethod(c);
     }
 
-    public void NewMethod(GridBagConstraints c){
+    /*public void NewMethod(GridBagConstraints c){
         for(int j=0; j < 4; j++){
             for(int i=0; i < 10; i++){
                 switch (j) {
@@ -130,7 +130,7 @@ public class SquareGridGUI extends JPanel {
                 LoadSquareGUI(square[j*10 + i], c);
             }
         }
-    }
+    }*/
 
     public void originalMethod(GridBagConstraints c) {
 

@@ -18,8 +18,9 @@ public class FrameGUI extends JFrame {
         this.setLayout(new BorderLayout(10,10));
 
         //TODO get the square array properly from constructor
-        MonopolyGame game = new MonopolyGame();
-        SquareGridGUI square = new SquareGridGUI(MonopolyGame.getBoard());
+        //MonopolyGame game = new MonopolyGame();
+        Square[] squares = new Square[32];
+        SquareGridGUI square = new SquareGridGUI(squares);
         this.add(square, BorderLayout.WEST);
 
         InfoDisplayGUI infoDisplayGUI = new InfoDisplayGUI();

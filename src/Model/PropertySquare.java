@@ -11,12 +11,10 @@ public class PropertySquare extends Square {
     private final Color color;
     private boolean sold;
     private Player owner = null;
-    public PropertySquareGUI gui;
 
 
     public PropertySquare(String name, int number, int buy, int rent, Color color) {
         super(name, number);
-        this.gui = new PropertySquareGUI(color, name, String.valueOf(buy));
         this.buyPrice = buy;
         this.rentPrice = rent;
         this.color = color;
@@ -71,7 +69,6 @@ public class PropertySquare extends Square {
     @Override
     public void landOn(Player p) {
         p.setLocation(this);
-        this.gui.addPlayer(p.getName());
 
         int fee = this.getRentFee();
         int price = this.getPrice();
@@ -81,7 +78,7 @@ public class PropertySquare extends Square {
         if (p != owner && owner != null) {
 //            if the owner of this square is in jail
             HashMap jail = MonopolyBoard.jail.getMap();
-            if (jail != null && jail.containsKey(p)) {
+            if (jail != null && jail.containsKey(owner)) {
                 System.out.println("The owner is in jail, no need to pay rent fee");
             } else {
                 //owner gets paid by the player
@@ -103,11 +100,6 @@ public class PropertySquare extends Square {
                 }
             }
         }
-    }
-
-    @Override
-    public void landOff(Player p) {
-        this.gui.removePlayer(p.getName(), false);
     }
 
 }

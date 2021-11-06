@@ -62,13 +62,12 @@ public class MonopolyGame {
      * */
     public void movePlayer(Player p, int distance) {
         Square currentLocation = p.getLocation();
-        currentLocation.landOff(p);
 //        print current location
         //System.out.println("Current location: " + currentLocation.toString());
 //            Move players to the square
         Square nextSquare = board.getNextSquare(p.getLocation(), distance);
 
-        if(currentLocation.getNumber() > nextSquare.getNumber()) {
+        if(currentLocation.getNumber() > nextSquare.getNumber() && nextSquare.getNumber() != 0) {
             board.startingSquare().landOn(p);
         }
         //        print location after moving
@@ -113,16 +112,21 @@ public class MonopolyGame {
                 distance = -1;
             }
         } else {
-            do {
+
+                //        roll dices
+            dice.rollDice();
+                //        print the number of dices
+            System.out.println("\t Dice Rolled!!\n" + dice.toString());
+            System.out.println("+-------------------------+");
+            //counter count the number of dices being rolled
+//        if two dices are same and have rolled less than 3 times, roll again
+            while (dice.hasDoubles() && ++counter < 3){
                 //        roll dices
                 dice.rollDice();
                 //        print the number of dices
                 System.out.println("\t Dice Rolled!!\n" + dice.toString());
                 System.out.println("+-------------------------+");
             }
-            //counter count the number of dices being rolled
-//        if two dices are same and have rolled less than 3 times, roll again
-            while (dice.hasDoubles() && counter++ < 3);
 
 //        if rolled 3 doubles
             if (counter >= 3){
@@ -190,15 +194,19 @@ public class MonopolyGame {
             if (distance > 0){
                 movePlayer(p, distance);
 
+                if(MonopolyBoard.jail.getMap().containsKey(p)){
+                    MonopolyBoard.jail.goOutJail(p);
+                }
+
 //              check if player is bankrupt
                 if (checkBankrupt(p, tempList)) {
 //              go to next player
                     continue;
                 }
             } else if (distance == -1 && !injail) {
-                System.out.println("You have rolled three doubles");
-                MonopolyBoard.jail.landOn(p);
-            } else if (distance == -1 && injail){
+                System.out.println("You have rolled three doubles\nYou have go to jail");
+                MonopolyBoard.jail.goJail(p);
+            } else if (distance == -1){
                 System.out.println("You are still in jail");
             }
 //            press enter to go to the next player turn
@@ -206,6 +214,7 @@ public class MonopolyGame {
             input.nextLine();
 
         }
+        MonopolyBoard.jail.IncrementJail();
         return tempList;
     }
 
@@ -234,15 +243,20 @@ public class MonopolyGame {
     public boolean ifInJail(Player p){
         HashMap jail = MonopolyBoard.jail.getMap();
         if (jail != null && jail.containsKey(p)){
-            if (MonopolyBoard.jail.getMap().get(p) <= 3){
+            if (MonopolyBoard.jail.getMap().get(p) < 3){
                 System.out.println("Do you wish to go out of the jail by paying $50?:(y/n) ");
-                if (!checkCommand()) {
+                if (checkCommand()) {
                     p.decreaseCash(50);
                     MonopolyBoard.jail.goOutJail(p);
+                    return false;
+                } else {
                     return true;
                 }
+            } else {
+                MonopolyBoard.jail.goOutJail(p);
+                p.decreaseCash(50);
+                System.out.println("You have go out of the jail!");
             }
-            MonopolyBoard.jail.goOutJail(p);
         }
         return false;
     }
