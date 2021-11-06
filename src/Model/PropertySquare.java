@@ -74,29 +74,28 @@ public class PropertySquare extends Square {
         int price = this.getPrice();
 
         Player owner = this.getOwner();
-        //if the square has an owner and the owner is not this player
-        if (p != owner && owner != null) {
-//            if the owner of this square is in jail
-            HashMap jail = MonopolyBoard.jail.getMap();
-            if (jail != null && jail.containsKey(owner)) {
-                System.out.println("The owner is in jail, no need to pay rent fee");
-            } else {
-                //owner gets paid by the player
-                owner.increaseCash(fee);
-                p.decreaseCash(fee);
 
-                //print the player paid the rent fee
-                System.out.println("!!!You need to pay rent!!!");
-                System.out.println(p.getName() + " has paid $" + fee);
-                System.out.println(owner.getName() + " has received $" + fee);
+        if (p != owner && owner != null) {              // if the property has an owner and the owner is not this player
+
+            HashMap jail = MonopolyBoard.jail.getMap();
+            if (jail != null && jail.containsKey(owner)) {                  // if the owner of this property is in jail
+                System.out.println("The owner is in jail, no need to pay rent fee");    // do not pay rent fee
+            } else {                                                        // if the owner is not in jail
+
+                owner.increaseCash(fee);                                    // owner gets paid by the player
+                p.decreaseCash(fee);                                        // player cash decreases
+
+                System.out.println("!!!You need to pay rent!!!");           //
+                System.out.println(p.getName() + " has paid $" + fee);      // print the player paid the rent fee
+                System.out.println(owner.getName() + " has received $" + fee);//
             }
-        } else if (owner == null) {
-           //check if the player has enough money to buy the square
-            if (p.getCash() - price >= 0) {
-                //check if the player want to buy the square
-                System.out.println("your cash is: " + p.getCash());
-                if (p.ifWantToBuy(this)) {
-                    p.buyProperty(this);
+        } else if (owner == null) {                                         // if this property has no owner
+
+            if (p.getCash() - price >= 0) {                     // if the player has enough money to buy the square
+
+                System.out.println("your cash is: " + p.getCash());     // show player's cash
+                if (p.ifWantToBuy(this)) {                      // if the player is willing to buy the square
+                    p.buyProperty(this);                        // player buy the property!!
                 }
             }
         }

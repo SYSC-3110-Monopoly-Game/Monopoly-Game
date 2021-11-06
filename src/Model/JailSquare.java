@@ -47,6 +47,8 @@ public class JailSquare extends Square {
         this.map.remove(p);
     }
 
+    /** increment all counters for players in jail
+     * */
     public void IncrementJail() {
         if(!map.isEmpty()){
             for(Map.Entry<Player, Integer> entry : map.entrySet()) {

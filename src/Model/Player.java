@@ -92,12 +92,9 @@ public class Player {
      */
     public void buyProperty(Square location) {
         if (location instanceof PropertySquare) {
-            //add the property to player's properties list
-            this.squaresOwned.add((PropertySquare) location);
-            //set the owner of the square to this player
-            ((PropertySquare) location).setOwner(this);
-            //reset the player's cash
-            this.decreaseCash(((PropertySquare) location).getPrice());
+            this.squaresOwned.add((PropertySquare) location);           // add the property to player's properties list
+            ((PropertySquare) location).setOwner(this);                 // set the owner of the property to this player
+            this.decreaseCash(((PropertySquare) location).getPrice());  // reset the player's cash
         }
     }
 
@@ -106,9 +103,9 @@ public class Player {
      */
     public void sellProperty(Square property){
         if (property instanceof PropertySquare) {
-            this.squaresOwned.remove(property);
-            ((PropertySquare) property).setOwner(null);
-            this.increaseCash(((PropertySquare) property).getPrice()/2);
+            this.squaresOwned.remove(property);                     // remove the property from player's properties list
+            ((PropertySquare) property).setOwner(null);             // set the owner of the property to nobody
+            this.increaseCash(((PropertySquare) property).getPrice()/2);    // reset the player's cash
         }
     }
 
