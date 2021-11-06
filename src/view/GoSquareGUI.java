@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 
-public class GoSquareGUI extends JPanel {
+public class GoSquareGUI extends SquareGUI {
     private final JPanel colorTag;
 
     public GoSquareGUI() {
@@ -26,7 +26,7 @@ public class GoSquareGUI extends JPanel {
         this.colorTag.add(player);
     }
 
-    public void removePlayer(String name) {
+    public void removePlayer(String name, boolean inJail) {
         Component[] components = this.colorTag.getComponents();
         Arrays.stream(components).forEach(label -> {
             JLabel player = (JLabel) label;

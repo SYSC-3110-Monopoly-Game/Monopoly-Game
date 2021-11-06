@@ -1,11 +1,15 @@
 package Model;
 
+import view.DiceGUI;
+
 import java.util.Random;
 
 public class Dice {
 
     private Random random;
     private int[] dice;
+
+    public DiceGUI gui;
 
     /**
      * Constructs the default number of dice
@@ -20,8 +24,10 @@ public class Dice {
      */
     public int[] rollDice() {
         for (int i = 0; i < 2; i++) {
+
             int singleDie = this.random.nextInt(6)+1;
             this.dice[i] = singleDie;
+            this.gui = new DiceGUI(dice);
         }
         return this.dice;
     }

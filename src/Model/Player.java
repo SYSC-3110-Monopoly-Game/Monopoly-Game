@@ -1,13 +1,16 @@
 package Model;
 
+import view.PlayerGUI;
+
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Player {
     private final String name;
     private ArrayList<PropertySquare> squaresOwned;
     private Square atSquare;
     private int cashTotal;
+
+    public PlayerGUI playerGUI;
 
     /**
      * Constructor of Player
@@ -18,10 +21,11 @@ public class Player {
         this.squaresOwned = new ArrayList<>();
         this.cashTotal = 300;
         this.setLocation(square);
+        this.playerGUI = new PlayerGUI(name);
     }
 
 
-    /** Returns the name of plater
+    /** Returns the name of player
      * @return name
      */
     public String getName() {
@@ -80,7 +84,7 @@ public class Player {
      * @return boolean
      */
     public boolean isBankrupt() {
-        return this.cashTotal <= 0;
+        return this.cashTotal < 0;
     }
 
     /**
@@ -88,12 +92,20 @@ public class Player {
      */
     public void buyProperty(Square location) {
         if (location instanceof PropertySquare) {
-            //add the property to player's properties list
-            this.squaresOwned.add((PropertySquare) location);
-            //set the owner of the square to this player
-            ((PropertySquare) location).setOwner(this);
-            //reset the player's cash
-            this.decreaseCash(((PropertySquare) location).getPrice());
+            this.squaresOwned.add((PropertySquare) location);           // add the property to player's properties list
+            ((PropertySquare) location).setOwner(this);                 // set the owner of the property to this player
+            this.decreaseCash(((PropertySquare) location).getPrice());  // reset the player's cash
+        }
+    }
+
+    /**
+     * @ param square is removed from the squaresOwned array list
+     */
+    public void sellProperty(Square property){
+        if (property instanceof PropertySquare) {
+            this.squaresOwned.remove(property);                     // remove the property from player's properties list
+            ((PropertySquare) property).setOwner(null);             // set the owner of the property to nobody
+            this.increaseCash(((PropertySquare) property).getPrice()/2);    // reset the player's cash
         }
     }
 
