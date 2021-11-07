@@ -13,13 +13,13 @@ public class FrameGUI extends JFrame {
     public FrameGUI() {
         //adding frame settings
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setPreferredSize(new Dimension(1700, 1000));
+        this.setPreferredSize(new Dimension(1500, 670));
 
-        this.setLayout(new BorderLayout(10,10));
+        this.setLayout(new BorderLayout());
 
         //TODO get the square array properly from constructor
         //MonopolyGame game = new MonopolyGame();
-        Square[] squares = new Square[32];
+        Square[] squares = new Square[33];
         SquareGridGUI square = new SquareGridGUI(squares);
         this.add(square, BorderLayout.WEST);
 

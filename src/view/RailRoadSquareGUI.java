@@ -10,19 +10,26 @@ import java.io.IOException;
 public class RailRoadSquareGUI extends SquareGUI {
     private final JPanel colorTag;
 
-    public RailRoadSquareGUI(int buyPrice) {
-        setLayout(new BorderLayout());
+    public RailRoadSquareGUI(String name, int buyPrice) {
+        setLayout(new GridLayout(3,1));
         setPreferredSize(new Dimension(100, 100));
         this.setBorder(BorderFactory.createLineBorder(Color.black,2));
 
         colorTag = new JPanel();
         colorTag.setPreferredSize(new Dimension(100, 25));
         colorTag.setBackground(Color.BLACK);
-        this.add(colorTag, BorderLayout.PAGE_START);
+        this.add(colorTag);
+
+
+        JLabel label = new JLabel(name);
+        label.setBackground(new Color(0, 0, 0, 60));
+        label.setForeground(Color.white);
+        label.setOpaque(true);
+        this.add(label);
 
         //square price display
         JLabel squarePrice = new JLabel(String.valueOf(buyPrice));
-        this.add(squarePrice, BorderLayout.PAGE_END);
+        this.add(squarePrice );
     }
 
     public void addPlayer(String name) {
