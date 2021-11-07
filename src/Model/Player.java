@@ -10,8 +10,6 @@ public class Player {
     private Square atSquare;
     private int cashTotal;
 
-    public PlayerGUI playerGUI;
-
     /**
      * Constructor of Player
      * make an array list for the owner's squares called squaresOwned
