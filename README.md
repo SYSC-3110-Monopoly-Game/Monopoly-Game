@@ -33,7 +33,7 @@ the initial cost of the property.
 # Milestones
 
 <details><summary>Milestone 1</summary>
-<details><summary>Milestone 2</summary>
+
 
 # Milestone 1
 
@@ -97,7 +97,7 @@ has done in this milestone. `MonopolyBoard.java` creates all the squares in the 
 Finally, the `MonopolyGame.java` brings everything together by creating the board and players and running the game.
 
 </details>
-
+<details><summary>Milestone 2</summary>
 # Milestone 2
 
 ## Folders/Files added
