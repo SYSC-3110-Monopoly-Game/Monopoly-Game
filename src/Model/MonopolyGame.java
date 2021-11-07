@@ -1,14 +1,15 @@
 package Model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
+import view.MonopolyGameGUI;
+
+import java.util.*;
 
 public class MonopolyGame {
     public static MonopolyBoard board;
     public static ArrayList<Player> players;
-    public static Scanner input;
-    public Dice dice;
+    private static Scanner input;
+    private Dice dice;
+    private static ArrayList<MonopolyGameGUI> views;
 
     public MonopolyGame() {
         board = new MonopolyBoard();
@@ -245,6 +246,10 @@ public class MonopolyGame {
         MonopolyBoard.jail.IncrementJail();                             // when all 4 players finish 1 round
                                                                         // all players in jail -> counter++
 
+        for(MonopolyGameGUI view: views){
+            view.handleUpdate();
+        }
+
         return tempList;                                                // return the edited player list
     }
 
@@ -300,6 +305,7 @@ public class MonopolyGame {
     }
 
 
-    public void addView() {
+    public void addView(MonopolyGameGUI view) {
+        this.views.add(view);
     }
 }

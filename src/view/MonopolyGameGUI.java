@@ -15,7 +15,7 @@ public class MonopolyGameGUI extends JFrame {
     public MonopolyGameGUI(MonopolyGame game) {
         //subscribe to game
         this.game=game;
-        this.game.addView();
+        this.game.addView(this);
 
         //adding frame settings
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -35,5 +35,9 @@ public class MonopolyGameGUI extends JFrame {
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+    }
+
+    public void handleUpdate() {
+        
     }
 }
