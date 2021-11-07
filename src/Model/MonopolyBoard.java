@@ -5,7 +5,7 @@ import java.awt.*;
 public class MonopolyBoard {
 
 
-    private static final int SIZE = 40;
+    private static final int SIZE = 34;
     private final Square[] squares;
     public static JailSquare jail;
     private int buyPrice = 50, rentPrice = 30;
@@ -39,7 +39,7 @@ public class MonopolyBoard {
         squares[i] = new PropertySquare("Vermont Avenue", i++, buyPrice, rentPrice, Color.CYAN);
         squares[i] = new PropertySquare("Connecticut Avenue", i++, buyPrice, rentPrice, Color.CYAN);
 
-        squares[i] = new JailSquare("Jail", i++);
+        squares[i] = new JailSquare("Jail", i);
 
         jail = (JailSquare) squares[i];
         i++;

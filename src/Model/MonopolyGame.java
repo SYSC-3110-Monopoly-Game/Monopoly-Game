@@ -16,7 +16,8 @@ public class MonopolyGame {
         players = createPlayers();
         input = new Scanner(System.in);
         dice = new Dice();
-        playGame();
+        views = new ArrayList<>();
+        //playGame();
     }
 
     public MonopolyBoard getBoard() {

@@ -13,7 +13,7 @@ public class InfoDisplayGUI extends JPanel {
     public InfoDisplayGUI() {
         this.setBackground(Color.LIGHT_GRAY);
         //this.add(new JLabel("Welcome to Monopoly Game!"));
-        this.setPreferredSize(new Dimension(360, 670));
+        this.setPreferredSize(new Dimension(400, 670));
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         //player name, cash, property list
