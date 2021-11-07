@@ -26,7 +26,7 @@ public class UtilitySquareGUI extends SquareGUI {
 
         //square price display
         JLabel squarePrice = new JLabel(String.valueOf(buyPrice));
-        this.add(squarePrice, BorderLayout.PAGE_END);
+        this.add(squarePrice, BorderLayout.AFTER_LAST_LINE);
     }
 
     public void addPlayer(String name) {
