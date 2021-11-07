@@ -115,7 +115,7 @@ public class Player {
         System.out.println("Price: " + square.getPrice());
         System.out.println("Color: " + square.getColor());
 
-        return MonopolyGame.checkCommand();
+        return true; //MonopolyGame.checkCommand();
     }
 
     public String toString() {

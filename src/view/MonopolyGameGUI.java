@@ -44,6 +44,15 @@ public class MonopolyGameGUI extends JFrame {
     }
 
     public void handleUpdate(Player player, Square nextLocation) {
+
+
+
+        infoDisplayGUI.setCash(player.getCash());
+        infoDisplayGUI.setPropertyList(player.getProperties().toString());
+        infoDisplayGUI.setCurrentLocation(player.getLocation().getName());
+        infoDisplayGUI.setName(player.getName());
+
+
         //if nextLocation
         //edit player info in the info display
         //delete player icon from the current square view

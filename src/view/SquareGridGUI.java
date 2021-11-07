@@ -297,5 +297,9 @@ public class SquareGridGUI extends JPanel {
         this.add(propertyGUI23, c);
     }
 
+    public void changePlayerGUILocation(Player player, int currentLocationIndex, int nextLocationIndex) {
+       // squareGUIs[currentLocationIndex].removePlayer();
+    }
+
 }
 

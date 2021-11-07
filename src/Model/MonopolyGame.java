@@ -7,7 +7,6 @@ import java.util.*;
 public class MonopolyGame {
     public static MonopolyBoard board;
     public static ArrayList<Player> players;
-    private static Scanner input;
     private static ArrayList<MonopolyGameGUI> views;
     private Dice dice;
     private Player playerInTurn;
@@ -15,7 +14,6 @@ public class MonopolyGame {
     public MonopolyGame() {
         board = new MonopolyBoard();
         players = createPlayers();
-        input = new Scanner(System.in);
         dice = new Dice();
         views = new ArrayList<>();
     }
@@ -23,29 +21,12 @@ public class MonopolyGame {
     /**
      * check what the command is
      */
-    public static boolean checkCommand() {
-        String op = input.next();
-        while (op.charAt(0) != 'y' && op.charAt(0) != 'n') {       // if input is neither 'y' nor 'n', get input again
-            System.out.print("\nPlease input a valid command:(y/n) ");
-            op = input.next();                                         // get user input
-        }
-        if (op.charAt(0) == 'y') {                                      // if input is y; return true
-            return true;
-        } else {                                                        // if input is n; return false
-            return false;
-        }
-    }
-
     public ArrayList<Player> getPlayers() {
         return players;
     }
 
     public MonopolyBoard getBoard() {
         return board;
-    }
-
-    public void closeScanner() {
-        input.close();
     }
 
     /**
@@ -95,7 +76,6 @@ public class MonopolyGame {
             ArrayList<Player> tempList = this.playRound();      // play a round
             this.refreshPlayer(tempList);                       // refresh player list from the edited temp player list
         }                                                       // if some one wins
-        this.closeScanner();
         System.out.println("Game Over, the winner is: " + this.getWinner().getName());  // show who is the winner
     }
 
@@ -127,7 +107,6 @@ public class MonopolyGame {
     public void rollDice() {
         // control part ask user to press on the dice to roll
         System.out.println("type ENTER to roll the dices!");
-        input.nextLine();
         dice.rollDice();                                            // roll dice
         System.out.println("\t Dice Rolled!!\n" + dice.toString());
         System.out.println("+-------------------------+");
@@ -188,8 +167,8 @@ public class MonopolyGame {
                             "You are now bankrupt, please sell properties to gain money to avoid bankrupt\n" +
                                     "Please input the index of property you want to sell: ");
                     // control part ask user to select a property to sell
-                    int index = input.nextInt();
-                    p.sellProperty(p.getProperties().get(index - 1));// sell the property with the given index
+                   // int index = input.nextInt();
+                   // p.sellProperty(p.getProperties().get(index - 1));// sell the property with the given index
                     //
 
                 } else {                                            // if player do not have any property
@@ -255,7 +234,6 @@ public class MonopolyGame {
         }
         // control part pass player to next turn
         System.out.println("Press <Enter> to pass your turn to next player");
-        input.nextLine();                                           // type something to go to next player's turn
         //
 
 
@@ -302,7 +280,7 @@ public class MonopolyGame {
                 System.out.println("Do you wish to go out of the jail by paying $50?:(y/n) ");
 
                 // view show message and control part get user decision
-                if (checkCommand()) {                       // if player pay $50
+                if (true) {                       // if player pay $50
                     p.decreaseCash(50);
                     MonopolyBoard.jail.goOutJail(p);        // the player get out immediately
                     return false;
