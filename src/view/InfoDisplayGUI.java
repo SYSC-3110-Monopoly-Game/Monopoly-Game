@@ -1,6 +1,8 @@
 package view;
 
 import Controller.MonopolyGameController;
+import Model.Player;
+import Model.PropertySquare;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,10 +12,10 @@ public class InfoDisplayGUI extends JPanel {
     JLabel name, cash, propertyList, currentLocation, buyPrice, rentPrice, housePrice, hotelPrice;
     JButton buy, sell, rollDice, nextTurn;
 
-    public InfoDisplayGUI() {
+    public InfoDisplayGUI(Player playerInTurn) {
         this.setBackground(Color.LIGHT_GRAY);
         //this.add(new JLabel("Welcome to Monopoly Game!"));
-        this.setPreferredSize(new Dimension(400, 670));
+        this.setPreferredSize(new Dimension(360, 670));
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         //player name, cash, property list
@@ -24,9 +26,10 @@ public class InfoDisplayGUI extends JPanel {
         cash = new JLabel();
         propertyList = new JLabel();
 
-        name.setText("Player Name: ");
-        cash.setText("Cash: ");
-        propertyList.setText("Property List: ");
+        name.setText("Player Name: " + playerInTurn.getName());
+        cash.setText("Cash: " + playerInTurn.getCash());
+        String properties = playerInTurn.getProperties().toString();
+        propertyList.setText("Property List: " + properties);
 
         playerInfo.add(name);
         playerInfo.add(cash);
@@ -45,11 +48,16 @@ public class InfoDisplayGUI extends JPanel {
         housePrice = new JLabel();
         hotelPrice = new JLabel();
 
-        currentLocation.setText("Current Location: ");
-        buyPrice.setText("Buy Price: ");
-        rentPrice.setText("Rent Price: ");
-        housePrice.setText("House Price: ");
-        hotelPrice.setText("Hotel Price: ");
+        currentLocation.setText("Current Location: " + playerInTurn.getLocation().getName());
+        String buyPriceString = "", rentPriceString ="";
+        if(playerInTurn.getLocation() instanceof PropertySquare){
+             buyPriceString = ((PropertySquare) playerInTurn.getLocation()).getPrice()+"";
+             rentPriceString = ((PropertySquare) playerInTurn.getLocation()).getRentFee()+"";
+        }
+        buyPrice.setText("Buy Price: " + buyPriceString);
+        rentPrice.setText("Rent Price: " + rentPriceString);
+        housePrice.setText("House Price: 20" ); // will be changed in milestone
+        hotelPrice.setText("Hotel Price: 30" ); // will be changed in milestone
 
         currentProperty.add(currentLocation);
         currentProperty.add(buyPrice);

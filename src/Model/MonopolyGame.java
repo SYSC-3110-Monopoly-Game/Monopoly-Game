@@ -8,8 +8,9 @@ public class MonopolyGame {
     public static MonopolyBoard board;
     public static ArrayList<Player> players;
     private static Scanner input;
-    private Dice dice;
     private static ArrayList<MonopolyGameGUI> views;
+    private Dice dice;
+    private Player playerInTurn;
 
     public MonopolyGame() {
         board = new MonopolyBoard();
@@ -17,36 +18,11 @@ public class MonopolyGame {
         input = new Scanner(System.in);
         dice = new Dice();
         views = new ArrayList<>();
-        //playGame();
     }
 
-    public MonopolyBoard getBoard() {
-        return board;
-    }
-
-    public void closeScanner() {
-        input.close();
-    }
-
-    /** set 4 players
-     * */
-    public ArrayList<Player> createPlayers() {
-        ArrayList<Player> playerTempList = new ArrayList<>();
-        System.out.println("Welcome to Monopoly Game!!");
-        System.out.println("There are 4 player in total");
-
-        int number = 4;                                                      // get the number of players to 4
-
-        /**create the 4 players*/
-        for (int i = 0; i < number; i++) {
-            String name = "Player "+(i+1);
-            playerTempList.add(new Player(name, board.startingSquare()));   // add players to a temp arraylist
-        }
-        return playerTempList;                                              // return the temp arrayList
-    }
-
-    /**check what the command is
-    */
+    /**
+     * check what the command is
+     */
     public static boolean checkCommand() {
         String op = input.next();
         while (op.charAt(0) != 'y' && op.charAt(0) != 'n') {       // if input is neither 'y' nor 'n', get input again
@@ -60,16 +36,48 @@ public class MonopolyGame {
         }
     }
 
-    /** move the player with a random distance
-     * */
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public MonopolyBoard getBoard() {
+        return board;
+    }
+
+    public void closeScanner() {
+        input.close();
+    }
+
+    /**
+     * set 4 players
+     */
+    public ArrayList<Player> createPlayers() {
+        ArrayList<Player> playerTempList = new ArrayList<>();
+        System.out.println("Welcome to Monopoly Game!!");
+        System.out.println("There are 4 player in total");
+
+        int number = 4;                                                      // get the number of players to 4
+
+        /**create the 4 players*/
+        for (int i = 0; i < number; i++) {
+            String name = "" + (i + 1);
+            playerTempList.add(new Player(name, board.startingSquare()));   // add players to a temp arraylist
+        }
+        this.playerInTurn = playerTempList.get(0);
+        return playerTempList;                                              // return the temp arrayList
+    }
+
+    /**
+     * move the player with a random distance
+     */
     public void movePlayer(Player p, int distance) {
         Square currentLocation = p.getLocation();
         System.out.println("Current location: " + currentLocation.toString());      // show current location
 
         Square nextSquare = board.getNextSquare(p.getLocation(), distance);     // calculate the square will be reached
 
-        if(currentLocation.getNumber() > nextSquare.getNumber() && nextSquare.getNumber() != 0) {   // if the square--
-                                                                // will reached passes GoSquare AND is Not GoSquare
+        if (currentLocation.getNumber() > nextSquare.getNumber() && nextSquare.getNumber() != 0) {   // if the square--
+            // will reached passes GoSquare AND is Not GoSquare
             board.startingSquare().landOn(p);                                       // land the player on GoSquare
         }
         System.out.println("New location: " + nextSquare.toString() + "\n");        // show new location
@@ -77,7 +85,9 @@ public class MonopolyGame {
     }
 
 
-    /** main loop of the whole Game!!!!! ---------- Look here !!!!!!!!! ----------Look Here !!!!!!!!!!*/
+    /**
+     * main loop of the whole Game!!!!! ---------- Look here !!!!!!!!! ----------Look Here !!!!!!!!!!
+     */
     public void playGame() {
         this.getBoard().displayBoard();
         while (!this.playerWin()) {                             // if no one wins; go into the loop
@@ -89,8 +99,9 @@ public class MonopolyGame {
         System.out.println("Game Over, the winner is: " + this.getWinner().getName());  // show who is the winner
     }
 
-    /** check if there is a winner
-     * */
+    /**
+     * check if there is a winner
+     */
     public boolean playerWin() {
 //        if more than 1 player exist, return true (keep playing game)
         //        otherwise, return the false (end the game)
@@ -98,8 +109,9 @@ public class MonopolyGame {
     }
 
 
-    /** return the winner of the game
-     * */
+    /**
+     * return the winner of the game
+     */
     public Player getWinner() {
         if (players.size() != 1)                        // if more than 1 player exist
             return null;                                // return nothing
@@ -109,8 +121,9 @@ public class MonopolyGame {
     }
 
 
-    /** roll dices and print messages
-     * */
+    /**
+     * roll dices and print messages
+     */
     public void rollDice() {
         // control part ask user to press on the dice to roll
         System.out.println("type ENTER to roll the dices!");
@@ -122,8 +135,9 @@ public class MonopolyGame {
     }
 
 
-    /**do all needed check when rolling dices
-    */
+    /**
+     * do all needed check when rolling dices
+     */
     public int getDistance(boolean inJail) {
         int counter = 0;                                                // counter for 3 doubles checking
         int distance;
@@ -131,7 +145,7 @@ public class MonopolyGame {
         rollDice();
 
         if (inJail) {                                                   // if player in jail
-            if (dice.hasDoubles()){                                     // if player rolls a double
+            if (dice.hasDoubles()) {                                     // if player rolls a double
                 System.out.println("You rolled a double, you can go out!");
                 distance = dice.getTotalValue();                        // distance available; distance = sum of 2 Dice
 
@@ -141,11 +155,11 @@ public class MonopolyGame {
             }
 
         } else {                                                        // if player not in jail
-            while (dice.hasDoubles() && ++counter < 3){                 // if has double, go into the while loop
+            while (dice.hasDoubles() && ++counter < 3) {                 // if has double, go into the while loop
                 rollDice();
             }                                                           // each time a double is rolled, counter++
 
-            if (counter >= 3){                                          // if rolled 3 doubles
+            if (counter >= 3) {                                          // if rolled 3 doubles
                 distance = -1;                                          // distance unavailable; distance = -1
             } else {                                                    // if not rolled 3 doubles
 
@@ -157,11 +171,12 @@ public class MonopolyGame {
     }
 
 
-    /**check is the player is bankrupt
-    */
+    /**
+     * check is the player is bankrupt
+     */
     public boolean checkBankrupt(Player p, ArrayList<Player> tempList) {
 
-        if (p.isBankrupt()){                                        // check if player is bankrupt
+        if (p.isBankrupt()) {                                        // check if player is bankrupt
             /** do while loop: player sell properties until he/she is not bankrupt */
             do {
                 if (p.getProperties().size() != 0) {                // if player have properties to sell
@@ -171,7 +186,7 @@ public class MonopolyGame {
                     System.out.println("balance: " + p.getCash());  // show how much player should pay
                     System.out.println(
                             "You are now bankrupt, please sell properties to gain money to avoid bankrupt\n" +
-                            "Please input the index of property you want to sell: ");
+                                    "Please input the index of property you want to sell: ");
                     // control part ask user to select a property to sell
                     int index = input.nextInt();
                     p.sellProperty(p.getProperties().get(index - 1));// sell the property with the given index
@@ -183,8 +198,7 @@ public class MonopolyGame {
             } while (p.isBankrupt());                               // if player is still bankrupt, loop again
 
 
-
-            if (p.isBankrupt()){                                    // if player is still bankrupt
+            if (p.isBankrupt()) {                                    // if player is still bankrupt
 
                 System.out.println(p.getName() + " is bankrupt, removed from player list");
                 tempList.remove(p);                                 // remove player from the temp player list
@@ -197,66 +211,65 @@ public class MonopolyGame {
     }
 
 
-    /**A round of playing for every player
-    */
+    /**
+     * A round of playing for every player
+     */
     public ArrayList<Player> playRound() {
         ArrayList<Player> tempList = new ArrayList<>(players);          // create a tempList of player in case we need--
-                                                                        // to remove players
+
         int distance;
-        for (Player p : players) {
-            System.out.println("+----------+");                         //
-            System.out.println("NEXT ROUND : " + p.getName());          // print which player's turn it is
-            System.out.println("+----------+");                         //
 
-            boolean injail = ifInJail(p);                               // return if or not the player is in jail now
+        System.out.println("+----------+");                         //
+        System.out.println("NEXT ROUND : " + playerInTurn.getName());          // print which player's turn it is
+        System.out.println("+----------+");                         //
 
-            if (injail){
-                distance = getDistance(true);                       // roll dice for player in jail
-            } else {
-                distance = getDistance(false);                      // roll dice for player not in jail
-            }
+        boolean injail = ifInJail(playerInTurn);                               // return if or not the player is in jail now
 
-            if (distance > 0){                                          // if dices numbers are good to move the player
-
-                movePlayer(p, distance);                                // move player for distance
-
-                if(MonopolyBoard.jail.getMap().containsKey(p)){         // if the player is currently in jail but the--
-                                                                        // player rolled a double and get out.
-                    MonopolyBoard.jail.goOutJail(p);                    // player out of jail immediately
-                }
-
-                if (checkBankrupt(p, tempList)) {                       // if player is bankrupt or not
-                    continue;                                           // go to next player if this one is bankrupt
-                }
-
-            } else if (distance == -1 && !injail) {                     // if dices numbers are not good for move AND--
-                                                                        // the player NOT in jail currently
-                System.out.println("You have rolled three doubles\nYou have go to jail");
-                MonopolyBoard.jail.goJail(p);                           // let the player go to jail
-
-            } else if (distance == -1){                                 // if dices numbers are not good for move AND--
-                                                                        // if player in jail currently
-                System.out.println("You are still in jail");
-            }
-            // control part pass player to next turn
-            System.out.println("Press <Enter> to pass your turn to next player");
-            input.nextLine();                                           // type something to go to next player's turn
-            //
-
+        if (injail) {
+            distance = getDistance(true);                       // roll dice for player in jail
+        } else {
+            distance = getDistance(false);                      // roll dice for player not in jail
         }
+
+        if (distance > 0) {                                          // if dices numbers are good to move the player
+
+            movePlayer(playerInTurn, distance);                                // move player for distance
+
+            if (MonopolyBoard.jail.getMap().containsKey(playerInTurn)) {         // if the player is currently in jail but the--
+                // player rolled a double and get out.
+                MonopolyBoard.jail.goOutJail(playerInTurn);                    // player out of jail immediately
+            }
+
+            if (checkBankrupt(playerInTurn, tempList)) {                       // if player is bankrupt or not
+                //return tempList;                                           // go to next player if this one is bankrupt
+            }
+
+        } else if (distance == -1 && !injail) {                     // if dices numbers are not good for move AND--
+            // the player NOT in jail currently
+            System.out.println("You have rolled three doubles\nYou have go to jail");
+            MonopolyBoard.jail.goJail(playerInTurn);                           // let the player go to jail
+
+        } else if (distance == -1) {                                 // if dices numbers are not good for move AND--
+            // if player in jail currently
+            System.out.println("You are still in jail");
+        }
+        // control part pass player to next turn
+        System.out.println("Press <Enter> to pass your turn to next player");
+        input.nextLine();                                           // type something to go to next player's turn
+        //
+
+
         MonopolyBoard.jail.IncrementJail();                             // when all 4 players finish 1 round
-                                                                        // all players in jail -> counter++
+        // all players in jail -> counter++
 
-        for(MonopolyGameGUI view: views){
-            view.handleUpdate();
-        }
 
         return tempList;                                                // return the edited player list
     }
 
 
-    /** display all needed information about players
-     * */
+    /**
+     * display all needed information about players
+     */
     public void printPlayersInfo() {
         System.out.println("\n+-------------------+");
         for (Player p : players) {
@@ -269,21 +282,23 @@ public class MonopolyGame {
     }
 
 
-    /** refresh the players list
-     * */
+    /**
+     * refresh the players list
+     */
     public void refreshPlayer(ArrayList<Player> tempList) {
         players = tempList;
     }
 
 
-    /** check if the player will be in jail in this round (true for in jail, false for not)
-    * */
-    public boolean ifInJail(Player p){
+    /**
+     * check if the player will be in jail in this round (true for in jail, false for not)
+     */
+    public boolean ifInJail(Player p) {
         HashMap jail = MonopolyBoard.jail.getMap();
 
-        if (jail != null && jail.containsKey(p)){           // if the player is currently in jail
+        if (jail != null && jail.containsKey(p)) {           // if the player is currently in jail
 
-            if (MonopolyBoard.jail.getMap().get(p) < 3){    // if the player is in jail less than 3 rounds
+            if (MonopolyBoard.jail.getMap().get(p) < 3) {    // if the player is in jail less than 3 rounds
                 System.out.println("Do you wish to go out of the jail by paying $50?:(y/n) ");
 
                 // view show message and control part get user decision
@@ -308,5 +323,17 @@ public class MonopolyGame {
 
     public void addView(MonopolyGameGUI view) {
         this.views.add(view);
+    }
+
+
+    private void updateViews(Player p, Square nextLocation) {
+        //when players are created
+        for (MonopolyGameGUI view : views) {
+            view.handleUpdate(p, nextLocation);
+        }
+    }
+
+    public Player getPlayerInTurn() {
+        return this.playerInTurn;
     }
 }

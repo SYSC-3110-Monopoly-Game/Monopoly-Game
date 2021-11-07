@@ -3,10 +3,12 @@ package view;
 import Controller.MonopolyGameController;
 import Model.MonopolyBoard;
 import Model.MonopolyGame;
+import Model.Player;
 import Model.Square;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class MonopolyGameGUI extends JFrame {
     private MonopolyGame game;
@@ -25,10 +27,11 @@ public class MonopolyGameGUI extends JFrame {
 
         //pass the squares to the view
         Square[] squares =this.game.getBoard().getSquares();
-        SquareGridGUI square = new SquareGridGUI(squares);
+        ArrayList<Player> players = this.game.players;
+        SquareGridGUI square = new SquareGridGUI(squares,players);
         this.add(square, BorderLayout.WEST);
 
-        this.infoDisplayGUI = new InfoDisplayGUI();
+        this.infoDisplayGUI = new InfoDisplayGUI(this.game.getPlayerInTurn());
         this.add(infoDisplayGUI, BorderLayout.EAST);
 
         this.pack();
@@ -40,7 +43,10 @@ public class MonopolyGameGUI extends JFrame {
         this.infoDisplayGUI.setButtonControllers(controller);
     }
 
-    public void handleUpdate() {
-        
+    public void handleUpdate(Player player, Square nextLocation) {
+        //if nextLocation
+        //edit player info in the info display
+        //delete player icon from the current square view
+        //add player icon in
     }
 }

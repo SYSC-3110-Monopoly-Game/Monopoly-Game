@@ -25,7 +25,7 @@ public class PropertySquare extends Square {
      * gets the color of the square
      */
     public Color getColor() {
-        return Color.BLACK;
+        return color;
     }
 
     /**

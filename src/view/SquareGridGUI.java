@@ -4,75 +4,25 @@ import Model.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class SquareGridGUI extends JPanel {
-    Square[] square;
+    private Square[] square;
+    private SquareGUI squareGUIs[];
 
-    public SquareGridGUI(Square[] square) {
+    public SquareGridGUI(Square[] square, ArrayList<Player> players) {
         this.square = square;
+        this.squareGUIs= new SquareGUI[33];
         this.setBackground(new Color(205, 230, 208));
         this.setLayout(new GridBagLayout());
         this.setPreferredSize(new Dimension(920, 670));
 
-        this.makeSquares();
+        //this.makeSquares();
         this.createSquareGUI();
+        for(Player p: players){
+            this.squareGUIs[0].addPlayer(p.getName());
+        }
 
-    }
-
-    /** Will get deleted once GUI is set up with model
-     */
-    int buyPrice = 50;
-    int rentPrice = 30;
-    private void makeSquares() {
-        int i = 0;
-        square[i] = new GoSquare("GO", i, Color.BLACK, 200);
-        i++;
-        square[i] = new PropertySquare("Mediterranean Avenue", i++, buyPrice, rentPrice, Color.BLACK);
-        square[i] = new PropertySquare("Baltic Avenue", i++, buyPrice, rentPrice, Color.BLACK);
-
-        square[i] = new IncomeTaxSquare("Tax", i++, 150);
-        square[i] = new RailRoadSquare("Reading RailRoad", i++, buyPrice, rentPrice, Color.BLACK);
-
-        square[i] = new PropertySquare("Oriental Avenue", i++, buyPrice, rentPrice, Color.BLACK);
-        square[i] = new PropertySquare("Vermont Avenue", i++, buyPrice, rentPrice, Color.BLACK);
-        square[i] = new PropertySquare("Connecticut Avenue", i++, buyPrice, rentPrice, Color.BLACK);
-
-        square[i] = new JailSquare("Jail", i++);
-        square[i] = new PropertySquare("St. Charles Place", i++, buyPrice, rentPrice, Color.BLACK);
-        square[i] = new UtilitySquare("electric", i++, buyPrice, rentPrice, Color.LIGHT_GRAY);
-
-        square[i] = new PropertySquare("States Avenue", i++, buyPrice, rentPrice, Color.BLACK);
-        square[i] = new PropertySquare("Virginia Avenue", i++, buyPrice, rentPrice, Color.BLACK);
-
-        square[i] = new RailRoadSquare("Pennsylvania RailRoad", i++, buyPrice, rentPrice, Color.BLACK);
-
-        square[i] = new PropertySquare("St. James Place", i++, buyPrice, rentPrice, Color.BLACK);
-        square[i] = new PropertySquare("Tennessee Avenue", i++, buyPrice, rentPrice, Color.BLACK);
-        square[i] = new PropertySquare("New York Avenue", i++, buyPrice, rentPrice, Color.BLACK);
-
-        square[i] = new FreeParkingSquare("New York Avenue", i++);
-        square[i] = new PropertySquare("Kentucky Avenue", i++, buyPrice, rentPrice, Color.BLACK);
-        square[i] = new PropertySquare("Indiana Avenue", i++, buyPrice, rentPrice, Color.BLACK);
-        square[i] = new PropertySquare("Illinois Avenue", i++, buyPrice, rentPrice, Color.BLACK);
-
-        square[i] = new RailRoadSquare("B. & O. RailRoad", i++, buyPrice, rentPrice, Color.BLACK);
-
-        square[i] = new PropertySquare("Atlantic Avenue", i++, buyPrice, rentPrice, Color.BLACK);
-        square[i] = new PropertySquare("Ventnor Avenue", i++, buyPrice, rentPrice, Color.BLACK);
-
-        square[i] = new UtilitySquare("water", i++, buyPrice, rentPrice, Color.LIGHT_GRAY);
-        square[i] = new PropertySquare("Marvin Gardens", i++, buyPrice, rentPrice, Color.BLACK);
-
-        square[i] = new GoToJailSquare("electric", i++, (JailSquare)square[8]);
-
-        square[i] = new PropertySquare("Pacific Avenue", i++, buyPrice, rentPrice, Color.BLACK);
-        square[i] = new PropertySquare("North Carolina Avenue", i++, buyPrice, rentPrice, Color.BLACK);
-        square[i] = new PropertySquare("Pennsylvania Avenue", i++, buyPrice, rentPrice, Color.BLACK);
-
-        square[i] = new RailRoadSquare("Short Line RailRoad", i++, buyPrice, rentPrice, Color.BLACK);
-
-        square[i] = new PropertySquare("Park Place", i++, buyPrice, rentPrice, Color.BLACK);
-        square[i] = new PropertySquare("Boardwalk", i, buyPrice, rentPrice, Color.BLACK);
 
     }
 
@@ -151,6 +101,7 @@ public class SquareGridGUI extends JPanel {
         GoSquare goSquare = (GoSquare) square[0];
         GoSquareGUI goSquareGUI = new GoSquareGUI();
         this.add(goSquareGUI, c);
+        this.squareGUIs[0] = goSquareGUI;
 
         // 1st Square
         c.gridx = 7;
