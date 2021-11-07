@@ -1,11 +1,14 @@
 package Model;
 
+import Controller.MonopolyGameController;
 import view.*;
 
 public class main {
 
     public static void main(String[] args) {
-        new MonopolyGameGUI();
-        new MonopolyGame();
+        MonopolyGame game = new MonopolyGame();
+        MonopolyGameGUI view = new MonopolyGameGUI(game);
+        MonopolyGameController controller = new MonopolyGameController(game, view);
+
     }
 }

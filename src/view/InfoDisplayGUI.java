@@ -1,5 +1,7 @@
 package view;
 
+import Controller.MonopolyGameController;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -61,9 +63,13 @@ public class InfoDisplayGUI extends JPanel {
         buttons.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 
         JButton buy = new JButton("Buy");
+       // buy.addActionListener(this.controller);
         JButton sell = new JButton("Sell");
+       // sell.addActionListener(this.controller);
         JButton rollDice = new JButton("Roll Dice");
+       // rollDice.addActionListener(this.controller);
         JButton nextTurn = new JButton("Next Turn");
+        //nextTurn.addActionListener(this.controller);
 
         buy.setBorder(BorderFactory.createLineBorder(Color.black, 1));
         sell.setBorder(BorderFactory.createLineBorder(Color.black, 1));

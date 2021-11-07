@@ -300,4 +300,6 @@ public class MonopolyGame {
     }
 
 
+    public void addView() {
+    }
 }
