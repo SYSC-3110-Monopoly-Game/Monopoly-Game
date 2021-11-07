@@ -10,6 +10,7 @@ import java.awt.*;
 
 public class MonopolyGameGUI extends JFrame {
     private MonopolyGame game;
+    private InfoDisplayGUI infoDisplayGUI;
 
 //TODO requires a square array like Square[] squares
     public MonopolyGameGUI(MonopolyGame game) {
@@ -23,18 +24,21 @@ public class MonopolyGameGUI extends JFrame {
 
         this.setLayout(new BorderLayout());
 
-        //TODO get the square array properly from constructor
-        //MonopolyGame game = new MonopolyGame();
-        Square[] squares = new Square[33];
+        //pass the squares to the view
+        Square[] squares =this.game.getBoard().getSquares();
         SquareGridGUI square = new SquareGridGUI(squares);
         this.add(square, BorderLayout.WEST);
 
-        InfoDisplayGUI infoDisplayGUI = new InfoDisplayGUI();
+        this.infoDisplayGUI = new InfoDisplayGUI();
         this.add(infoDisplayGUI, BorderLayout.EAST);
 
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+    }
+
+    public void setController(MonopolyGameController controller){
+        this.infoDisplayGUI.setButtonControllers(controller);
     }
 
     public void handleUpdate() {

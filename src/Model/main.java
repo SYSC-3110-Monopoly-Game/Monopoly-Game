@@ -9,6 +9,6 @@ public class main {
         MonopolyGame game = new MonopolyGame();
         MonopolyGameGUI view = new MonopolyGameGUI(game);
         MonopolyGameController controller = new MonopolyGameController(game, view);
-
+        view.setController(controller);
     }
 }

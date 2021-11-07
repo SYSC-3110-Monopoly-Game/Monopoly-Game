@@ -8,6 +8,7 @@ import java.awt.*;
 public class InfoDisplayGUI extends JPanel {
 
     JLabel name, cash, propertyList, currentLocation, buyPrice, rentPrice, housePrice, hotelPrice;
+    JButton buy, sell, rollDice, nextTurn;
 
     public InfoDisplayGUI() {
         this.setBackground(Color.LIGHT_GRAY);
@@ -62,14 +63,11 @@ public class InfoDisplayGUI extends JPanel {
         //buttons.setPreferredSize(new Dimension(150, 100));
         buttons.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 
-        JButton buy = new JButton("Buy");
-       // buy.addActionListener(this.controller);
-        JButton sell = new JButton("Sell");
-       // sell.addActionListener(this.controller);
-        JButton rollDice = new JButton("Roll Dice");
-       // rollDice.addActionListener(this.controller);
-        JButton nextTurn = new JButton("Next Turn");
-        //nextTurn.addActionListener(this.controller);
+        buy = new JButton("Buy");
+        sell = new JButton("Sell");
+        rollDice = new JButton("Roll Dice");
+        nextTurn = new JButton("Next Turn");
+
 
         buy.setBorder(BorderFactory.createLineBorder(Color.black, 1));
         sell.setBorder(BorderFactory.createLineBorder(Color.black, 1));
@@ -85,6 +83,13 @@ public class InfoDisplayGUI extends JPanel {
         this.add(playerInfo);
         this.add(currentProperty);
         this.add(buttons);
+    }
+
+    public void setButtonControllers(MonopolyGameController controller) {
+        this.buy.addActionListener(controller);
+        sell.addActionListener(controller);
+        rollDice.addActionListener(controller);
+        nextTurn.addActionListener(controller);
     }
 
     public void setName(String name) {
