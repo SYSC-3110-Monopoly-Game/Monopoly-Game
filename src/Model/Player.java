@@ -10,8 +10,6 @@ public class Player {
     private Square atSquare;
     private int cashTotal;
 
-    public PlayerGUI playerGUI;
-
     /**
      * Constructor of Player
      * make an array list for the owner's squares called squaresOwned
@@ -21,7 +19,6 @@ public class Player {
         this.squaresOwned = new ArrayList<>();
         this.cashTotal = 300;
         this.setLocation(square);
-        this.playerGUI = new PlayerGUI(name);
     }
 
 
