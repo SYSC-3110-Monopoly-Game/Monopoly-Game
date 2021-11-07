@@ -19,7 +19,6 @@ public class Player {
         this.squaresOwned = new ArrayList<>();
         this.cashTotal = 300;
         this.setLocation(square);
-        this.playerGUI = new PlayerGUI(name);
     }
 
 
