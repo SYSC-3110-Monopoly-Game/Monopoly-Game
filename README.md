@@ -172,7 +172,7 @@ Rebbeca Li
 
 Shizhong Shang
   
-- Implemented Player class
+- Refactored Player class
 - Implemented PlayerTest class
 - Implemented FreeParking class
 - Implemented GoToJail class
