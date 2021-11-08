@@ -38,15 +38,15 @@ public class RailRoadSquareGUI extends SquareGUI {
     }
 
     public void removePlayer(String name, boolean inJail) {
-        Component[] components = this.getComponents();
+        Component[] components = this.colorTag.getComponents();
         for (Component label : components
         ) {
             JLabel player = (JLabel) label;
             if (player.getText().equals(name)) {
                 player.setVisible(false);
                 this.colorTag.remove(label);
-                this.revalidate();
-                this.repaint();
+                //this.revalidate();
+                this.colorTag.repaint();
             }
         }
     }

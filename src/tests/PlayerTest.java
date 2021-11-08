@@ -22,7 +22,7 @@ class PlayerTest {
     void setUp() {
         game = new MonopolyGame();
         player = game.players;
-        board = game.getBoard();
+        board = game.board;
     }
 
     @AfterEach

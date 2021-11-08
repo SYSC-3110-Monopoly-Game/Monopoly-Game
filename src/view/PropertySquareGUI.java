@@ -46,7 +46,7 @@ public class PropertySquareGUI extends SquareGUI{
                 player.setVisible(false);
                 this.colorTag.remove(label);
                 this.revalidate();
-                this.repaint();
+                this.colorTag.repaint();
             }
         }
     }

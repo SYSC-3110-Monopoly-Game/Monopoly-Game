@@ -1,18 +1,18 @@
 package Model;
-
-import view.JailSquareGUI;
-
-import java.awt.Color;
 import java.util.HashMap;
-import java.util.Map;
+
 
 public class JailSquare extends Square {
 
-    private HashMap<Player, Integer> map;
+    public static HashMap<Player, Integer> map;
+    private int jailFee;
 
-    public JailSquare(String name,int number) {
+
+
+    public JailSquare(String name, int number, int jailFee) {
         super(name,number);
         this.map = new HashMap<>();
+        this.jailFee = jailFee;
     }
 
     /**
@@ -30,7 +30,7 @@ public class JailSquare extends Square {
      */
     @Override
     public void landOn(Player p) {
-        p.setLocation(this);
+        p.setCurrentLocation(this);
         System.out.println("You are visiting jail");
     }
 
@@ -39,25 +39,21 @@ public class JailSquare extends Square {
      * @param p
      */
     public void goJail(Player p) {
-        p.setLocation(this);
+        p.setCurrentLocation(this);
         this.map.put(p, 0);
     }
 
     public void goOutJail(Player p) {
+
         this.map.remove(p);
+        this.landOn(p);
+        p.setInJail(false);
+    }
+    public int getJailFee(){
+        return this.jailFee;
     }
 
-    /** increment all counters for players in jail
-     * */
-    public void IncrementJail() {
-        if(!map.isEmpty()){
-            for(Map.Entry<Player, Integer> entry : map.entrySet()) {
-                entry.setValue(entry.getValue() + 1);
-            }
-        }
-    }
-
-    public HashMap<Player, Integer> getMap() {
+    public static HashMap<Player, Integer> getMap() {
         return map;
     }
 }
