@@ -1,5 +1,10 @@
 package Model;
 
+import view.SquareGUI;
+
+import javax.swing.*;
+import java.awt.Color;
+
 public abstract class Square {
 
     private final String name;

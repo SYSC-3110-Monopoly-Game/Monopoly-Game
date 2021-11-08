@@ -1,7 +1,14 @@
 package Model;
 
+import view.GoSquareGUI;
+
+import java.awt.Color;
+
 public class GoSquare extends Square{
     private final int addMoney;
+    private Color color;
+
+
 
     /** Represents the GO Square
      *
@@ -9,7 +16,7 @@ public class GoSquare extends Square{
      * @param number
      * @param money
      */
-    public GoSquare(String name, int number, int money) {
+    public GoSquare(String name, int number, Color color, int money) {
         super(name, number);
         this.addMoney = money;
     }
@@ -18,7 +25,9 @@ public class GoSquare extends Square{
      *
      * @return amount of money a player gets when they pass go
      */
-    private int getAddMoney() {return addMoney;}
+    public int getAddMoney(Player p) {
+        return addMoney;
+    }
 
     /** Player passed GO square, gets free money
      *
@@ -26,7 +35,9 @@ public class GoSquare extends Square{
      */
     @Override
     public void landOn(Player p) {
+        p.setLocation(this);
         p.increaseCash(this.addMoney);
         System.out.println("You passed GO Square! You will get " + this.addMoney);
     }
+
 }
