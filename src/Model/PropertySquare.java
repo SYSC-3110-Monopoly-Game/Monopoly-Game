@@ -68,7 +68,7 @@ public class PropertySquare extends Square {
      */
     @Override
     public void landOn(Player p) {
-        p.setLocation(this);
+        p.setCurrentLocation(this);
 
         int fee = this.getRentFee();
         int price = this.getPrice();

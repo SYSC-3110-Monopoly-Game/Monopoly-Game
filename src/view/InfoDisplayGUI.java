@@ -48,16 +48,16 @@ public class InfoDisplayGUI extends JPanel {
         housePrice = new JLabel();
         hotelPrice = new JLabel();
 
-        currentLocation.setText("Current Location: " + playerInTurn.getLocation().getName());
-        String buyPriceString = "", rentPriceString ="";
-        if(playerInTurn.getLocation() instanceof PropertySquare){
-             buyPriceString = ((PropertySquare) playerInTurn.getLocation()).getPrice()+"";
-             rentPriceString = ((PropertySquare) playerInTurn.getLocation()).getRentFee()+"";
+        currentLocation.setText("Location before rolling dice: " + playerInTurn.getCurrentLocation().getName());
+        String buyPriceString = "", rentPriceString = "";
+        if (playerInTurn.getCurrentLocation() instanceof PropertySquare) {
+            buyPriceString = ((PropertySquare) playerInTurn.getCurrentLocation()).getPrice() + "";
+            rentPriceString = ((PropertySquare) playerInTurn.getCurrentLocation()).getRentFee() + "";
         }
         buyPrice.setText("Buy Price: " + buyPriceString);
         rentPrice.setText("Rent Price: " + rentPriceString);
-        housePrice.setText("House Price: 20" ); // will be changed in milestone
-        hotelPrice.setText("Hotel Price: 30" ); // will be changed in milestone
+        housePrice.setText("House Price: 20"); // will be changed in milestone
+        hotelPrice.setText("Hotel Price: 30"); // will be changed in milestone
 
         currentProperty.add(currentLocation);
         currentProperty.add(buyPrice);
@@ -68,7 +68,6 @@ public class InfoDisplayGUI extends JPanel {
 
         //buttons: buy, sell, roll dice next turn
         JPanel buttons = new JPanel(new GridLayout(2, 2));
-        //buttons.setPreferredSize(new Dimension(150, 100));
         buttons.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 
         buy = new JButton("Buy");
@@ -111,7 +110,7 @@ public class InfoDisplayGUI extends JPanel {
     }
 
     public void setPropertyList(String propertyList) {
-        this.propertyList.setText("Property List: " + propertyList);
+        this.propertyList.setText("<html>" + "Property List: " + propertyList + "</html>");
         this.propertyList.repaint();
     }
 
@@ -138,5 +137,25 @@ public class InfoDisplayGUI extends JPanel {
     public void setHotelPrice(JLabel hotelPrice) {
         this.hotelPrice.setText("Hotel Price: " + hotelPrice);
         this.hotelPrice.repaint();
+    }
+
+    public void setBuyEnabled(boolean b) {
+        this.buy.setEnabled(b);
+        this.buy.repaint();
+    }
+
+    public void setSellEnabled(boolean b) {
+        this.sell.setEnabled(b);
+        this.sell.repaint();
+    }
+
+    public void setNextEnabled(boolean b) {
+        this.nextTurn.setEnabled(b);
+        this.nextTurn.repaint();
+    }
+
+    public void setRollEnabled(boolean b) {
+        this.rollDice.setEnabled(b);
+        this.rollDice.repaint();
     }
 }

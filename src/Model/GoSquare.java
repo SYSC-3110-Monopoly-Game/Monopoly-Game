@@ -25,7 +25,8 @@ public class GoSquare extends Square{
      *
      * @return amount of money a player gets when they pass go
      */
-    public int getAddMoney(Player p) {
+    public int getAddMoney() {
+
         return addMoney;
     }
 
@@ -35,7 +36,7 @@ public class GoSquare extends Square{
      */
     @Override
     public void landOn(Player p) {
-        p.setLocation(this);
+        p.setCurrentLocation(this);
         p.increaseCash(this.addMoney);
         System.out.println("You passed GO Square! You will get " + this.addMoney);
     }

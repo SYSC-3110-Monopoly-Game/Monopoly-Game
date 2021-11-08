@@ -8,7 +8,7 @@ public class MonopolyBoard {
     private static final int SIZE = 33;
     private final Square[] squares;
     public static JailSquare jail;
-    private int buyPrice = 50, rentPrice = 30;
+    private int buyPrice = 60, rentPrice = 70;
 
 
     public MonopolyBoard() {
@@ -27,6 +27,7 @@ public class MonopolyBoard {
         int i = 0;
         int goMoney = 50;
         int incomeTax = 100;
+        int jailFee = 100;
 
         squares[i] = new GoSquare("GO", i++, Color.WHITE, goMoney);
         squares[i] = new PropertySquare("Mediterranean Avenue", i++, buyPrice, rentPrice, Color.GRAY);
@@ -39,7 +40,7 @@ public class MonopolyBoard {
         squares[i] = new PropertySquare("Vermont Avenue", i++, buyPrice, rentPrice, Color.CYAN);
         squares[i] = new PropertySquare("Connecticut Avenue", i++, buyPrice, rentPrice, Color.CYAN);
 
-        squares[i] = new JailSquare("Jail", i);
+        squares[i] = new JailSquare("Jail", i, jailFee);
 
         jail = (JailSquare) squares[i];
         i++;

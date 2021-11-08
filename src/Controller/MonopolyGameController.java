@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.MonopolyGame;
+import Model.PropertySquare;
 import view.MonopolyGameGUI;
 
 import javax.swing.*;
@@ -23,17 +24,16 @@ public class MonopolyGameController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         JButton b = (JButton)e.getSource();
         if(b.getText().equals("Buy")){
-
+            this.game.buySquare();
         }
         if(b.getText().equals("Sell")){
-
+            //this.game.sellProperty(PropertySquare p);
         }
         if(b.getText().equals("Roll Dice")){
-            this.game.rollDice();
+            this.game.playRound();
         }
         if(b.getText().equals("Next Turn")){
-            this.game.playRound();
-
+            this.game.nextTurn();
         }
     }
 }
