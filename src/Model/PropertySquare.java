@@ -25,7 +25,7 @@ public class PropertySquare extends Square {
      * gets the color of the square
      */
     public Color getColor() {
-        return Color.BLACK;
+        return color;
     }
 
     /**
@@ -68,7 +68,7 @@ public class PropertySquare extends Square {
      */
     @Override
     public void landOn(Player p) {
-        p.setLocation(this);
+        p.setCurrentLocation(this);
 
         int fee = this.getRentFee();
         int price = this.getPrice();
