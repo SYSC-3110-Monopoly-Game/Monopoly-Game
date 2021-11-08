@@ -1,31 +1,29 @@
 package tests;
 
 import Model.Player;
+import Model.PropertySquare;
 import Model.Square;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 class PlayerTest {
 
     Player player;
-    private Player s;
-    private Player square;
+    private Square square;
     private Square PropertySquare;
-    private ArrayList<Model.PropertySquare> squaresOwned;
     private Square atSquare;
-    private Object Square;
     private int cashTotal;
     private int rentFee;
 
-    PlayerTest(Player s, Player square, Square propertySquare, ArrayList<Model.PropertySquare> squaresOwned, int rentFee) {
-        this.s = s;
+    PlayerTest(Square square, Square propertySquare, Square atSquare, int rentFee) {
         this.square = square;
         PropertySquare = propertySquare;
-        this.squaresOwned = squaresOwned;
+        this.atSquare = atSquare;
         this.rentFee = rentFee;
         this.cashTotal = 300;
     }
@@ -57,9 +55,9 @@ class PlayerTest {
     }
 
     @Test
-    void setLocation(Square nextSquare) {
-        this.atSquare = nextSquare;
-        Assertions.assertEquals(nextSquare, player.setLocation(Square));
+    void setLocation() {
+        player.setLocation(square);
+        Assertions.assertEquals(atSquare, player.getLocation());
     }
 
     @Test
@@ -84,7 +82,9 @@ class PlayerTest {
 
     @Test
     void buyProperty() {
-        Assertions.assertEquals(player.buyProperty(location), player.buyProperty(location));
+        Square location = new PropertySquare("aSquare", 1,1,1, Color.BLACK);
+        player.buyProperty(location);
+        Assertions.assertEquals(location, player.getProperties());
     }
 
     @Test
@@ -94,6 +94,6 @@ class PlayerTest {
 
     @Test
     void ifWantToBuy() {
-        Assertions.assertEquals("If you want to buy " + square.getName() + "? (y/n)",player.ifWantToBuy((Model.PropertySquare) PropertySquare));
+        Assertions.assertEquals("If you want to buy " + square.getName() + "? (y/n)",player.ifWantToBuy((PropertySquare) PropertySquare));
     }
 }
