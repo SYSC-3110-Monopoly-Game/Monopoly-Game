@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class JailSquare extends Square {
 
-    public static HashMap<Player, Integer> map;
+    public HashMap<Player, Integer> map;
     private int jailFee;
 
 
@@ -32,6 +32,7 @@ public class JailSquare extends Square {
     public void landOn(Player p) {
         p.setCurrentLocation(this);
         System.out.println("You are visiting jail");
+        message = " is visiting jail\n";
     }
 
     /** Adds player to jail hashmap
@@ -41,6 +42,7 @@ public class JailSquare extends Square {
     public void goJail(Player p) {
         p.setCurrentLocation(this);
         this.map.put(p, 0);
+        message = " is in jail\n";
     }
 
     public void goOutJail(Player p) {
@@ -48,12 +50,14 @@ public class JailSquare extends Square {
         this.map.remove(p);
         this.landOn(p);
         p.setInJail(false);
+        message = " is out of jail\n";
     }
     public int getJailFee(){
         return this.jailFee;
     }
 
-    public static HashMap<Player, Integer> getMap() {
-        return map;
+    public HashMap<Player, Integer> getMap() {
+        return this.map;
     }
+
 }
