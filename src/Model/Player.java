@@ -63,16 +63,18 @@ public class Player {
      *
      * @param rentFee
      */
-    public void decreaseCash(int rentFee) {
+    public int decreaseCash(int rentFee) {
         this.cashTotal -= rentFee;
+        return cashTotal;
     }
 
     /** Increases player's cash by rentFee amount
      *
      * @param rentFee
      */
-    public void increaseCash(int rentFee) {
+    public int increaseCash(int rentFee) {
         this.cashTotal += rentFee;
+        return cashTotal;
     }
 
     /** Checks if player is bankrupt
