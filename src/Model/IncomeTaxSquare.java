@@ -7,13 +7,12 @@ import java.awt.Color;
 public class IncomeTaxSquare extends Square {
 
     private final int incomeTax;
+
     public IncomeTaxSquare(String name, int number, int tax) {
         super(name, number);
         this.incomeTax = tax;
+        message = " is on Income Tax and has just paid $" + tax + '\n';
     }
-
-
-    private int getIncomeTax() {return incomeTax;}
 
     /** Player pays income tax when they land on this square
      *

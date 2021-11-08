@@ -34,7 +34,7 @@ public class MonopolyBoard {
         squares[i] = new PropertySquare("Baltic Avenue", i++, buyPrice, rentPrice, Color.GRAY);
         squares[i] = new IncomeTaxSquare("Income Tax", i++, incomeTax);
 
-        squares[i] = new RailRoadSquare("Reading ReilRoad", i++, buyPrice, rentPrice, Color.BLACK);
+        squares[i] = new RailRoadSquare("Reading RailRoad", i++, buyPrice, rentPrice, Color.BLACK);
 
         squares[i] = new PropertySquare("Oriental Avenue", i++, buyPrice, rentPrice, Color.CYAN);
         squares[i] = new PropertySquare("Vermont Avenue", i++, buyPrice, rentPrice, Color.CYAN);

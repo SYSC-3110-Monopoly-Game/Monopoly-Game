@@ -5,11 +5,12 @@ import view.MonopolyGameGUI;
 import java.util.*;
 
 public class MonopolyGame {
-    public static MonopolyBoard board;
-    public static ArrayList<Player> players;
-    private static ArrayList<MonopolyGameGUI> views;
-    private final Dice dice;
+    public MonopolyBoard board;
+    public ArrayList<Player> players;
+    private ArrayList<MonopolyGameGUI> views;
+    public final Dice dice;
     private Player playerInTurn;
+    private int index = -1;
 
     public MonopolyGame() {
         board = new MonopolyBoard();
@@ -86,7 +87,13 @@ public class MonopolyGame {
     }
 
     public void buySquare() {
-        //playerInTurn.buyProperty(playerInTurn.getCurrentLocation());
+        playerInTurn.buyProperty(playerInTurn.getCurrentLocation());
+        this.updateViews(playerInTurn, "Buy");
+    }
+
+    public void sellSquare() {
+        playerInTurn.sellProperty(playerInTurn.getProperties().get(0));
+        this.updateViews(playerInTurn, "Sell");
     }
 
     /**
@@ -106,37 +113,44 @@ public class MonopolyGame {
         if (inJail) {
             if (dice.hasDoubles()) {
                 System.out.println("You rolled a double, you can go out!");
-                distance = 0;
                 //setting player out of jail
                 MonopolyBoard.jail.goOutJail(playerInTurn);
             } else {
                 System.out.println("You did not roll a double!");
                 MonopolyBoard.jail.addCounter(playerInTurn);
                 //check if player hasn't rolled a double 3 times, make them pay jail fee and get out of jail
-                if (JailSquare.map.get(playerInTurn) == 2) {
+                if (MonopolyBoard.jail.getMap().get(playerInTurn) == 2) {
                     playerInTurn.decreaseCash(MonopolyBoard.jail.getJailFee());
                     MonopolyBoard.jail.goOutJail(playerInTurn);
                 }
             }
         } else {  // if player not in jail
-            while (dice.hasDoubles() && ++counter < 3) {  // if it has double, go into the while loop
+            /*while (dice.hasDoubles() && ++counter < 3) {  // if it has double, go into the while loop
                 distance = getDistance();
-            }
+            }*/
 
-            if (counter >= 3) {  // if rolled 3 doubles send to jail
+            /*if (counter >= 3) {  // if rolled 3 doubles send to jail
                 MonopolyBoard.jail.goJail(playerInTurn);
                 playerInTurn.setInJail(true);
-            } else {
-                movePlayer(playerInTurn, distance);
-            }
+            } else {*/
+            movePlayer(playerInTurn, distance);
+
         }
 
         if (playerInTurn.isBankrupt()) {
             updateViews(playerInTurn, "Bankrupt");
-            players.remove(playerInTurn);
             for(PropertySquare property: playerInTurn.getProperties()){
                 property.setOwner(null);
             }
+            index = players.indexOf(playerInTurn);
+
+            // if only 2 players left and one is bankrupt
+            if(players.size() == 2) {
+                //remove the player immediately, otherwise the winner won't be get until next playRound()
+                // also see nextTurn() for any question
+                players.remove(playerInTurn);
+            }
+
         } else {
             updateViews(playerInTurn, "Roll Dice");
         }
@@ -177,11 +191,16 @@ public class MonopolyGame {
     }
 
     public void nextTurn() {
+        // index added to avoid playerInTurn go from player 2 (bankrupt!) to player 1 when there are still 4 players
+        // that was the situation when i was running the game!!!!
+
         int currentIndex = players.indexOf(this.playerInTurn);
         if (currentIndex == players.size() - 1) currentIndex = -1;
         this.playerInTurn = players.get(currentIndex + 1);
+        if(index != -1) {
+            players.remove(index);
+            index = -1;
+        }
         updateViews(playerInTurn, "Next Turn");
     }
-
-
 }
