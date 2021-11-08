@@ -173,6 +173,14 @@ Rebbeca Li
 Shizhong Shang
   
 - Implemented Player class
+- Implemented PlayerTest class
+- Implemented FreeParking class
+- Implemented GoToJail class
+- Implemented GoSquare class
+- Implemented IncomeTaxSquare class
+- Implemented JailSquare class
+- Implemented RailRoadSquare class
+- Implemented UtilitySquare class
 - Sequence diagrams
 
 Zirui Qiao
