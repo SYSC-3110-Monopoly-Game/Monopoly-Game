@@ -1,0 +1,366 @@
+Index: src/Model/Dice.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Model;\r\n\r\nimport view.DiceGUI;\r\n\r\nimport java.util.Random;\r\n\r\npublic class Dice {\r\n\r\n    private Random random;\r\n    private int[] dice;\r\n\r\n    /**\r\n     * Constructs the default number of dice\r\n     */\r\n    public Dice() {\r\n        this.dice = new int[2];\r\n        this.random = new Random();\r\n    }\r\n\r\n    /**\r\n     * Rolls all the dice at once and returns an array of the values\r\n     */\r\n    public int[] rollDice() {\r\n        for (int i = 0; i < 2; i++) {\r\n\r\n            int singleDie = this.random.nextInt(6)+1;\r\n            this.dice[i] = singleDie;\r\n        }\r\n        return this.dice;\r\n    }\r\n\r\n    /**\r\n     * Adds the dice values and returns the sum\r\n     */\r\n    public int getTotalValue() {\r\n        return this.dice[0] + this.dice[1];\r\n    }\r\n\r\n    /**\r\n     * method which returns true if the die values are equal/doubles\r\n     */\r\n    public boolean hasDoubles() {\r\n        return this.dice[0] == this.dice[1];\r\n    }\r\n\r\n    /**\r\n     * method which returns a space-separated list of all the individual die-values\r\n     */\r\n    public String toString() {\r\n        return \"Dice #1 = \" + this.dice[0] + \"\\t\\t\" + \"Dice #2 = \" + this.dice[1];\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Model/Dice.java b/src/Model/Dice.java
+--- a/src/Model/Dice.java	(revision 96eafd5ac82d0878cb0cbc29537cef897152c7f3)
++++ b/src/Model/Dice.java	(date 1636408835560)
+@@ -1,7 +1,5 @@
+ package Model;
+ 
+-import view.DiceGUI;
+-
+ import java.util.Random;
+ 
+ public class Dice {
+@@ -29,6 +27,20 @@
+         return this.dice;
+     }
+ 
++    /**
++     * get dice1 value
++     */
++    public int getDice1 () {
++        return this.dice[0];
++    }
++
++    /**
++     * get dice2 value
++     */
++    public int getDice2 () {
++        return this.dice[1];
++    }
++
+     /**
+      * Adds the dice values and returns the sum
+      */
+Index: src/view/SquareGridGUI.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package view;\r\n\r\nimport Model.*;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.*;\r\nimport java.util.ArrayList;\r\n\r\npublic class SquareGridGUI extends JPanel {\r\n    private Square[] square;\r\n    private SquareGUI squareGUIs[];\r\n\r\n    public SquareGridGUI(Square[] square, ArrayList<Player> players) {\r\n        this.square = square;\r\n        this.squareGUIs = new SquareGUI[33];\r\n        this.setBackground(new Color(205, 230, 208));\r\n        this.setLayout(new GridBagLayout());\r\n        this.setPreferredSize(new Dimension(920, 670));\r\n\r\n        //this.makeSquares();\r\n        this.createSquareGUI();\r\n        for (Player p : players) {\r\n            this.squareGUIs[0].addPlayer(p.getName());\r\n        }\r\n\r\n\r\n    }\r\n\r\n   /* private void LoadSquareGUI(Square square, GridBagConstraints c) {\r\n        if (square instanceof GoSquare){\r\n            this.add(((GoSquare) square).gui, c);\r\n\r\n        } else if (square instanceof UtilitySquare utility) {\r\n            this.add(utility.gui, c);\r\n\r\n        } else if (square instanceof RailRoadSquare railRoad) {\r\n            this.add(railRoad.gui, c);\r\n\r\n        } else if (square instanceof PropertySquare property) {\r\n            this.add(property.gui, c);\r\n\r\n        } else if (square instanceof IncomeTaxSquare incomeTax) {\r\n            this.add(incomeTax.gui, c);\r\n\r\n        } else if (square instanceof GoToJailSquare) {\r\n            this.add(((GoToJailSquare) square).gui, c);\r\n\r\n        } else if (square instanceof JailSquare) {\r\n            this.add(((JailSquare) square).gui, c);\r\n\r\n        } else if (square instanceof FreeParkingSquare) {\r\n            this.add(((FreeParkingSquare) square).gui, c);\r\n        }\r\n    }*/\r\n\r\n    private void createSquareGUI() {\r\n\r\n        GridBagConstraints c = new GridBagConstraints();\r\n        c.weightx = 0.5;\r\n        c.insets = new Insets(1, 0, 1, 0);  //top padding\r\n\r\n        //NewMethod(c);\r\n        originalMethod(c);\r\n    }\r\n\r\n    /*public void NewMethod(GridBagConstraints c){\r\n        for(int j=0; j < 4; j++){\r\n            for(int i=0; i < 10; i++){\r\n                switch (j) {\r\n                    case 0: {\r\n                        c.gridx = 10 - i;\r\n                        c.gridy = 10;\r\n                        break;\r\n                    }\r\n                    case 1: {\r\n                        c.gridx = 0;\r\n                        c.gridy = 10 - i;\r\n                        break;\r\n                    }\r\n                    case 2: {\r\n                        c.gridx = i;\r\n                        c.gridy = 0;\r\n                        break;\r\n                    }\r\n                    case 3: {\r\n                        c.gridx = 10;\r\n                        c.gridy = i;\r\n                    }\r\n                }\r\n                //this.add(square[j*10 + i].gui, c);\r\n                LoadSquareGUI(square[j*10 + i], c);\r\n            }\r\n        }\r\n    }*/\r\n\r\n    public void originalMethod(GridBagConstraints c) {\r\n\r\n        // 0th Square : Starting Point\r\n        c.gridx = 8;\r\n        c.gridy = 7;\r\n        GoSquare goSquare = (GoSquare) square[0];\r\n        GoSquareGUI goSquareGUI = new GoSquareGUI();\r\n        this.add(goSquareGUI, c);\r\n        this.squareGUIs[0] = goSquareGUI;\r\n\r\n        // 1st Square\r\n        c.gridx = 7;\r\n        PropertySquare property1 = (PropertySquare) square[1];\r\n        PropertySquareGUI propertyGUI1 = new PropertySquareGUI(property1.getColor(), property1.getName(), String.valueOf(property1.getPrice()));\r\n        this.add(propertyGUI1, c);\r\n        this.squareGUIs[1] = propertyGUI1;\r\n\r\n        //2nd Square\r\n        c.gridx = 6;\r\n        PropertySquare property2 = (PropertySquare) square[2];\r\n        PropertySquareGUI propertyGUI2 = new PropertySquareGUI(property2.getColor(), property2.getName(), String.valueOf(property2.getPrice()));\r\n        this.add(propertyGUI2, c);\r\n        this.squareGUIs[2] = propertyGUI2;\r\n\r\n        //3rd Square\r\n        IncomeTaxSquare incomeTax1 = (IncomeTaxSquare) square[3];\r\n        IncomeTaxSquareGUI incomeTaxGUI1 = new IncomeTaxSquareGUI(incomeTax1.getTax());\r\n        c.gridx = 5;\r\n        this.add(incomeTaxGUI1, c);\r\n        this.squareGUIs[3] = incomeTaxGUI1;\r\n\r\n        //4th Square\r\n        RailRoadSquare railRoad1 = (RailRoadSquare) square[4];\r\n        RailRoadSquareGUI railRoadGUI1 = new RailRoadSquareGUI(railRoad1.getName(), railRoad1.getPrice());\r\n        c.gridx = 4;\r\n        this.add(railRoadGUI1, c);\r\n        this.squareGUIs[4] = railRoadGUI1;\r\n\r\n        //5th Square\r\n        c.gridx = 3;\r\n        PropertySquare property3 = (PropertySquare) square[5];\r\n        PropertySquareGUI propertyGUI3 = new PropertySquareGUI(property3.getColor(), property3.getName(), String.valueOf(property3.getPrice()));\r\n        this.add(propertyGUI3, c);\r\n        this.squareGUIs[5] = propertyGUI3;\r\n\r\n        //6th Square\r\n        c.gridx = 2;\r\n        PropertySquare property4 = (PropertySquare) square[6];\r\n        PropertySquareGUI propertyGUI4 = new PropertySquareGUI(property4.getColor(), property4.getName(), String.valueOf(property4.getPrice()));\r\n        this.add(propertyGUI4, c);\r\n        this.squareGUIs[6] = propertyGUI4;\r\n\r\n        //7th Square\r\n        c.gridx = 1;\r\n        PropertySquare property5 = (PropertySquare) square[7];\r\n        PropertySquareGUI propertyGUI5 = new PropertySquareGUI(property5.getColor(), property5.getName(), String.valueOf(property5.getPrice()));\r\n        this.add(propertyGUI5, c);\r\n        this.squareGUIs[7] = propertyGUI5;\r\n\r\n        //8th Square\r\n        c.gridx = 0;\r\n        JailSquare jail = (JailSquare) square[8];\r\n        JailSquareGUI jailGUI = new JailSquareGUI();\r\n        this.add(jailGUI, c);\r\n        this.squareGUIs[8] = jailGUI;\r\n\r\n        //9th Square\r\n        c.gridy = 6;\r\n        PropertySquare property6 = (PropertySquare) square[9];\r\n        PropertySquareGUI propertyGUI6 = new PropertySquareGUI(property6.getColor(), property6.getName(), String.valueOf(property6.getPrice()));\r\n        this.add(propertyGUI6, c);\r\n        this.squareGUIs[9] = propertyGUI6;\r\n\r\n        //10th Square\r\n        c.gridy = 5;\r\n        UtilitySquare utility1 = (UtilitySquare) square[10];\r\n        UtilitySquareGUI utilityGUI1 = new UtilitySquareGUI(300, utility1.getName());\r\n        this.add(utilityGUI1, c);\r\n        this.squareGUIs[10] = utilityGUI1;\r\n\r\n        //11th Square\r\n        c.gridy = 4;\r\n        PropertySquare property8 = (PropertySquare) square[11];\r\n        PropertySquareGUI propertyGUI8 = new PropertySquareGUI(property8.getColor(), property8.getName(), String.valueOf(property8.getPrice()));\r\n        this.add(propertyGUI8, c);\r\n        this.squareGUIs[11] = propertyGUI8;\r\n\r\n        //12th Square\r\n        c.gridy = 3;\r\n        PropertySquare property9 = (PropertySquare) square[12];\r\n        PropertySquareGUI propertyGUI9 = new PropertySquareGUI(property9.getColor(), property9.getName(), String.valueOf(property9.getPrice()));\r\n        this.add(propertyGUI9, c);\r\n        this.squareGUIs[12] = propertyGUI9;\r\n\r\n        //13th Square\r\n        c.gridy = 2;\r\n        RailRoadSquare railRoad2 = (RailRoadSquare) square[13];\r\n        RailRoadSquareGUI railRoadGUI2 = new RailRoadSquareGUI(railRoad2.getName(), railRoad2.getPrice());\r\n        this.add(railRoadGUI2, c);\r\n        this.squareGUIs[13] = railRoadGUI2;\r\n\r\n        //14th Square\r\n        c.gridx = 1;\r\n        PropertySquare property10 = (PropertySquare) square[14];\r\n        PropertySquareGUI propertyGUI10 = new PropertySquareGUI(property10.getColor(), property10.getName(), String.valueOf(property10.getPrice()));\r\n        this.add(propertyGUI10, c);\r\n        this.squareGUIs[14] = propertyGUI10;\r\n\r\n        //15th Square\r\n        c.gridx = 2;\r\n        PropertySquare property11 = (PropertySquare) square[15];\r\n        PropertySquareGUI propertyGUI11 = new PropertySquareGUI(property11.getColor(), property11.getName(), String.valueOf(property11.getPrice()));\r\n        this.add(propertyGUI11, c);\r\n        this.squareGUIs[15] = propertyGUI11;\r\n\r\n        //16th Square\r\n        c.gridx = 3;\r\n        PropertySquare property12 = (PropertySquare) square[16];\r\n        PropertySquareGUI propertyGUI12 = new PropertySquareGUI(property12.getColor(), property12.getName(), String.valueOf(property12.getPrice()));\r\n        this.add(propertyGUI12, c);\r\n        this.squareGUIs[16] = propertyGUI12;\r\n\r\n        //17th Square\r\n        c.gridx = 2;\r\n        c.gridy = 3;\r\n        FreeParkingSquare freeParking = (FreeParkingSquare) square[17];\r\n        FreeParkingSquareGUI freeParkingGUI = new FreeParkingSquareGUI();\r\n        this.add(freeParkingGUI, c);\r\n        this.squareGUIs[17] = freeParkingGUI;\r\n\r\n        //18th Square\r\n        c.gridy = 4;\r\n        PropertySquare property13 = (PropertySquare) square[18];\r\n        PropertySquareGUI propertyGUI13 = new PropertySquareGUI(property13.getColor(), property13.getName(), String.valueOf(property13.getPrice()));\r\n        this.add(propertyGUI13, c);\r\n        this.squareGUIs[18] = propertyGUI13;\r\n\r\n        //19th Square\r\n        c.gridy = 5;\r\n        PropertySquare property14 = (PropertySquare) square[19];\r\n        PropertySquareGUI propertyGUI14 = new PropertySquareGUI(property14.getColor(), property14.getName(), String.valueOf(property14.getPrice()));\r\n        this.add(propertyGUI14, c);\r\n        this.squareGUIs[19] = propertyGUI14;\r\n\r\n        //20th Square\r\n        c.gridx = 3;\r\n        PropertySquare property15 = (PropertySquare) square[20];\r\n        PropertySquareGUI propertyGUI15 = new PropertySquareGUI(property15.getColor(), property15.getName(), String.valueOf(property15.getPrice()));\r\n        this.add(propertyGUI15, c);\r\n        this.squareGUIs[20] = propertyGUI15;\r\n\r\n        //21st Square\r\n        c.gridx = 4;\r\n        RailRoadSquare railRoad3 = (RailRoadSquare) square[21];\r\n        RailRoadSquareGUI railRoad3GUI = new RailRoadSquareGUI(railRoad3.getName(), railRoad3.getPrice());\r\n        this.add(railRoad3GUI, c);\r\n        this.squareGUIs[21] = railRoad3GUI;\r\n\r\n        //22nd Square\r\n        c.gridx = 5;\r\n        PropertySquare property16 = (PropertySquare) square[22];\r\n        PropertySquareGUI propertyGUI16 = new PropertySquareGUI(property16.getColor(), property16.getName(), String.valueOf(property16.getPrice()));\r\n        this.add(propertyGUI16, c);\r\n        this.squareGUIs[22] = propertyGUI16;\r\n\r\n        //23rd Square\r\n        c.gridx = 6;\r\n        PropertySquare property17 = (PropertySquare) square[23];\r\n        PropertySquareGUI propertyGUI17 = new PropertySquareGUI(property17.getColor(), property17.getName(), String.valueOf(property17.getPrice()));\r\n        this.add(propertyGUI17, c);\r\n        this.squareGUIs[23] = propertyGUI17;\r\n\r\n        //24th Square\r\n        c.gridy = 4;\r\n        UtilitySquare utility2 = (UtilitySquare) square[24];\r\n        UtilitySquareGUI utilityGUI2 = new UtilitySquareGUI(300, utility2.getName());\r\n        this.add(utilityGUI2, c);\r\n        this.squareGUIs[24] = utilityGUI2;\r\n\r\n        //26th Square\r\n        c.gridy = 3;\r\n        PropertySquare property18 = (PropertySquare) square[25];\r\n        PropertySquareGUI propertyGUI18 = new PropertySquareGUI(property18.getColor(), property18.getName(), String.valueOf(property18.getPrice()));\r\n        this.add(propertyGUI18, c);\r\n        this.squareGUIs[25] = propertyGUI18;\r\n\r\n        //27th Square\r\n        c.gridy = 2;\r\n        GoToJailSquare goToJailSquare = (GoToJailSquare) square[26];\r\n        GoToJailGUI goToJailGUI = new GoToJailGUI();\r\n        this.add(goToJailGUI, c);\r\n        this.squareGUIs[26] = goToJailGUI;\r\n\r\n        //28th Square\r\n        c.gridx = 7;\r\n        PropertySquare property19 = (PropertySquare) square[27];\r\n        PropertySquareGUI propertyGUI19 = new PropertySquareGUI(property19.getColor(), property19.getName(), String.valueOf(property19.getPrice()));\r\n        this.add(propertyGUI19, c);\r\n        this.squareGUIs[27] = propertyGUI19;\r\n\r\n        //30th Square\r\n        c.gridx = 8;\r\n        PropertySquare property20 = (PropertySquare) square[28];\r\n        PropertySquareGUI propertyGUI20 = new PropertySquareGUI(property20.getColor(), property20.getName(), String.valueOf(property20.getPrice()));\r\n        this.add(propertyGUI20, c);\r\n        this.squareGUIs[28] = propertyGUI20;\r\n\r\n        //31st Square\r\n        c.gridy = 3;\r\n        PropertySquare property21 = (PropertySquare) square[29];\r\n        PropertySquareGUI propertyGUI21 = new PropertySquareGUI(property21.getColor(), property21.getName(), String.valueOf(property21.getPrice()));\r\n        this.add(propertyGUI21, c);\r\n        this.squareGUIs[29] = propertyGUI21;\r\n\r\n        //32nd Square\r\n        c.gridy = 4;\r\n        RailRoadSquare railRoad4 = (RailRoadSquare) square[30];\r\n        RailRoadSquareGUI railRoad4GUI = new RailRoadSquareGUI(railRoad4.getName(), railRoad4.getPrice());\r\n        this.add(railRoad4GUI, c);\r\n        this.squareGUIs[30] = railRoad4GUI;\r\n\r\n        //33rd Square\r\n        c.gridy = 5;\r\n        PropertySquare property22 = (PropertySquare) square[31];\r\n        PropertySquareGUI propertyGUI22 = new PropertySquareGUI(property22.getColor(), property22.getName(), String.valueOf(property22.getPrice()));\r\n        this.add(propertyGUI22, c);\r\n        this.squareGUIs[31] = propertyGUI22;\r\n\r\n        //34th Square\r\n        c.gridy = 6;\r\n        PropertySquare property23 = (PropertySquare) square[32];\r\n        PropertySquareGUI propertyGUI23 = new PropertySquareGUI(property23.getColor(), property23.getName(), String.valueOf(property23.getPrice()));\r\n        this.add(propertyGUI23, c);\r\n        this.squareGUIs[32] = propertyGUI23;\r\n    }\r\n\r\n    public void changePlayerGUILocation(Player player, int currentLocationIndex, int nextLocationIndex) {\r\n        squareGUIs[currentLocationIndex].removePlayer(player.getName(), player.isInJail());\r\n\r\n        if (player.isInJail() && nextLocationIndex == 8) {\r\n            JailSquareGUI jail = (JailSquareGUI) squareGUIs[nextLocationIndex];\r\n            //if player already not in jail\r\n            jail.addPlayerToJail(player.getName());\r\n        } else {\r\n            if (!player.isInJail() && nextLocationIndex == 8 && currentLocationIndex == 8) {\r\n                JailSquareGUI jail = (JailSquareGUI) squareGUIs[nextLocationIndex];\r\n                jail.removePlayer(player.getName(), true);\r\n            }\r\n            System.out.println(\"currentlocationIndex in square GUI \" + currentLocationIndex);\r\n            squareGUIs[nextLocationIndex].addPlayer(player.getName());\r\n            System.out.println(\"nextLocationIndex in square GUI \" + nextLocationIndex);\r\n\r\n        }\r\n    }\r\n\r\n    public void removePlayerGUILocation(Player player, int currentLocationIndex) {\r\n        squareGUIs[currentLocationIndex].removePlayer(player.getName(), player.isInJail());\r\n    }\r\n\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/view/SquareGridGUI.java b/src/view/SquareGridGUI.java
+--- a/src/view/SquareGridGUI.java	(revision 96eafd5ac82d0878cb0cbc29537cef897152c7f3)
++++ b/src/view/SquareGridGUI.java	(date 1636408665990)
+@@ -327,6 +327,20 @@
+         PropertySquareGUI propertyGUI23 = new PropertySquareGUI(property23.getColor(), property23.getName(), String.valueOf(property23.getPrice()));
+         this.add(propertyGUI23, c);
+         this.squareGUIs[32] = propertyGUI23;
++
++
++        //Dice1
++        c.gridx = 4;
++        c.gridy = 3;
++        DiceGUI1 diceGui1 = new DiceGUI1();
++        this.add(diceGui1, c);
++
++        //Dice2
++        c.gridx = 4;
++        c.gridy = 4;
++        DiceGUI2 diceGui2 = new DiceGUI2();
++        this.add(diceGui2, c);
++
+     }
+ 
+     public void changePlayerGUILocation(Player player, int currentLocationIndex, int nextLocationIndex) {
+Index: src/Model/MonopolyGame.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Model;\r\n\r\nimport view.MonopolyGameGUI;\r\n\r\nimport java.util.*;\r\n\r\npublic class MonopolyGame {\r\n    public static MonopolyBoard board;\r\n    public static ArrayList<Player> players;\r\n    private static ArrayList<MonopolyGameGUI> views;\r\n    private final Dice dice;\r\n    private Player playerInTurn;\r\n\r\n    public MonopolyGame() {\r\n        board = new MonopolyBoard();\r\n        players = createPlayers();\r\n        dice = new Dice();\r\n        views = new ArrayList<>();\r\n        printPlayersInfo();\r\n    }\r\n\r\n\r\n    /**\r\n     * set 4 players\r\n     */\r\n    private ArrayList<Player> createPlayers() {\r\n        ArrayList<Player> playerTempList = new ArrayList<>();\r\n        System.out.println(\"Welcome to Monopoly Game!!\");\r\n        System.out.println(\"There are 4 player in total\");\r\n\r\n        int number = 4;                                                      // get the number of players to 4\r\n\r\n        //create the 4 players\r\n        for (int i = 0; i < number; i++) {\r\n            String name = \"\" + (i + 1);\r\n            playerTempList.add(new Player(name, board.startingSquare()));   // add players to a temp arraylist\r\n        }\r\n        this.playerInTurn = playerTempList.get(0);\r\n        return playerTempList;                                              // return the temp arrayList\r\n    }\r\n\r\n    /**\r\n     * move the player with a random distance\r\n     */\r\n    private void movePlayer(Player p, int distance) {\r\n        Square currentLocation = p.getCurrentLocation();\r\n        System.out.println(\"Current location: \" + currentLocation.toString());\r\n\r\n        // calculate the square will be reached\r\n        Square nextSquare = board.getNextSquare(p.getCurrentLocation(), distance);\r\n\r\n        // if the square will reached passes GoSquare AND is Not GoSquare\r\n        if (currentLocation.getNumber() > nextSquare.getNumber() && nextSquare.getNumber() != 0) {\r\n            // increase player money by go money amount\r\n            p.increaseCash(((GoSquare) board.startingSquare()).getAddMoney());\r\n        }\r\n        System.out.println(\"New location: \" + nextSquare + \"\\n\");\r\n\r\n        // Move player to the calculated square\r\n        nextSquare.landOn(p);\r\n    }\r\n\r\n\r\n    /**\r\n     * return the winner of the game\r\n     */\r\n    private Player getWinner() {\r\n        // if more than 1 player exist return null\r\n        if (players.size() != 1)\r\n            return null;\r\n            // if only 1 player exist return the winner\r\n        else\r\n            return players.get(0);\r\n    }\r\n\r\n\r\n    /**\r\n     * do all needed check when rolling dices\r\n     */\r\n    public int getDistance() {\r\n        dice.rollDice();\r\n        System.out.println(\"\\t Dice Rolled!!\\n\" + dice);\r\n        System.out.println(\"+-------------------------+\");\r\n\r\n        return dice.getTotalValue();\r\n    }\r\n\r\n    public void buySquare() {\r\n        //playerInTurn.buyProperty(playerInTurn.getCurrentLocation());\r\n    }\r\n\r\n    /**\r\n     * A round of playing for every player\r\n     */\r\n    public void playRound() {\r\n        // print which player's turn it is\r\n        System.out.println(\"+----------+\");\r\n        System.out.println(\"NEXT ROUND : \" + playerInTurn.getName());\r\n        System.out.println(\"+----------+\");\r\n\r\n        boolean inJail = playerInTurn.isInJail();\r\n        int distance = getDistance();\r\n        int counter = 0;\r\n\r\n        //if player is in jail, only let player out if they rolled a double\r\n        if (inJail) {\r\n            if (dice.hasDoubles()) {\r\n                System.out.println(\"You rolled a double, you can go out!\");\r\n                distance = 0;\r\n                //setting player out of jail\r\n                MonopolyBoard.jail.goOutJail(playerInTurn);\r\n            } else {\r\n                System.out.println(\"You did not roll a double!\");\r\n                MonopolyBoard.jail.addCounter(playerInTurn);\r\n                //check if player hasn't rolled a double 3 times, make them pay jail fee and get out of jail\r\n                if (JailSquare.map.get(playerInTurn) == 2) {\r\n                    playerInTurn.decreaseCash(MonopolyBoard.jail.getJailFee());\r\n                    MonopolyBoard.jail.goOutJail(playerInTurn);\r\n                }\r\n            }\r\n        } else {  // if player not in jail\r\n            while (dice.hasDoubles() && ++counter < 3) {  // if it has double, go into the while loop\r\n                distance = getDistance();\r\n            }\r\n\r\n            if (counter >= 3) {  // if rolled 3 doubles send to jail\r\n                MonopolyBoard.jail.goJail(playerInTurn);\r\n                playerInTurn.setInJail(true);\r\n            } else {\r\n                movePlayer(playerInTurn, distance);\r\n            }\r\n        }\r\n\r\n        if (playerInTurn.isBankrupt()) {\r\n            updateViews(playerInTurn, \"Bankrupt\");\r\n            players.remove(playerInTurn);\r\n            for(PropertySquare property: playerInTurn.getProperties()){\r\n                property.setOwner(null);\r\n            }\r\n        } else {\r\n            updateViews(playerInTurn, \"Roll Dice\");\r\n        }\r\n\r\n        if(getWinner()!=null){\r\n            updateViews(getWinner(), \"Winner\");\r\n        }\r\n    }\r\n\r\n\r\n    /**\r\n     * display all needed information about players\r\n     */\r\n    public void printPlayersInfo() {\r\n        System.out.println(\"\\n+-------------------+\");\r\n        for (Player p : players) {\r\n            System.out.println(\"\\nPlayer #\" + (players.indexOf(p) + 1) + \" \" + p.getName()); // player ID and Name\r\n            System.out.println(\"Cash = $ \" + p.getCash());                                   // player cash\r\n            System.out.println(\"Properties = \" + p.getProperties());                         // player properties\r\n            System.out.println(\"Current location =  \" + p.getCurrentLocation().toString());         // player location\r\n        }\r\n        System.out.println(\"+-------------------+\\n\");\r\n    }\r\n\r\n    public void addView(MonopolyGameGUI view) {\r\n        views.add(view);\r\n    }\r\n\r\n\r\n    private void updateViews(Player p, String command) {\r\n        for (MonopolyGameGUI view : views) {\r\n            view.handleUpdate(p, command);\r\n        }\r\n    }\r\n\r\n    public Player getPlayerInTurn() {\r\n        return this.playerInTurn;\r\n    }\r\n\r\n    public void nextTurn() {\r\n        int currentIndex = players.indexOf(this.playerInTurn);\r\n        if (currentIndex == players.size() - 1) currentIndex = -1;\r\n        this.playerInTurn = players.get(currentIndex + 1);\r\n        updateViews(playerInTurn, \"Next Turn\");\r\n    }\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Model/MonopolyGame.java b/src/Model/MonopolyGame.java
+--- a/src/Model/MonopolyGame.java	(revision 96eafd5ac82d0878cb0cbc29537cef897152c7f3)
++++ b/src/Model/MonopolyGame.java	(date 1636411631971)
+@@ -183,5 +183,9 @@
+         updateViews(playerInTurn, "Next Turn");
+     }
+ 
++    public Dice getDice(){
++        return this.dice;
++    }
++
+ 
+ }
+\ No newline at end of file
+Index: .idea/runConfigurations.xml
+===================================================================
+diff --git a/.idea/runConfigurations.xml b/.idea/runConfigurations.xml
+deleted file mode 100644
+--- a/.idea/runConfigurations.xml	(revision 96eafd5ac82d0878cb0cbc29537cef897152c7f3)
++++ /dev/null	(revision 96eafd5ac82d0878cb0cbc29537cef897152c7f3)
+@@ -1,10 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project version="4">
+-  <component name="RunConfigurationProducerService">
+-    <option name="ignoredProducers">
+-      <set>
+-        <option value="com.android.tools.idea.compose.preview.runconfiguration.ComposePreviewRunConfigurationProducer" />
+-      </set>
+-    </option>
+-  </component>
+-</project>
+\ No newline at end of file
+Index: .idea/runConfigurations/MonopolyGame.xml
+===================================================================
+diff --git a/.idea/runConfigurations/MonopolyGame.xml b/.idea/runConfigurations/MonopolyGame.xml
+deleted file mode 100644
+--- a/.idea/runConfigurations/MonopolyGame.xml	(revision 96eafd5ac82d0878cb0cbc29537cef897152c7f3)
++++ /dev/null	(revision 96eafd5ac82d0878cb0cbc29537cef897152c7f3)
+@@ -1,15 +0,0 @@
+-<component name="ProjectRunConfigurationManager">
+-  <configuration default="false" name="MonopolyGame" type="Application" factoryName="Application" nameIsGenerated="true">
+-    <option name="MAIN_CLASS_NAME" value="Model.MonopolyGame" />
+-    <module name="Monopoly-Game" />
+-    <extension name="coverage">
+-      <pattern>
+-        <option name="PATTERN" value="Model.*" />
+-        <option name="ENABLED" value="true" />
+-      </pattern>
+-    </extension>
+-    <method v="2">
+-      <option name="Make" enabled="true" />
+-    </method>
+-  </configuration>
+-</component>
+\ No newline at end of file
+Index: .idea/.gitignore
+===================================================================
+diff --git a/.idea/.gitignore b/.idea/.gitignore
+deleted file mode 100644
+--- a/.idea/.gitignore	(revision 96eafd5ac82d0878cb0cbc29537cef897152c7f3)
++++ /dev/null	(revision 96eafd5ac82d0878cb0cbc29537cef897152c7f3)
+@@ -1,8 +0,0 @@
+-# Default ignored files
+-/shelf/
+-/workspace.xml
+-# Editor-based HTTP Client requests
+-/httpRequests/
+-# Datasource local storage ignored files
+-/dataSources/
+-/dataSources.local.xml
+Index: src/view/DiceGUI.java
+===================================================================
+diff --git a/src/view/DiceGUI.java b/src/view/DiceGUI.java
+deleted file mode 100644
+--- a/src/view/DiceGUI.java	(revision 96eafd5ac82d0878cb0cbc29537cef897152c7f3)
++++ /dev/null	(revision 96eafd5ac82d0878cb0cbc29537cef897152c7f3)
+@@ -1,22 +0,0 @@
+-package view;
+-
+-import javax.swing.*;
+-import java.awt.*;
+-
+-public class DiceGUI extends JPanel {
+-
+-    public DiceGUI() {
+-        JPanel image = new JPanel(new GridLayout(1,2));
+-        JPanel full = new JPanel(new BorderLayout());
+-
+-        image.setPreferredSize(new Dimension(200,100));
+-        full.setPreferredSize(new Dimension(200,150));
+-
+-        JLabel totalDiceValue = new JLabel();
+-
+-
+-        full.add(image, BorderLayout.CENTER);
+-        full.add(totalDiceValue, BorderLayout.PAGE_END);
+-    }
+-
+-}
+Index: .idea/Monopoly-Game.iml
+===================================================================
+diff --git a/.idea/Monopoly-Game.iml b/.idea/Monopoly-Game.iml
+deleted file mode 100644
+--- a/.idea/Monopoly-Game.iml	(revision 96eafd5ac82d0878cb0cbc29537cef897152c7f3)
++++ /dev/null	(revision 96eafd5ac82d0878cb0cbc29537cef897152c7f3)
+@@ -1,9 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<module type="JAVA_MODULE" version="4">
+-  <component name="NewModuleRootManager" inherit-compiler-output="true">
+-    <exclude-output />
+-    <content url="file://$MODULE_DIR$" />
+-    <orderEntry type="inheritedJdk" />
+-    <orderEntry type="sourceFolder" forTests="false" />
+-  </component>
+-</module>
+\ No newline at end of file
+Index: src/Controller/MonopolyGameController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package Controller;\r\n\r\nimport Model.MonopolyGame;\r\nimport Model.PropertySquare;\r\nimport view.MonopolyGameGUI;\r\n\r\nimport javax.swing.*;\r\nimport java.awt.event.ActionEvent;\r\nimport java.awt.event.ActionListener;\r\n\r\n\r\n\r\npublic class MonopolyGameController implements ActionListener {\r\n\r\n    private MonopolyGame game;\r\n    private MonopolyGameGUI view;\r\n\r\n    public MonopolyGameController(MonopolyGame game, MonopolyGameGUI view) {\r\n        this.game=game;\r\n        this.view = view;\r\n    }\r\n\r\n    @Override\r\n    public void actionPerformed(ActionEvent e) {\r\n        JButton b = (JButton)e.getSource();\r\n        if(b.getText().equals(\"Buy\")){\r\n            this.game.buySquare();\r\n        }\r\n        if(b.getText().equals(\"Sell\")){\r\n            //this.game.sellProperty(PropertySquare p);\r\n        }\r\n        if(b.getText().equals(\"Roll Dice\")){\r\n            this.game.playRound();\r\n        }\r\n        if(b.getText().equals(\"Next Turn\")){\r\n            this.game.nextTurn();\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Controller/MonopolyGameController.java b/src/Controller/MonopolyGameController.java
+--- a/src/Controller/MonopolyGameController.java	(revision 96eafd5ac82d0878cb0cbc29537cef897152c7f3)
++++ b/src/Controller/MonopolyGameController.java	(date 1636410925920)
+@@ -1,5 +1,6 @@
+ package Controller;
+ 
++import Model.Dice;
+ import Model.MonopolyGame;
+ import Model.PropertySquare;
+ import view.MonopolyGameGUI;
+@@ -36,4 +37,10 @@
+             this.game.nextTurn();
+         }
+     }
++
++
++
++    public Dice getdice(){
++        return game.getDice();
++    }
+ }
+Index: Monopoly-Game.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<module type=\"JAVA_MODULE\" version=\"4\">\r\n  <component name=\"NewModuleRootManager\" inherit-compiler-output=\"true\">\r\n    <exclude-output />\r\n    <content url=\"file://$MODULE_DIR$\">\r\n      <sourceFolder url=\"file://$MODULE_DIR$/src\" isTestSource=\"false\" />\r\n    </content>\r\n    <orderEntry type=\"inheritedJdk\" />\r\n    <orderEntry type=\"sourceFolder\" forTests=\"false\" />\r\n    <orderEntry type=\"module-library\">\r\n      <library name=\"JUnit4\">\r\n        <CLASSES>\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/junit/junit/4.13.1/junit-4.13.1.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar!/\" />\r\n        </CLASSES>\r\n        <JAVADOC />\r\n        <SOURCES />\r\n      </library>\r\n    </orderEntry>\r\n    <orderEntry type=\"module-library\">\r\n      <library name=\"JUnit5.7.0\">\r\n        <CLASSES>\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter/5.7.0/junit-jupiter-5.7.0.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.7.0/junit-jupiter-api-5.7.0.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.7.0/junit-platform-commons-1.7.0.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-params/5.7.0/junit-jupiter-params-5.7.0.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-engine/5.7.0/junit-jupiter-engine-5.7.0.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-engine/1.7.0/junit-platform-engine-1.7.0.jar!/\" />\r\n        </CLASSES>\r\n        <JAVADOC />\r\n        <SOURCES />\r\n      </library>\r\n    </orderEntry>\r\n    <orderEntry type=\"module-library\">\r\n      <library name=\"JUnit4\">\r\n        <CLASSES>\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/junit/junit/4.13.1/junit-4.13.1.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar!/\" />\r\n        </CLASSES>\r\n        <JAVADOC />\r\n        <SOURCES />\r\n      </library>\r\n    </orderEntry>\r\n    <orderEntry type=\"module-library\">\r\n      <library name=\"JUnit5.7.0\">\r\n        <CLASSES>\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter/5.7.0/junit-jupiter-5.7.0.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.7.0/junit-jupiter-api-5.7.0.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.7.0/junit-platform-commons-1.7.0.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-params/5.7.0/junit-jupiter-params-5.7.0.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-engine/5.7.0/junit-jupiter-engine-5.7.0.jar!/\" />\r\n          <root url=\"jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-engine/1.7.0/junit-platform-engine-1.7.0.jar!/\" />\r\n        </CLASSES>\r\n        <JAVADOC />\r\n        <SOURCES />\r\n      </library>\r\n    </orderEntry>\r\n  </component>\r\n</module>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Monopoly-Game.iml b/Monopoly-Game.iml
+--- a/Monopoly-Game.iml	(revision 96eafd5ac82d0878cb0cbc29537cef897152c7f3)
++++ b/Monopoly-Game.iml	(date 1636405121655)
+@@ -8,52 +8,16 @@
+     <orderEntry type="inheritedJdk" />
+     <orderEntry type="sourceFolder" forTests="false" />
+     <orderEntry type="module-library">
+-      <library name="JUnit4">
+-        <CLASSES>
+-          <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.13.1/junit-4.13.1.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar!/" />
+-        </CLASSES>
+-        <JAVADOC />
+-        <SOURCES />
+-      </library>
+-    </orderEntry>
+-    <orderEntry type="module-library">
+-      <library name="JUnit5.7.0">
++      <library name="JUnit5.4">
+         <CLASSES>
+-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter/5.7.0/junit-jupiter-5.7.0.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.7.0/junit-jupiter-api-5.7.0.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.7.0/junit-platform-commons-1.7.0.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-params/5.7.0/junit-jupiter-params-5.7.0.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-engine/5.7.0/junit-jupiter-engine-5.7.0.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-engine/1.7.0/junit-platform-engine-1.7.0.jar!/" />
+-        </CLASSES>
+-        <JAVADOC />
+-        <SOURCES />
+-      </library>
+-    </orderEntry>
+-    <orderEntry type="module-library">
+-      <library name="JUnit4">
+-        <CLASSES>
+-          <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.13.1/junit-4.13.1.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar!/" />
+-        </CLASSES>
+-        <JAVADOC />
+-        <SOURCES />
+-      </library>
+-    </orderEntry>
+-    <orderEntry type="module-library">
+-      <library name="JUnit5.7.0">
+-        <CLASSES>
+-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter/5.7.0/junit-jupiter-5.7.0.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.7.0/junit-jupiter-api-5.7.0.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/apiguardian/apiguardian-api/1.1.0/apiguardian-api-1.1.0.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.7.0/junit-platform-commons-1.7.0.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-params/5.7.0/junit-jupiter-params-5.7.0.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-engine/5.7.0/junit-jupiter-engine-5.7.0.jar!/" />
+-          <root url="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-engine/1.7.0/junit-platform-engine-1.7.0.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter/5.4.2/junit-jupiter-5.4.2.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.4.2/junit-jupiter-api-5.4.2.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/opentest4j/opentest4j/1.1.1/opentest4j-1.1.1.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.4.2/junit-platform-commons-1.4.2.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-params/5.4.2/junit-jupiter-params-5.4.2.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-engine/5.4.2/junit-jupiter-engine-5.4.2.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-engine/1.4.2/junit-platform-engine-1.4.2.jar!/" />
+         </CLASSES>
+         <JAVADOC />
+         <SOURCES />
+Index: .idea/codeStyles/Project.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/codeStyles/Project.xml b/.idea/codeStyles/Project.xml
+new file mode 100644
+--- /dev/null	(date 1636405121680)
++++ b/.idea/codeStyles/Project.xml	(date 1636405121680)
+@@ -0,0 +1,7 @@
++<component name="ProjectCodeStyleConfiguration">
++  <code_scheme name="Project" version="173">
++    <ScalaCodeStyleSettings>
++      <option name="MULTILINE_STRING_CLOSING_QUOTES_ON_NEW_LINE" value="true" />
++    </ScalaCodeStyleSettings>
++  </code_scheme>
++</component>
+\ No newline at end of file
+Index: .idea/codeStyles/codeStyleConfig.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/codeStyles/codeStyleConfig.xml b/.idea/codeStyles/codeStyleConfig.xml
+new file mode 100644
+--- /dev/null	(date 1636405121630)
++++ b/.idea/codeStyles/codeStyleConfig.xml	(date 1636405121630)
+@@ -0,0 +1,5 @@
++<component name="ProjectCodeStyleConfiguration">
++  <state>
++    <option name="PREFERRED_PROJECT_CODE_STYLE" value="Default" />
++  </state>
++</component>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_16\" default=\"true\" project-jdk-name=\"openjdk-16\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 96eafd5ac82d0878cb0cbc29537cef897152c7f3)
++++ b/.idea/misc.xml	(date 1636405121708)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" default="true" project-jdk-name="openjdk-16" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/libraries/Monopoly_Game.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/libraries/Monopoly_Game.xml b/.idea/libraries/Monopoly_Game.xml
+new file mode 100644
+--- /dev/null	(date 1636405121602)
++++ b/.idea/libraries/Monopoly_Game.xml	(date 1636405121602)
+@@ -0,0 +1,9 @@
++<component name="libraryTable">
++  <library name="Monopoly-Game">
++    <CLASSES>
++      <root url="jar://$PROJECT_DIR$/out/artifacts/Monopoly_Game_jar/Monopoly-Game.jar!/" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES />
++  </library>
++</component>
+\ No newline at end of file

@@ -1,7 +1,5 @@
 package Model;
 
-import view.DiceGUI;
-
 import java.util.Random;
 
 public class Dice {
@@ -29,6 +27,20 @@ public class Dice {
             this.dice[i] = singleDie;
         }
         return this.dice;
+    }
+
+    /**
+     * get dice1 value
+     */
+    public int getDice1 () {
+        return this.dice[0];
+    }
+
+    /**
+     * get dice2 value
+     */
+    public int getDice2 () {
+        return this.dice[1];
     }
 
     /**

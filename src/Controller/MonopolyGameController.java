@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Dice;
 import Model.MonopolyGame;
 import Model.PropertySquare;
 import view.MonopolyGameGUI;
@@ -35,5 +36,11 @@ public class MonopolyGameController implements ActionListener {
         if(b.getText().equals("Next Turn")){
             this.game.nextTurn();
         }
+    }
+
+
+
+    public Dice getdice(){
+        return game.getDice();
     }
 }

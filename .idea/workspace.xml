@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="29a7685e-6c79-4c06-8833-bc1d40fa775e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Monopoly_Game.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Monopoly-Game.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/MonopolyGame.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Monopoly-Game.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Monopoly-Game.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Controller/MonopolyGameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Controller/MonopolyGameController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/FreeParkingSquare.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/FreeParkingSquare.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/GoSquare.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/GoSquare.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/GoToJailSquare.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/GoToJailSquare.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/IncomeTaxSquare.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/IncomeTaxSquare.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/JailSquare.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/JailSquare.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/MonopolyBoard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/MonopolyBoard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/PropertySquare.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/PropertySquare.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/RailRoadSquare.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/RailRoadSquare.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/Square.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/Square.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/UtilitySquare.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/UtilitySquare.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/DiceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/DiceTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/MonopolyBoardTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/MonopolyBoardTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/MonopolyGameTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/MonopolyGameTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/PlayerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/PlayerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/PropertySquareTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/PropertySquareTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/DiceGUI.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/FreeParkingSquareGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/FreeParkingSquareGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/GoSquareGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/GoSquareGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/GoToJailGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/GoToJailGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/IncomeTaxSquareGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/IncomeTaxSquareGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/InfoDisplayGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/InfoDisplayGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/JailSquareGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/JailSquareGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/MonopolyGameGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/MonopolyGameGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/PlayerGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/PlayerGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/PropertySquareGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/PropertySquareGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/RailRoadSquareGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/RailRoadSquareGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/SquareGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/SquareGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/SquareGridGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/SquareGridGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/UtilitySquareGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/UtilitySquareGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/MonopolyGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MonopolyGameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Dice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Dice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/MonopolyGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/MonopolyGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/DiceGUI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/SquareGridGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/SquareGridGUI.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="20cotFftoS4ou6WA62ULMu1gQg0" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/SYSC 3110/Lab/Lab" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RunManager" selected="Application.DiceGUI1">
+    <configuration name="DiceGUI1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="view.DiceGUI1" />
+      <module name="Monopoly-Game" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="view.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MonopolyGameGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="view.MonopolyGameGUI" />
+      <module name="Monopoly-Game" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="view.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Model.main" />
+      <module name="Monopoly-Game" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.DiceGUI1" />
+        <item itemvalue="Application.main" />
+        <item itemvalue="Application.MonopolyGameGUI" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="29a7685e-6c79-4c06-8833-bc1d40fa775e" name="Default Changelist" comment="" />
+      <created>1636353464428</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1636353464428</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Change in 'Dice' 'DiceGUI1' 'DiceGUI2' 'MonopolyGame'">
+      <created>1636412513204</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1636412513204</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Change in 'Dice' 'DiceGUI1' 'DiceGUI2' 'MonopolyGame'" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change in 'Dice' 'DiceGUI1' 'DiceGUI2' 'MonopolyGame'" />
+  </component>
+</project>

@@ -183,5 +183,9 @@ public class MonopolyGame {
         updateViews(playerInTurn, "Next Turn");
     }
 
+    public Dice getDice(){
+        return this.dice;
+    }
+
 
 }

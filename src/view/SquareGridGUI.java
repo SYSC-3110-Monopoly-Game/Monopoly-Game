@@ -327,6 +327,20 @@ public class SquareGridGUI extends JPanel {
         PropertySquareGUI propertyGUI23 = new PropertySquareGUI(property23.getColor(), property23.getName(), String.valueOf(property23.getPrice()));
         this.add(propertyGUI23, c);
         this.squareGUIs[32] = propertyGUI23;
+
+
+        //Dice1
+        c.gridx = 4;
+        c.gridy = 3;
+        DiceGUI1 diceGui1 = new DiceGUI1();
+        this.add(diceGui1, c);
+
+        //Dice2
+        c.gridx = 4;
+        c.gridy = 4;
+        DiceGUI2 diceGui2 = new DiceGUI2();
+        this.add(diceGui2, c);
+
     }
 
     public void changePlayerGUILocation(Player player, int currentLocationIndex, int nextLocationIndex) {
