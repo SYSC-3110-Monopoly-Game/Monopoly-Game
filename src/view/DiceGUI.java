@@ -3,20 +3,29 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
+
 public class DiceGUI extends JPanel {
 
+    private JLabel dice1;
+    private JLabel dice2;
+
     public DiceGUI() {
-        JPanel image = new JPanel(new GridLayout(1,2));
-        JPanel full = new JPanel(new BorderLayout());
+        this.setPreferredSize(new Dimension(100, 100));
+        this.setLayout(new BorderLayout());
+    }
 
-        image.setPreferredSize(new Dimension(200,100));
-        full.setPreferredSize(new Dimension(200,150));
+    public void setDiceImages(int dice1Value, int dice2Value) {
+        String dice1Path = "src/images/Dice" + dice1Value + ".png";
+        String dice2Path = "src/images/Dice" + dice2Value + ".png";
 
-        JLabel totalDiceValue = new JLabel();
+        ImageIcon dice1Image = new ImageIcon(dice1Path);
+        ImageIcon dice2Image = new ImageIcon(dice2Path);
 
-
-        full.add(image, BorderLayout.CENTER);
-        full.add(totalDiceValue, BorderLayout.PAGE_END);
+        this.removeAll();
+        dice1 = new JLabel(dice1Image);
+        this.add(dice1, BorderLayout.NORTH);
+        dice2 = new JLabel(dice2Image);
+        this.add(dice2, BorderLayout.SOUTH);
     }
 
 }
