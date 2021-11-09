@@ -11,6 +11,7 @@ public class MonopolyGameGUI extends JFrame {
     private MonopolyGame game;
     private InfoDisplayGUI infoDisplayGUI;
     private SquareGridGUI squareGUI;
+    private DiceGUI diceGUI;
 
     //TODO requires a square array like Square[] squares
     public MonopolyGameGUI(MonopolyGame game) {
@@ -30,8 +31,13 @@ public class MonopolyGameGUI extends JFrame {
         squareGUI = new SquareGridGUI(squares, players);
         this.add(squareGUI, BorderLayout.WEST);
 
+        //infoPanel gui initialization
         this.infoDisplayGUI = new InfoDisplayGUI(this.game.getPlayerInTurn());
         this.add(infoDisplayGUI, BorderLayout.EAST);
+
+        //dice gui
+        diceGUI= new DiceGUI();
+        squareGUI.addDiceGUI(diceGUI);
 
         this.pack();
         this.setLocationRelativeTo(null);
@@ -89,19 +95,6 @@ public class MonopolyGameGUI extends JFrame {
             infoDisplayGUI.setCash(player.getCash());
 
         } else if (command.equals("Roll Dice")) {
-
-            /*DiceGUI dice = new DiceGUI(game.dice);
-
-            GridBagConstraints c = new GridBagConstraints();
-            c.weightx = 0.5;
-            c.insets = new Insets(1, 0, 1, 0);  //top padding
-            c.gridx = 4;
-            c.gridy = 3;
-            c.gridwidth = 2;
-            c.gridheight = 2;
-
-            squareGUI.add(dice, c);*/
-
             Square newLocation = player.getCurrentLocation();
             Square lastLocation = player.getLastLocation();
             StringBuffer message = new StringBuffer(player.getName() +
@@ -112,6 +105,11 @@ public class MonopolyGameGUI extends JFrame {
 
             //remove player gui form last location and add to new location
             squareGUI.changePlayerGUILocation(player, lastLocation.getNumber(), newLocation.getNumber());
+
+
+            //set dice value
+            int diceValues[] = game.dice.getDice();
+            diceGUI.setDiceImages(diceValues[0], diceValues[1]);
 
             // refresh location, buy, rent and cash.
             //start here
@@ -146,7 +144,6 @@ public class MonopolyGameGUI extends JFrame {
             infoDisplayGUI.setNextEnabled(true);
             infoDisplayGUI.setRollEnabled(false);
             squareGUI.setMessage(message.toString());
-            //squareGUI.add
 
         } else if (command.equals("Bankrupt")) {
             Square newLocation = player.getLastLocation();

@@ -9,6 +9,8 @@ public class Dice {
     private Random random;
     private int[] dice;
 
+
+
     /**
      * Constructs the default number of dice
      */
@@ -36,6 +38,10 @@ public class Dice {
         return this.dice[0] + this.dice[1];
     }
 
+    public int[] getDice() {
+        return dice;
+    }
+
     /**
      * method which returns true if the die values are equal/doubles
      */
@@ -48,9 +54,5 @@ public class Dice {
      */
     public String toString() {
         return "Dice #1 = " + this.dice[0] + "\t\t" + "Dice #2 = " + this.dice[1];
-    }
-
-    public int[] getDice() {
-        return dice;
     }
 }
