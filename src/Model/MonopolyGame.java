@@ -5,7 +5,7 @@ import view.MonopolyGameGUI;
 import java.util.*;
 
 public class MonopolyGame {
-    public MonopolyBoard board;
+    public static MonopolyBoard board;
     public ArrayList<Player> players;
     private ArrayList<MonopolyGameGUI> views;
     public static Dice dice;
@@ -92,8 +92,11 @@ public class MonopolyGame {
     }
 
     public void sellSquare() {
-        playerInTurn.sellProperty(playerInTurn.getProperties().get(0));
-        this.updateViews(playerInTurn, "Sell");
+        if (playerInTurn.getProperties().isEmpty()) {
+        } else {
+            playerInTurn.sellProperty(playerInTurn.getProperties().get(0));
+            this.updateViews(playerInTurn, "Sell");
+        }
     }
 
     /**
