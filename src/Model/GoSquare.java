@@ -9,7 +9,6 @@ public class GoSquare extends Square{
     private Color color;
 
 
-
     /** Represents the GO Square
      *
      * @param name
@@ -19,6 +18,7 @@ public class GoSquare extends Square{
     public GoSquare(String name, int number, Color color, int money) {
         super(name, number);
         this.addMoney = money;
+        message = " just passed GO and earns $"+money+"\n";
     }
 
     /** Returns the GO Square money

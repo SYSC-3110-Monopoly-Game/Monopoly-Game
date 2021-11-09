@@ -49,13 +49,13 @@ public class InfoDisplayGUI extends JPanel {
         hotelPrice = new JLabel();
 
         currentLocation.setText("Location before rolling dice: " + playerInTurn.getCurrentLocation().getName());
-        String buyPriceString = "", rentPriceString = "";
+/*        String buyPriceString = "", rentPriceString = "";
         if (playerInTurn.getCurrentLocation() instanceof PropertySquare) {
             buyPriceString = ((PropertySquare) playerInTurn.getCurrentLocation()).getPrice() + "";
             rentPriceString = ((PropertySquare) playerInTurn.getCurrentLocation()).getRentFee() + "";
-        }
-        buyPrice.setText("Buy Price: " + buyPriceString);
-        rentPrice.setText("Rent Price: " + rentPriceString);
+        }*/
+        buyPrice.setText("Buy Price: Non-sale");
+        rentPrice.setText("Rent Price: Non-rental");
         housePrice.setText("House Price: 20"); // will be changed in milestone
         hotelPrice.setText("Hotel Price: 30"); // will be changed in milestone
 
@@ -90,6 +90,10 @@ public class InfoDisplayGUI extends JPanel {
         this.add(playerInfo);
         this.add(currentProperty);
         this.add(buttons);
+
+        this.setBuyEnabled(false);
+        this.setSellEnabled(false);
+        this.setNextEnabled(false);
     }
 
     public void setButtonControllers(MonopolyGameController controller) {
@@ -120,12 +124,15 @@ public class InfoDisplayGUI extends JPanel {
     }
 
     public void setBuyPrice(int buyPrice) {
-        this.buyPrice.setText("Buy Price: " + buyPrice);
+        if(buyPrice == -1) this.buyPrice.setText("Buy Price: Non-sale" );
+        else if(buyPrice == -2) this.buyPrice.setText("Buy Price: SOLD");
+        else this.buyPrice.setText("Buy Price: " + buyPrice);
         this.buyPrice.repaint();
     }
 
     public void setRentPrice(int rentPrice) {
-        this.rentPrice.setText("Rent Price: " + rentPrice);
+        if(rentPrice == -1) this.rentPrice.setText("Rent Price: Non-rental" );
+        else this.rentPrice.setText("Rent Price: " + rentPrice);
         this.rentPrice.repaint();
     }
 

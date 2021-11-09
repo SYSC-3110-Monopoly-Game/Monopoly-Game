@@ -9,6 +9,7 @@ public abstract class Square {
 
     private final String name;
     private final int number;
+    public String message;
 
     public Square(String name, int number) {
         this.name = name;

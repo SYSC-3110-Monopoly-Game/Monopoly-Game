@@ -9,6 +9,7 @@ public class FreeParkingSquare extends Square {
 
     public FreeParkingSquare(String name, int number) {
         super(name, number);
+        message = " is on Free Parking\n";
     }
 
     /** Player gets a free parking

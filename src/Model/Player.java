@@ -89,10 +89,23 @@ public class Player {
      * @ param square is added into the squaresOwned array list
      */
     public void buyProperty(Square location) {
+        // if the square is a property
         if (location instanceof PropertySquare && ((PropertySquare) location).getPrice()<cashTotal) {
-            this.squaresOwned.add((PropertySquare) location);           // add the property to player's properties list
-            ((PropertySquare) location).setOwner(this);                 // set the owner of the property to this player
-            this.decreaseCash(((PropertySquare) location).getPrice());  // reset the player's cash
+            //if the property have not been bought
+            if(((PropertySquare) location).getOwner() == null) {
+                //if the player has enough money to buy
+                if(this.getCash() >= ((PropertySquare) location).getPrice()) {
+                    this.squaresOwned.add((PropertySquare) location);           // add the property to player's properties list
+                    ((PropertySquare) location).setOwner(this);                 // set the owner of the property to this player
+                    this.decreaseCash(((PropertySquare) location).getPrice());  // reset the player's cash
+                } else {
+                    System.out.println("u do not have enough money");
+                }
+            } else {
+                System.out.println("the property has been bought");
+            }
+        } else {
+            System.out.println("this square is not a property");
         }
     }
 
@@ -105,17 +118,6 @@ public class Player {
             ((PropertySquare) property).setOwner(null);             // set the owner of the property to nobody
             this.increaseCash(((PropertySquare) property).getPrice() / 2);    // reset the player's cash
         }
-    }
-
-    /**
-     * check is the player want to buy the property
-     */
-    public boolean ifWantToBuy(PropertySquare square) {
-        System.out.println("If you want to buy " + square.getName() + "? (y/n)");
-        System.out.println("Price: " + square.getPrice());
-        System.out.println("Color: " + square.getColor());
-
-        return true; //MonopolyGame.checkCommand();
     }
 
     public String toString() {
