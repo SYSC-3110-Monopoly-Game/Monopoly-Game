@@ -95,19 +95,4 @@ public class MonopolyBoard {
     public Square startingSquare() {
         return squares[0];
     }
-
-    /**
-     * Prints each square of the board
-     */
-    public void displayBoard() {
-        System.out.println("\n+--------------------------+");
-        System.out.println("Board Squares with positions");
-        System.out.println("+--------------------------+\n");
-
-        for (int i = 0; i < squares.length; i++) {
-
-            System.out.println(squares[i].toString());
-        }
-        System.out.println();
-    }
 }
