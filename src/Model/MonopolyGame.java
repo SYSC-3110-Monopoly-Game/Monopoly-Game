@@ -8,7 +8,7 @@ public class MonopolyGame {
     public MonopolyBoard board;
     public ArrayList<Player> players;
     private ArrayList<MonopolyGameGUI> views;
-    public final Dice dice;
+    public static Dice dice;
     private Player playerInTurn;
     private int index = -1;
 

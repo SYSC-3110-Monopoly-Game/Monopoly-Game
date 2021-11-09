@@ -1,51 +1,32 @@
 package view;
 
-import Model.Dice;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+
 
 public class DiceGUI extends JPanel {
 
-    int firstDice, secondDice;
+    private JLabel dice1;
+    private JLabel dice2;
 
-    public DiceGUI(Dice dice) {
-        JPanel image = new JPanel(new GridLayout(1,2));
-        JPanel full = new JPanel(new BorderLayout());
 
-        image.setPreferredSize(new Dimension(200,100));
-        full.setPreferredSize(new Dimension(200,150));
-
-        JLabel totalDiceValue = new JLabel(String.valueOf(dice.getTotalValue()));
-
-        firstDice = dice.getDice()[0];
-        secondDice = dice.getDice()[1];
-
-        image.add(new JLabel((Icon) createimage(firstDice)));
-        image.add(new JLabel((Icon) createimage(secondDice)));
-
-        full.add(image, BorderLayout.CENTER);
-        full.add(totalDiceValue, BorderLayout.PAGE_END);
+    public DiceGUI() {
+        this.setPreferredSize(new Dimension(100, 100));
+        this.setLayout(new BorderLayout());
     }
 
-    public Image createimage(int number)
-    {
-        BufferedImage img;
-        Image resizedImage = null;
-        try {
+    public void setDiceImages(int dice1Value, int dice2Value) {
+        String dice1Path = "src/images/Dice" + dice1Value + ".png";
+        String dice2Path = "src/images/Dice" + dice2Value + ".png";
 
-            img = ImageIO.read(new File("src/images/Dice" + number + ".png"));
-            resizedImage = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        ImageIcon dice1Image = new ImageIcon(dice1Path);
+        ImageIcon dice2Image = new ImageIcon(dice2Path);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return resizedImage;
+        this.removeAll();
+        dice1 = new JLabel(dice1Image);
+        this.add(dice1, BorderLayout.NORTH);
+        dice2 = new JLabel(dice2Image);
+        this.add(dice2, BorderLayout.SOUTH);
     }
 
 }
