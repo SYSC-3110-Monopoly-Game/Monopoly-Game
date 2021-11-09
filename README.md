@@ -131,10 +131,17 @@ Finally, the `MonopolyGame.java` brings everything together by creating the boar
         + UtilitySquareGUI.java
     - test
         + DiceTest.java
+        + FreeParkingSquareTest.java
+        + GoSquareTest.java
+        + GoToJailSquareTest.java
+        + incomeTaxSquareTest.java
+        + JailSquareTest.java
         + MonopolyBoardTest.java
         + MonopolyGameTest.java
         + PlayerTest.java
         + PropertySquareTest.java
+        + RailRoadSquareTest.java
+        + UtilitySquareTest.java
     - Controller
         + MonopolyGameController.java
     - UML and Sequence Diagrams
@@ -166,9 +173,9 @@ Liya Abebe
  
 Rebbeca Li
     
-- Implemented Square class
-- Implemented PropertySquare class
-- Updated UML
+- Refactored InfoDisplayGUI class
+- Refactored DiceGUI class
+- Draw the UML of the whole project
 
 Shizhong Shang
   
@@ -187,9 +194,11 @@ Zirui Qiao
 
 - Refactored MonopolyGame class
 - Refactored JailSquare class
+- Refactored all tests excepted for diceTest
 - Implemented MonopolyGameTest class
 - Implemented main class
 - Implemented SquareGUI class
+- Implemented buyProperty() and sellProperty() methods in MonopolyGame class
 - Add sellProperty() method to Player class
 - Refactored the landOn() method in PropertySquare class
 - Refactored the landOn() method in GoToJailSquare class
