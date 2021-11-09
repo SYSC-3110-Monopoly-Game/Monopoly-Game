@@ -65,7 +65,7 @@ public class MonopolyGame {
     /**
      * return the winner of the game
      */
-    private Player getWinner() {
+    public Player getWinner() {
         // if more than 1 player exist return null
         if (players.size() != 1)
             return null;
@@ -78,7 +78,7 @@ public class MonopolyGame {
     /**
      * do all needed check when rolling dices
      */
-    public int getDistance() {
+    private int getDistance() {
         dice.rollDice();
         System.out.println("\t Dice Rolled!!\n" + dice);
         System.out.println("+-------------------------+");

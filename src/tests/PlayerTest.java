@@ -1,91 +1,110 @@
 package tests;
 
-import Model.MonopolyBoard;
 import Model.MonopolyGame;
 import Model.Player;
+import Model.PropertySquare;
+import Model.Square;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
 import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest {
 
-    MonopolyGame game;
-    ArrayList<Player> player;
-    MonopolyBoard board;
+    private MonopolyGame game;
+    private Player player;
 
     @BeforeEach
     void setUp() {
         game = new MonopolyGame();
-        player = game.players;
-        board = game.board;
+        player = game.getPlayerInTurn();
     }
 
     @AfterEach
     void tearDown() {
         game = null;
         player = null;
-        board = null;
-    }
-
-    @Test
-    void testToString() {
     }
 
     @Test
     void getName() {
+        Assertions.assertEquals(""+1, player.getName());
     }
 
     @Test
-    void getLocation() {
-    }
+    void testToString() {}
 
     @Test
-    void setLocation() {
+    void getCash() {
+        Assertions.assertEquals(player.getCash(), 300);
     }
 
     @Test
     void decreaseCash() {
-    }
-
-    @Test
-    void isBankrupt() {
+        player.decreaseCash(100);
+        Assertions.assertEquals(200, player.getCash());
     }
 
     @Test
     void increaseCash() {
+        player.increaseCash(100);
+        Assertions.assertEquals(400, player.getCash());
     }
 
     @Test
-    void getCash() {
+    void isBankrupt() {
+        Assertions.assertFalse(player.isBankrupt());
+    }
+
+    @Test
+    void setCurrentLocation() {
+        player.setCurrentLocation(game.board.getSquares()[2]);
+        Assertions.assertEquals(game.board.getSquares()[2], player.getCurrentLocation());
+    }
+
+    @Test
+    void getLastLocation() {
+        player.setCurrentLocation(game.board.getSquares()[2]);
+        Assertions.assertEquals(game.board.startingSquare(), player.getLastLocation());
+    }
+
+    @Test
+    void getCurrentLocation() {
+        player.setCurrentLocation(game.board.getSquares()[2]);
+        Assertions.assertEquals(game.board.getSquares()[2], player.getCurrentLocation());
+    }
+
+
+    @Test
+    void getProperties() {
+        Assertions.assertEquals(0, player.getProperties().size());
     }
 
     @Test
     void buyProperty() {
-        player.get(0).buyProperty(board.getSquares()[3]);
-        Assertions.assertEquals("Baltic Avenue", player.get(0).getProperties().get(0).getName());
-    }
-
-    @Test
-    void getProperties() {
-    }
-
-    @Test
-    void ifWantToBuy() {
+        player.setCurrentLocation(game.board.getSquares()[2]);
+        player.buyProperty(player.getCurrentLocation());
+        Assertions.assertEquals(player.getCurrentLocation(), player.getProperties().get(0));
     }
 
     @Test
     void sellProperty() {
-        player.get(0).buyProperty(board.getSquares()[3]);
-        player.get(0).sellProperty(board.getSquares()[3]);
-        Assertions.assertEquals(275, player.get(0).getCash());
+        player.setCurrentLocation(game.board.getSquares()[2]);
+        player.sellProperty(player.getCurrentLocation());
+        Assertions.assertEquals(0, player.getProperties().size());
     }
 
     @Test
-    void testToString1() {
+    void isInJail() {
+        Assertions.assertFalse(player.isInJail());
+    }
+
+    @Test
+    void setInJail() {
+        player.setInJail(true);
+        Assertions.assertTrue(player.isInJail());
     }
 }

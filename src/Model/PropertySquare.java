@@ -43,13 +43,6 @@ public class PropertySquare extends Square {
     }
 
     /**
-     * if the square has an owner
-     */
-    public boolean isSold() {
-        return sold;
-    }
-
-    /**
      * get the player who own this land
      */
     public Player getOwner() {
@@ -71,7 +64,6 @@ public class PropertySquare extends Square {
         p.setCurrentLocation(this);
 
         int fee = this.getRentFee();
-        int price = this.getPrice();
 
         Player owner = this.getOwner();
 
