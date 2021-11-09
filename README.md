@@ -235,5 +235,13 @@ test:
     For each class in package 'Model', a test class is created to test all testable methods in the class. 
     For example, 'DiceTest.java' to test all methods in 'Dice.java'.
 
+
+## Known Issues/bugs
+
+When a player that's not in jail rolls a double, the game automatically
+rolls the dice again instead to waiting for an input from the 'Roll Dice' button.
+It sends the player to jail if dice rolls a double 3 times. In the view, only the last dice roll is shown.
+Ideally we would want to wait for user input to roll dice again when doubles are rolled and display
+all the dice pairs, not just the last rolled pair.
 </details>
 
