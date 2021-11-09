@@ -9,8 +9,8 @@ import java.awt.*;
 
 public class InfoDisplayGUI extends JPanel {
 
-    JLabel name, cash, propertyList, currentLocation, buyPrice, rentPrice, housePrice, hotelPrice;
-    JButton buy, sell, rollDice, nextTurn;
+    private JLabel name, cash, propertyList, currentLocation, buyPrice, rentPrice, housePrice, hotelPrice;
+    private JButton buy, sell, rollDice, nextTurn;
 
     public InfoDisplayGUI(Player playerInTurn) {
         this.setBackground(Color.LIGHT_GRAY);
