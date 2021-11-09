@@ -362,7 +362,6 @@ public class SquareGridGUI extends JPanel {
         squareGUIs[currentLocationIndex].removePlayer(player.getName(), player.isInJail());
     }
 
-<<<<<<< HEAD
     public void addDiceGUI(DiceGUI diceGUI) {
         GridBagConstraints c = new GridBagConstraints();
         c.weightx = 0.5;
@@ -370,7 +369,6 @@ public class SquareGridGUI extends JPanel {
         c.gridy = 3;
         this.add(diceGUI, c);
     }
-=======
     public void setMessage(String string) {
         message.setText(string);
     }
@@ -379,6 +377,5 @@ public class SquareGridGUI extends JPanel {
         message.append(string);
     }
 
->>>>>>> main
 }
 
