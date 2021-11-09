@@ -9,6 +9,7 @@ public class DiceGUI extends JPanel {
     private JLabel dice1;
     private JLabel dice2;
 
+
     public DiceGUI() {
         this.setPreferredSize(new Dimension(100, 100));
         this.setLayout(new BorderLayout());

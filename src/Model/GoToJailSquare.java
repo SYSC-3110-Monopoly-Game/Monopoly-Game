@@ -11,6 +11,7 @@ public class GoToJailSquare extends Square {
     public GoToJailSquare(String name, int number, JailSquare jail) {
         super(name, number);
         this.jail = jail;
+        message = " is on GoToJail and you have to go to jail!!\n";
     }
 
     /** Sends player to Jail Square when player lands on square

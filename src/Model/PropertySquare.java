@@ -89,15 +89,6 @@ public class PropertySquare extends Square {
                 System.out.println(p.getName() + " has paid $" + fee);      // print the player paid the rent fee
                 System.out.println(owner.getName() + " has received $" + fee);//
             }
-        } else if (owner == null) {                                         // if this property has no owner
-
-            if (p.getCash() - price >= 0) {                     // if the player has enough money to buy the square
-
-                System.out.println("your cash is: " + p.getCash());     // show player's cash
-                if (p.ifWantToBuy(this)) {                      // if the player is willing to buy the square
-                    p.buyProperty(this);                        // player buy the property!!
-                }
-            }
         }
     }
 

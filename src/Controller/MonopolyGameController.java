@@ -27,7 +27,7 @@ public class MonopolyGameController implements ActionListener {
             this.game.buySquare();
         }
         if(b.getText().equals("Sell")){
-            //this.game.sellProperty(PropertySquare p);
+            this.game.sellSquare();
         }
         if(b.getText().equals("Roll Dice")){
             this.game.playRound();

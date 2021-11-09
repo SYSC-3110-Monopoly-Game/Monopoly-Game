@@ -55,4 +55,8 @@ public class Dice {
     public String toString() {
         return "Dice #1 = " + this.dice[0] + "\t\t" + "Dice #2 = " + this.dice[1];
     }
+
+    public int[] getDice() {
+        return dice;
+    }
 }

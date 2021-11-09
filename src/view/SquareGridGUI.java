@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class SquareGridGUI extends JPanel {
     private Square[] square;
     private SquareGUI squareGUIs[];
+    private JTextArea message;
 
     public SquareGridGUI(Square[] square, ArrayList<Player> players) {
         this.square = square;
@@ -26,7 +27,26 @@ public class SquareGridGUI extends JPanel {
 
     }
 
-   /* private void LoadSquareGUI(Square square, GridBagConstraints c) {
+
+    private void createSquareGUI() {
+
+        GridBagConstraints c = new GridBagConstraints();
+        c.weightx = 0.5;
+        c.insets = new Insets(1, 0, 1, 0);  //top padding
+
+        //NewMethod(c);
+        originalMethod(c);
+
+        message = new JTextArea();
+        message.setPreferredSize(new Dimension(500, 80));
+        message.setBackground(new Color(205, 230, 208));
+        c.gridx = 2;
+        c.gridy = 6;
+        c.gridwidth = 5;
+        this.add(message, c);
+    }
+
+    /* private void LoadSquareGUI(Square square, GridBagConstraints c) {
         if (square instanceof GoSquare){
             this.add(((GoSquare) square).gui, c);
 
@@ -52,16 +72,6 @@ public class SquareGridGUI extends JPanel {
             this.add(((FreeParkingSquare) square).gui, c);
         }
     }*/
-
-    private void createSquareGUI() {
-
-        GridBagConstraints c = new GridBagConstraints();
-        c.weightx = 0.5;
-        c.insets = new Insets(1, 0, 1, 0);  //top padding
-
-        //NewMethod(c);
-        originalMethod(c);
-    }
 
     /*public void NewMethod(GridBagConstraints c){
         for(int j=0; j < 4; j++){
@@ -344,14 +354,15 @@ public class SquareGridGUI extends JPanel {
             System.out.println("currentlocationIndex in square GUI " + currentLocationIndex);
             squareGUIs[nextLocationIndex].addPlayer(player.getName());
             System.out.println("nextLocationIndex in square GUI " + nextLocationIndex);
-
         }
+
     }
 
     public void removePlayerGUILocation(Player player, int currentLocationIndex) {
         squareGUIs[currentLocationIndex].removePlayer(player.getName(), player.isInJail());
     }
 
+<<<<<<< HEAD
     public void addDiceGUI(DiceGUI diceGUI) {
         GridBagConstraints c = new GridBagConstraints();
         c.weightx = 0.5;
@@ -359,5 +370,15 @@ public class SquareGridGUI extends JPanel {
         c.gridy = 3;
         this.add(diceGUI, c);
     }
+=======
+    public void setMessage(String string) {
+        message.setText(string);
+    }
+
+    public void addMessage(String string) {
+        message.append(string);
+    }
+
+>>>>>>> main
 }
 

@@ -30,14 +30,18 @@ public class JailSquareGUI extends SquareGUI {
     public void addPlayer(String name) {
         PlayerGUI player = new PlayerGUI(name);
         this.colorTag.add(player);
+        this.revalidate();
+        this.repaint();
     }
     public void addPlayerToJail(String name) {
         PlayerGUI player = new PlayerGUI(name);
         this.jailTag.add(player);
+        this.revalidate();
+        this.repaint();
     }
 
     public void removePlayer(String name, boolean inJail) {
-        Component[] components = new Component[0];
+        Component[] components;
         if(inJail){
             components = this.jailTag.getComponents();
         }
@@ -50,7 +54,11 @@ public class JailSquareGUI extends SquareGUI {
             JLabel player = (JLabel) label;
             if (player.getText().equals(name)) {
                 player.setVisible(false);
-                this.colorTag.remove(label);
+                if (inJail) {
+                    this.jailTag.remove(label);
+                } else {
+                    this.colorTag.remove(label);
+                }
                 this.revalidate();
                 this.repaint();
             }
