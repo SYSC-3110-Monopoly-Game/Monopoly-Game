@@ -8,7 +8,7 @@ public class MonopolyGame {
     public MonopolyBoard board;
     public ArrayList<Player> players;
     private ArrayList<MonopolyGameGUI> views;
-    public final Dice dice;
+    public static Dice dice;
     private Player playerInTurn;
     private int index = -1;
 
@@ -65,7 +65,7 @@ public class MonopolyGame {
     /**
      * return the winner of the game
      */
-    public Player getWinner() {
+    private Player getWinner() {
         // if more than 1 player exist return null
         if (players.size() != 1)
             return null;
@@ -78,7 +78,7 @@ public class MonopolyGame {
     /**
      * do all needed check when rolling dices
      */
-    private int getDistance() {
+    public int getDistance() {
         dice.rollDice();
         System.out.println("\t Dice Rolled!!\n" + dice);
         System.out.println("+-------------------------+");

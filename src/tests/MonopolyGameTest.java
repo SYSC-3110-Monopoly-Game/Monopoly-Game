@@ -23,11 +23,6 @@ class MonopolyGameTest {
     }
 
     @Test
-    public void getWinner() {
-        assertNull(game.getWinner());
-    }
-
-    @Test
     void buySquare() {
         game.getPlayerInTurn().setCurrentLocation(game.board.getSquares()[2]);
         game.buySquare();
