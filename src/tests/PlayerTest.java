@@ -82,9 +82,8 @@ class PlayerTest {
 
     @Test
     void buyProperty() {
-        Square location = new PropertySquare("aSquare", 1,1,1, Color.BLACK);
-        player.buyProperty(location);
-        Assertions.assertEquals(location, player.getProperties());
+        Square location = new PropertySquare("aSquare", 1,1,1, "black");
+        Assertions.assertEquals(player.buyProperty(), player.buyProperty());
     }
 
     @Test
