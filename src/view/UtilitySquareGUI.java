@@ -9,8 +9,8 @@ import java.io.IOException;
 
 public class UtilitySquareGUI extends SquareGUI {
 
-    private String type;
-    private JPanel colorTag;
+    private final String type;
+    private final JPanel colorTag;
 
     public UtilitySquareGUI(int buyPrice, String type) {
         this.type = type;
@@ -35,7 +35,7 @@ public class UtilitySquareGUI extends SquareGUI {
     }
 
     public void removePlayer(String name, boolean inJail) {
-        Component components[] = this.colorTag.getComponents();
+        Component[] components = this.colorTag.getComponents();
         for (Component label : components
         ) {
             JLabel player = (JLabel) label;

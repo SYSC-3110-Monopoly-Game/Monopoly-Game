@@ -1,9 +1,5 @@
 package Model;
 
-import view.GoToJailGUI;
-
-import java.awt.*;
-
 public class GoToJailSquare extends Square {
 
     JailSquare jail;

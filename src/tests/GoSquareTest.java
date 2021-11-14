@@ -5,12 +5,10 @@ import Model.Player;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.awt.*;
-
 class GoSquareTest {
 
-    private GoSquare goSquare = new GoSquare("go", 0, Color.BLACK, 100);
-    private Player p = new Player("player", goSquare);
+    private final GoSquare goSquare = new GoSquare("go", 0, 100);
+    private final Player p = new Player("player", goSquare);
 
     @Test
     void getAddMoney() {

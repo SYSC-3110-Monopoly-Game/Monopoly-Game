@@ -1,10 +1,5 @@
 package Model;
 
-
-import view.FreeParkingSquareGUI;
-
-import java.awt.*;
-
 public class FreeParkingSquare extends Square {
 
     public FreeParkingSquare(String name, int number) {

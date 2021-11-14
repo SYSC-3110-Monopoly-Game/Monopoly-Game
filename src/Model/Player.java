@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Player {
     private final String name;
-    private ArrayList<PropertySquare> squaresOwned;
+    private final ArrayList<PropertySquare> squaresOwned;
     private Square currentLocation;
     private Square lastLocation;
     private int cashTotal;
@@ -88,9 +88,9 @@ public class Player {
     /**
      * @ param square is added into the squaresOwned array list
      */
-    public void buyProperty(Square location) {
+    public boolean buyProperty(Square location) {
         // if the square is a property
-        if (location instanceof PropertySquare && ((PropertySquare) location).getPrice()<cashTotal) {
+        if (location instanceof PropertySquare) {
             //if the property have not been bought
             if(((PropertySquare) location).getOwner() == null) {
                 //if the player has enough money to buy
@@ -98,6 +98,7 @@ public class Player {
                     this.squaresOwned.add((PropertySquare) location);           // add the property to player's properties list
                     ((PropertySquare) location).setOwner(this);                 // set the owner of the property to this player
                     this.decreaseCash(((PropertySquare) location).getPrice());  // reset the player's cash
+                    return true;
                 } else {
                     System.out.println("u do not have enough money");
                 }
@@ -107,6 +108,8 @@ public class Player {
         } else {
             System.out.println("this square is not a property");
         }
+
+        return false;
     }
 
     /**

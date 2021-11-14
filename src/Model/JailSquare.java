@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class JailSquare extends Square {
 
     public HashMap<Player, Integer> map;
-    private int jailFee;
+    private final int jailFee;
 
 
 

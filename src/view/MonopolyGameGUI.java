@@ -8,15 +8,13 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class MonopolyGameGUI extends JFrame {
-    private MonopolyGame game;
-    private InfoDisplayGUI infoDisplayGUI;
-    private SquareGridGUI squareGUI;
-    private DiceGUI diceGUI;
+    private final InfoDisplayGUI infoDisplayGUI;
+    private final SquareGridGUI squareGUI;
+    private final DiceGUI diceGUI;
 
     //TODO requires a square array like Square[] squares
     public MonopolyGameGUI(MonopolyGame game) {
         //subscribe to game
-        this.game = game;
 
         //adding frame settings
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -25,14 +23,14 @@ public class MonopolyGameGUI extends JFrame {
         this.setLayout(new BorderLayout());
 
         //pass the squares to the view
-        Square[] squares = this.game.board.getSquares();
-        ArrayList<Player> players = this.game.players;
+        Square[] squares = MonopolyGame.board.getSquares();
+        ArrayList<Player> players = game.players;
 
         squareGUI = new SquareGridGUI(squares, players);
         this.add(squareGUI, BorderLayout.WEST);
 
         //infoPanel gui initialization
-        this.infoDisplayGUI = new InfoDisplayGUI(this.game.getPlayerInTurn());
+        this.infoDisplayGUI = new InfoDisplayGUI(game.getPlayerInTurn());
         this.add(infoDisplayGUI, BorderLayout.EAST);
 
         //dice gui
@@ -76,7 +74,8 @@ public class MonopolyGameGUI extends JFrame {
             infoDisplayGUI.setRollEnabled(true);
             squareGUI.setMessage("");
 
-        } else if (command.equals("Buy")) {
+        }
+        else if (command.equals("Buy")) {
 
             ArrayList<PropertySquare> property = player.getProperties();
 
@@ -90,14 +89,16 @@ public class MonopolyGameGUI extends JFrame {
                     " just bought " + property.get(property.size() - 1).getName() +
                     "[" + property.get(property.size() - 1).getNumber() + "]\n");
 
-        } else if (command.equals("Sell")) {
+        }
+        else if (command.equals("Sell")) {
             infoDisplayGUI.setPropertyList(player.getProperties().toString());
             infoDisplayGUI.setCash(player.getCash());
 
-        } else if (command.equals("Roll Dice")) {
+        }
+        else if (command.equals("Roll Dice")) {
             Square newLocation = player.getCurrentLocation();
             Square lastLocation = player.getLastLocation();
-            StringBuffer message = new StringBuffer(player.getName() +
+            StringBuilder message = new StringBuilder(player.getName() +
                     " move from " + lastLocation.getName() + "[" +
                     lastLocation.getNumber() + "]   to   "
                     + newLocation.getName() + "["
@@ -108,7 +109,7 @@ public class MonopolyGameGUI extends JFrame {
 
 
             //set dice value
-            int diceValues[] = game.dice.getDice();
+            int[] diceValues = MonopolyGame.dice.getDice();
             diceGUI.setDiceImages(diceValues[0], diceValues[1]);
 
             // refresh location, buy, rent and cash.
@@ -145,7 +146,8 @@ public class MonopolyGameGUI extends JFrame {
             infoDisplayGUI.setRollEnabled(false);
             squareGUI.setMessage(message.toString());
 
-        } else if (command.equals("Bankrupt")) {
+        }
+        else if (command.equals("Bankrupt")) {
             Square newLocation = player.getLastLocation();
             squareGUI.removePlayerGUILocation(player, newLocation.getNumber());
             JOptionPane.showMessageDialog(this, "Player Bankrupt " + player.getName());
@@ -154,7 +156,8 @@ public class MonopolyGameGUI extends JFrame {
             infoDisplayGUI.setNextEnabled(true);
             infoDisplayGUI.setRollEnabled(false);
 
-        } else if (command.equals("Winner")) {
+        }
+        else if (command.equals("Winner")) {
             Square newLocation = player.getLastLocation();
             squareGUI.removePlayerGUILocation(player, newLocation.getNumber());
             JOptionPane.showMessageDialog(this, "We have a Winner!! Player " + player.getName());

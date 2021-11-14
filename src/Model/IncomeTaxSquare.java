@@ -1,9 +1,5 @@
 package Model;
 
-import view.IncomeTaxSquareGUI;
-
-import java.awt.Color;
-
 public class IncomeTaxSquare extends Square {
 
     private final int incomeTax;

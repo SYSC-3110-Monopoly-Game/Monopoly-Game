@@ -86,11 +86,18 @@ public class MonopolyGame {
         return dice.getTotalValue();
     }
 
+    /**
+     * buy the landed on property
+     */
     public void buySquare() {
-        playerInTurn.buyProperty(playerInTurn.getCurrentLocation());
-        this.updateViews(playerInTurn, "Buy");
+        if(playerInTurn.buyProperty(playerInTurn.getCurrentLocation())) {
+            this.updateViews(playerInTurn, "Buy");
+        }
     }
 
+    /**
+     * sell properties
+     */
     public void sellSquare() {
         if (playerInTurn.getProperties().isEmpty()) {
         } else {
@@ -128,14 +135,6 @@ public class MonopolyGame {
                 }
             }
         } else {  // if player not in jail
-            /*while (dice.hasDoubles() && ++counter < 3) {  // if it has double, go into the while loop
-                distance = getDistance();
-            }*/
-
-            /*if (counter >= 3) {  // if rolled 3 doubles send to jail
-                MonopolyBoard.jail.goJail(playerInTurn);
-                playerInTurn.setInJail(true);
-            } else {*/
             movePlayer(playerInTurn, distance);
 
         }
@@ -149,8 +148,7 @@ public class MonopolyGame {
 
             // if only 2 players left and one is bankrupt
             if(players.size() == 2) {
-                //remove the player immediately, otherwise the winner won't be get until next playRound()
-                // also see nextTurn() for any question
+                //remove the player immediately
                 players.remove(playerInTurn);
             }
 
@@ -182,20 +180,26 @@ public class MonopolyGame {
         views.add(view);
     }
 
-
+    /**
+     * update GUI
+     */
     private void updateViews(Player p, String command) {
         for (MonopolyGameGUI view : views) {
             view.handleUpdate(p, command);
         }
     }
 
+    /**
+     * get the player who is currently playing the game
+     */
     public Player getPlayerInTurn() {
         return this.playerInTurn;
     }
 
+    /**
+     * go to next player
+     */
     public void nextTurn() {
-        // index added to avoid playerInTurn go from player 2 (bankrupt!) to player 1 when there are still 4 players
-        // that was the situation when i was running the game!!!!
 
         int currentIndex = players.indexOf(this.playerInTurn);
         if (currentIndex == players.size() - 1) currentIndex = -1;

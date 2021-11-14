@@ -29,7 +29,7 @@ public class MonopolyBoard {
         int incomeTax = 100;
         int jailFee = 100;
 
-        squares[i] = new GoSquare("GO", i++, Color.WHITE, goMoney);
+        squares[i] = new GoSquare("GO", i++, goMoney);
         squares[i] = new PropertySquare("Mediterranean Avenue", i++, buyPrice, rentPrice, Color.GRAY);
         squares[i] = new PropertySquare("Baltic Avenue", i++, buyPrice, rentPrice, Color.GRAY);
         squares[i] = new IncomeTaxSquare("Income Tax", i++, incomeTax);

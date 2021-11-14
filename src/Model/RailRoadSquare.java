@@ -1,9 +1,6 @@
 package Model;
 
-import view.RailRoadSquareGUI;
-
 import java.awt.Color;
-import java.util.HashMap;
 
 public class RailRoadSquare extends PropertySquare {
 
