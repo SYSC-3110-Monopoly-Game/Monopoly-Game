@@ -50,7 +50,7 @@ public class UtilitySquareGUI extends SquareGUI {
 
     @Override
     protected void paintComponent(Graphics g) {
-        BufferedImage img = null;
+        BufferedImage img;
         Image resizedImage = null;
         try {
 

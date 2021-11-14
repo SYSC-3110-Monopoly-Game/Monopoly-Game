@@ -56,8 +56,7 @@ public class MonopolyGameGUI extends JFrame {
             // refresh location, buy, rent.
             //start here
             infoDisplayGUI.setCurrentLocation(player.getCurrentLocation().getName());
-            if (player.getCurrentLocation() instanceof PropertySquare) {
-                PropertySquare location = (PropertySquare) player.getCurrentLocation();
+            if (player.getCurrentLocation() instanceof PropertySquare location) {
                 Player owner = ((PropertySquare) player.getCurrentLocation()).getOwner();
                 if (owner == null) infoDisplayGUI.setBuyPrice(location.getPrice());
                 else infoDisplayGUI.setBuyPrice(-2);
@@ -125,8 +124,7 @@ public class MonopolyGameGUI extends JFrame {
                 else {
                     infoDisplayGUI.setBuyPrice(-2);
                     if (owner != player) {
-                        message.append(player.getName() + " just paid " + owner.getName() +
-                        "       " + location.getRentFee() + " as rent fee\n");
+                        message.append(player.getName()).append(" just paid ").append(owner.getName()).append("       ").append(location.getRentFee()).append(" as rent fee\n");
                     }
                     infoDisplayGUI.setBuyEnabled(false);
                 }
@@ -135,7 +133,7 @@ public class MonopolyGameGUI extends JFrame {
                 infoDisplayGUI.setBuyPrice(-1);
                 infoDisplayGUI.setRentPrice(-1);
                 infoDisplayGUI.setBuyEnabled(false);
-                message.append(player.getName() + player.getCurrentLocation().message);
+                message.append(player.getName()).append(player.getCurrentLocation().message);
             }
             infoDisplayGUI.setCash(player.getCash());
             //ends here

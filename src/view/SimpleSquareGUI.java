@@ -6,33 +6,28 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
-public class JailSquareGUI extends SquareGUI {
-    private final JPanel colorTag;
-    private final JPanel jailTag;
+public class SimpleSquareGUI extends SquareGUI {
 
-    public JailSquareGUI() {
+    private JPanel colorTag;
+    private String path;
+
+    public SimpleSquareGUI(String path) {
+        initalize(path);
+    }
+
+    public void initalize(String path){
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(100, 100));
         this.setBorder( BorderFactory.createLineBorder(Color.black, 2));
         this.colorTag = new JPanel();
+        this.path = path;
         this.colorTag.setPreferredSize(new Dimension(100, 25));
         this.colorTag.setBackground(Color.BLACK);
         this.add(colorTag, BorderLayout.PAGE_START);
-        jailTag = new JPanel();
-        jailTag.setPreferredSize(new Dimension(40, 25));
-        jailTag.setBackground(Color.RED);
-        this.add(jailTag, BorderLayout.PAGE_END);
     }
 
-    public void addPlayerToJail(String name) {
-        PlayerGUI player = new PlayerGUI(name);
-        this.jailTag.add(player);
-        this.revalidate();
-        this.repaint();
-    }
-
-    @Override
     public void addPlayer(String name) {
         PlayerGUI player = new PlayerGUI(name);
         this.colorTag.add(player);
@@ -40,41 +35,27 @@ public class JailSquareGUI extends SquareGUI {
         this.repaint();
     }
 
-    @Override
     public void removePlayer(String name, boolean inJail) {
-        Component[] components;
-        if(inJail){
-            components = this.jailTag.getComponents();
-        }
-        else{
-            components = this.colorTag.getComponents();
-        }
-
-        for (Component label : components
-        ) {
+        Component[] components = this.colorTag.getComponents();
+        Arrays.stream(components).forEach(label -> {
             JLabel player = (JLabel) label;
             if (player.getText().equals(name)) {
                 player.setVisible(false);
-                if (inJail) {
-                    this.jailTag.remove(label);
-                } else {
-                    this.colorTag.remove(label);
-                }
+                this.colorTag.remove(label);
                 this.revalidate();
                 this.repaint();
             }
-        }
+        });
     }
 
     @Override
     protected void paintComponent(Graphics g) {
-
         BufferedImage img;
         Image resizedImage = null;
         try {
 
-            img = ImageIO.read(new File("src/images/jailSquare.png"));
-            resizedImage = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            img = ImageIO.read(new File(path));
+            resizedImage = img.getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH);
 
         } catch (IOException e) {
             e.printStackTrace();

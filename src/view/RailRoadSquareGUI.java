@@ -35,6 +35,8 @@ public class RailRoadSquareGUI extends SquareGUI {
     public void addPlayer(String name) {
         PlayerGUI player = new PlayerGUI(name);
         this.colorTag.add(player);
+        this.revalidate();
+        this.repaint();
     }
 
     public void removePlayer(String name, boolean inJail) {
@@ -45,7 +47,6 @@ public class RailRoadSquareGUI extends SquareGUI {
             if (player.getText().equals(name)) {
                 player.setVisible(false);
                 this.colorTag.remove(label);
-                //this.revalidate();
                 this.colorTag.repaint();
             }
         }

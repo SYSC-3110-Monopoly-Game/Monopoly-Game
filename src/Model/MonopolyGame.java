@@ -139,6 +139,8 @@ public class MonopolyGame {
 
         }
 
+        updateViews(playerInTurn, "Roll Dice");
+
         if (playerInTurn.isBankrupt()) {
             updateViews(playerInTurn, "Bankrupt");
             for(PropertySquare property: playerInTurn.getProperties()){
@@ -152,8 +154,6 @@ public class MonopolyGame {
                 players.remove(playerInTurn);
             }
 
-        } else {
-            updateViews(playerInTurn, "Roll Dice");
         }
 
         if(getWinner()!=null){

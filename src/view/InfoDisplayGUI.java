@@ -2,7 +2,6 @@ package view;
 
 import Controller.MonopolyGameController;
 import Model.Player;
-import Model.PropertySquare;
 
 import javax.swing.*;
 import java.awt.*;
@@ -49,11 +48,6 @@ public class InfoDisplayGUI extends JPanel {
         hotelPrice = new JLabel();
 
         currentLocation.setText("Location before rolling dice: " + playerInTurn.getCurrentLocation().getName());
-/*        String buyPriceString = "", rentPriceString = "";
-        if (playerInTurn.getCurrentLocation() instanceof PropertySquare) {
-            buyPriceString = ((PropertySquare) playerInTurn.getCurrentLocation()).getPrice() + "";
-            rentPriceString = ((PropertySquare) playerInTurn.getCurrentLocation()).getRentFee() + "";
-        }*/
         buyPrice.setText("Buy Price: Non-sale");
         rentPrice.setText("Rent Price: Non-rental");
         housePrice.setText("House Price: 20"); // will be changed in milestone
