@@ -28,6 +28,9 @@ public class SimpleSquareGUI extends SquareGUI {
         this.add(colorTag, BorderLayout.PAGE_START);
     }
 
+    /**
+     * in gui add player to the square
+     */
     public void addPlayer(String name) {
         PlayerGUI player = new PlayerGUI(name);
         this.colorTag.add(player);
@@ -35,6 +38,9 @@ public class SimpleSquareGUI extends SquareGUI {
         this.repaint();
     }
 
+    /**
+     * in gui remove player from the square
+     */
     public void removePlayer(String name, boolean inJail) {
         Component[] components = this.colorTag.getComponents();
         Arrays.stream(components).forEach(label -> {

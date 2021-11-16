@@ -11,6 +11,9 @@ public class SquareGridGUI extends JPanel {
     private final SquareGUI[] squareGUIs;
     private JTextArea message;
 
+    /**
+     * initalize the game map (left part)
+     */
     public SquareGridGUI(Square[] square, ArrayList<Player> players) {
         this.square = square;
         this.squareGUIs = new SquareGUI[33];
@@ -25,6 +28,9 @@ public class SquareGridGUI extends JPanel {
         }
     }
 
+    /**
+     * initialize the map and textArea
+     */
     private void createSquareGUI() {
 
         GridBagConstraints c = new GridBagConstraints();
@@ -100,6 +106,9 @@ public class SquareGridGUI extends JPanel {
         }
     }*/
 
+    /**
+     * initialization of the map called by createSquareGUI()
+     */
     public void originalMethod(GridBagConstraints c) {
 
         // 0th Square : Starting Point
@@ -332,6 +341,9 @@ public class SquareGridGUI extends JPanel {
         this.squareGUIs[32] = propertyGUI23;
     }
 
+    /**
+     * refresh player's location on the map
+     */
     public void changePlayerGUILocation(Player player, int currentLocationIndex, int nextLocationIndex) {
         squareGUIs[currentLocationIndex].removePlayer(player.getName(), player.isInJail());
 
@@ -351,10 +363,16 @@ public class SquareGridGUI extends JPanel {
 
     }
 
+    /**
+     * remove the player from the map
+     */
     public void removePlayerGUILocation(Player player, int currentLocationIndex) {
         squareGUIs[currentLocationIndex].removePlayer(player.getName(), player.isInJail());
     }
 
+    /**
+     * add 2 dices to the map
+     */
     public void addDiceGUI(DiceGUI diceGUI) {
         GridBagConstraints c = new GridBagConstraints();
         c.weightx = 0.5;
@@ -363,10 +381,16 @@ public class SquareGridGUI extends JPanel {
         this.add(diceGUI, c);
     }
 
+    /**
+     * set textArea message
+     */
     public void setMessage(String string) {
         message.setText(string);
     }
 
+    /**
+     * add message to textArea
+     */
     public void addMessage(String string) {
         message.append(string);
     }

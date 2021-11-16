@@ -25,6 +25,9 @@ public class JailSquareGUI extends SquareGUI {
         this.add(jailTag, BorderLayout.PAGE_END);
     }
 
+    /**
+     * in gui add player to jail
+     */
     public void addPlayerToJail(String name) {
         PlayerGUI player = new PlayerGUI(name);
         this.jailTag.add(player);
@@ -32,6 +35,9 @@ public class JailSquareGUI extends SquareGUI {
         this.repaint();
     }
 
+    /**
+     * in gui add player to the square
+     */
     @Override
     public void addPlayer(String name) {
         PlayerGUI player = new PlayerGUI(name);
@@ -40,6 +46,9 @@ public class JailSquareGUI extends SquareGUI {
         this.repaint();
     }
 
+    /**
+     * in gui remove player from the square
+     */
     @Override
     public void removePlayer(String name, boolean inJail) {
         Component[] components;

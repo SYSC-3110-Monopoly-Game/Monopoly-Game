@@ -7,11 +7,17 @@ import java.awt.*;
 public class DiceGUI extends JPanel {
 
 
+    /**
+     * initialize the dice panel
+     */
     public DiceGUI() {
         this.setPreferredSize(new Dimension(100, 100));
         this.setLayout(new BorderLayout());
     }
 
+    /**
+     * set dice image according to dice values
+     */
     public void setDiceImages(int dice1Value, int dice2Value) {
         String dice1Path = "src/images/Dice" + dice1Value + ".png";
         String dice2Path = "src/images/Dice" + dice2Value + ".png";
