@@ -1,19 +1,16 @@
 package tests;
 
-import Model.IncomeTaxSquare;
 import Model.JailSquare;
 import Model.Player;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class JailSquareTest {
 
-    private JailSquare s= new JailSquare("go", 0, 100);;
-    private Player p= new Player("player", s);;
+    private final JailSquare s= new JailSquare("go", 0, 100);
+    private final Player p= new Player("player", s);
 
 
     @Test

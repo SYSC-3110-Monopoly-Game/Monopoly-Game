@@ -22,13 +22,13 @@ class DiceTest {
 
     @Test
     void testRollDiceAndGetTotalValue() {
-        int values[] = dice.rollDice();
+        int[] values = dice.rollDice();
         Assertions.assertEquals(values[0] + values[1], dice.getTotalValue());
     }
 
     @Test
     void testToString() {
-        int values[] = dice.rollDice();
+        int[] values = dice.rollDice();
         String expected = "Dice #1 = " + values[0] + "\t\t" + "Dice #2 = " + values[1];
         Assertions.assertEquals(expected, dice.toString());
     }

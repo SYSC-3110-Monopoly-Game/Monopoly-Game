@@ -32,11 +32,19 @@ public class RailRoadSquareGUI extends SquareGUI {
         this.add(squarePrice );
     }
 
+    /**
+     * in gui add player to the square
+     */
     public void addPlayer(String name) {
         PlayerGUI player = new PlayerGUI(name);
         this.colorTag.add(player);
+        this.revalidate();
+        this.repaint();
     }
 
+    /**
+     * in gui remove player from the square
+     */
     public void removePlayer(String name, boolean inJail) {
         Component[] components = this.colorTag.getComponents();
         for (Component label : components
@@ -45,7 +53,6 @@ public class RailRoadSquareGUI extends SquareGUI {
             if (player.getText().equals(name)) {
                 player.setVisible(false);
                 this.colorTag.remove(label);
-                //this.revalidate();
                 this.colorTag.repaint();
             }
         }

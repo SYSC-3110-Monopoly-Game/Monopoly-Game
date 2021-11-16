@@ -6,15 +6,18 @@ import java.awt.*;
 
 public class DiceGUI extends JPanel {
 
-    private JLabel dice1;
-    private JLabel dice2;
 
-
+    /**
+     * initialize the dice panel
+     */
     public DiceGUI() {
         this.setPreferredSize(new Dimension(100, 100));
         this.setLayout(new BorderLayout());
     }
 
+    /**
+     * set dice image according to dice values
+     */
     public void setDiceImages(int dice1Value, int dice2Value) {
         String dice1Path = "src/images/Dice" + dice1Value + ".png";
         String dice2Path = "src/images/Dice" + dice2Value + ".png";
@@ -23,9 +26,9 @@ public class DiceGUI extends JPanel {
         ImageIcon dice2Image = new ImageIcon(dice2Path);
 
         this.removeAll();
-        dice1 = new JLabel(dice1Image);
+        JLabel dice1 = new JLabel(dice1Image);
         this.add(dice1, BorderLayout.NORTH);
-        dice2 = new JLabel(dice2Image);
+        JLabel dice2 = new JLabel(dice2Image);
         this.add(dice2, BorderLayout.SOUTH);
     }
 

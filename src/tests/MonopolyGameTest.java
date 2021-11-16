@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class MonopolyGameTest {
 
     MonopolyGame game;
@@ -24,14 +22,14 @@ class MonopolyGameTest {
 
     @Test
     void buySquare() {
-        game.getPlayerInTurn().setCurrentLocation(game.board.getSquares()[2]);
+        game.getPlayerInTurn().setCurrentLocation(MonopolyGame.board.getSquares()[2]);
         game.buySquare();
         Assertions.assertEquals("Baltic Avenue", game.getPlayerInTurn().getProperties().get(0).getName());
     }
 
     @Test
     void sellSquare() {
-        game.getPlayerInTurn().setCurrentLocation(game.board.getSquares()[2]);
+        game.getPlayerInTurn().setCurrentLocation(MonopolyGame.board.getSquares()[2]);
         game.buySquare();
         game.sellSquare();
         Assertions.assertEquals(0, game.getPlayerInTurn().getProperties().size());
@@ -40,7 +38,7 @@ class MonopolyGameTest {
     @Test
     void playRound() {
         game.playRound();
-        Assertions.assertNotEquals(game.board.startingSquare(), game.getPlayerInTurn().getCurrentLocation());
+        Assertions.assertNotEquals(MonopolyGame.board.startingSquare(), game.getPlayerInTurn().getCurrentLocation());
     }
 
     @Test

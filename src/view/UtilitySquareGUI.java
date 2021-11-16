@@ -9,8 +9,8 @@ import java.io.IOException;
 
 public class UtilitySquareGUI extends SquareGUI {
 
-    private String type;
-    private JPanel colorTag;
+    private final String type;
+    private final JPanel colorTag;
 
     public UtilitySquareGUI(int buyPrice, String type) {
         this.type = type;
@@ -29,13 +29,19 @@ public class UtilitySquareGUI extends SquareGUI {
         this.add(squarePrice, BorderLayout.AFTER_LAST_LINE);
     }
 
+    /**
+     * in gui add player to the square
+     */
     public void addPlayer(String name) {
         PlayerGUI player = new PlayerGUI(name);
         this.colorTag.add(player);
     }
 
+    /**
+     * in gui remove player from the square
+     */
     public void removePlayer(String name, boolean inJail) {
-        Component components[] = this.colorTag.getComponents();
+        Component[] components = this.colorTag.getComponents();
         for (Component label : components
         ) {
             JLabel player = (JLabel) label;
@@ -50,7 +56,7 @@ public class UtilitySquareGUI extends SquareGUI {
 
     @Override
     protected void paintComponent(Graphics g) {
-        BufferedImage img = null;
+        BufferedImage img;
         Image resizedImage = null;
         try {
 

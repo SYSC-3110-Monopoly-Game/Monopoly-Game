@@ -1,6 +1,5 @@
 package Model;
 
-import view.PropertySquareGUI;
 import java.awt.Color;
 import java.util.HashMap;
 
@@ -9,7 +8,6 @@ public class PropertySquare extends Square {
     private final int buyPrice; //price for the player buy this land
     private final int rentPrice; //the price that other players need to pay to the owner.
     private final Color color;
-    private boolean sold;
     private Player owner = null;
 
 
@@ -18,7 +16,6 @@ public class PropertySquare extends Square {
         this.buyPrice = buy;
         this.rentPrice = rent;
         this.color = color;
-        this.sold = false;
     }
 
     /**
