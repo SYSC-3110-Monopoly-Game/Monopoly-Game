@@ -1,19 +1,25 @@
 package Model;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MonopolyBoard {
 
 
-    private static final int SIZE = 33;
+    private static final int SIZE = 34;
     private final Square[] squares;
     public static JailSquare jail;
     private int buyPrice = 60, rentPrice = 70;
+
+    Color[] set = {Color.CYAN, Color.PINK, Color.ORANGE, Color.RED, Color.YELLOW, Color.GREEN, Color.GRAY, Color.BLUE, Color.BLACK};
+    public static ArrayList<Color> colors = new ArrayList<>();
 
 
     public MonopolyBoard() {
         squares = new Square[SIZE];
         makeSquares();
+        colors.addAll(Arrays.asList(set));
     }
 
     public Square[] getSquares() {
@@ -77,7 +83,8 @@ public class MonopolyBoard {
         squares[i] = new RailRoadSquare("Short Line", i++, buyPrice, rentPrice, Color.BLACK);
 
         squares[i] = new PropertySquare("Park Place", i++, buyPrice, rentPrice, Color.BLUE);
-        squares[i] = new PropertySquare("Boardwalk", i, buyPrice, rentPrice, Color.blue);
+        squares[i] = new IncomeTaxSquare("Luxury Tax", i++, incomeTax);;
+        squares[i] = new PropertySquare("Boardwalk", i, buyPrice, rentPrice, Color.BLUE);
     }
 
     /**

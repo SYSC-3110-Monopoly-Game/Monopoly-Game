@@ -16,10 +16,10 @@ public class SquareGridGUI extends JPanel {
      */
     public SquareGridGUI(Square[] square, ArrayList<Player> players) {
         this.square = square;
-        this.squareGUIs = new SquareGUI[33];
+        this.squareGUIs = new SquareGUI[square.length];
         this.setBackground(new Color(205, 230, 208));
         this.setLayout(new GridBagLayout());
-        this.setPreferredSize(new Dimension(920, 670));
+        this.setPreferredSize(new Dimension(920, 680));
 
         //this.makeSquares();
         this.createSquareGUI();
@@ -34,82 +34,81 @@ public class SquareGridGUI extends JPanel {
     private void createSquareGUI() {
 
         GridBagConstraints c = new GridBagConstraints();
-        c.weightx = 0.5;
-        c.insets = new Insets(1, 0, 1, 0);  //top padding
+        c.fill = GridBagConstraints.NONE;
+        c.weightx = 0.0;
+        c.weighty = 0.0;
+        c.insets = new Insets(1, 1, 0, 0);  //top padding
 
-        //NewMethod(c);
-        originalMethod(c);
+        NewMethod(c);
+        //originalMethod(c);
 
         message = new JTextArea();
-        message.setPreferredSize(new Dimension(500, 80));
+        message.setPreferredSize(new Dimension(450, 80));
         message.setBackground(new Color(205, 230, 208));
         c.gridx = 2;
         c.gridy = 6;
-        c.gridwidth = 5;
+        c.gridwidth = 6;
         this.add(message, c);
     }
 
-    /* private void LoadSquareGUI(Square square, GridBagConstraints c) {
+    /**
+     * load different kinds of squares
+     */
+     private void LoadSquareGUI(Square square, GridBagConstraints c, int number) {
+        SquareGUI s = null;
         if (square instanceof GoSquare){
-            this.add(((GoSquare) square).gui, c);
+            s = new GoSquareGUI();
 
         } else if (square instanceof UtilitySquare utility) {
-            this.add(utility.gui, c);
+            s = new UtilitySquareGUI(300, utility.getName());
 
         } else if (square instanceof RailRoadSquare railRoad) {
-            this.add(railRoad.gui, c);
+            s = new RailRoadSquareGUI(railRoad.getName(), railRoad.getPrice());
 
         } else if (square instanceof PropertySquare property) {
-            this.add(property.gui, c);
+            s = new PropertySquareGUI(property.getColor(), property.getName(), String.valueOf(property.getPrice()));
 
         } else if (square instanceof IncomeTaxSquare incomeTax) {
-            this.add(incomeTax.gui, c);
+            s = new IncomeTaxSquareGUI(incomeTax.getTax());
 
         } else if (square instanceof GoToJailSquare) {
-            this.add(((GoToJailSquare) square).gui, c);
+            s = new GoToJailGUI();
 
         } else if (square instanceof JailSquare) {
-            this.add(((JailSquare) square).gui, c);
+            s = new JailSquareGUI();
 
         } else if (square instanceof FreeParkingSquare) {
-            this.add(((FreeParkingSquare) square).gui, c);
+            s = new FreeParkingSquareGUI();
         }
-    }*/
-
-    /*public void NewMethod(GridBagConstraints c){
-        for(int j=0; j < 4; j++){
-            for(int i=0; i < 10; i++){
-                switch (j) {
-                    case 0: {
-                        c.gridx = 10 - i;
-                        c.gridy = 10;
-                        break;
-                    }
-                    case 1: {
-                        c.gridx = 0;
-                        c.gridy = 10 - i;
-                        break;
-                    }
-                    case 2: {
-                        c.gridx = i;
-                        c.gridy = 0;
-                        break;
-                    }
-                    case 3: {
-                        c.gridx = 10;
-                        c.gridy = i;
-                    }
-                }
-                //this.add(square[j*10 + i].gui, c);
-                LoadSquareGUI(square[j*10 + i], c);
-            }
-        }
-    }*/
+         assert s != null;
+         this.add(s, c);
+         this.squareGUIs[number] = s;
+    }
 
     /**
      * initialization of the map called by createSquareGUI()
      */
-    public void originalMethod(GridBagConstraints c) {
+    public void NewMethod(GridBagConstraints c){
+        c.gridy = 7;
+        c.gridx = 10;
+        for(int j=0; j < square.length; j++){
+            if(j < 10) c.gridx -= 1;
+            else if(j < 15) c.gridy -= 1;
+            else if(j < 17) c.gridx += 1;
+            else if(j < 20) c.gridy += 1;
+            else if(j < 25) c.gridx += 1;
+            else if(j < 28) c.gridy -= 1;
+            else if(j < 30) c.gridx += 1;
+            else c.gridy += 1;
+
+            LoadSquareGUI(square[j], c, j);
+        }
+    }
+
+    /**
+     * initialization of the map called by createSquareGUI()
+     */
+    /*public void originalMethod(GridBagConstraints c) {
 
         // 0th Square : Starting Point
         c.gridx = 8;
@@ -339,7 +338,7 @@ public class SquareGridGUI extends JPanel {
         PropertySquareGUI propertyGUI23 = new PropertySquareGUI(property23.getColor(), property23.getName(), String.valueOf(property23.getPrice()));
         this.add(propertyGUI23, c);
         this.squareGUIs[32] = propertyGUI23;
-    }
+    }*/
 
     /**
      * refresh player's location on the map
@@ -375,9 +374,10 @@ public class SquareGridGUI extends JPanel {
      */
     public void addDiceGUI(DiceGUI diceGUI) {
         GridBagConstraints c = new GridBagConstraints();
-        c.weightx = 0.5;
+        c.weightx = 0.0;
         c.gridx = 4;
         c.gridy = 3;
+        c.gridwidth = 2;
         this.add(diceGUI, c);
     }
 

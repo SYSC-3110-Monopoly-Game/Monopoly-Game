@@ -10,18 +10,18 @@ public class PropertySquareGUI extends SquareGUI{
     public PropertySquareGUI(Color color, String name, String buyPrice) {
         //layout of main  panel
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(100, 100));
+        setPreferredSize(new Dimension(DiceGUI.SIZE, DiceGUI.SIZE));
         this.setBorder(BorderFactory.createLineBorder(Color.black, 2));
 
         // color tag panel
         colorTag = new JPanel();
-        colorTag.setPreferredSize(new Dimension(100, 25));
+        colorTag.setPreferredSize(new Dimension(DiceGUI.SIZE, 23)); // 100, 25
         colorTag.setBackground(color);
         this.add(colorTag, BorderLayout.PAGE_START);
 
         //square name display
         JLabel squareName = new JLabel("<html>" + name + "</html>");
-        squareName.setMaximumSize(new Dimension(100,30));
+        squareName.setMaximumSize(new Dimension(DiceGUI.SIZE,27));
         squareName.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
         this.add(squareName, BorderLayout.CENTER);
 
