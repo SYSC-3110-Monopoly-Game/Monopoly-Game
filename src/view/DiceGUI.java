@@ -6,12 +6,14 @@ import java.awt.*;
 
 public class DiceGUI extends JPanel {
 
+    public static final int SIZE = 90;
+
 
     /**
      * initialize the dice panel
      */
     public DiceGUI() {
-        this.setPreferredSize(new Dimension(100, 100));
+        this.setPreferredSize(new Dimension(150, 80));
         this.setLayout(new BorderLayout());
     }
 
@@ -27,9 +29,9 @@ public class DiceGUI extends JPanel {
 
         this.removeAll();
         JLabel dice1 = new JLabel(dice1Image);
-        this.add(dice1, BorderLayout.NORTH);
+        this.add(dice1, BorderLayout.WEST);
         JLabel dice2 = new JLabel(dice2Image);
-        this.add(dice2, BorderLayout.SOUTH);
+        this.add(dice2, BorderLayout.EAST);
     }
 
 }

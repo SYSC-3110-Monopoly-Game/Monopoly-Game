@@ -1,7 +1,6 @@
 package Controller;
 
 import Model.MonopolyGame;
-import Model.PropertySquare;
 import view.MonopolyGameGUI;
 
 import javax.swing.*;
@@ -12,8 +11,8 @@ import java.awt.event.ActionListener;
 
 public class MonopolyGameController implements ActionListener {
 
-    private MonopolyGame game;
-    private MonopolyGameGUI view;
+    private final MonopolyGame game;
+    private final MonopolyGameGUI view;
 
     public MonopolyGameController(MonopolyGame game, MonopolyGameGUI view) {
         this.game=game;
@@ -34,6 +33,12 @@ public class MonopolyGameController implements ActionListener {
         }
         if(b.getText().equals("Next Turn")){
             this.game.nextTurn();
+        }
+        if(b.getText().equals("Build On Property")){
+            this.game.checkAvailableBuild();
+        }
+        if(b.getText().equals("Sell Houses/Hotels")){
+            this.game.checkAvailableSell();
         }
     }
 }

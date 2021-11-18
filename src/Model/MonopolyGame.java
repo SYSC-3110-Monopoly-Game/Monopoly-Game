@@ -107,6 +107,49 @@ public class MonopolyGame {
     }
 
     /**
+     * check if the player can build a house on any of its property square list
+     */
+    public void checkAvailableBuild() {
+        ArrayList<PropertySquare> propertyList = playerInTurn.removeRailroadUtility(playerInTurn.hasWholeSet());
+        if(!propertyList.isEmpty()){
+            propertyList = playerInTurn.getAvailableProperties(propertyList);
+            if(!propertyList.isEmpty()){
+                views.get(0).getDecision(propertyList, this);
+                this.getPlayerInTurn().setDecision("build");
+            }else {
+                System.out.println("not enough money");
+            }
+        } else {
+            System.out.println("not hold a set");
+        }
+    }
+
+    /**
+     * return the property according to its name
+     */
+    public PropertySquare getProperty(String name) {
+        for (PropertySquare p: playerInTurn.getProperties()){
+            if(p.getName().equals(name)){
+                return p;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * check if the player can sell a building from any of its property square list
+     */
+    public void checkAvailableSell() {
+        ArrayList<PropertySquare> propertyList = playerInTurn.hasBuilding();
+        if(!propertyList.isEmpty()){
+            views.get(0).getDecision(propertyList, this);
+            this.getPlayerInTurn().setDecision("sellH");
+        } else {
+            System.out.println("No houses neither hotels");
+        }
+    }
+
+    /**
      * A round of playing for every player
      */
     public void playRound() {
@@ -209,5 +252,14 @@ public class MonopolyGame {
             index = -1;
         }
         updateViews(playerInTurn, "Next Turn");
+    }
+
+    /**
+     * set the selected property to the player in turn
+     * ask the player to choose whether you want to build/sell a house or a hotel
+     */
+    public void setSelectedProperty(String text) {
+        this.getPlayerInTurn().setSelectedSquare(this.getProperty(text));
+        updateViews(playerInTurn, this.getPlayerInTurn().getDecision());
     }
 }

@@ -9,7 +9,7 @@ import java.awt.*;
 public class InfoDisplayGUI extends JPanel {
 
     private final JLabel name, cash, propertyList, currentLocation, buyPrice, rentPrice, housePrice, hotelPrice;
-    private final JButton buy, sell, rollDice, nextTurn;
+    private final JButton buy, sell, rollDice, nextTurn, build, sellH;
 
     /**
      * Initialize JPanel which shows player information and buttons
@@ -52,8 +52,8 @@ public class InfoDisplayGUI extends JPanel {
         currentLocation.setText("Location before rolling dice: " + playerInTurn.getCurrentLocation().getName());
         buyPrice.setText("Buy Price: Non-sale");
         rentPrice.setText("Rent Price: Non-rental");
-        housePrice.setText("House Price: 20"); // will be changed in milestone
-        hotelPrice.setText("Hotel Price: 30"); // will be changed in milestone
+        housePrice.setText("House Price: Cannot build"); // will be changed in milestone
+        hotelPrice.setText("Hotel Price: Cannot build"); // will be changed in milestone
 
         currentProperty.add(currentLocation);
         currentProperty.add(buyPrice);
@@ -63,24 +63,30 @@ public class InfoDisplayGUI extends JPanel {
 
 
     //buttons: buy, sell, roll dice next turn
-        JPanel buttons = new JPanel(new GridLayout(2, 2));
+        JPanel buttons = new JPanel(new GridLayout(3, 2));
         buttons.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 
         buy = new JButton("Buy");
         sell = new JButton("Sell");
         rollDice = new JButton("Roll Dice");
         nextTurn = new JButton("Next Turn");
+        build = new JButton("Build On Property");
+        sellH = new JButton("Sell Houses/Hotels");
 
 
         buy.setBorder(BorderFactory.createLineBorder(Color.black, 1));
         sell.setBorder(BorderFactory.createLineBorder(Color.black, 1));
         rollDice.setBorder(BorderFactory.createLineBorder(Color.black, 1));
         nextTurn.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+        build.setBorder(BorderFactory.createLineBorder(Color.black, 1));
+        sellH.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 
         buttons.add(buy);
         buttons.add(sell);
         buttons.add(rollDice);
         buttons.add(nextTurn);
+        buttons.add(build);
+        buttons.add(sellH);
 
 
         this.add(playerInfo);
@@ -90,6 +96,8 @@ public class InfoDisplayGUI extends JPanel {
         this.setBuyEnabled(false);
         this.setSellEnabled(false);
         this.setNextEnabled(false);
+        this.setBuildEnabled(false);
+        this.setSellHEnabled(false);
     }
 
     /**
@@ -100,6 +108,8 @@ public class InfoDisplayGUI extends JPanel {
         sell.addActionListener(controller);
         rollDice.addActionListener(controller);
         nextTurn.addActionListener(controller);
+        build.addActionListener(controller);
+        sellH.addActionListener(controller);
     }
 
     /**
@@ -157,15 +167,19 @@ public class InfoDisplayGUI extends JPanel {
      * show the price to build a house on current location which the player who is currently playing lands on
      */
     public void setHousePrice(int housePrice) {
-        this.housePrice.setText("House Price: " + housePrice);
+        if(housePrice == -1) this.buyPrice.setText("House Price: Cannot build" );
+        else if(housePrice == -2) this.buyPrice.setText("House Price: SOLD");
+        else this.housePrice.setText("House Price: " + housePrice);
         this.housePrice.repaint();
     }
 
     /**
      * show the price to build a hotel on current location which the player who is currently playing lands on
      */
-    public void setHotelPrice(JLabel hotelPrice) {
-        this.hotelPrice.setText("Hotel Price: " + hotelPrice);
+    public void setHotelPrice(int hotelPrice) {
+        if(hotelPrice == -1) this.buyPrice.setText("Hotel Price: Cannot build" );
+        else if(hotelPrice == -2) this.buyPrice.setText("Hotel Price: SOLD");
+        else this.hotelPrice.setText("Hotel Price: " + hotelPrice);
         this.hotelPrice.repaint();
     }
 
@@ -199,5 +213,21 @@ public class InfoDisplayGUI extends JPanel {
     public void setRollEnabled(boolean b) {
         this.rollDice.setEnabled(b);
         this.rollDice.repaint();
+    }
+
+    /**
+     * enable or disable the Sell on Property button
+     */
+    public void setBuildEnabled(boolean b) {
+        this.build.setEnabled(b);
+        this.build.repaint();
+    }
+
+    /**
+     * enable or disable the Sell Houses/Hotels button
+     */
+    public void setSellHEnabled(boolean b) {
+        this.sellH.setEnabled(b);
+        this.sellH.repaint();
     }
 }

@@ -17,10 +17,10 @@ public class UtilitySquareGUI extends SquareGUI {
         setLayout(new BorderLayout());
         this.setBorder(BorderFactory.createLineBorder(Color.black,2));
 
-        setPreferredSize(new Dimension(100, 100));
+        setPreferredSize(new Dimension(DiceGUI.SIZE, DiceGUI.SIZE));
 
         colorTag = new JPanel();
-        colorTag.setPreferredSize(new Dimension(100, 25));
+        colorTag.setPreferredSize(new Dimension(DiceGUI.SIZE, 23));
         colorTag.setBackground(Color.BLACK);
         this.add(colorTag, BorderLayout.PAGE_START);
 
@@ -65,7 +65,7 @@ public class UtilitySquareGUI extends SquareGUI {
             } else {
                 img = ImageIO.read(new File("src/images/electricSquare.png"));
             }
-            resizedImage = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            resizedImage = img.getScaledInstance(DiceGUI.SIZE, DiceGUI.SIZE, Image.SCALE_SMOOTH);
 
         } catch (IOException e) {
             e.printStackTrace();
