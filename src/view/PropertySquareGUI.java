@@ -10,18 +10,18 @@ public class PropertySquareGUI extends SquareGUI{
     public PropertySquareGUI(Color color, String name, String buyPrice) {
         //layout of main  panel
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(100, 100));
+        setPreferredSize(new Dimension(DiceGUI.SIZE, DiceGUI.SIZE));
         this.setBorder(BorderFactory.createLineBorder(Color.black, 2));
 
         // color tag panel
         colorTag = new JPanel();
-        colorTag.setPreferredSize(new Dimension(100, 25));
+        colorTag.setPreferredSize(new Dimension(DiceGUI.SIZE, 23)); // 100, 25
         colorTag.setBackground(color);
         this.add(colorTag, BorderLayout.PAGE_START);
 
         //square name display
         JLabel squareName = new JLabel("<html>" + name + "</html>");
-        squareName.setMaximumSize(new Dimension(100,30));
+        squareName.setMaximumSize(new Dimension(DiceGUI.SIZE,27));
         squareName.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
         this.add(squareName, BorderLayout.CENTER);
 
@@ -30,6 +30,9 @@ public class PropertySquareGUI extends SquareGUI{
         this.add(squarePrice, BorderLayout.PAGE_END);
     }
 
+    /**
+     * in gui add player to the square
+     */
     public void addPlayer(String name) {
         PlayerGUI player = new PlayerGUI(name);
         this.colorTag.add(player);
@@ -37,6 +40,9 @@ public class PropertySquareGUI extends SquareGUI{
         this.repaint();
     }
 
+    /**
+     * in gui remove player from the square
+     */
     public void removePlayer(String name, boolean inJail) {
         Component[] components = this.colorTag.getComponents();
         for (Component label : components

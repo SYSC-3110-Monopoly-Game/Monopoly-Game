@@ -2,15 +2,10 @@ package tests;
 
 import Model.MonopolyGame;
 import Model.Player;
-import Model.PropertySquare;
-import Model.Square;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.awt.*;
-import java.util.ArrayList;
 
 class PlayerTest {
 
@@ -61,20 +56,20 @@ class PlayerTest {
 
     @Test
     void setCurrentLocation() {
-        player.setCurrentLocation(game.board.getSquares()[2]);
-        Assertions.assertEquals(game.board.getSquares()[2], player.getCurrentLocation());
+        player.setCurrentLocation(MonopolyGame.board.getSquares()[2]);
+        Assertions.assertEquals(MonopolyGame.board.getSquares()[2], player.getCurrentLocation());
     }
 
     @Test
     void getLastLocation() {
-        player.setCurrentLocation(game.board.getSquares()[2]);
-        Assertions.assertEquals(game.board.startingSquare(), player.getLastLocation());
+        player.setCurrentLocation(MonopolyGame.board.getSquares()[2]);
+        Assertions.assertEquals(MonopolyGame.board.startingSquare(), player.getLastLocation());
     }
 
     @Test
     void getCurrentLocation() {
-        player.setCurrentLocation(game.board.getSquares()[2]);
-        Assertions.assertEquals(game.board.getSquares()[2], player.getCurrentLocation());
+        player.setCurrentLocation(MonopolyGame.board.getSquares()[2]);
+        Assertions.assertEquals(MonopolyGame.board.getSquares()[2], player.getCurrentLocation());
     }
 
 
@@ -85,14 +80,14 @@ class PlayerTest {
 
     @Test
     void buyProperty() {
-        player.setCurrentLocation(game.board.getSquares()[2]);
+        player.setCurrentLocation(MonopolyGame.board.getSquares()[2]);
         player.buyProperty(player.getCurrentLocation());
         Assertions.assertEquals(player.getCurrentLocation(), player.getProperties().get(0));
     }
 
     @Test
     void sellProperty() {
-        player.setCurrentLocation(game.board.getSquares()[2]);
+        player.setCurrentLocation(MonopolyGame.board.getSquares()[2]);
         player.sellProperty(player.getCurrentLocation());
         Assertions.assertEquals(0, player.getProperties().size());
     }

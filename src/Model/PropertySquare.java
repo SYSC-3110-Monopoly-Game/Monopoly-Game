@@ -1,7 +1,7 @@
 package Model;
 
-import view.PropertySquareGUI;
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PropertySquare extends Square {
@@ -9,8 +9,38 @@ public class PropertySquare extends Square {
     private final int buyPrice; //price for the player buy this land
     private final int rentPrice; //the price that other players need to pay to the owner.
     private final Color color;
-    private boolean sold;
     private Player owner = null;
+    private final int HousePrice;
+
+
+    private static class House {
+        private final int price;
+
+        public House(int price){
+            this.price = price;
+        }
+
+        public int getPrice(){
+            return this.price;
+        }
+    }
+
+    private static class Hotel {
+        private final int price;
+
+        public Hotel(int price){
+            this.price = price;
+        }
+
+        public int getPrice() {
+            return this.price;
+        }
+
+    }
+
+
+    private Hotel hotel;
+    private final ArrayList<House> houses;
 
 
     public PropertySquare(String name, int number, int buy, int rent, Color color) {
@@ -18,8 +48,91 @@ public class PropertySquare extends Square {
         this.buyPrice = buy;
         this.rentPrice = rent;
         this.color = color;
-        this.sold = false;
+        houses = new ArrayList<>();
+        hotel = null;
+        HousePrice = 50;
     }
+
+    public int buildHouse() {
+        if(this.houses.size() < 4) {
+            House h= new House(HousePrice);
+            this.houses.add(h);
+            this.owner.decreaseCash(h.getPrice());
+            System.out.println("A house has been built on " + this.getName());
+            return h.getPrice();
+        }
+        return -1;
+    }
+
+    /**
+     * check if the square has a house
+     *
+     * @return boolean
+     */
+    public boolean hasHouses() {
+        return !this.houses.isEmpty();
+    }
+
+    /**
+     * return the price of building a house on this property square
+     */
+    public int getHousePrice() {
+        return this.HousePrice;
+    }
+
+    /**
+     * sell a house from this property square
+     */
+    public void sellHouse() {
+        if(hasHouses()) {
+            House h = this.houses.remove(0);
+            this.owner.increaseCash(h.getPrice()/2);
+        }
+    }
+
+    /**
+     * build a hotel on this property square
+     */
+    public int buildHotel() {
+        if(this.hotel == null){
+            this.hotel = new Hotel(HousePrice);
+            for(int i=0; i<(4 - houses.size()); i++){
+                this.houses.add(new House(HousePrice));
+            }
+            int price = getHotelPrice();
+            this.owner.decreaseCash(price);
+            System.out.println("A hotel has been built on " + this.getName());
+            return price;
+        }
+        return -1;
+    }
+
+    /**
+     * return the price of building a hotel on this property square
+     */
+    public int getHotelPrice() {
+        return HousePrice*(5 - houses.size());
+    }
+
+    /**
+     * check if the square has a hotel
+     *
+     * @return boolean
+     */
+    public boolean hasHotel() {
+        return !(this.hotel ==null);
+    }
+
+    /**
+     * sell a hotel from the square
+     */
+    public void sellHotel() {
+        if(hasHotel()){
+            this.owner.increaseCash(this.hotel.getPrice()/2);
+            this.hotel = null;
+        }
+    }
+
 
     /**
      * gets the color of the square
@@ -39,7 +152,7 @@ public class PropertySquare extends Square {
      * get the land rent price (square toll)
      */
     public int getRentFee() {
-        return rentPrice;
+        return calculateRentFee();
     }
 
     /**
@@ -56,6 +169,24 @@ public class PropertySquare extends Square {
         this.owner = owner;
     }
 
+
+    /**
+     * calculate the rent fee of the square
+     * according to the number of squares with the same color and the buildings on the square
+     */
+    private int calculateRentFee() {
+        if(this.owner == null){
+            return this.rentPrice;
+        }
+        if(this.owner.hasWholeSet().contains(this)){
+            if(this instanceof RailRoadSquare || this instanceof UtilitySquare){
+                return this.rentPrice * this.owner.countNumber(Color.BLACK);
+            }
+            return (this.rentPrice + this.rentPrice / 2 * (houses.size() + ((hasHotel()) ? 1 : 0))) * 2;
+        }
+        return this.rentPrice;
+    }
+
     /**
      * action applied when player lands on this square
      */
@@ -63,7 +194,7 @@ public class PropertySquare extends Square {
     public void landOn(Player p) {
         p.setCurrentLocation(this);
 
-        int fee = this.getRentFee();
+        int fee = getRentFee();
 
         Player owner = this.getOwner();
 
@@ -83,5 +214,4 @@ public class PropertySquare extends Square {
             }
         }
     }
-
 }

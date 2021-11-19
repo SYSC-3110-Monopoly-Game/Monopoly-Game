@@ -13,26 +13,21 @@ public class JailSquareGUI extends SquareGUI {
 
     public JailSquareGUI() {
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(100, 100));
-        this.setBorder(BorderFactory.createLineBorder(Color.black,2));
-
-        colorTag = new JPanel();
-        colorTag.setPreferredSize(new Dimension(100, 25));
-        colorTag.setBackground(Color.BLACK);
+        setPreferredSize(new Dimension(DiceGUI.SIZE, DiceGUI.SIZE));
+        this.setBorder( BorderFactory.createLineBorder(Color.black, 2));
+        this.colorTag = new JPanel();
+        this.colorTag.setPreferredSize(new Dimension(DiceGUI.SIZE, 23));
+        this.colorTag.setBackground(Color.BLACK);
         this.add(colorTag, BorderLayout.PAGE_START);
-
         jailTag = new JPanel();
-        jailTag.setPreferredSize(new Dimension(40, 25));
+        jailTag.setPreferredSize(new Dimension(36, 23));
         jailTag.setBackground(Color.RED);
         this.add(jailTag, BorderLayout.PAGE_END);
     }
 
-    public void addPlayer(String name) {
-        PlayerGUI player = new PlayerGUI(name);
-        this.colorTag.add(player);
-        this.revalidate();
-        this.repaint();
-    }
+    /**
+     * in gui add player to jail
+     */
     public void addPlayerToJail(String name) {
         PlayerGUI player = new PlayerGUI(name);
         this.jailTag.add(player);
@@ -40,6 +35,21 @@ public class JailSquareGUI extends SquareGUI {
         this.repaint();
     }
 
+    /**
+     * in gui add player to the square
+     */
+    @Override
+    public void addPlayer(String name) {
+        PlayerGUI player = new PlayerGUI(name);
+        this.colorTag.add(player);
+        this.revalidate();
+        this.repaint();
+    }
+
+    /**
+     * in gui remove player from the square
+     */
+    @Override
     public void removePlayer(String name, boolean inJail) {
         Component[] components;
         if(inJail){
@@ -73,7 +83,7 @@ public class JailSquareGUI extends SquareGUI {
         try {
 
             img = ImageIO.read(new File("src/images/jailSquare.png"));
-            resizedImage = img.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+            resizedImage = img.getScaledInstance(DiceGUI.SIZE, DiceGUI.SIZE, Image.SCALE_SMOOTH);
 
         } catch (IOException e) {
             e.printStackTrace();
