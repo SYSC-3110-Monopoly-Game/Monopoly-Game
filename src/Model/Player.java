@@ -212,7 +212,7 @@ public class Player {
     }
 
     /**
-     * check if the player has build 1 or more buildings, if so, return the properties with buildings
+    * check if the player has build 1 or more buildings, if so, return the properties with buildings
      */
     public ArrayList<PropertySquare> hasBuilding() {
         ArrayList<PropertySquare> result = new ArrayList<>();
