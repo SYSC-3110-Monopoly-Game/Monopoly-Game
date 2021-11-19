@@ -34,6 +34,7 @@ the initial cost of the property.
 
 <details><summary>Milestone 1</summary>
 
+
 # Milestone 1
 
 ## Folders/Files added
@@ -97,4 +98,159 @@ Finally, the `MonopolyGame.java` brings everything together by creating the boar
 
 </details>
 
+<details><summary>Milestone 2</summary>
+    
+# Milestone 2
+
+## Folders/Files added
+
+* src
+    - Model
+        + main.java
+        + FreeParkingSquare.java
+        + GoSquare.java
+        + GoTOJailSquare.java
+        + IncomeTaxSquare.java
+        + JailSquare.java
+        + RailRoadSquare.java
+        + UtilitySquare.java
+    - view
+        + DiceGUI.java
+        + FreeParkingSquare.java
+        + GoSquareGUI.java
+        + GoToJailGUI.java
+        + IncomeTaxSquareGUI.java
+        + InfoDisplayGUI.java
+        + JailSquareGUI.java
+        + MonopolyGameGUI.java
+        + playerGUI.java
+        + PropertySquareGUI.java
+        + RailRoadSquareGUI.java
+        + SquareGridGUI.java
+        + SquareGUI.java
+        + UtilitySquareGUI.java
+    - test
+        + DiceTest.java
+        + FreeParkingSquareTest.java
+        + GoSquareTest.java
+        + GoToJailSquareTest.java
+        + incomeTaxSquareTest.java
+        + JailSquareTest.java
+        + MonopolyBoardTest.java
+        + MonopolyGameTest.java
+        + PlayerTest.java
+        + PropertySquareTest.java
+        + RailRoadSquareTest.java
+        + UtilitySquareTest.java
+    - Controller
+        + MonopolyGameController.java
+    - UML and Sequence Diagrams
+        - Milestone2
+
+   
+
+## Team Responsibilities
+
+Liya Abebe
+
+- Implemented FreeParkingGUI class
+- Implemented GoToJailGUI class
+- Implemented GoSquareGUI class
+- Implemented IncomeTaxSquareGUI class
+- Implemented JailSquareGUI class
+- Implemented PropertySquareGUI class
+- Implemented RailRoadSquareGUI class
+- Implemented UtilitySquareGUI class
+- Implemented PlayerGUI class
+- Implemented InfoDisplayGUI class
+- Implemented MonopolyGameGUI class
+- Implemented SquareGridGUI class
+- Implemented DiceTest class
+- Implemented MonopolyBoardTest class
+- Implemented MonopolyGameController class
+- Refactored MonopolyGame class
+- Refactored main class
+ 
+Rebbeca Li
+    
+- Refactored InfoDisplayGUI class
+- Refactored DiceGUI class
+- Draw the UML of the whole project
+
+Shizhong Shang
+  
+- Refactored Player class
+- Implemented PlayerTest class
+- Implemented FreeParking class
+- Implemented GoToJail class
+- Implemented GoSquare class
+- Implemented IncomeTaxSquare class
+- Implemented JailSquare class
+- Implemented RailRoadSquare class
+- Implemented UtilitySquare class
+- Sequence diagrams
+
+Zirui Qiao
+
+- Refactored MonopolyGame class
+- Refactored JailSquare class
+- Refactored all tests excepted for diceTest
+- Implemented MonopolyGameTest class
+- Implemented main class
+- Implemented SquareGUI class
+- Implemented buyProperty() and sellProperty() methods in MonopolyGame class
+- Add sellProperty() method to Player class
+- Refactored the landOn() method in PropertySquare class
+- Refactored the landOn() method in GoToJailSquare class
+- Refactored the makeSquares() method in MonopolyBoard class
+- Provide a new method(no use after discussion) to SquareGridGUI class
+- README file documentation
+
+
+## Detailed Set Up
+    
+We separate the whole game to 5 packages. The packages are 'Model', 'view', 'tests', 'Controller' and 'images'.
+In order to move game to GUI version, the game is designed to have a MVC pattern. Package 'Model' is the model
+part in MVC pattern; package 'view' is the view part in MVC pattern; package 'Controller' is the controller
+part in MVC pattern, package 'test' contains tests for all classes in 'Model' and package 'images' contains 
+images will be used in 'view'.
+    
+Model:
+    New classes which represents special types of squares are added. The classes are 'FreeParkingSqaure.java', 
+    'GoSquare.java', 'GoToJailSquare.java', 'IncomeTaxSquare.java', 'JailSquare.java', 'RailRoadSquare.java' 
+    and 'UtilitySquare.java'. 'RailRoadSquare.java' and 'UtilitySquare.java' are children of 'PropertySquare.java' 
+    because all of them can be buy and sell. All of the rest new classes implement 'Square.java' class.
+    A 'main' class is also added which helps to arrange MVC pattern. New rules are included in the game 
+    compared to milstone1, rules about jail and selling properties when getting bankrupt are implemented 
+    in game. In order to write the test easier and match with the MVC pattern, multiple methods in 'MonopolyGame' 
+    are splited into new methods. All other classes remain their original functions.
+    
+view:
+    New classes are created to do visual part of the game. The classes which represent the squares' view are 
+    'FreeParkingSquareGUI.java', 'GoSquareGUI.java', 'GoToJailGUI.java', 'IncomeTaxSquareGUI.java', 
+    'JailSquareGUI.java', 'PropertySquareGUI.java', 'RailRoadSquareGUI.java', 'UtilitySquareGUI.java' and 
+    'SquareGUI.java'. We designed `SquareGUI.java` to be an abstract class just like in milestone1. Then, each
+    class is responsible for a type of square in package 'Model'. 'DIceGUI.java' and 'PlayerGUI.java' are 
+    also created in responsible for the visualization of 'Dice.java' and 'Player.java'. 'InfoDisplayGUI.java'
+    is created to display the information of the player who is currently playing the round. 'SquareGridGUI.java'
+    is created to draw the map of the game. Finally, 'MonopolyGameGUI.java' is created to bring all view part 
+    together.
+ 
+controller:
+    New class 'MonopolyGameController.java' is created in responsible for actionListeners of buttons created in
+    package 'view'.
+    
+test:
+    For each class in package 'Model', a test class is created to test all testable methods in the class. 
+    For example, 'DiceTest.java' to test all methods in 'Dice.java'.
+
+
+## Known Issues/bugs
+
+When a player that's not in jail rolls a double, the game automatically
+rolls the dice again instead to waiting for an input from the 'Roll Dice' button.
+It sends the player to jail if dice rolls a double 3 times. In the view, only the last dice roll is shown.
+Ideally we would want to wait for user input to roll dice again when doubles are rolled and display
+all the dice pairs, not just the last rolled pair.
+</details>
 
