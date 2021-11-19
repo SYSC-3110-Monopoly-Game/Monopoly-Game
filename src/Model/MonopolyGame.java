@@ -11,8 +11,6 @@ public class MonopolyGame {
     public static Dice dice;
     private Player playerInTurn;
     private int index = -1;
-    public AIPlayer ai;
-    private Square square;
 
     public MonopolyGame() {
         board = new MonopolyBoard();
@@ -34,13 +32,9 @@ public class MonopolyGame {
         int number = 4;                                                      // get the number of players to 4
 
         //create the 4 players
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < number; i++) {
             String name = "" + (i + 1);
             playerTempList.add(new Player(name, board.startingSquare()));   // add players to a temp arraylist
-        }
-        for (int i = 1; i < number; i++) {
-            String name = "" + (i + 1);
-            playerTempList.add(new AIPlayer(name, board.startingSquare()));   // add players to a temp arraylist
         }
         this.playerInTurn = playerTempList.get(0);
         return playerTempList;                                              // return the temp arrayList
@@ -258,16 +252,6 @@ public class MonopolyGame {
             index = -1;
         }
         updateViews(playerInTurn, "Next Turn");
-
-        if (playerInTurn instanceof AIPlayer){
-            ai.rollDiceAI();
-            Square location = playerInTurn.getCurrentLocation();
-            ai.buyProperty(location);
-            ai.sellSomeThing();
-            String answer = new String();
-            ai.buildH(answer);
-            ai.sellH(answer);
-        }
     }
 
     /**
