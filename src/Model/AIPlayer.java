@@ -11,6 +11,7 @@ public class AIPlayer extends Player {
     AIPlayer ai;
     Random random = new Random();
     MonopolyGame mg;
+    private Object ArrayList;
     private PropertySquare square;
     private PropertySquare[] squaresOwned;
 
