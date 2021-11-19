@@ -1,7 +1,5 @@
 package Model;
 
-import view.DiceGUI;
-
 import java.util.Random;
 
 public class Dice {
@@ -9,7 +7,7 @@ public class Dice {
     private Random random;
     private int[] dice;
 
-    public DiceGUI gui;
+
 
     /**
      * Constructs the default number of dice
@@ -27,7 +25,6 @@ public class Dice {
 
             int singleDie = this.random.nextInt(6)+1;
             this.dice[i] = singleDie;
-            this.gui = new DiceGUI();
         }
         return this.dice;
     }
@@ -37,6 +34,10 @@ public class Dice {
      */
     public int getTotalValue() {
         return this.dice[0] + this.dice[1];
+    }
+
+    public int[] getDice() {
+        return dice;
     }
 
     /**
