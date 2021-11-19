@@ -2,6 +2,7 @@ package Model;
 
 import view.MonopolyGameGUI;
 
+import java.awt.image.BandedSampleModel;
 import java.util.*;
 
 public class MonopolyGame {
@@ -10,6 +11,9 @@ public class MonopolyGame {
     private ArrayList<MonopolyGameGUI> views;
     public static Dice dice;
     private Player playerInTurn;
+    private AIPlayer ai;
+    private PropertySquare square;
+    private MonopolyGame mg;
     private int index = -1;
 
     public MonopolyGame() {
@@ -252,6 +256,15 @@ public class MonopolyGame {
             index = -1;
         }
         updateViews(playerInTurn, "Next Turn");
+
+        if(playerInTurn instanceof  AIPlayer){
+            ai.rollDiceAI();
+            ai.buyProperty(square);
+            ai.sellSomeThing();
+            String answer = new String();
+            ai.buildH(answer);
+            mg.nextTurn();
+        }
     }
 
     /**
