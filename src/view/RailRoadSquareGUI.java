@@ -12,11 +12,11 @@ public class RailRoadSquareGUI extends SquareGUI {
 
     public RailRoadSquareGUI(String name, int buyPrice) {
         setLayout(new GridLayout(3,1));
-        setPreferredSize(new Dimension(100, 100));
+        setPreferredSize(new Dimension(DiceGUI.SIZE, DiceGUI.SIZE));
         this.setBorder(BorderFactory.createLineBorder(Color.black,2));
 
         colorTag = new JPanel();
-        colorTag.setPreferredSize(new Dimension(100, 25));
+        colorTag.setPreferredSize(new Dimension(DiceGUI.SIZE, 23));
         colorTag.setBackground(Color.BLACK);
         this.add(colorTag);
 
@@ -32,21 +32,28 @@ public class RailRoadSquareGUI extends SquareGUI {
         this.add(squarePrice );
     }
 
+    /**
+     * in gui add player to the square
+     */
     public void addPlayer(String name) {
         PlayerGUI player = new PlayerGUI(name);
         this.colorTag.add(player);
+        this.revalidate();
+        this.repaint();
     }
 
+    /**
+     * in gui remove player from the square
+     */
     public void removePlayer(String name, boolean inJail) {
-        Component[] components = this.getComponents();
+        Component[] components = this.colorTag.getComponents();
         for (Component label : components
         ) {
             JLabel player = (JLabel) label;
             if (player.getText().equals(name)) {
                 player.setVisible(false);
                 this.colorTag.remove(label);
-                this.revalidate();
-                this.repaint();
+                this.colorTag.repaint();
             }
         }
     }
@@ -58,7 +65,7 @@ public class RailRoadSquareGUI extends SquareGUI {
         try {
 
             img = ImageIO.read(new File("src/images/railroadSquare.png"));
-            resizedImage = img.getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH);
+            resizedImage = img.getScaledInstance(DiceGUI.SIZE, DiceGUI.SIZE, java.awt.Image.SCALE_SMOOTH);
 
         } catch (IOException e) {
             e.printStackTrace();
