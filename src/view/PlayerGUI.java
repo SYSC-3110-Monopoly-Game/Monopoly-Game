@@ -4,6 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PlayerGUI extends JLabel {
+
+    /**
+     * initialize a single player panel
+     */
     public  PlayerGUI(String name){
         super(name);
         this.setBackground(Color.white);
