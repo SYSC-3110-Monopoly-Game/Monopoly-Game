@@ -258,7 +258,7 @@ public class MonopolyGame {
             index = -1;
         }
         updateViews(playerInTurn, "Next Turn");
-        
+
         if (playerInTurn instanceof AIPlayer){
             ai.rollDiceAI();
             Square location = playerInTurn.getCurrentLocation();
