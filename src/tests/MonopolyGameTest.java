@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class MonopolyGameTest {
 
     MonopolyGame game;
@@ -23,28 +21,39 @@ class MonopolyGameTest {
     }
 
     @Test
-    public void getBoard(){
-        Assertions.assertEquals(game.board, game.getBoard());
+    void buySquare() {
+        game.getPlayerInTurn().setCurrentLocation(MonopolyGame.board.getSquares()[2]);
+        game.buySquare();
+        Assertions.assertEquals("Baltic Avenue", game.getPlayerInTurn().getProperties().get(0).getName());
     }
 
     @Test
-    public void playerWin() {
-        Assertions.assertEquals(false, game.playerWin());
+    void sellSquare() {
+        game.getPlayerInTurn().setCurrentLocation(MonopolyGame.board.getSquares()[2]);
+        game.buySquare();
+        game.sellSquare();
+        Assertions.assertEquals(0, game.getPlayerInTurn().getProperties().size());
     }
 
     @Test
-    public void getWinner() {
-        Assertions.assertEquals(null, game.getWinner());
+    void playRound() {
+        game.playRound();
+        Assertions.assertNotEquals(MonopolyGame.board.startingSquare(), game.getPlayerInTurn().getCurrentLocation());
     }
 
     @Test
-    public void checkBankrupt() {
-        boolean result = game.checkBankrupt(game.players.get(0), game.players);
-        Assertions.assertEquals(false, result);
+    void printPlayersInfo() {
+
     }
 
     @Test
-    public void ifInJail() {
-        Assertions.assertEquals(false, game.ifInJail(game.players.get(0)));
+    void getPlayerInTurn() {
+        Assertions.assertEquals(game.players.get(0), game.getPlayerInTurn());
+    }
+
+    @Test
+    void nextTurn() {
+        game.nextTurn();
+        Assertions.assertEquals(game.players.get(1), game.getPlayerInTurn());
     }
 }
