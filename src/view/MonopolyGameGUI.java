@@ -35,7 +35,7 @@ public class MonopolyGameGUI extends JFrame {
         this.add(squareGUI, BorderLayout.WEST);
 
         //infoPanel gui initialization
-        this.infoDisplayGUI = new InfoDisplayGUI(game.getPlayerInTurn());
+        this.infoDisplayGUI = new InfoDisplayGUI(game.getPlayerInTurn(), game.getPlayersNotInTurn());
         this.add(infoDisplayGUI, BorderLayout.EAST);
 
         //dice gui
@@ -57,7 +57,7 @@ public class MonopolyGameGUI extends JFrame {
     /**
      * apply change to gui according to the command
      */
-    public void handleUpdate(Player player, String command) {
+    public void handleUpdate(Player player, String command, ArrayList<Player> players) {
         Square newLocation = player.getCurrentLocation();
         Square lastLocation = player.getLastLocation();
         switch (command) {
@@ -66,6 +66,15 @@ public class MonopolyGameGUI extends JFrame {
                 infoDisplayGUI.setName(player.getName());
                 infoDisplayGUI.setCash(player.getCash());
                 infoDisplayGUI.setPropertyList(player.getProperties().toString());
+
+                //update the info panel about not current players info
+                infoDisplayGUI.setName1(players.get(0).getName());
+                infoDisplayGUI.setCash1(players.get(0).getCash());
+                infoDisplayGUI.setName2(players.get(1).getName());
+                infoDisplayGUI.setCash2(players.get(1).getCash());
+                infoDisplayGUI.setName3(players.get(2).getName());
+                infoDisplayGUI.setCash3(players.get(2).getCash());
+
 
                 // refresh location, buy, rent.
                 //start here
