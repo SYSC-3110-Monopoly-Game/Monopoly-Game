@@ -12,19 +12,17 @@ public class SimpleSquareGUI extends SquareGUI {
 
     private JPanel colorTag;
     private String path;
+    public static final int SIZE = 90;
 
-    public SimpleSquareGUI(String path) {
-        initalize(path);
-    }
 
-    public void initalize(String path){
+    public SimpleSquareGUI(String path, Color color){
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(DiceGUI.SIZE, DiceGUI.SIZE));
+        setPreferredSize(new Dimension(SIZE, SIZE));
         this.setBorder( BorderFactory.createLineBorder(Color.black, 2));
         this.colorTag = new JPanel();
         this.path = path;
-        this.colorTag.setPreferredSize(new Dimension(DiceGUI.SIZE, 23));
-        this.colorTag.setBackground(Color.BLACK);
+        this.colorTag.setPreferredSize(new Dimension(SIZE, 23));
+        this.colorTag.setBackground(color);
         this.add(colorTag, BorderLayout.PAGE_START);
     }
 
@@ -61,7 +59,7 @@ public class SimpleSquareGUI extends SquareGUI {
         try {
 
             img = ImageIO.read(new File(path));
-            resizedImage = img.getScaledInstance(DiceGUI.SIZE, DiceGUI.SIZE, java.awt.Image.SCALE_SMOOTH);
+            resizedImage = img.getScaledInstance(SIZE, SIZE, java.awt.Image.SCALE_SMOOTH);
 
         } catch (IOException e) {
             e.printStackTrace();
