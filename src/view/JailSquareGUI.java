@@ -10,13 +10,15 @@ import java.io.IOException;
 public class JailSquareGUI extends SquareGUI {
     private final JPanel colorTag;
     private final JPanel jailTag;
+    public static final int SIZE = 90;
+
 
     public JailSquareGUI() {
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(DiceGUI.SIZE, DiceGUI.SIZE));
+        setPreferredSize(new Dimension(SIZE, SIZE));
         this.setBorder( BorderFactory.createLineBorder(Color.black, 2));
         this.colorTag = new JPanel();
-        this.colorTag.setPreferredSize(new Dimension(DiceGUI.SIZE, 23));
+        this.colorTag.setPreferredSize(new Dimension(SIZE, 23));
         this.colorTag.setBackground(Color.BLACK);
         this.add(colorTag, BorderLayout.PAGE_START);
         jailTag = new JPanel();
@@ -83,7 +85,7 @@ public class JailSquareGUI extends SquareGUI {
         try {
 
             img = ImageIO.read(new File("src/images/jailSquare.png"));
-            resizedImage = img.getScaledInstance(DiceGUI.SIZE, DiceGUI.SIZE, Image.SCALE_SMOOTH);
+            resizedImage = img.getScaledInstance(SIZE, SIZE, Image.SCALE_SMOOTH);
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,76 +1,15 @@
 package view;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-public class UtilitySquareGUI extends SquareGUI {
-
-    private final String type;
-    private final JPanel colorTag;
+public class UtilitySquareGUI extends SimpleSquareGUI {
 
     public UtilitySquareGUI(int buyPrice, String type) {
-        this.type = type;
-        setLayout(new BorderLayout());
-        this.setBorder(BorderFactory.createLineBorder(Color.black,2));
-
-        setPreferredSize(new Dimension(DiceGUI.SIZE, DiceGUI.SIZE));
-
-        colorTag = new JPanel();
-        colorTag.setPreferredSize(new Dimension(DiceGUI.SIZE, 23));
-        colorTag.setBackground(Color.BLACK);
-        this.add(colorTag, BorderLayout.PAGE_START);
+        super("src/images/" + type + "Square.png", Color.BLACK);
 
         //square price display
         JLabel squarePrice = new JLabel(String.valueOf(buyPrice));
         this.add(squarePrice, BorderLayout.AFTER_LAST_LINE);
-    }
-
-    /**
-     * in gui add player to the square
-     */
-    public void addPlayer(String name) {
-        PlayerGUI player = new PlayerGUI(name);
-        this.colorTag.add(player);
-    }
-
-    /**
-     * in gui remove player from the square
-     */
-    public void removePlayer(String name, boolean inJail) {
-        Component[] components = this.colorTag.getComponents();
-        for (Component label : components
-        ) {
-            JLabel player = (JLabel) label;
-            if (player.getText().equals(name)) {
-                player.setVisible(false);
-                this.colorTag.remove(label);
-                this.revalidate();
-                this.repaint();
-            }
-        }
-    }
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        BufferedImage img;
-        Image resizedImage = null;
-        try {
-
-            if (type.equals("Water Works")) {
-                img = ImageIO.read(new File("src/images/waterSquare.png"));
-            } else {
-                img = ImageIO.read(new File("src/images/electricSquare.png"));
-            }
-            resizedImage = img.getScaledInstance(DiceGUI.SIZE, DiceGUI.SIZE, Image.SCALE_SMOOTH);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        super.paintComponent(g);
-        g.drawImage(resizedImage, 0, 0, null);
     }
 }

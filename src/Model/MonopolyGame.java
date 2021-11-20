@@ -11,14 +11,19 @@ public class MonopolyGame {
     private ArrayList<MonopolyGameGUI> views;
     public static Dice dice;
     private Player playerInTurn;
+
     private AIPlayer ai;
     private PropertySquare square;
     private MonopolyGame mg;
+
+    private ArrayList<Player> playersNotInTurn;
+
     private int index = -1;
 
     public MonopolyGame() {
         board = new MonopolyBoard();
         players = createPlayers();
+        playersNotInTurn = new ArrayList<>();
         dice = new Dice();
         views = new ArrayList<>();
         printPlayersInfo();
@@ -95,7 +100,7 @@ public class MonopolyGame {
      */
     public void buySquare() {
         if(playerInTurn.buyProperty(playerInTurn.getCurrentLocation())) {
-            this.updateViews(playerInTurn, "Buy");
+            this.updateViews(playerInTurn, "Buy", playersNotInTurn);
         }
     }
 
@@ -106,7 +111,7 @@ public class MonopolyGame {
         if (playerInTurn.getProperties().isEmpty()) {
         } else {
             playerInTurn.sellProperty(playerInTurn.getProperties().get(0));
-            this.updateViews(playerInTurn, "Sell");
+            this.updateViews(playerInTurn, "Sell", playersNotInTurn);
         }
     }
 
@@ -186,10 +191,10 @@ public class MonopolyGame {
 
         }
 
-        updateViews(playerInTurn, "Roll Dice");
+        updateViews(playerInTurn, "Roll Dice", getPlayersNotInTurn());
 
         if (playerInTurn.isBankrupt()) {
-            updateViews(playerInTurn, "Bankrupt");
+            updateViews(playerInTurn, "Bankrupt", getPlayersNotInTurn());
             for(PropertySquare property: playerInTurn.getProperties()){
                 property.setOwner(null);
             }
@@ -204,7 +209,7 @@ public class MonopolyGame {
         }
 
         if(getWinner()!=null){
-            updateViews(getWinner(), "Winner");
+            updateViews(getWinner(), "Winner", getPlayersNotInTurn());
         }
     }
 
@@ -230,9 +235,9 @@ public class MonopolyGame {
     /**
      * update GUI
      */
-    private void updateViews(Player p, String command) {
+    private void updateViews(Player p, String command, ArrayList<Player> ps) {
         for (MonopolyGameGUI view : views) {
-            view.handleUpdate(p, command);
+            view.handleUpdate(p, command, ps);
         }
     }
 
@@ -255,6 +260,7 @@ public class MonopolyGame {
             players.remove(index);
             index = -1;
         }
+
         updateViews(playerInTurn, "Next Turn");
 
         if(playerInTurn instanceof  AIPlayer){
@@ -265,6 +271,9 @@ public class MonopolyGame {
             ai.buildH(answer);
             mg.nextTurn();
         }
+
+        updateViews(playerInTurn, "Next Turn", getPlayersNotInTurn());
+
     }
 
     /**
@@ -273,6 +282,25 @@ public class MonopolyGame {
      */
     public void setSelectedProperty(String text) {
         this.getPlayerInTurn().setSelectedSquare(this.getProperty(text));
-        updateViews(playerInTurn, this.getPlayerInTurn().getDecision());
+        updateViews(playerInTurn, this.getPlayerInTurn().getDecision(), playersNotInTurn);
+    }
+
+    /**
+     * List of players not in turn
+     */
+    public ArrayList getPlayersNotInTurn(){
+        //playersNotInTurn.remove(0);
+        for (int i = 0; i < players.size(); i++){
+            if (players.get(i) != playerInTurn){
+                if (!playersNotInTurn.contains(players.get(i))){
+                    playersNotInTurn.add(players.get(i));
+                }
+            }else if (players.get(i) == playerInTurn){
+                if (playersNotInTurn.contains(players.get(i))){
+                    playersNotInTurn.remove(players.get(i));
+                }
+            }
+        }
+        return playersNotInTurn;
     }
 }

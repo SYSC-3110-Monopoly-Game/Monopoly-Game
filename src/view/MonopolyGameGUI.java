@@ -12,7 +12,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class MonopolyGameGUI extends JFrame {
     private final InfoDisplayGUI infoDisplayGUI;
     private final SquareGridGUI squareGUI;
-    private final DiceGUI diceGUI;
     private String message;
 
     /**
@@ -35,12 +34,8 @@ public class MonopolyGameGUI extends JFrame {
         this.add(squareGUI, BorderLayout.WEST);
 
         //infoPanel gui initialization
-        this.infoDisplayGUI = new InfoDisplayGUI(game.getPlayerInTurn());
+        this.infoDisplayGUI = new InfoDisplayGUI(game.getPlayerInTurn(), game.getPlayersNotInTurn());
         this.add(infoDisplayGUI, BorderLayout.EAST);
-
-        //dice gui
-        diceGUI= new DiceGUI();
-        squareGUI.addDiceGUI(diceGUI);
 
         this.pack();
         this.setLocationRelativeTo(null);
@@ -57,7 +52,7 @@ public class MonopolyGameGUI extends JFrame {
     /**
      * apply change to gui according to the command
      */
-    public void handleUpdate(Player player, String command) {
+    public void handleUpdate(Player player, String command, ArrayList<Player> players) {
         Square newLocation = player.getCurrentLocation();
         Square lastLocation = player.getLastLocation();
         switch (command) {
@@ -66,6 +61,15 @@ public class MonopolyGameGUI extends JFrame {
                 infoDisplayGUI.setName(player.getName());
                 infoDisplayGUI.setCash(player.getCash());
                 infoDisplayGUI.setPropertyList(player.getProperties().toString());
+
+                //update the info panel about not current players info
+                infoDisplayGUI.setName1(players.get(0).getName());
+                infoDisplayGUI.setCash1(players.get(0).getCash());
+                infoDisplayGUI.setName2(players.get(1).getName());
+                infoDisplayGUI.setCash2(players.get(1).getCash());
+                infoDisplayGUI.setName3(players.get(2).getName());
+                infoDisplayGUI.setCash3(players.get(2).getCash());
+
 
                 // refresh location, buy, rent.
                 //start here
@@ -140,7 +144,7 @@ public class MonopolyGameGUI extends JFrame {
 
                 //set dice value
                 int[] diceValues = MonopolyGame.dice.getDice();
-                diceGUI.setDiceImages(diceValues[0], diceValues[1]);
+                squareGUI.setDiceImages(diceValues[0], diceValues[1]);
 
                 // refresh location, buy, rent and cash.
                 //start here
