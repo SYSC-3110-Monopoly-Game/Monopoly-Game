@@ -4,38 +4,38 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PropertySquareGUI extends SimpleSquareGUI{
-    JPanel building1, building2, building3, building4;
+    JPanel building1, building2, building3, building4, building5;
 
     public PropertySquareGUI(Color color, String name, String buyPrice) {
         super("src/images/empty.png", color);
 
-        //square name display + building
         //name part
         JLabel squareName = new JLabel("<html>" + name + "</html>");
+        squareName.setMaximumSize(new Dimension(SimpleSquareGUI.SIZE,27));
         squareName.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
         //building part
-        JPanel buildings = new JPanel(new GridLayout(1,4));
+        JPanel buildings = new JPanel(new GridLayout(1,5));
         //building1
         building1 = new JPanel(new GridLayout(1,1));
-        building1.setSize(25,25);
         building1.setBackground(Color.WHITE);
         //building2
         building2 = new JPanel(new GridLayout(1,1));
-        building2.setSize(25,25);
         building2.setBackground(Color.WHITE);
         //building3
         building3 = new JPanel(new GridLayout(1,1));
-        building3.setSize(25,25);
         building3.setBackground(Color.WHITE);
         //building4
         building4 = new JPanel(new GridLayout(1,1));
-        building4.setSize(25,25);
         building4.setBackground(Color.WHITE);
+        //building5
+        building5 = new JPanel(new GridLayout(1,1));
+        building5.setBackground(Color.WHITE);
         //buildings
         buildings.add(building1);
         buildings.add(building2);
         buildings.add(building3);
         buildings.add(building4);
+        buildings.add(building5);
         //name + building
         JPanel total = new JPanel(new GridLayout(2,1));
         total.add(squareName);
@@ -47,28 +47,44 @@ public class PropertySquareGUI extends SimpleSquareGUI{
         this.add(squarePrice, BorderLayout.PAGE_END);
     }
 
-
-    //build first building
-    public void setBuilding1 (Color buildingType){
-        this.building1.setBackground(buildingType);
-        this.building1.repaint();
+    /**
+     * check if the square already had No.x building
+     */
+    public boolean isBuilding(int buildingNumber){
+        if (buildingNumber == 1){
+            return building1.getBackground() == Color.white;
+        }else if (buildingNumber == 2){
+            return building2.getBackground() == Color.white;
+        }else if(buildingNumber == 3){
+            return building3.getBackground() == Color.white;
+        }else if(buildingNumber == 4){
+            return building4.getBackground() == Color.white;
+        }else if(buildingNumber == 5){
+            if (building5.getBackground() == Color.white){
+                return true;
+            }
+        }
+        return false;
     }
 
-    //build second building
-    public void setBuilding2 (Color buildingType){
-        this.building2.setBackground(buildingType);
-        this.building2.repaint();
-    }
 
-    //build third building
-    public void setBuilding3 (Color buildingType){
-        this.building3.setBackground(buildingType);
-        this.building3.repaint();
-    }
-
-    //build fourth building
-    public void setBuilding4 (Color buildingType){
-        this.building4.setBackground(buildingType);
-        this.building4.repaint();
+    //build No. x building
+    public void setBuildingX (Color buildingType, int buildingNumber){
+        if (buildingNumber == 1){
+            this.building1.setBackground(buildingType);
+            this.building1.repaint();
+        }else if (buildingNumber == 2){
+            this.building2.setBackground(buildingType);
+            this.building2.repaint();
+        }else if(buildingNumber == 3){
+            this.building3.setBackground(buildingType);
+            this.building3.repaint();
+        }else if(buildingNumber == 4){
+            this.building4.setBackground(buildingType);
+            this.building4.repaint();
+        }else if(buildingNumber == 5){
+            this.building5.setBackground(buildingType);
+            this.building5.repaint();
+        }
     }
 }

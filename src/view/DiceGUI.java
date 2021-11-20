@@ -19,8 +19,8 @@ public class DiceGUI extends JPanel {
      * set dice image according to dice values
      */
     public void setDiceImages(int dice1Value, int dice2Value) {
-        String dice1Path = "src/images/Dice" + dice1Value + ".png";
-        String dice2Path = "src/images/Dice" + dice2Value + ".png";
+        String dice1Path = ".\\src\\images\\Dice" + dice1Value + ".png";
+        String dice2Path = ".\\src\\images\\Dice" + dice2Value + ".png";
 
         ImageIcon dice1Image = new ImageIcon(dice1Path);
         ImageIcon dice2Image = new ImageIcon(dice2Path);
