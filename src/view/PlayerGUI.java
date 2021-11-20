@@ -13,7 +13,7 @@ public class PlayerGUI extends JLabel {
         this.setBackground(Color.white);
         this.setFont(new Font("Lucida Grande", Font.BOLD, 15));
         this.setForeground(Color.black);
-        this.setBounds(30, 33, 20, 28); // need to fix here for adjustable player numbers
+        this.setBounds(30, 33, 20, 28);
         this.setOpaque(true);
     }
 

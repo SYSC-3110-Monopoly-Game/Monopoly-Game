@@ -7,8 +7,6 @@ public class Dice {
     private Random random;
     private int[] dice;
 
-
-
     /**
      * Constructs the default number of dice
      */
@@ -36,6 +34,10 @@ public class Dice {
         return this.dice[0] + this.dice[1];
     }
 
+    /**
+     *
+     * Returns dice values
+     */
     public int[] getDice() {
         return dice;
     }

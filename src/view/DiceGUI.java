@@ -6,8 +6,6 @@ import java.awt.*;
 
 public class DiceGUI extends JPanel {
 
-    public static final int SIZE = 90;
-
 
     /**
      * initialize the dice panel
