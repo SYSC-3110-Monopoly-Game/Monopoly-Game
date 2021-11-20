@@ -10,11 +10,13 @@ public class MonopolyGame {
     private ArrayList<MonopolyGameGUI> views;
     public static Dice dice;
     private Player playerInTurn;
+    private ArrayList<Player> playersNotInTurn;
     private int index = -1;
 
     public MonopolyGame() {
         board = new MonopolyBoard();
         players = createPlayers();
+        playersNotInTurn = new ArrayList<>();
         dice = new Dice();
         views = new ArrayList<>();
         printPlayersInfo();
@@ -110,7 +112,8 @@ public class MonopolyGame {
      * check if the player can build a house on any of its property square list
      */
     public void checkAvailableBuild() {
-        ArrayList<PropertySquare> propertyList = playerInTurn.removeRailroadUtility(playerInTurn.hasWholeSet());
+        ArrayList<PropertySquare> propertyList = playerInTurn.getProperties();
+                //playerInTurn.removeRailroadUtility(playerInTurn.hasWholeSet());
         if(!propertyList.isEmpty()){
             propertyList = playerInTurn.getAvailableProperties(propertyList);
             if(!propertyList.isEmpty()){
@@ -228,7 +231,7 @@ public class MonopolyGame {
      */
     private void updateViews(Player p, String command) {
         for (MonopolyGameGUI view : views) {
-            view.handleUpdate(p, command);
+            view.handleUpdate(p, command, playersNotInTurn);
         }
     }
 
@@ -247,6 +250,7 @@ public class MonopolyGame {
         int currentIndex = players.indexOf(this.playerInTurn);
         if (currentIndex == players.size() - 1) currentIndex = -1;
         this.playerInTurn = players.get(currentIndex + 1);
+        this.playersNotInTurn = getPlayersNotInTurn();
         if(index != -1) {
             players.remove(index);
             index = -1;
@@ -258,8 +262,34 @@ public class MonopolyGame {
      * set the selected property to the player in turn
      * ask the player to choose whether you want to build/sell a house or a hotel
      */
-    public void setSelectedProperty(String text) {
+    public int setSelectedProperty(String text) {
         this.getPlayerInTurn().setSelectedSquare(this.getProperty(text));
         updateViews(playerInTurn, this.getPlayerInTurn().getDecision());
+
+        for (int i =0; i < board.getSquares().length; i++){
+            if (text.equals( board.getSquares()[i].getName())){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * List of players not in turn
+     */
+    public ArrayList getPlayersNotInTurn(){
+        //playersNotInTurn.remove(0);
+        for (int i = 0; i < players.size(); i++){
+            if (players.get(i) != playerInTurn){
+                if (!playersNotInTurn.contains(players.get(i))){
+                    playersNotInTurn.add(players.get(i));
+                }
+            }else if (players.get(i) == playerInTurn){
+                if (playersNotInTurn.contains(players.get(i))){
+                    playersNotInTurn.remove(players.get(i));
+                }
+            }
+        }
+        return playersNotInTurn;
     }
 }

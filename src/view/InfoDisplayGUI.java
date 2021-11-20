@@ -5,24 +5,26 @@ import Model.Player;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class InfoDisplayGUI extends JPanel {
 
-    private final JLabel name, cash, propertyList, currentLocation, buyPrice, rentPrice, housePrice, hotelPrice;
+    private final JLabel name, name1, name2, name3, cash, cash1, cash2, cash3, propertyList, currentLocation, buyPrice, rentPrice, housePrice, hotelPrice;
     private final JButton buy, sell, rollDice, nextTurn, build, sellH;
 
     /**
      * Initialize JPanel which shows player information and buttons
      */
-    public InfoDisplayGUI(Player playerInTurn) {
+    public InfoDisplayGUI(Player playerInTurn, ArrayList<Player> players) {
         this.setBackground(Color.LIGHT_GRAY);
         //this.add(new JLabel("Welcome to Monopoly Game!"));
         this.setPreferredSize(new Dimension(360, 670));
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-    // player name, cash, property list
+        // player name, cash, property list + other players' name and cash
+        //player name, cash, property list
         JPanel playerInfo = new JPanel(new GridLayout(3, 2));
-        playerInfo.setBorder(BorderFactory.createLineBorder(Color.black, 3));
+        playerInfo.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 
         name = new JLabel();
         cash = new JLabel();
@@ -37,7 +39,56 @@ public class InfoDisplayGUI extends JPanel {
         playerInfo.add(cash);
         playerInfo.add(propertyList);
 
-    //current property (property name, buy price, rent price, house price, hotel price)
+        //other players' name and cash
+        JPanel otherPlayer = new JPanel(new GridLayout(4,1));
+        otherPlayer.setBorder(BorderFactory.createLineBorder(Color.black,1));
+
+        JPanel line1 = new JPanel(new GridLayout(1,2));
+        JLabel nameColumn = new JLabel("Name");
+        JLabel cashColumn = new JLabel("Cash");
+        line1.add(nameColumn);
+        line1.add(cashColumn);
+
+        //information about one player (player not in turn)
+        JPanel line2 = new JPanel(new GridLayout(1,2));
+        name1 = new JLabel();
+        cash1 = new JLabel();
+        name1.setText(players.get(0).getName());
+        cash1.setText(String.valueOf(players.get(0).getCash()));
+        line2.add(name1);
+        line2.add(cash1);
+
+        //information about one player (player not in turn)
+        JPanel line3 = new JPanel(new GridLayout(1,2));
+        name2 = new JLabel();
+        cash2 = new JLabel();
+        name2.setText(players.get(1).getName());
+        cash2.setText(String.valueOf(players.get(1).getCash()));
+        line3.add(name2);
+        line3.add(cash2);
+
+        //information about one player (player not in turn)
+        JPanel line4 = new JPanel(new GridLayout(1,2));
+        name3 = new JLabel();
+        cash3 = new JLabel();
+        name3.setText(players.get(2).getName());
+        cash3.setText(String.valueOf(players.get(2).getCash()));
+        line4.add(name3);
+        line4.add(cash3);
+
+        otherPlayer.add(line1);
+        otherPlayer.add(line2);
+        otherPlayer.add(line3);
+        otherPlayer.add(line4);
+
+        // total
+        //JPanel otherPlayers = new JPanel(new GridLayout(1, 2));
+        JPanel otherPlayers = new JPanel(new GridLayout(2, 1));
+        playerInfo.setBorder(BorderFactory.createLineBorder(Color.black, 3));
+        otherPlayers.add(otherPlayer);
+        otherPlayers.add(playerInfo);
+
+        //current property (property name, buy price, rent price, house price, hotel price)
         JPanel currentProperty = new JPanel(new GridLayout(5, 1));
         currentProperty.setPreferredSize(new Dimension(200, 150));
         currentProperty.setBorder(BorderFactory.createLineBorder(Color.black, 1));
@@ -62,7 +113,7 @@ public class InfoDisplayGUI extends JPanel {
         currentProperty.add(hotelPrice);
 
 
-    //buttons: buy, sell, roll dice next turn
+        //buttons: buy, sell, roll dice next turn
         JPanel buttons = new JPanel(new GridLayout(3, 2));
         buttons.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 
@@ -89,7 +140,7 @@ public class InfoDisplayGUI extends JPanel {
         buttons.add(sellH);
 
 
-        this.add(playerInfo);
+        this.add(otherPlayers);
         this.add(currentProperty);
         this.add(buttons);
 
@@ -121,11 +172,58 @@ public class InfoDisplayGUI extends JPanel {
     }
 
     /**
+     * show the name1 of the player who is not currently playing
+     */
+    public void setName1(String name) {
+        this.name1.setText(name);
+        this.name1.repaint();
+    }
+
+    /**
+     * show the name2 of the player who is not currently playing
+     */
+    public void setName2(String name) {
+        this.name2.setText(name);
+        this.name2.repaint();
+    }
+    /**
+     * show the name1 of the player who is not currently playing
+     */
+    public void setName3(String name) {
+        this.name3.setText(name);
+        this.name3.repaint();
+    }
+
+    /**
      * show the cash of the player who is currently playing
      */
     public void setCash(int cash) {
         this.cash.setText("Cash: " + cash);
         this.cash.repaint();
+    }
+
+    /**
+     * show the cash of the player1 who is not currently playing
+     */
+    public void setCash1(int cash) {
+        this.cash1.setText(String.valueOf(cash));
+        this.cash1.repaint();
+    }
+
+    /**
+     * show the cash of the player2 who is not currently playing
+     */
+    public void setCash2(int cash) {
+        this.cash2.setText(String.valueOf(cash));
+        this.cash2.repaint();
+    }
+
+    /**
+     * show the cash of the player1 who is not currently playing
+     */
+    public void setCash3(int cash) {
+        this.cash3.setText(String.valueOf(cash));
+        this.cash3.repaint();
     }
 
     /**
