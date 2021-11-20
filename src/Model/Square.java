@@ -18,6 +18,10 @@ public abstract class Square {
         return name;
     }
 
+    /**
+     *  String representation of square
+     * @return string
+     */
     public String toString() {
         return this.name + " [" + this.getNumber() + "]";
     }

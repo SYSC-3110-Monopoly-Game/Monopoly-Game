@@ -99,8 +99,7 @@ public class MonopolyGame {
      * sell properties
      */
     public void sellSquare() {
-        if (playerInTurn.getProperties().isEmpty()) {
-        } else {
+        if (!playerInTurn.getProperties().isEmpty()) {
             playerInTurn.sellProperty(playerInTurn.getProperties().get(0));
             this.updateViews(playerInTurn, "Sell");
         }

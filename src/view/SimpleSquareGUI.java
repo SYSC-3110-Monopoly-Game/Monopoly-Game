@@ -56,15 +56,17 @@ public class SimpleSquareGUI extends SquareGUI {
     protected void paintComponent(Graphics g) {
         BufferedImage img;
         Image resizedImage = null;
-        try {
 
-            img = ImageIO.read(new File(path));
-            resizedImage = img.getScaledInstance(SIZE, SIZE, java.awt.Image.SCALE_SMOOTH);
+            try {
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        super.paintComponent(g);
-        g.drawImage(resizedImage, 0, 0, null);
+                img = ImageIO.read(new File(path));
+                resizedImage = img.getScaledInstance(SIZE, SIZE, java.awt.Image.SCALE_SMOOTH);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            super.paintComponent(g);
+            g.drawImage(resizedImage, 0, 0, null);
+
     }
 }

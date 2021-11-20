@@ -7,7 +7,7 @@ public class PropertySquareGUI extends SimpleSquareGUI{
 
 
     public PropertySquareGUI(Color color, String name, String buyPrice) {
-        super("", color);
+        super("src/images/empty.png", color);
 
         //square name display
         JLabel squareName = new JLabel("<html>" + name + "</html>");
