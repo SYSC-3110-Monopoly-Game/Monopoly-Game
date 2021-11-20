@@ -112,8 +112,7 @@ public class MonopolyGame {
      * check if the player can build a house on any of its property square list
      */
     public void checkAvailableBuild() {
-        ArrayList<PropertySquare> propertyList = playerInTurn.getProperties();
-                //playerInTurn.removeRailroadUtility(playerInTurn.hasWholeSet());
+        ArrayList<PropertySquare> propertyList = playerInTurn.removeRailroadUtility(playerInTurn.hasWholeSet());
         if(!propertyList.isEmpty()){
             propertyList = playerInTurn.getAvailableProperties(propertyList);
             if(!propertyList.isEmpty()){

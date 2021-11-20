@@ -91,30 +91,20 @@ public class PropertySquareGUI extends SquareGUI{
     //build No. x building
     public void setBuildingX (Color buildingType, int buildingNumber){
         if (buildingNumber == 1){
-            if (building1.getBackground() == Color.white){
-                this.building1.setBackground(buildingType);
-                this.building1.repaint();
-            }
+            this.building1.setBackground(buildingType);
+            this.building1.repaint();
         }else if (buildingNumber == 2){
-            if (building2.getBackground() == Color.white){
-                this.building2.setBackground(buildingType);
-                this.building2.repaint();
-            }
+            this.building2.setBackground(buildingType);
+            this.building2.repaint();
         }else if(buildingNumber == 3){
-            if (building3.getBackground() == Color.white){
-                this.building3.setBackground(buildingType);
-                this.building3.repaint();
-            }
+            this.building3.setBackground(buildingType);
+            this.building3.repaint();
         }else if(buildingNumber == 4){
-            if (building4.getBackground() == Color.white){
-                this.building4.setBackground(buildingType);
-                this.building4.repaint();
-            }
+            this.building4.setBackground(buildingType);
+            this.building4.repaint();
         }else if(buildingNumber == 5){
-            if (building5.getBackground() == Color.white){
-                this.building5.setBackground(buildingType);
-                this.building5.repaint();
-            }
+            this.building5.setBackground(buildingType);
+            this.building5.repaint();
         }
     }
 

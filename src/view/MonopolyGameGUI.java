@@ -126,7 +126,7 @@ public class MonopolyGameGUI extends JFrame {
                 squareGUI.addMessage(player.getName() +
                         " just bought " + property.get(property.size() - 1).getName() +
                         "[" + property.get(property.size() - 1).getNumber() + "]\n");
-                if(player.getAvailableProperties(player.removeRailroadUtility(player.hasWholeSet())).isEmpty()){
+                if(!player.getAvailableProperties(player.removeRailroadUtility(player.hasWholeSet())).isEmpty()){
                     infoDisplayGUI.setBuildEnabled(true);
                 }
                 if(!player.hasBuilding().isEmpty()){
@@ -287,9 +287,9 @@ public class MonopolyGameGUI extends JFrame {
                 temp = "sell";
                 if (decision.equals("House")){
                     if (squareGUI.getPropertySquareGUI(index) instanceof PropertySquareGUI){
-                        for (int i = 1; i < 5; i++) {
-                            if (((PropertySquareGUI) squareGUI.getPropertySquareGUI(index)).isBuilding(i)) {
-                                ((PropertySquareGUI) squareGUI.getPropertySquareGUI(index)).setBuildingX(Color.WHITE, i - 1);
+                        for (int i = 4; i > 0; i--) {
+                            if (!(((PropertySquareGUI) squareGUI.getPropertySquareGUI(index)).isBuilding(i))) {
+                                ((PropertySquareGUI) squareGUI.getPropertySquareGUI(index)).setBuildingX(Color.WHITE, i);
                                 break;
                             }
                         }
