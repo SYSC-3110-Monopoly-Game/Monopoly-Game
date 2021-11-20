@@ -12,7 +12,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class MonopolyGameGUI extends JFrame {
     private final InfoDisplayGUI infoDisplayGUI;
     private final SquareGridGUI squareGUI;
-    private final DiceGUI diceGUI;
     private String message;
 
     /**
@@ -37,10 +36,6 @@ public class MonopolyGameGUI extends JFrame {
         //infoPanel gui initialization
         this.infoDisplayGUI = new InfoDisplayGUI(game.getPlayerInTurn());
         this.add(infoDisplayGUI, BorderLayout.EAST);
-
-        //dice gui
-        diceGUI= new DiceGUI();
-        squareGUI.addDiceGUI(diceGUI);
 
         this.pack();
         this.setLocationRelativeTo(null);
@@ -140,7 +135,7 @@ public class MonopolyGameGUI extends JFrame {
 
                 //set dice value
                 int[] diceValues = MonopolyGame.dice.getDice();
-                diceGUI.setDiceImages(diceValues[0], diceValues[1]);
+                squareGUI.setDiceImages(diceValues[0], diceValues[1]);
 
                 // refresh location, buy, rent and cash.
                 //start here
