@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PropertySquareGUI extends SimpleSquareGUI{
-    private final JPanel colorTag;
     JPanel building1, building2, building3, building4;
 
     public PropertySquareGUI(Color color, String name, String buyPrice) {

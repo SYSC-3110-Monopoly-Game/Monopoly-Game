@@ -63,13 +63,28 @@ public class MonopolyGameGUI extends JFrame {
                 infoDisplayGUI.setPropertyList(player.getProperties().toString());
 
                 //update the info panel about not current players info
-                infoDisplayGUI.setName1(players.get(0).getName());
-                infoDisplayGUI.setCash1(players.get(0).getCash());
-                infoDisplayGUI.setName2(players.get(1).getName());
-                infoDisplayGUI.setCash2(players.get(1).getCash());
-                infoDisplayGUI.setName3(players.get(2).getName());
-                infoDisplayGUI.setCash3(players.get(2).getCash());
+                int num = 1;
+                for (Player otherPlayer:
+                     players) {
+                    switch (num){
+                        case 1->{
+                            infoDisplayGUI.setName1(otherPlayer.getName());
+                            infoDisplayGUI.setCash1(otherPlayer.getCash());
+                            num++;
+                        }
+                        case 2->{
+                            infoDisplayGUI.setName2(otherPlayer.getName());
+                            infoDisplayGUI.setCash2(otherPlayer.getCash());
+                            num++;
+                        }
+                        case 3->{
+                            infoDisplayGUI.setName3(otherPlayer.getName());
+                            infoDisplayGUI.setCash3(otherPlayer.getCash());
+                            num++;
+                        }
+                    }
 
+                }
 
                 // refresh location, buy, rent.
                 //start here
@@ -227,6 +242,7 @@ public class MonopolyGameGUI extends JFrame {
             btn.addActionListener(e -> {
                 JButton b = (JButton)e.getSource();
                 game.setSelectedProperty(b.getText());
+                popup.dispose();
             });
             popup.add(btn);
         }

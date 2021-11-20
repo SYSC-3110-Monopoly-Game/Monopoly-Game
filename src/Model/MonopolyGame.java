@@ -260,7 +260,7 @@ public class MonopolyGame {
             index = -1;
         }
 
-        updateViews(playerInTurn, "Next Turn");
+        updateViews(playerInTurn, "Next Turn",getPlayersNotInTurn());
 
         if(playerInTurn instanceof  AIPlayer){
             ai.rollDiceAI();
