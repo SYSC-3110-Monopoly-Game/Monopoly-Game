@@ -11,7 +11,6 @@ public class MonopolyGame {
     private ArrayList<MonopolyGameGUI> views;
     public static Dice dice;
     private Player playerInTurn;
-
     private AIPlayer ai;
     private PropertySquare square;
     private MonopolyGame mg;
@@ -234,9 +233,10 @@ public class MonopolyGame {
     /**
      * update GUI
      */
-    private void updateViews(Player p, String command, ArrayList<Player> ps) {
+    private void updateViews(Player p, String command) {
         for (MonopolyGameGUI view : views) {
-            view.handleUpdate(p, command, ps);
+            view.handleUpdate(p, command, playersNotInTurn);
+
         }
     }
 
@@ -255,6 +255,7 @@ public class MonopolyGame {
         int currentIndex = players.indexOf(this.playerInTurn);
         if (currentIndex == players.size() - 1) currentIndex = -1;
         this.playerInTurn = players.get(currentIndex + 1);
+        this.playersNotInTurn = getPlayersNotInTurn();
         if(index != -1) {
             players.remove(index);
             index = -1;
@@ -274,7 +275,7 @@ public class MonopolyGame {
      */
     public int setSelectedProperty(String text) {
         this.getPlayerInTurn().setSelectedSquare(this.getProperty(text));
-        updateViews(playerInTurn, this.getPlayerInTurn().getDecision(), playersNotInTurn);
+        updateViews(playerInTurn, this.getPlayerInTurn().getDecision());
 
         for (int i =0; i < board.getSquares().length; i++){
             if (text.equals( board.getSquares()[i].getName())){
@@ -287,7 +288,9 @@ public class MonopolyGame {
     /**
      * List of players not in turn
      */
-    public ArrayList<Player> getPlayersNotInTurn(){
+    public ArrayList getPlayersNotInTurn(){
+        //playersNotInTurn.remove(0);
+
         for (int i = 0; i < players.size(); i++){
             if (players.get(i) != playerInTurn){
                 if (!playersNotInTurn.contains(players.get(i))){

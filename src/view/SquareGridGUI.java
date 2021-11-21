@@ -10,10 +10,9 @@ public class SquareGridGUI extends JPanel {
     private final Square[] square;
     private final SquareGUI[] squareGUIs;
     private JTextArea message;
-    private DiceGUI diceGUI;
 
     /**
-     * initialize the game map (left part)
+     * initalize the game map (left part)
      */
     public SquareGridGUI(Square[] square, ArrayList<Player> players) {
         this.square = square;
@@ -44,20 +43,12 @@ public class SquareGridGUI extends JPanel {
         //originalMethod(c);
 
         message = new JTextArea();
-        message.setPreferredSize(new Dimension(270, 60));
-        message.setBackground(new Color(196, 206, 196));
-        c.gridx = 3;
-        c.gridy = 2;
-        c.gridwidth = 4;
+        message.setPreferredSize(new Dimension(450, 80));
+        message.setBackground(new Color(205, 230, 208));
+        c.gridx = 2;
+        c.gridy = 6;
+        c.gridwidth = 6;
         this.add(message, c);
-
-        //dice gui
-        c.weightx = 0.0;
-        c.gridx = 4;
-        c.gridy = 3;
-        c.gridwidth = 2;
-        diceGUI= new DiceGUI();
-        this.add(diceGUI, c);
     }
 
     /**
@@ -114,6 +105,11 @@ public class SquareGridGUI extends JPanel {
         }
     }
 
+    public SquareGUI getPropertySquareGUI(int index){
+        return squareGUIs[index];
+    }
+
+
     /**
      * refresh player's location on the map
      */
@@ -129,7 +125,7 @@ public class SquareGridGUI extends JPanel {
                 JailSquareGUI jail = (JailSquareGUI) squareGUIs[nextLocationIndex];
                 jail.removePlayer(player.getName(), true);
             }
-            System.out.println("current locationIndex in square GUI " + currentLocationIndex);
+            System.out.println("currentlocationIndex in square GUI " + currentLocationIndex);
             squareGUIs[nextLocationIndex].addPlayer(player.getName());
             System.out.println("nextLocationIndex in square GUI " + nextLocationIndex);
         }
@@ -141,6 +137,18 @@ public class SquareGridGUI extends JPanel {
      */
     public void removePlayerGUILocation(Player player, int currentLocationIndex) {
         squareGUIs[currentLocationIndex].removePlayer(player.getName(), player.isInJail());
+    }
+
+    /**
+     * add 2 dices to the map
+     */
+    public void addDiceGUI(DiceGUI diceGUI) {
+        GridBagConstraints c = new GridBagConstraints();
+        c.weightx = 0.0;
+        c.gridx = 4;
+        c.gridy = 3;
+        c.gridwidth = 2;
+        this.add(diceGUI, c);
     }
 
     /**
@@ -157,20 +165,5 @@ public class SquareGridGUI extends JPanel {
         message.append(string);
     }
 
-    /**
-     * add 2 dices to the map
-     */
-    public void addDiceGUI(DiceGUI diceGUI) {
-        GridBagConstraints c = new GridBagConstraints();
-        c.weightx = 0.0;
-        c.gridx = 4;
-        c.gridy = 3;
-        c.gridwidth = 2;
-        this.add(diceGUI, c);
-    }
-
-    public SquareGUI getPropertySquareGUI(int index){
-        return squareGUIs[index];
-    }
 }
 

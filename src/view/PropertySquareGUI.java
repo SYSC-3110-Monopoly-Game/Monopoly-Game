@@ -3,15 +3,27 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
-public class PropertySquareGUI extends SimpleSquareGUI{
+public class PropertySquareGUI extends SquareGUI{
+
+    private final JPanel colorTag;
     JPanel building1, building2, building3, building4, building5;
 
     public PropertySquareGUI(Color color, String name, String buyPrice) {
-        super("src/images/empty.png", color);
+        //layout of main  panel
+        setLayout(new BorderLayout());
+        setPreferredSize(new Dimension(DiceGUI.SIZE, DiceGUI.SIZE));
+        this.setBorder(BorderFactory.createLineBorder(Color.black, 2));
 
+        // color tag panel
+        colorTag = new JPanel();
+        colorTag.setPreferredSize(new Dimension(DiceGUI.SIZE, 23)); // 100, 25
+        colorTag.setBackground(color);
+        this.add(colorTag, BorderLayout.PAGE_START);
+
+        //square name display + building
         //name part
         JLabel squareName = new JLabel("<html>" + name + "</html>");
-        squareName.setMaximumSize(new Dimension(SimpleSquareGUI.SIZE,27));
+        squareName.setMaximumSize(new Dimension(DiceGUI.SIZE,27));
         squareName.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
         //building part
         JPanel buildings = new JPanel(new GridLayout(1,5));
@@ -52,13 +64,21 @@ public class PropertySquareGUI extends SimpleSquareGUI{
      */
     public boolean isBuilding(int buildingNumber){
         if (buildingNumber == 1){
-            return building1.getBackground() == Color.white;
+            if (building1.getBackground() == Color.white){
+                return true;
+            }
         }else if (buildingNumber == 2){
-            return building2.getBackground() == Color.white;
+            if (building2.getBackground() == Color.white){
+                return true;
+            }
         }else if(buildingNumber == 3){
-            return building3.getBackground() == Color.white;
+            if (building3.getBackground() == Color.white){
+                return true;
+            }
         }else if(buildingNumber == 4){
-            return building4.getBackground() == Color.white;
+            if (building4.getBackground() == Color.white){
+                return true;
+            }
         }else if(buildingNumber == 5){
             if (building5.getBackground() == Color.white){
                 return true;
@@ -85,6 +105,33 @@ public class PropertySquareGUI extends SimpleSquareGUI{
         }else if(buildingNumber == 5){
             this.building5.setBackground(buildingType);
             this.building5.repaint();
+        }
+    }
+
+    /**
+     * in gui add player to the square
+     */
+    public void addPlayer(String name) {
+        PlayerGUI player = new PlayerGUI(name);
+        this.colorTag.add(player);
+        this.revalidate();
+        this.repaint();
+    }
+
+    /**
+     * in gui remove player from the square
+     */
+    public void removePlayer(String name, boolean inJail) {
+        Component[] components = this.colorTag.getComponents();
+        for (Component label : components
+        ) {
+            JLabel player = (JLabel) label;
+            if (player.getText().equals(name)) {
+                player.setVisible(false);
+                this.colorTag.remove(label);
+                this.revalidate();
+                this.colorTag.repaint();
+            }
         }
     }
 }
