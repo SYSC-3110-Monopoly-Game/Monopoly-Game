@@ -99,7 +99,7 @@ public class MonopolyGame {
      */
     public void buySquare() {
         if(playerInTurn.buyProperty(playerInTurn.getCurrentLocation())) {
-            this.updateViews(playerInTurn, "Buy", playersNotInTurn);
+            this.updateViews(playerInTurn, "Buy");
         }
     }
 
@@ -109,7 +109,7 @@ public class MonopolyGame {
     public void sellSquare() {
         if (!playerInTurn.getProperties().isEmpty()) {
             playerInTurn.sellProperty(playerInTurn.getProperties().get(0));
-            this.updateViews(playerInTurn, "Sell", playersNotInTurn);
+            this.updateViews(playerInTurn, "Sell");
         }
     }
 
@@ -189,10 +189,10 @@ public class MonopolyGame {
 
         }
 
-        updateViews(playerInTurn, "Roll Dice", getPlayersNotInTurn());
+        updateViews(playerInTurn, "Roll Dice");
 
         if (playerInTurn.isBankrupt()) {
-            updateViews(playerInTurn, "Bankrupt", getPlayersNotInTurn());
+            updateViews(playerInTurn, "Bankrupt");
             for(PropertySquare property: playerInTurn.getProperties()){
                 property.setOwner(null);
             }
@@ -207,7 +207,7 @@ public class MonopolyGame {
         }
 
         if(getWinner()!=null){
-            updateViews(getWinner(), "Winner", getPlayersNotInTurn());
+            updateViews(getWinner(), "Winner");
         }
     }
 
@@ -263,7 +263,7 @@ public class MonopolyGame {
 
         this.playersNotInTurn = getPlayersNotInTurn();
 
-        updateViews(playerInTurn, "Next Turn",getPlayersNotInTurn());
+        updateViews(playerInTurn, "Next Turn");
 
         AIProcess();
 

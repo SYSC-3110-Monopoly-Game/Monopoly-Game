@@ -3,27 +3,18 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
-public class PropertySquareGUI extends SquareGUI{
+public class PropertySquareGUI extends SimpleSquareGUI{
+    public static final int SIZE = 90;
 
-    private final JPanel colorTag;
     JPanel building1, building2, building3, building4, building5;
 
     public PropertySquareGUI(Color color, String name, String buyPrice) {
-        //layout of main  panel
-        setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(DiceGUI.SIZE, DiceGUI.SIZE));
-        this.setBorder(BorderFactory.createLineBorder(Color.black, 2));
-
-        // color tag panel
-        colorTag = new JPanel();
-        colorTag.setPreferredSize(new Dimension(DiceGUI.SIZE, 23)); // 100, 25
-        colorTag.setBackground(color);
-        this.add(colorTag, BorderLayout.PAGE_START);
+        super("src/images/empty.png", color);
 
         //square name display + building
         //name part
         JLabel squareName = new JLabel("<html>" + name + "</html>");
-        squareName.setMaximumSize(new Dimension(DiceGUI.SIZE,27));
+        squareName.setMaximumSize(new Dimension(SIZE,27));
         squareName.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
         //building part
         JPanel buildings = new JPanel(new GridLayout(1,5));
@@ -105,33 +96,6 @@ public class PropertySquareGUI extends SquareGUI{
         }else if(buildingNumber == 5){
             this.building5.setBackground(buildingType);
             this.building5.repaint();
-        }
-    }
-
-    /**
-     * in gui add player to the square
-     */
-    public void addPlayer(String name) {
-        PlayerGUI player = new PlayerGUI(name);
-        this.colorTag.add(player);
-        this.revalidate();
-        this.repaint();
-    }
-
-    /**
-     * in gui remove player from the square
-     */
-    public void removePlayer(String name, boolean inJail) {
-        Component[] components = this.colorTag.getComponents();
-        for (Component label : components
-        ) {
-            JLabel player = (JLabel) label;
-            if (player.getText().equals(name)) {
-                player.setVisible(false);
-                this.colorTag.remove(label);
-                this.revalidate();
-                this.colorTag.repaint();
-            }
         }
     }
 }
