@@ -5,6 +5,7 @@ import Model.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class SquareGridGUI extends JPanel {
     private final Square[] square;
@@ -118,7 +119,11 @@ public class SquareGridGUI extends JPanel {
      * refresh player's location on the map
      */
     public void changePlayerGUILocation(Player player, int currentLocationIndex, int nextLocationIndex) {
-        squareGUIs[currentLocationIndex].removePlayer(player.getName(), player.isInJail());
+        String name = player.getName();
+        if(player instanceof AIPlayer){
+            name = String.valueOf(player.getName().charAt(0));
+        }
+        squareGUIs[currentLocationIndex].removePlayer(name, player.isInJail());
 
         if (player.isInJail() && nextLocationIndex == 8) {
             JailSquareGUI jail = (JailSquareGUI) squareGUIs[nextLocationIndex];
@@ -127,7 +132,11 @@ public class SquareGridGUI extends JPanel {
         } else {
             if (!player.isInJail() && nextLocationIndex == 8 && currentLocationIndex == 8) {
                 JailSquareGUI jail = (JailSquareGUI) squareGUIs[nextLocationIndex];
-                jail.removePlayer(player.getName(), true);
+                name = player.getName();
+                if(player instanceof AIPlayer){
+                    name = String.valueOf(player.getName().charAt(0));
+                }
+                jail.removePlayer(name, true);
             }
             System.out.println("current locationIndex in square GUI " + currentLocationIndex);
             squareGUIs[nextLocationIndex].addPlayer(player.getName());
@@ -140,7 +149,11 @@ public class SquareGridGUI extends JPanel {
      * remove the player from the map
      */
     public void removePlayerGUILocation(Player player, int currentLocationIndex) {
-        squareGUIs[currentLocationIndex].removePlayer(player.getName(), player.isInJail());
+        String name = player.getName();
+        if(player instanceof AIPlayer){
+            name = String.valueOf(player.getName().charAt(0));
+        }
+        squareGUIs[currentLocationIndex].removePlayer(name, player.isInJail());
     }
 
     /**

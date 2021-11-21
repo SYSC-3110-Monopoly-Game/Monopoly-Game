@@ -8,7 +8,7 @@ public class AIPlayer extends Player {
     Random random = new Random();
 
     public AIPlayer(String name, Square square) {
-        super("AI"+name, square);
+        super(name+"AI", square);
     }
 
     public boolean getBoolean() {

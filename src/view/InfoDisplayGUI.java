@@ -57,8 +57,8 @@ public class InfoDisplayGUI extends JPanel {
             JPanel line = new JPanel(new GridLayout(1,2));
             names[i] = new JLabel();
             cashes[i] = new JLabel();
-            names[i].setText(players.get(0).getName());
-            cashes[i].setText(String.valueOf(players.get(0).getCash()));
+            names[i].setText(players.get(i).getName());
+            cashes[i].setText(String.valueOf(players.get(i).getCash()));
             line.add(names[i]);
             line.add(cashes[i]);
             otherPlayer.add(line);

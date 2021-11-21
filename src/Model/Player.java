@@ -199,7 +199,7 @@ public class Player {
                 }
             }
         }
-        for(int i=(c.size()-4); i<c.size(); i++){
+        for(int i=(c.size()-3); i<c.size(); i++){
             if (counter[i] == 2){
                 for(PropertySquare p: squaresOwned){
                     if(p.getColor() == c.get(i)){

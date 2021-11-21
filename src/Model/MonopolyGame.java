@@ -2,7 +2,6 @@ package Model;
 
 import view.MonopolyGameGUI;
 
-import java.awt.image.BandedSampleModel;
 import java.util.*;
 
 public class MonopolyGame {
@@ -39,11 +38,16 @@ public class MonopolyGame {
         System.out.println("There are 4 player in total");
 
         int number = 4;                                                      // get the number of players to 4
+        int playernum = 1;
 
         //create the 4 players
-        for (int i = 0; i < number; i++) {
+        for (int i = 0; i < playernum; i++) {
             String name = "" + (i + 1);
             playerTempList.add(new Player(name, board.startingSquare()));   // add players to a temp arraylist
+        }
+        for (int j = playernum; j < number; j++) {
+            String name = "" + (j + 1);
+            playerTempList.add(new AIPlayer(name, board.startingSquare()));   // add players to a temp arraylist
         }
         this.playerInTurn = playerTempList.get(0);
         return playerTempList;                                              // return the temp arrayList
@@ -302,13 +306,16 @@ public class MonopolyGame {
         return playersNotInTurn;
     }
 
-    public void AIProcess() {
-        if(playerInTurn instanceof AIPlayer){
+    public void AIProcess(){
+        if(playerInTurn instanceof AIPlayer) {
             playRound();
-            playerInTurn.buyProperty(playerInTurn.getCurrentLocation());
-            ((AIPlayer) playerInTurn).buildBuildings();
-            ((AIPlayer) playerInTurn).sellSomeThing();
+            if (!playerInTurn.isBankrupt()) {
+                playerInTurn.buyProperty(playerInTurn.getCurrentLocation());
+                ((AIPlayer) playerInTurn).buildBuildings();
+                ((AIPlayer) playerInTurn).sellSomeThing();
+            }
             nextTurn();
         }
+
     }
 }
