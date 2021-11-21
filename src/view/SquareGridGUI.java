@@ -157,8 +157,20 @@ public class SquareGridGUI extends JPanel {
         message.append(string);
     }
 
-    public void setDiceImages(int value1, int value2) {
-        this.diceGUI.setDiceImages(value1, value2);
+    /**
+     * add 2 dices to the map
+     */
+    public void addDiceGUI(DiceGUI diceGUI) {
+        GridBagConstraints c = new GridBagConstraints();
+        c.weightx = 0.0;
+        c.gridx = 4;
+        c.gridy = 3;
+        c.gridwidth = 2;
+        this.add(diceGUI, c);
+    }
+
+    public SquareGUI getPropertySquareGUI(int index){
+        return squareGUIs[index];
     }
 }
 

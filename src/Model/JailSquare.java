@@ -49,7 +49,6 @@ public class JailSquare extends Square {
 
         this.map.remove(p);
         this.landOn(p);
-        p.decreaseCash(jailFee);
         p.setInJail(false);
         message = " is out of jail\n";
     }

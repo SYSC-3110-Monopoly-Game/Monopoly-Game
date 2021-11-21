@@ -9,7 +9,9 @@ import java.util.ArrayList;
 
 public class InfoDisplayGUI extends JPanel {
 
-    private final JLabel name, name1, name2, name3, cash, cash1, cash2, cash3, propertyList, currentLocation, buyPrice, rentPrice, housePrice, hotelPrice;
+    private final JLabel name, cash, propertyList, currentLocation, buyPrice, rentPrice, housePrice, hotelPrice;
+    private final JLabel[] names = new JLabel[3];
+    private final JLabel[] cashes = new JLabel[3];
     private final JButton buy, sell, rollDice, nextTurn, build, sellH;
 
     /**
@@ -48,38 +50,19 @@ public class InfoDisplayGUI extends JPanel {
         JLabel cashColumn = new JLabel("Cash");
         line1.add(nameColumn);
         line1.add(cashColumn);
-
-        //information about one player (player not in turn)
-        JPanel line2 = new JPanel(new GridLayout(1,2));
-        name1 = new JLabel();
-        cash1 = new JLabel();
-        name1.setText(players.get(0).getName());
-        cash1.setText(String.valueOf(players.get(0).getCash()));
-        line2.add(name1);
-        line2.add(cash1);
-
-        //information about one player (player not in turn)
-        JPanel line3 = new JPanel(new GridLayout(1,2));
-        name2 = new JLabel();
-        cash2 = new JLabel();
-        name2.setText(players.get(1).getName());
-        cash2.setText(String.valueOf(players.get(1).getCash()));
-        line3.add(name2);
-        line3.add(cash2);
-
-        //information about one player (player not in turn)
-        JPanel line4 = new JPanel(new GridLayout(1,2));
-        name3 = new JLabel();
-        cash3 = new JLabel();
-        name3.setText(players.get(2).getName());
-        cash3.setText(String.valueOf(players.get(2).getCash()));
-        line4.add(name3);
-        line4.add(cash3);
-
         otherPlayer.add(line1);
-        otherPlayer.add(line2);
-        otherPlayer.add(line3);
-        otherPlayer.add(line4);
+
+        //information about other players (player not in turn)
+        for(int i=0; i<3; i++){
+            JPanel line = new JPanel(new GridLayout(1,2));
+            names[i] = new JLabel();
+            cashes[i] = new JLabel();
+            names[i].setText(players.get(0).getName());
+            cashes[i].setText(String.valueOf(players.get(0).getCash()));
+            line.add(names[i]);
+            line.add(cashes[i]);
+            otherPlayer.add(line);
+        }
 
         // total
         JPanel otherPlayers = new JPanel(new GridLayout(1, 2));
@@ -172,26 +155,11 @@ public class InfoDisplayGUI extends JPanel {
     }
 
     /**
-     * show the name1 of the player who is not currently playing
+     * show the names of the players who are not currently playing
      */
-    public void setName1(String name) {
-        this.name1.setText(name);
-        this.name1.repaint();
-    }
-
-    /**
-     * show the name2 of the player who is not currently playing
-     */
-    public void setName2(String name) {
-        this.name2.setText(name);
-        this.name2.repaint();
-    }
-    /**
-     * show the name1 of the player who is not currently playing
-     */
-    public void setName3(String name) {
-        this.name3.setText(name);
-        this.name3.repaint();
+    public void setNames(String name, int i) {
+        this.names[i].setText(name);
+        this.names[i].repaint();
     }
 
     /**
@@ -203,27 +171,11 @@ public class InfoDisplayGUI extends JPanel {
     }
 
     /**
-     * show the cash of the player1 who is not currently playing
+     * show the cashes of the players who are not currently playing
      */
-    public void setCash1(int cash) {
-        this.cash1.setText(String.valueOf(cash));
-        this.cash1.repaint();
-    }
-
-    /**
-     * show the cash of the player2 who is not currently playing
-     */
-    public void setCash2(int cash) {
-        this.cash2.setText(String.valueOf(cash));
-        this.cash2.repaint();
-    }
-
-    /**
-     * show the cash of the player1 who is not currently playing
-     */
-    public void setCash3(int cash) {
-        this.cash3.setText(String.valueOf(cash));
-        this.cash3.repaint();
+    public void setCashes(int cash, int i) {
+        this.cashes[i].setText(String.valueOf(cash));
+        this.cashes[i].repaint();
     }
 
     /**

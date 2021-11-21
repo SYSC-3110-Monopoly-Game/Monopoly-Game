@@ -260,18 +260,11 @@ public class MonopolyGame {
             index = -1;
         }
 
+        this.playersNotInTurn = getPlayersNotInTurn();
+
         updateViews(playerInTurn, "Next Turn",getPlayersNotInTurn());
 
-        if(playerInTurn instanceof  AIPlayer){
-            ai.rollDiceAI();
-            ai.buyProperty(square);
-            ai.sellSomeThing();
-            String answer = new String();
-            ai.buildH(answer);
-            mg.nextTurn();
-        }
-
-        updateViews(playerInTurn, "Next Turn", getPlayersNotInTurn());
+        AIProcess();
 
     }
 
@@ -279,16 +272,22 @@ public class MonopolyGame {
      * set the selected property to the player in turn
      * ask the player to choose whether you want to build/sell a house or a hotel
      */
-    public void setSelectedProperty(String text) {
+    public int setSelectedProperty(String text) {
         this.getPlayerInTurn().setSelectedSquare(this.getProperty(text));
         updateViews(playerInTurn, this.getPlayerInTurn().getDecision(), playersNotInTurn);
+
+        for (int i =0; i < board.getSquares().length; i++){
+            if (text.equals( board.getSquares()[i].getName())){
+                return i;
+            }
+        }
+        return -1;
     }
 
     /**
      * List of players not in turn
      */
-    public ArrayList getPlayersNotInTurn(){
-        //playersNotInTurn.remove(0);
+    public ArrayList<Player> getPlayersNotInTurn(){
         for (int i = 0; i < players.size(); i++){
             if (players.get(i) != playerInTurn){
                 if (!playersNotInTurn.contains(players.get(i))){
@@ -301,5 +300,15 @@ public class MonopolyGame {
             }
         }
         return playersNotInTurn;
+    }
+
+    public void AIProcess() {
+        if(playerInTurn instanceof AIPlayer){
+            playRound();
+            playerInTurn.buyProperty(playerInTurn.getCurrentLocation());
+            ((AIPlayer) playerInTurn).buildBuildings();
+            ((AIPlayer) playerInTurn).sellSomeThing();
+            nextTurn();
+        }
     }
 }

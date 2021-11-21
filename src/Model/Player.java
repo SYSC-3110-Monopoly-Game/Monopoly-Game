@@ -20,7 +20,7 @@ public class Player {
     public Player(String name, Square square) {
         this.name = name;
         this.squaresOwned = new ArrayList<>();
-        this.cashTotal = 300;
+        this.cashTotal = 60;
         this.currentLocation = square;
         this.decision = null;
     }
