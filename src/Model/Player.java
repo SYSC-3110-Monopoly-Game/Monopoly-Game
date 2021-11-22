@@ -10,6 +10,7 @@ public class Player {
     private Square currentLocation;
     private Square lastLocation;
     private PropertySquare selectedSquare;
+
     private int cashTotal;
     private boolean isInJail;
     private String buildingType;
@@ -22,7 +23,7 @@ public class Player {
         this.name = name;
         this.squaresOwned = new ArrayList<>();
 
-        this.cashTotal = 1000;
+        this.cashTotal = 350;
 
         this.currentLocation = square;
         this.decision = null;
@@ -48,6 +49,17 @@ public class Player {
     }
 
     /**
+     * return the property according to its name
+     */
+    public PropertySquare getPropertyFromName(String name) {
+        for (PropertySquare p: this.getProperties()){
+            if(p.getName().equals(name)){
+                return p;
+            }
+        }
+        return null;
+    }
+    /**
      * get which square the player would like to build/sell building
      *
      * @return selectedSquare
@@ -66,6 +78,10 @@ public class Player {
     public void setCurrentLocation(Square currentLocation) {
         this.lastLocation = this.currentLocation;
         this.currentLocation = currentLocation;
+    }
+
+    public void setLastLocation(Square lastLocation) {
+        this.lastLocation = lastLocation;
     }
 
     /**

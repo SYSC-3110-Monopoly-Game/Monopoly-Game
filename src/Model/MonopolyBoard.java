@@ -26,6 +26,10 @@ public class MonopolyBoard {
         return squares;
     }
 
+    public Square getSquareAt(int index) {
+        return squares[index];
+    }
+
     /**
      * Populates the board with Squares.
      */
