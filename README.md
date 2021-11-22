@@ -254,3 +254,99 @@ Ideally we would want to wait for user input to roll dice again when doubles are
 all the dice pairs, not just the last rolled pair.
 </details>
 
+<details><summary>Milestone 2</summary>
+    
+# Milestone 3
+
+## Folders/Files added
+
+* src
+    - Model
+        + AIPlayer.java
+    - view
+        + SimpleSquareGUI.java
+    - test
+        + AIPlayertest.java
+    - UML and Sequence Diagrams
+        - Milestone3
+
+   
+
+## Team Responsibilities
+
+Liya Abebe
+
+- 
+ 
+Rebbeca Li
+    
+- 
+
+Shizhong Shang
+  
+- Implemented AIPlayer class
+- improved the UML diagram 
+- Improve the sequence diagram PressButtonBuy_Action
+- Improve the sequence diagram PressButtonSell_Action
+- Improve the sequence diagram PressButtonRollDice_Action
+- Improve the sequence diagram PressButtonSell_HouseOrHotel_Action
+- Improve the sequence diagram PressButtonBuild_On_Property_Action
+- Improve the sequence diagram PressButtonNextTurn_Action
+- improved the Jail class
+- Add AIPlayer in the MonopolyGame class
+
+Zirui Qiao
+
+- Implemented SimpleSquareGUI class
+- Improved GUI code in all GUI square by merging repeated codes into SimpleSquareGUI class
+- Improved the map of the game by using new method to generate map GUI
+- refresh the GUI information more frequently by adding details in MonopolyGameGUI class
+- Improved the code in MonopolyGameGUI class by packing redundant codes into methods
+- Fixed the bug that when player trying to buy properties when lacking of money, wrong message
+were shown.
+- Included bankrupt feedback
+- Write nearly all javadocs in package view
+- Created getDecision() and HotelOrHouse() in MonopolyGameGUI class
+- Packing redundant codes into setButtons(), setPriceInfo() and sellBuildBuilding() in
+MonopolyGameGUI class
+- Created inner classes houses and hotels in PropertySquare class
+- Implemented buildHouse(), hasHouses(), getHousePrice(), sellHouse(), buildHotel(), getHotelPrice(), hasHotel(), 
+sellHotel() in PropertySqaure class
+- Implemented calculateRentFee() in PropertySquare class to get higher rent fee when the owner of this square 
+owns all other squares with the same color(or more than 1 railroad and utility), the price also increase when 
+there are houses or hotel built on this square.
+- Refactoed AIPlayer so that it can run properly
+- Implemented AIPlayertest class
+- Updated all tests
+
+In Player class:
+- Implemented hasWholeSet() which return all properties in 1 or more whole sets owned by the player
+- Implemented hasBuilding() which return all properties with houses or hotel
+- Implemented countNumber() which gives the number the squares (owned by the player) with a given color
+- Implemented getAvailableProperties() which remove all properties that the player does not has enough money to 
+build at least a house on it from the given property list
+- Implemented buildH() which builds a house or a hotel on the selected square according to parameter passed
+- Implemented sellH() which sells a house or a hotel from the selected square according to parameter passed
+
+In MonopolyGame class:
+- Implemented checkAvailableBuild() and checkAvailableSell() which build or sell buildings on the selected square
+- Implemented AIProcess() which runs the process of AI when it is its turn
+
+
+
+## Detailed Set Up
+    
+In this Milestone, we focused on 3 parts: fixing existing bugs and features; implementing build/sell houses/hotel
+and its GUI; implementing AI players. The existing bugs and features include: incorrect feedbacks; feature lost; 
+Misunderstanding of the rules; few bugs and UML&sequence diagrams. Implementing build/sell houses/hotel and its GUI
+include: implementing the logic of building/selling a house/hotel; getting decision from human players and showing 
+houses/hotel changes on the GUI map. Implementing AI players include: implementing AI logic, fitting AI to the game
+(how AI use original methods and how to fit the original loops) and showing AI on information tab and the GUI map.
+Some of codes are be complicated because we want to fit MVC pattern as good as possible.
+
+
+## Known Issues/bugs
+
+If player rolls a double and lands on go to jail, the double lets them get out of jail.
+
+</details>
