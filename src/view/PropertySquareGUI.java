@@ -79,7 +79,9 @@ public class PropertySquareGUI extends SimpleSquareGUI{
     }
 
 
-    //build No. x building
+    /**
+     * build or remove No.x building on the square
+     */
     public void setBuildingX (Color buildingType, int buildingNumber){
         if (buildingNumber == 1){
             this.building1.setBackground(buildingType);

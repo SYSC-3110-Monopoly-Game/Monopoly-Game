@@ -12,10 +12,18 @@ public class AIPlayer extends Player {
         super(name+"AI", square);
     }
 
+    /**
+     * get a random boolean
+     *
+     * @return boolean
+     */
     public boolean getBoolean() {
         return random.nextBoolean();
     }
 
+    /**
+     * get a random square from the given square list
+     */
     public PropertySquare getRandomSquare(ArrayList<PropertySquare> p)
     {
         Random r = new Random();
@@ -23,6 +31,9 @@ public class AIPlayer extends Player {
         return p.get(randomIndex);
     }
 
+    /**
+     * get all sellable properties of the AI Player
+     */
     public ArrayList<PropertySquare> getSellProperties(){
         ArrayList<PropertySquare> p = this.getProperties();
         ArrayList<PropertySquare> temp = this.hasBuilding();
@@ -32,6 +43,9 @@ public class AIPlayer extends Player {
         return p;
     }
 
+    /**
+     * sell properties until AI is not bankrupt
+     */
     public void sellSomeThing(){
         while(this.isBankrupt()){
             if(this.isBankrupt()){
@@ -40,6 +54,9 @@ public class AIPlayer extends Player {
         }
     }
 
+    /**
+     * build a house on a random property which is owned by this AI
+     */
     public boolean buildBuildings(){
         ArrayList<PropertySquare> propertyList = this.removeRailroadUtility(this.hasWholeSet());
         if(!propertyList.isEmpty()){
@@ -58,6 +75,10 @@ public class AIPlayer extends Player {
         return false;
     }
 
+    /**
+     * sell a house on a random property which is owned by this AI and
+     * has at least one house on it
+     */
     public void sellBuildings() {
         ArrayList<PropertySquare> propertyList = this.hasBuilding();
         if (!propertyList.isEmpty()) {

@@ -191,8 +191,6 @@ public class MonopolyGame {
 
         }
 
-
-
         if (playerInTurn.isBankrupt()) {
             if (!(playerInTurn instanceof AIPlayer)){
                 updateViews(playerInTurn, "Bankrupt");
@@ -313,6 +311,9 @@ public class MonopolyGame {
         return playersNotInTurn;
     }
 
+    /**
+     * AI process during their turn
+     */
     public void AIProcess() {
         if (playerInTurn instanceof AIPlayer) {
             playRound();

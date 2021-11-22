@@ -213,6 +213,9 @@ public class MonopolyGameGUI extends JFrame {
         }
     }
 
+    /**
+     * popup a window and ask player to select a property to sell
+     */
     public void getSellDecision(ArrayList<PropertySquare> p, Player player) {
         JFrame popup = new JFrame("Select a property to sell");
 
@@ -253,8 +256,11 @@ public class MonopolyGameGUI extends JFrame {
         });
     }
 
+    /**
+     * popup a window and ask player to select a property to build or sell buildings
+     */
     public void getDecision(ArrayList<PropertySquare> p, MonopolyGame game) {
-        JFrame popup = new JFrame("Select a property to build");
+        JFrame popup = new JFrame("Select a property");
         popup.setBounds(500, 400, 640, 120);
         GridLayout grid = new GridLayout(0, 4);
         popup.setLayout(grid);
@@ -272,6 +278,10 @@ public class MonopolyGameGUI extends JFrame {
         popup.setVisible(true);
     }
 
+    /**
+     * popup a window and ask player to decide whether to build/sell a house or a hotel
+     * on the selected property
+     */
     public void HotelOrHouse(Player player, String command) {
         JFrame popup = new JFrame("House or Hotel");
         popup.setBounds(500, 400, 160, 120);
@@ -347,6 +357,9 @@ public class MonopolyGameGUI extends JFrame {
         infoDisplayGUI.setSellEnabled(!player.getProperties().isEmpty());
     }
 
+    /**
+     * refresh players information
+     */
     private void setPriceInfo(Square currentLocation, Player player){
         if (currentLocation instanceof PropertySquare location) {
             Player owner = ((PropertySquare) player.getCurrentLocation()).getOwner();
@@ -372,6 +385,10 @@ public class MonopolyGameGUI extends JFrame {
         infoDisplayGUI.setCash(player.getCash());
     }
 
+    /**
+     * a part of action listener in HouseOrHotel()
+     * build or sell houses or hotels on GUI map
+     */
      public int sellBuildBuilding(String command, String decision, Player player){
          int price = -1;
          if (command.equals("build")) {
