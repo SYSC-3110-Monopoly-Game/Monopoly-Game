@@ -46,6 +46,9 @@ public class JailSquare extends Square {
         message = " is in jail\n";
     }
 
+    /**
+     * remove player from the jail hashmap
+     */
     public void goOutJail(Player p) {
 
         this.map.remove(p);
@@ -53,6 +56,10 @@ public class JailSquare extends Square {
         p.setInJail(false);
         message = " is out of jail\n";
     }
+
+    /**
+     * get the money a player need to go out of jail
+     */
     public int getJailFee(){
         return this.jailFee;
     }

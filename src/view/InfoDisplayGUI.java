@@ -117,6 +117,9 @@ public class InfoDisplayGUI extends JPanel {
         this.setSellHEnabled(false);
     }
 
+    /**
+     * show the information of players who are not in turn
+     */
     public void setOtherPlayersInfo(ArrayList<Player> players) {
         String allPlayerInfo = "Information of Other Players currently in the game \n";
 

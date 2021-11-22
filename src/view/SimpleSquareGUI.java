@@ -14,7 +14,9 @@ public class SimpleSquareGUI extends SquareGUI {
     private String path;
     public static final int SIZE = 90;
 
-
+    /**
+     * set the square on map
+     */
     public SimpleSquareGUI(String path, Color color){
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(SIZE, SIZE));
