@@ -189,7 +189,7 @@ public class MonopolyGame {
             }
 
         }
-        
+
         if (playerInTurn.isBankrupt()) {
             if (!(playerInTurn instanceof AIPlayer)) {
                 updateViews(playerInTurn, "Bankrupt");
