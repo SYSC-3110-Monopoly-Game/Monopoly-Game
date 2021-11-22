@@ -79,8 +79,8 @@ public class MonopolyGameGUI extends JFrame {
                 infoDisplayGUI.setCurrentLocation(currentLocation.getName());
 
                 setPriceInfo(currentLocation, player);
-
                 setButtons(player);
+                infoDisplayGUI.setBuyEnabled(false);
 
 
                 infoDisplayGUI.setNextEnabled(false);
