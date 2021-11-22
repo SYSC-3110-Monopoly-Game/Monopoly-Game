@@ -148,9 +148,16 @@ A player wins the game when all other players go bankrupt.
             - There is a new window for you to choose the building type (Houses/Hotel) you can sell.
                 - Now, click ‘House’ (Hotel) if you want to sell a house (hotel).       
 </details>
-</details>     
-</details>      
+</details>
+</details>  
+<details><summary>Bankrupt</summary> 
     
+- When a player has 0 or negative cash, the system will sell his/her properties.
+    - If that player still has negative cash after selling all his/her properties, he/she goes bankrupt.
+- Bankrupt player will be moved out of the board             
+</details>
+
+
 # Authors
 
 - Liya Abebe
