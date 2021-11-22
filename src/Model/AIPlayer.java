@@ -6,7 +6,6 @@ import java.util.Random;
 public class AIPlayer extends Player {
 
     Random random = new Random();
-    int index;
 
     public AIPlayer(String name, Square square) {
         super(name+"AI", square);
