@@ -127,14 +127,14 @@ public class SquareGridGUI extends JPanel {
             name = String.valueOf(player.getName().charAt(0));
         }
         squareGUIs[currentLocationIndex].removePlayer(name, player.isInJail());
-
+        JailSquareGUI jail = (JailSquareGUI) squareGUIs[8];
         if (player.isInJail() && nextLocationIndex == 8) {
-            JailSquareGUI jail = (JailSquareGUI) squareGUIs[8];
+
             //if player already not in jail
+            jail.removePlayer(name, false);
             jail.addPlayerToJail(player.getName());
         } else {
             if (!player.isInJail() && nextLocationIndex == 8 && currentLocationIndex == 8) {
-                JailSquareGUI jail = (JailSquareGUI) squareGUIs[nextLocationIndex];
                 name = player.getName();
                 if(player instanceof AIPlayer){
                     name = String.valueOf(player.getName().charAt(0));

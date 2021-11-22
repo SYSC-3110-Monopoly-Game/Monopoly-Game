@@ -36,7 +36,6 @@ public class Dice {
     }
 
     /**
-     *
      * Returns dice values
      */
     public int[] getDice() {

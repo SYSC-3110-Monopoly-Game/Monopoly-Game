@@ -7,8 +7,8 @@ import java.util.*;
 public class MonopolyGame {
     public static MonopolyBoard board;
     public static Dice dice;
-    public ArrayList<Player> players;
     private final ArrayList<MonopolyGameGUI> views;
+    public ArrayList<Player> players;
     private int doubleCounter;
     private Player playerInTurn;
 
@@ -45,7 +45,7 @@ public class MonopolyGame {
             p.setLastLocation(board.startingSquare());
             playerTempList.add(p);   // add players to a temp arraylist
         }
-        //create AI players
+       // create AI players
         for (int i = numberOfHuman; i < numberOfPlayer; i++) {
             String name = "" + (i + 1);
             Player p = new AIPlayer(name, board.startingSquare());
@@ -113,7 +113,6 @@ public class MonopolyGame {
 
     /**
      * sell properties
-     *
      */
     public void sellSquare() {
         if (!playerInTurn.getProperties().isEmpty()) {
@@ -184,7 +183,7 @@ public class MonopolyGame {
             if (dice.hasDoubles()) {
                 updateViews(playerInTurn, "Doubles");
                 doubleCounter++;
-            }else {
+            } else {
                 movePlayer(playerInTurn, distance);
                 updateViews(playerInTurn, "Roll Dice");
             }
@@ -192,9 +191,8 @@ public class MonopolyGame {
         }
 
 
-
         if (playerInTurn.isBankrupt()) {
-            if (!(playerInTurn instanceof AIPlayer)){
+            if (!(playerInTurn instanceof AIPlayer)) {
                 updateViews(playerInTurn, "Bankrupt");
             }
         }
@@ -205,8 +203,8 @@ public class MonopolyGame {
         }
     }
 
-    public void removeBankruptPlayer(Player player){
-        for(PropertySquare property: player.getProperties()){
+    public void removeBankruptPlayer(Player player) {
+        for (PropertySquare property : player.getProperties()) {
             property.setOwner(null);
         }
         players.remove(player);
@@ -261,6 +259,7 @@ public class MonopolyGame {
      * go to next player
      */
     public void nextTurn() {
+        doubleCounter = 0;
 
         int currentIndex = players.indexOf(this.playerInTurn);
         if (currentIndex == players.size() - 1) currentIndex = -1;
@@ -317,10 +316,10 @@ public class MonopolyGame {
         if (playerInTurn instanceof AIPlayer) {
             playRound();
             playerInTurn.buyProperty(playerInTurn.getCurrentLocation());
-            if(((AIPlayer) playerInTurn).buildBuildings()){
+            if (((AIPlayer) playerInTurn).buildBuildings()) {
                 views.get(0).sellBuildBuilding("House", "build", playerInTurn);
             }
-            while(playerInTurn.isBankrupt()){
+            while (playerInTurn.isBankrupt()) {
                 ((AIPlayer) playerInTurn).sellBuildings();
                 views.get(0).sellBuildBuilding("House", "sellH", playerInTurn);
             }
