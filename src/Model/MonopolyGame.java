@@ -53,7 +53,7 @@ public class MonopolyGame {
             playerTempList.add(p);   // add players to a temp arraylist
         }
         this.playerInTurn = playerTempList.get(0);
-        return playerTempList;                                              // return the temp arrayList
+        return playerTempList;
     }
 
     /**
@@ -194,7 +194,9 @@ public class MonopolyGame {
 
 
         if (playerInTurn.isBankrupt()) {
-            updateViews(playerInTurn, "Bankrupt");
+            if (!(playerInTurn instanceof AIPlayer)){
+                updateViews(playerInTurn, "Bankrupt");
+            }
         }
         //index = players.indexOf(playerInTurn);
 
@@ -315,7 +317,13 @@ public class MonopolyGame {
         if (playerInTurn instanceof AIPlayer) {
             playRound();
             playerInTurn.buyProperty(playerInTurn.getCurrentLocation());
-            ((AIPlayer) playerInTurn).buildBuildings();
+            if(((AIPlayer) playerInTurn).buildBuildings()){
+                views.get(0).sellBuildBuilding("House", "build", playerInTurn);
+            }
+            while(playerInTurn.isBankrupt()){
+                ((AIPlayer) playerInTurn).sellBuildings();
+                views.get(0).sellBuildBuilding("House", "sellH", playerInTurn);
+            }
             ((AIPlayer) playerInTurn).sellSomeThing();
             nextTurn();
         }

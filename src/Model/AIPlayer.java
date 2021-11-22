@@ -6,6 +6,7 @@ import java.util.Random;
 public class AIPlayer extends Player {
 
     Random random = new Random();
+    int index;
 
     public AIPlayer(String name, Square square) {
         super(name+"AI", square);
@@ -33,21 +34,20 @@ public class AIPlayer extends Player {
 
     public void sellSomeThing(){
         while(this.isBankrupt()){
-            sellBuildings();
             if(this.isBankrupt()){
                 this.sellProperty(this.getRandomSquare(this.getSellProperties()));
             }
         }
     }
 
-    public void buildBuildings(){
+    public boolean buildBuildings(){
         ArrayList<PropertySquare> propertyList = this.removeRailroadUtility(this.hasWholeSet());
         if(!propertyList.isEmpty()){
             propertyList = this.getAvailableProperties(propertyList);
             if(!propertyList.isEmpty() && this.getBoolean()){
                 this.setSelectedSquare(this.getRandomSquare(propertyList));
                 if(this.getBoolean()){
-                    this.buildH("House");
+                    return this.buildH("House") > 0;
                 }
             }else {
                 System.out.println("not enough money");
@@ -55,11 +55,12 @@ public class AIPlayer extends Player {
         } else {
             System.out.println("not hold a set");
         }
+        return false;
     }
 
     public void sellBuildings() {
         ArrayList<PropertySquare> propertyList = this.hasBuilding();
-        if(!propertyList.isEmpty()){
+        if (!propertyList.isEmpty()) {
             this.setSelectedSquare(this.getRandomSquare(propertyList));
             this.sellH("House");
         } else {
