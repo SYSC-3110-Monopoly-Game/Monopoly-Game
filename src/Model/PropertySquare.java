@@ -70,6 +70,7 @@ public class PropertySquare extends Square {
      * @return boolean
      */
     public boolean hasHouses() {
+        System.out.println("size of houses: "+houses.size());
         return !this.houses.isEmpty();
     }
 
@@ -87,6 +88,7 @@ public class PropertySquare extends Square {
         if(hasHouses()) {
             House h = this.houses.remove(0);
             this.owner.increaseCash(h.getPrice()/2);
+            System.out.println("A house has been sold from " + this.getName());
         }
     }
 
@@ -96,7 +98,8 @@ public class PropertySquare extends Square {
     public int buildHotel() {
         if(this.hotel == null){
             this.hotel = new Hotel(HousePrice);
-            for(int i=0; i<(4 - houses.size()); i++){
+            int size = houses.size();
+            for(int i=0; i<(4 - size); i++){
                 this.houses.add(new House(HousePrice));
             }
             int price = getHotelPrice();
@@ -130,6 +133,7 @@ public class PropertySquare extends Square {
         if(hasHotel()){
             this.owner.increaseCash(this.hotel.getPrice()/2);
             this.hotel = null;
+            System.out.println("A hotel has been sold from " + this.getName());
         }
     }
 
@@ -182,7 +186,7 @@ public class PropertySquare extends Square {
             if(this instanceof RailRoadSquare || this instanceof UtilitySquare){
                 return this.rentPrice * this.owner.countNumber(Color.BLACK);
             }
-            return (this.rentPrice + this.rentPrice / 2 * (houses.size() + ((hasHotel()) ? 1 : 0))) * 2;
+            return (this.rentPrice + (this.rentPrice / 2) * (houses.size() + ((hasHotel()) ? 1 : 0))) * 2;
         }
         return this.rentPrice;
     }

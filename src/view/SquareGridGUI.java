@@ -5,7 +5,6 @@ import Model.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 public class SquareGridGUI extends JPanel {
     private final Square[] square;
@@ -158,14 +157,6 @@ public class SquareGridGUI extends JPanel {
             name = String.valueOf(player.getName().charAt(0));
         }
         squareGUIs[currentLocationIndex].removePlayer(name, player.isInJail());
-    }
-
-    /**
-     * add 2 dices to the map
-     */
-    public void addDiceGUI(DiceGUI diceGUI) {
-        GridBagConstraints c = new GridBagConstraints();
-
     }
 
     /**

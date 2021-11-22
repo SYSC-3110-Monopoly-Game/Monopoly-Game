@@ -8,11 +8,8 @@ public class MonopolyGame {
     public static MonopolyBoard board;
     public static Dice dice;
     public ArrayList<Player> players;
-    private ArrayList<MonopolyGameGUI> views;
+    private final ArrayList<MonopolyGameGUI> views;
     private Player playerInTurn;
-    private AIPlayer ai;
-    private PropertySquare square;
-    private MonopolyGame mg;
 
     private ArrayList<Player> playersNotInTurn;
 
@@ -36,15 +33,23 @@ public class MonopolyGame {
         System.out.println("Welcome to Monopoly Game!!");
         System.out.println("There are 4 player in total");
 
-        int number = 4;                                                      // get the number of players to 4
+        // get the number of players to 4
+        int numberOfPlayer = 4;
+        int numberOfHuman = 4;
 
-        //create the 4 players
-        for (int i = 0; i < number; i++) {
+        //create the human players
+        for (int i = 0; i < numberOfHuman; i++) {
             String name = "" + (i + 1);
             Player p = new Player(name, board.startingSquare());
             p.setLastLocation(board.startingSquare());
             playerTempList.add(p);   // add players to a temp arraylist
-
+        }
+        //create AI players
+        for (int i = numberOfHuman; i < numberOfPlayer; i++) {
+            String name = "" + (i + 1);
+            Player p = new AIPlayer(name, board.startingSquare());
+            p.setLastLocation(board.startingSquare());
+            playerTempList.add(p);   // add players to a temp arraylist
         }
         this.playerInTurn = playerTempList.get(0);
         return playerTempList;                                              // return the temp arrayList
@@ -119,7 +124,7 @@ public class MonopolyGame {
      * check if the player can build a house on any of its property square list
      */
     public void checkAvailableBuild() {
-        ArrayList<PropertySquare> propertyList = playerInTurn.removeRailroadUtility(playerInTurn.hasWholeSet());
+        ArrayList<PropertySquare> propertyList = playerInTurn.getProperties();//playerInTurn.removeRailroadUtility(playerInTurn.hasWholeSet());
         if (!propertyList.isEmpty()) {
             propertyList = playerInTurn.getAvailableProperties(propertyList);
             if (!propertyList.isEmpty()) {
@@ -280,18 +285,16 @@ public class MonopolyGame {
     /**
      * List of players not in turn
      */
-    public ArrayList getPlayersNotInTurn() {
+    public ArrayList<Player> getPlayersNotInTurn() {
         //playersNotInTurn.remove(0);
 
-        for (int i = 0; i < players.size(); i++) {
-            if (players.get(i) != playerInTurn) {
-                if (!playersNotInTurn.contains(players.get(i))) {
-                    playersNotInTurn.add(players.get(i));
+        for (Player player : players) {
+            if (player != playerInTurn) {
+                if (!playersNotInTurn.contains(player)) {
+                    playersNotInTurn.add(player);
                 }
-            } else if (players.get(i) == playerInTurn) {
-                if (playersNotInTurn.contains(players.get(i))) {
-                    playersNotInTurn.remove(players.get(i));
-                }
+            } else {
+                playersNotInTurn.remove(player);
             }
         }
         return playersNotInTurn;
