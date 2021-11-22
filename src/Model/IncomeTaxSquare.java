@@ -7,7 +7,6 @@ public class IncomeTaxSquare extends Square {
     public IncomeTaxSquare(String name, int number, int tax) {
         super(name, number);
         this.incomeTax = tax;
-        message = " is on Income Tax and has just paid $" + tax + '\n';
     }
 
     /** Player pays income tax when they land on this square

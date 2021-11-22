@@ -13,7 +13,6 @@ public class GoSquare extends Square{
     public GoSquare(String name, int number, int money) {
         super(name, number);
         this.addMoney = money;
-        message = " just passed GO and earns $"+money+"\n";
     }
 
     /** Returns the GO Square money

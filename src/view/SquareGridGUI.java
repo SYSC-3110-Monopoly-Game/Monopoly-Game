@@ -10,6 +10,7 @@ public class SquareGridGUI extends JPanel {
     private final Square[] square;
     private final SquareGUI[] squareGUIs;
     private JTextArea message;
+    private DiceGUI diceGUI;
 
     /**
      * initalize the game map (left part)
@@ -40,15 +41,22 @@ public class SquareGridGUI extends JPanel {
         c.insets = new Insets(1, 1, 0, 0);  //top padding
 
         NewMethod(c);
-        //originalMethod(c);
 
         message = new JTextArea();
-        message.setPreferredSize(new Dimension(450, 80));
-        message.setBackground(new Color(205, 230, 208));
-        c.gridx = 2;
-        c.gridy = 6;
-        c.gridwidth = 6;
+        message.setPreferredSize(new Dimension(350, 60));
+        message.setBackground(new Color(213, 218, 213));
+        c.gridx = 3;
+        c.gridy = 2;
+        c.gridwidth = 4;
         this.add(message, c);
+
+        //add dice to board
+        diceGUI= new DiceGUI();
+        c.weightx = 0.0;
+        c.gridx = 4;
+        c.gridy = 3;
+        c.gridwidth = 2;
+        this.add(diceGUI, c);
     }
 
     /**
@@ -144,11 +152,7 @@ public class SquareGridGUI extends JPanel {
      */
     public void addDiceGUI(DiceGUI diceGUI) {
         GridBagConstraints c = new GridBagConstraints();
-        c.weightx = 0.0;
-        c.gridx = 4;
-        c.gridy = 3;
-        c.gridwidth = 2;
-        this.add(diceGUI, c);
+
     }
 
     /**
@@ -165,5 +169,8 @@ public class SquareGridGUI extends JPanel {
         message.append(string);
     }
 
+    public void setDiceImages(int diceValue, int diceValue1) {
+        this.diceGUI.setDiceImages( diceValue,  diceValue1);
+    }
 }
 
