@@ -9,6 +9,7 @@ public class MonopolyGame {
     public static Dice dice;
     public ArrayList<Player> players;
     private final ArrayList<MonopolyGameGUI> views;
+    private int doubleCounter;
     private Player playerInTurn;
 
     private ArrayList<Player> playersNotInTurn;

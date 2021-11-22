@@ -12,7 +12,7 @@ public class MonopolyBoard {
     public static JailSquare jail;
     private final int buyPrice = 60, rentPrice = 70;
 
-    Color[] set = {Color.CYAN, Color.PINK, Color.ORANGE, Color.RED, Color.YELLOW, Color.GREEN, Color.GRAY, Color.BLUE, Color.BLACK};
+    Color[] set = {Color.CYAN, Color.PINK, Color.ORANGE, Color.RED, Color.YELLOW, Color.GREEN, Color.GRAY, Color.BLUE, Color.BLACK, Color.WHITE};
     public static ArrayList<Color> colors = new ArrayList<>();
 
 
