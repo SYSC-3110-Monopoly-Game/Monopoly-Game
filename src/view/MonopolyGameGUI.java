@@ -21,6 +21,7 @@ public class MonopolyGameGUI extends JFrame {
      * Initialize the gui frame
      */
     public MonopolyGameGUI(MonopolyGame game) {
+        this.message="";
         this.game = game;
         //subscribe to game
         this.game.addView(this);
@@ -67,6 +68,10 @@ public class MonopolyGameGUI extends JFrame {
         String name = player.getName();
         switch (command) {
             case "Next Turn" -> {
+                if(currentLocation instanceof PropertySquare square && square.getOwner()==player)
+                    squareGUI.setMessage("You own this property!");
+                else
+                    squareGUI.setMessage("");
                 //update the info panel with the current player info
                 infoDisplayGUI.setName(name);
                 infoDisplayGUI.setCash(cash);
@@ -85,7 +90,7 @@ public class MonopolyGameGUI extends JFrame {
 
                 infoDisplayGUI.setNextEnabled(false);
                 infoDisplayGUI.setRollEnabled(true);
-                squareGUI.setMessage("");
+
 
             }
             case "Buy" -> {
@@ -129,7 +134,7 @@ public class MonopolyGameGUI extends JFrame {
                     if (MonopolyGame.dice.hasDoubles())
                         JOptionPane.showMessageDialog(squareGUI, "You rolled a double!! You get to get out of jail fo free!");
                     else {
-                        JOptionPane.showMessageDialog(squareGUI, "You did not roll a double!! You cannot get out of jail fo free!");
+                        message.append("You did not roll a double!! You cannot get out of jail fo free!");
                         infoDisplayGUI.setNextEnabled(true);
                         infoDisplayGUI.setRollEnabled(false);
                     }
@@ -198,7 +203,10 @@ public class MonopolyGameGUI extends JFrame {
                         infoDisplayGUI.setNextEnabled(true);
                         infoDisplayGUI.setRollEnabled(false);
                     } else {
-                        JOptionPane.showMessageDialog(squareGUI, "You rolled a double!!Roll Dice again.");
+                        if (player instanceof AIPlayer ai)
+                            JOptionPane.showMessageDialog(squareGUI, "AI rolled a double!!Click ok to continue.");
+                        else
+                            JOptionPane.showMessageDialog(squareGUI, "You rolled a double!!Roll Dice again.");
                         infoDisplayGUI.setNextEnabled(false);
                         infoDisplayGUI.setRollEnabled(true);
                     }
@@ -317,7 +325,7 @@ public class MonopolyGameGUI extends JFrame {
             if (price >= 0) {
                 setMessage(player.getName() + " has " + temp + " a " + decision + " on "
                         + player.getSelectedSquare().getName() + "\n" + player.getName() +
-                        " paid $" + price + "to build it\n");
+                        " paid $" + price + " to build it\n");
             } else if (price == -1) {
                 setMessage(player.getName() + " cannot " + temp + " on " +
                         player.getSelectedSquare().getName() + "\n");

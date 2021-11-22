@@ -21,9 +21,7 @@ public class Player {
     public Player(String name, Square square) {
         this.name = name;
         this.squaresOwned = new ArrayList<>();
-
         this.cashTotal = 350;
-
         this.currentLocation = square;
         this.decision = null;
     }
@@ -38,10 +36,16 @@ public class Player {
         return name;
     }
 
+    /**
+     * Returns last location of player
+     */
     public Square getLastLocation() {
         return lastLocation;
     }
 
+    /**
+     * Returns current location of player
+     */
     public Square getCurrentLocation() {
         return currentLocation;
     }
@@ -73,11 +77,17 @@ public class Player {
         this.selectedSquare = selectedSquare;
     }
 
+    /**
+     * Sets the current location of th player
+     */
     public void setCurrentLocation(Square currentLocation) {
         this.lastLocation = this.currentLocation;
         this.currentLocation = currentLocation;
     }
 
+    /**
+     * Sets the last location of the player
+     */
     public void setLastLocation(Square lastLocation) {
         this.lastLocation = lastLocation;
     }

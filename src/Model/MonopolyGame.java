@@ -172,6 +172,7 @@ public class MonopolyGame {
 
             } else {
                 System.out.println("You did not roll a double!");
+                updateViews(playerInTurn, "Doubles");
                 MonopolyBoard.jail.addCounter(playerInTurn);
                 //check if player hasn't rolled a double 3 times, make them pay jail fee and get out of jail
                 if (MonopolyBoard.jail.getMap().get(playerInTurn) == 2) {
@@ -195,7 +196,6 @@ public class MonopolyGame {
                 updateViews(playerInTurn, "Bankrupt");
             }
         }
-        //index = players.indexOf(playerInTurn);
 
         if (getWinner() != null) {
             updateViews(getWinner(), "Winner");
@@ -239,10 +239,18 @@ public class MonopolyGame {
         }
     }
 
+    /**
+     * Gets the double counter int value
+     * @return
+     */
     public int getDoubleCounter() {
         return doubleCounter;
     }
 
+    /**
+     * Sets the double counter value
+     * @param doubleCounter
+     */
     public void setDoubleCounter(int doubleCounter) {
         this.doubleCounter = doubleCounter;
     }
@@ -274,6 +282,7 @@ public class MonopolyGame {
         updateViews(playerInTurn, "Next Turn");
 
         AIProcess();
+        printPlayersInfo();
 
     }
 
@@ -297,7 +306,6 @@ public class MonopolyGame {
      * List of players not in turn
      */
     public ArrayList<Player> getPlayersNotInTurn() {
-        //playersNotInTurn.remove(0);
 
         for (Player player : players) {
             if (player != playerInTurn) {
