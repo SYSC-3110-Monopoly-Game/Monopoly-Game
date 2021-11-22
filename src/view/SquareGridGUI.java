@@ -76,8 +76,8 @@ public class SquareGridGUI extends JPanel {
         } else if (square instanceof PropertySquare property) {
             s = new PropertySquareGUI(property.getColor(), property.getName(), String.valueOf(property.getPrice()));
 
-        } else if (square instanceof IncomeTaxSquare incomeTax) {
-            s = new IncomeTaxSquareGUI(incomeTax.getTax());
+        } else if (square instanceof TaxSquare incomeTax) {
+            s = new TaxSquareGUI(incomeTax.getTax(), incomeTax.getName());
 
         } else if (square instanceof GoToJailSquare) {
             s = new GoToJailGUI();
@@ -129,7 +129,7 @@ public class SquareGridGUI extends JPanel {
         squareGUIs[currentLocationIndex].removePlayer(name, player.isInJail());
 
         if (player.isInJail() && nextLocationIndex == 8) {
-            JailSquareGUI jail = (JailSquareGUI) squareGUIs[nextLocationIndex];
+            JailSquareGUI jail = (JailSquareGUI) squareGUIs[8];
             //if player already not in jail
             jail.addPlayerToJail(player.getName());
         } else {
@@ -175,6 +175,7 @@ public class SquareGridGUI extends JPanel {
 
     public void setDiceImages(int diceValue, int diceValue1) {
         this.diceGUI.setDiceImages( diceValue,  diceValue1);
+        this.repaint();
     }
 }
 

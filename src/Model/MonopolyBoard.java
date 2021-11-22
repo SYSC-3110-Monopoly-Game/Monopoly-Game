@@ -42,7 +42,7 @@ public class MonopolyBoard {
         squares[i] = new GoSquare("GO", i++, goMoney);
         squares[i] = new PropertySquare("Mediterranean Avenue", i++, buyPrice, rentPrice, Color.GRAY);
         squares[i] = new PropertySquare("Baltic Avenue", i++, buyPrice, rentPrice, Color.GRAY);
-        squares[i] = new IncomeTaxSquare("Income Tax", i++, incomeTax);
+        squares[i] = new TaxSquare("Income Tax", i++, incomeTax);
 
         squares[i] = new RailRoadSquare("Reading RailRoad", i++, buyPrice, rentPrice, Color.BLACK);
 
@@ -87,7 +87,7 @@ public class MonopolyBoard {
         squares[i] = new RailRoadSquare("Short Line", i++, buyPrice, rentPrice, Color.BLACK);
 
         squares[i] = new PropertySquare("Park Place", i++, buyPrice, rentPrice, Color.BLUE);
-        squares[i] = new IncomeTaxSquare("Luxury Tax", i++, incomeTax);;
+        squares[i] = new TaxSquare("Luxury Tax", i++, incomeTax);;
         squares[i] = new PropertySquare("Boardwalk", i, buyPrice, rentPrice, Color.BLUE);
     }
 

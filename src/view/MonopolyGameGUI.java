@@ -13,9 +13,9 @@ import java.util.ArrayList;
 public class MonopolyGameGUI extends JFrame {
     private final InfoDisplayGUI infoDisplayGUI;
     private final SquareGridGUI squareGUI;
+    private final MonopolyGame game;
     private String message;
     private int selectedPropertyIndex;
-    private final MonopolyGame game;
 
     /**
      * Initialize the gui frame
@@ -110,6 +110,7 @@ public class MonopolyGameGUI extends JFrame {
                 this.getSellDecision(PropertiesCanBeSell,player);
             }
             case "Roll Dice" -> {
+
                 StringBuilder message = new StringBuilder(player.getName() +
                         " moved from " + lastLocation.getName() + "[" +
                         lastLocation.getNumber() + "] to "
@@ -122,6 +123,14 @@ public class MonopolyGameGUI extends JFrame {
                 //set dice value
                 int[] diceValues = MonopolyGame.dice.getDice();
                 squareGUI.setDiceImages(diceValues[0], diceValues[1]);
+
+                if (player.isInJail()) {
+                    if (MonopolyGame.dice.hasDoubles())
+                        JOptionPane.showMessageDialog(squareGUI, "You rolled a double!! You get to get out of jail fo free!");
+                    else
+                        JOptionPane.showMessageDialog(squareGUI, "You did not roll a double!! You cannot get out of jail fo free!");
+
+                }
 
                 // refresh location, buy, rent and cash.
                 //start here
@@ -160,6 +169,37 @@ public class MonopolyGameGUI extends JFrame {
                 infoDisplayGUI.setNextEnabled(true);
                 infoDisplayGUI.setRollEnabled(false);
             }
+            case "Doubles" -> {
+                //set dice value
+                int[] diceValues = MonopolyGame.dice.getDice();
+                squareGUI.setDiceImages(diceValues[0], diceValues[1]);
+
+                if(player.isInJail()){
+                    JOptionPane.showMessageDialog(squareGUI, "You rolled a double!! You are going out of jail.");
+
+                    //setting player out of jail
+                    MonopolyBoard.jail.goOutJail(player);
+                    squareGUI.changePlayerGUILocation(player,8,8);
+                    infoDisplayGUI.setNextEnabled(true);
+                    infoDisplayGUI.setRollEnabled(false);
+                }
+                else {
+
+                    if (game.getDoubleCounter() == 2) {
+                        JOptionPane.showMessageDialog(squareGUI, "You rolled a double 3 times! You are going to jail");
+                        JailSquare jail = (JailSquare) MonopolyGame.board.getSquareAt(8);
+                        jail.goJail(player);
+                        squareGUI.changePlayerGUILocation(player, currentLocation.getNumber(), 8);
+                        game.setDoubleCounter(-1);
+                        infoDisplayGUI.setNextEnabled(true);
+                        infoDisplayGUI.setRollEnabled(false);
+                    } else {
+                        JOptionPane.showMessageDialog(squareGUI, "You rolled a double!!Roll Dice again.");
+                        infoDisplayGUI.setNextEnabled(false);
+                        infoDisplayGUI.setRollEnabled(true);
+                    }
+                }
+            }
             case "Winner" -> {
                 squareGUI.removePlayerGUILocation(player, lastLocation.getNumber());
                 JOptionPane.showMessageDialog(this, "We have a Winner!! Player " + player.getName());
@@ -169,6 +209,7 @@ public class MonopolyGameGUI extends JFrame {
                 infoDisplayGUI.setRollEnabled(false);
             }
             case "build", "sellH" -> HotelOrHouse(player, command);
+            default -> throw new IllegalStateException("Unexpected value: " + command);
         }
     }
 

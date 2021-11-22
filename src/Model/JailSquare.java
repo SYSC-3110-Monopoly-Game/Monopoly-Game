@@ -41,6 +41,7 @@ public class JailSquare extends Square {
      */
     public void goJail(Player p) {
         p.setCurrentLocation(this);
+        p.setInJail(true);
         this.map.put(p, 0);
         message = " is in jail\n";
     }

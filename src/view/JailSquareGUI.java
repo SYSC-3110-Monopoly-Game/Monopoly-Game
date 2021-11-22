@@ -8,15 +8,15 @@ import java.io.File;
 import java.io.IOException;
 
 public class JailSquareGUI extends SquareGUI {
+    public static final int SIZE = 90;
     private final JPanel colorTag;
     private final JPanel jailTag;
-    public static final int SIZE = 90;
 
 
     public JailSquareGUI() {
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(SIZE, SIZE));
-        this.setBorder( BorderFactory.createLineBorder(Color.black, 2));
+        this.setBorder(BorderFactory.createLineBorder(Color.black, 2));
         this.colorTag = new JPanel();
         this.colorTag.setPreferredSize(new Dimension(SIZE, 23));
         this.colorTag.setBackground(Color.BLACK);
@@ -32,7 +32,20 @@ public class JailSquareGUI extends SquareGUI {
      */
     public void addPlayerToJail(String name) {
         PlayerGUI player = new PlayerGUI(name);
-        this.jailTag.add(player);
+        boolean playerGUIAlreadyAdded = false;
+
+        Component[] components = this.jailTag.getComponents();
+        System.out.println("Jail tag components: " + components.toString());
+        for (Component labelComponent : components
+        ) {
+            JLabel label = (JLabel) labelComponent;
+            if (label.getText().equals(name)) {
+                playerGUIAlreadyAdded = true;
+
+            }
+        }
+        if (!playerGUIAlreadyAdded)
+            this.jailTag.add(player);
         this.revalidate();
         this.repaint();
     }
@@ -54,10 +67,9 @@ public class JailSquareGUI extends SquareGUI {
     @Override
     public void removePlayer(String name, boolean inJail) {
         Component[] components;
-        if(inJail){
+        if (inJail) {
             components = this.jailTag.getComponents();
-        }
-        else{
+        } else {
             components = this.colorTag.getComponents();
         }
 
