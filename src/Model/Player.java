@@ -13,7 +13,6 @@ public class Player {
 
     private int cashTotal;
     private boolean isInJail;
-    private String buildingType;
 
     /**
      * Constructor of Player
@@ -22,12 +21,9 @@ public class Player {
     public Player(String name, Square square) {
         this.name = name;
         this.squaresOwned = new ArrayList<>();
-
         this.cashTotal = 350;
-
         this.currentLocation = square;
         this.decision = null;
-        this.buildingType = null;
     }
 
 
@@ -40,10 +36,16 @@ public class Player {
         return name;
     }
 
+    /**
+     * Returns last location of player
+     */
     public Square getLastLocation() {
         return lastLocation;
     }
 
+    /**
+     * Returns current location of player
+     */
     public Square getCurrentLocation() {
         return currentLocation;
     }
@@ -75,11 +77,17 @@ public class Player {
         this.selectedSquare = selectedSquare;
     }
 
+    /**
+     * Sets the current location of th player
+     */
     public void setCurrentLocation(Square currentLocation) {
         this.lastLocation = this.currentLocation;
         this.currentLocation = currentLocation;
     }
 
+    /**
+     * Sets the last location of the player
+     */
     public void setLastLocation(Square lastLocation) {
         this.lastLocation = lastLocation;
     }
@@ -210,7 +218,7 @@ public class Player {
                 }
             }
         }
-        for(int i=0; i<(c.size()-3); i++){
+        for(int i=0; i<(c.size()-4); i++){
             if (counter[i] == 3){
                 for(PropertySquare p: squaresOwned){
                     if(p.getColor() == c.get(i)){
@@ -220,7 +228,7 @@ public class Player {
             }
         }
         for(int i=(c.size()-4); i<c.size(); i++){
-            if (counter[i] == 2){
+            if (counter[i] >= 2){
                 for(PropertySquare p: squaresOwned){
                     if(p.getColor() == c.get(i)){
                         result.add(p);
@@ -285,10 +293,8 @@ public class Player {
      */
     public int buildH(String answer) {
         if(answer.equals("House")){
-            setBuildingType("House");
             return this.getSelectedSquare().buildHouse();
         } else if (answer.equals("Hotel")){
-            setBuildingType("Hotel");
             return this.getSelectedSquare().buildHotel();
         }
         return -1;
@@ -300,20 +306,10 @@ public class Player {
      */
     public int sellH(String answer) {
         if(answer.equals("House")){
-            setBuildingType("House");
-            this.getSelectedSquare().sellHouse();
+            return this.getSelectedSquare().sellHouse();
         } else if (answer.equals("Hotel")){
-            setBuildingType("Hotel");
-            this.getSelectedSquare().sellHotel();
+            return this.getSelectedSquare().sellHotel();
         }
         return -1;
-    }
-
-    public String getBuildingType() {
-        return buildingType;
-    }
-
-    public void setBuildingType(String buildingType) {
-        this.buildingType = buildingType;
     }
 }

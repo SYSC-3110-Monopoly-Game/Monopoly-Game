@@ -21,6 +21,7 @@ public class MonopolyGameGUI extends JFrame {
      * Initialize the gui frame
      */
     public MonopolyGameGUI(MonopolyGame game) {
+        this.message="";
         this.game = game;
         //subscribe to game
         this.game.addView(this);
@@ -67,6 +68,10 @@ public class MonopolyGameGUI extends JFrame {
         String name = player.getName();
         switch (command) {
             case "Next Turn" -> {
+                if(currentLocation instanceof PropertySquare square && square.getOwner()==player)
+                    squareGUI.setMessage("You own this property!");
+                else
+                    squareGUI.setMessage("");
                 //update the info panel with the current player info
                 infoDisplayGUI.setName(name);
                 infoDisplayGUI.setCash(cash);
@@ -77,31 +82,16 @@ public class MonopolyGameGUI extends JFrame {
 
                 // refresh location, buy, rent.
                 infoDisplayGUI.setCurrentLocation(currentLocation.getName());
-                if (currentLocation instanceof PropertySquare location) {
-                    Player owner = ((PropertySquare) player.getCurrentLocation()).getOwner();
 
-                    if (owner == null) {
-                        infoDisplayGUI.setBuyPrice(location.getPrice());
-                        infoDisplayGUI.setHousePrice(location.getHousePrice());
-                        infoDisplayGUI.setHotelPrice(location.getHotelPrice());
-                    } else {
-                        infoDisplayGUI.setBuyPrice(-2);
-                        infoDisplayGUI.setHousePrice(-2);
-                        infoDisplayGUI.setHotelPrice(-2);
-                    }
-                    infoDisplayGUI.setRentPrice(location.getRentFee());
-                } else {
-                    infoDisplayGUI.setBuyPrice(-1);
-                    infoDisplayGUI.setHousePrice(-1);
-                    infoDisplayGUI.setHotelPrice(-1);
-                    infoDisplayGUI.setRentPrice(-1);
-                }
+                setPriceInfo(currentLocation, player);
+                setButtons(player);
+                infoDisplayGUI.setBuyEnabled(false);
 
-                //set buttons
-                infoDisplayGUI.setSellEnabled(!player.getProperties().isEmpty());
+
                 infoDisplayGUI.setNextEnabled(false);
                 infoDisplayGUI.setRollEnabled(true);
-                squareGUI.setMessage("");
+
+
             }
             case "Buy" -> {
                 ArrayList<PropertySquare> property = player.getProperties();
@@ -110,25 +100,20 @@ public class MonopolyGameGUI extends JFrame {
                 squareGUI.addMessage(player.getName() +
                         " just bought " + property.get(property.size() - 1).getName() +
                         "[" + property.get(property.size() - 1).getNumber() + "]\n");
-                if (!player.getAvailableProperties(player.removeRailroadUtility(player.hasWholeSet())).isEmpty()) {
-                    infoDisplayGUI.setBuildEnabled(true);
-                }
-                if (!player.hasBuilding().isEmpty()) {
-                    infoDisplayGUI.setSellHEnabled(true);
-                }
+
+                setButtons(player);
+
                 infoDisplayGUI.setBuyEnabled(false);
-                infoDisplayGUI.setSellEnabled(true);
             }
             case "Sell" -> {
                 infoDisplayGUI.setPropertyList(propertyList);
                 infoDisplayGUI.setCash(cash);
-                if (player.getAvailableProperties(player.removeRailroadUtility(player.hasWholeSet())) == null) {
-                    infoDisplayGUI.setBuildEnabled(false);
-                }
-                if (player.hasBuilding().isEmpty()) {
-                    infoDisplayGUI.setSellHEnabled(false);
-                }
-                this.getSellDecision(player.getProperties(), player);
+
+                setButtons(player);
+
+                ArrayList<PropertySquare> PropertiesCanBeSell = player.getProperties();
+                PropertiesCanBeSell.remove(player.hasBuilding());
+                this.getSellDecision(PropertiesCanBeSell, player);
             }
             case "Roll Dice" -> {
 
@@ -148,49 +133,34 @@ public class MonopolyGameGUI extends JFrame {
                 if (player.isInJail()) {
                     if (MonopolyGame.dice.hasDoubles())
                         JOptionPane.showMessageDialog(squareGUI, "You rolled a double!! You get to get out of jail fo free!");
-                    else
-                        JOptionPane.showMessageDialog(squareGUI, "You did not roll a double!! You cannot get out of jail fo free!");
-
+                    else {
+                        message.append("You did not roll a double!! You cannot get out of jail fo free!");
+                        infoDisplayGUI.setNextEnabled(true);
+                        infoDisplayGUI.setRollEnabled(false);
+                    }
                 }
 
                 // refresh location, buy, rent and cash.
                 //start here
                 infoDisplayGUI.setCurrentLocation(currentLocation.getName());
-                if (currentLocation instanceof PropertySquare) {
-                    PropertySquare location = (PropertySquare) player.getCurrentLocation();
+
+                setPriceInfo(currentLocation, player);
+
+                if (currentLocation instanceof PropertySquare location) {
                     Player owner = ((PropertySquare) player.getCurrentLocation()).getOwner();
-                    if (owner == null) {
-                        infoDisplayGUI.setBuyEnabled(player.getCash() >= location.getPrice());
-                        infoDisplayGUI.setBuyPrice(location.getPrice());
-                        infoDisplayGUI.setHousePrice(location.getHousePrice());
-                        infoDisplayGUI.setHotelPrice(location.getHotelPrice());
-                    } else {
-                        infoDisplayGUI.setBuyPrice(-2);
-                        infoDisplayGUI.setHousePrice(-2);
-                        infoDisplayGUI.setHotelPrice(-2);
-                        if (owner != player) {
-                            message.append(player.getName()).append(" just paid ").append(owner.getName()).append(" $").append(location.getRentFee()).append(" as rent fee\n");
-                        } else
-                            message.append("You own this property!");
-                        infoDisplayGUI.setBuyEnabled(false);
+
+                    if (owner != null && owner != player) {
+                        message.append(player.getName()).append(" just paid ").append(owner.getName()).append(" $").append(location.getRentFee()).append(" as rent fee\n");
                     }
-                    infoDisplayGUI.setRentPrice(location.getRentFee());
-
                 } else {
-                    infoDisplayGUI.setBuyPrice(-1);
-                    infoDisplayGUI.setHousePrice(-1);
-                    infoDisplayGUI.setHotelPrice(-1);
-                    infoDisplayGUI.setRentPrice(-1);
-                    infoDisplayGUI.setBuyEnabled(false);
-                    //message.append(player.getName()).append(player.getCurrentLocation().message);
+                    if (currentLocation instanceof TaxSquare location)
+                        message.append(player.getName() + " paid " + player.getCurrentLocation().getName());
+                    else
+                        message.append(player.getName() + " is on Square " + player.getCurrentLocation().getName());
                 }
-                infoDisplayGUI.setBuildEnabled(!player.getAvailableProperties(player.removeRailroadUtility(player.hasWholeSet())).isEmpty());
-                infoDisplayGUI.setSellHEnabled(!player.hasBuilding().isEmpty());
-                infoDisplayGUI.setCash(player.getCash());
-                //ends here
 
-                //enable or disable appropriate buttons
-                infoDisplayGUI.setSellEnabled(!player.getProperties().isEmpty());
+                setButtons(player);
+
                 infoDisplayGUI.setNextEnabled(true);
                 infoDisplayGUI.setRollEnabled(false);
                 squareGUI.setMessage(message.toString());
@@ -215,27 +185,28 @@ public class MonopolyGameGUI extends JFrame {
                 int[] diceValues = MonopolyGame.dice.getDice();
                 squareGUI.setDiceImages(diceValues[0], diceValues[1]);
 
-                if(player.isInJail()){
+                if (player.isInJail()) {
                     JOptionPane.showMessageDialog(squareGUI, "You rolled a double!! You are going out of jail.");
 
                     //setting player out of jail
                     MonopolyBoard.jail.goOutJail(player);
-                    squareGUI.changePlayerGUILocation(player,8,8);
+                    squareGUI.changePlayerGUILocation(player, 8, 8);
                     infoDisplayGUI.setNextEnabled(true);
                     infoDisplayGUI.setRollEnabled(false);
-                }
-                else {
+                } else {
 
                     if (game.getDoubleCounter() == 2) {
                         JOptionPane.showMessageDialog(squareGUI, "You rolled a double 3 times! You are going to jail");
                         JailSquare jail = (JailSquare) MonopolyGame.board.getSquareAt(8);
                         jail.goJail(player);
                         squareGUI.changePlayerGUILocation(player, currentLocation.getNumber(), 8);
-                        game.setDoubleCounter(-1);
                         infoDisplayGUI.setNextEnabled(true);
                         infoDisplayGUI.setRollEnabled(false);
                     } else {
-                        JOptionPane.showMessageDialog(squareGUI, "You rolled a double!!Roll Dice again.");
+                        if (player instanceof AIPlayer ai)
+                            JOptionPane.showMessageDialog(squareGUI, "AI rolled a double!!Click ok to continue.");
+                        else
+                            JOptionPane.showMessageDialog(squareGUI, "You rolled a double!!Roll Dice again.");
                         infoDisplayGUI.setNextEnabled(false);
                         infoDisplayGUI.setRollEnabled(true);
                     }
@@ -254,6 +225,9 @@ public class MonopolyGameGUI extends JFrame {
         }
     }
 
+    /**
+     * popup a window and ask player to select a property to sell
+     */
     public void getSellDecision(ArrayList<PropertySquare> p, Player player) {
         JFrame popup = new JFrame("Select a property to sell");
 
@@ -262,6 +236,7 @@ public class MonopolyGameGUI extends JFrame {
         JButton btn;
         for (PropertySquare property : p) {
             btn = new JButton(property.getName());
+            btn.setBackground(property.getColor());
             btn.addActionListener(e -> {
                 JButton b = (JButton) e.getSource();
                 player.sellProperty(player.getPropertyFromName(b.getText()));
@@ -293,78 +268,64 @@ public class MonopolyGameGUI extends JFrame {
         });
     }
 
+    /**
+     * popup a window and ask player to select a property to build or sell buildings
+     */
     public void getDecision(ArrayList<PropertySquare> p, MonopolyGame game) {
-        JFrame popup = new JFrame("Select a property to build");
+        JFrame popup = new JFrame("Select a property");
         popup.setBounds(500, 400, 640, 120);
         GridLayout grid = new GridLayout(0, 4);
         popup.setLayout(grid);
         JButton btn;
         for (PropertySquare property : p) {
             btn = new JButton(property.getName());
+            btn.setBackground(property.getColor());
             btn.addActionListener(e -> {
                 JButton b = (JButton) e.getSource();
                 selectedPropertyIndex = game.setSelectedProperty(b.getText());
+                popup.dispose();
             });
             popup.add(btn);
         }
         popup.setVisible(true);
     }
 
+    /**
+     * popup a window and ask player to decide whether to build/sell a house or a hotel
+     * on the selected property
+     */
     public void HotelOrHouse(Player player, String command) {
         JFrame popup = new JFrame("House or Hotel");
         popup.setBounds(500, 400, 160, 120);
         GridLayout grid = new GridLayout(1, 2);
         popup.setLayout(grid);
         JButton house = new JButton("House"), hotel = new JButton("Hotel");
-        ActionListener al = e -> {
-            int price = -1;
-            String temp = "", decision = ((JButton) e.getSource()).getText();
-            if (command.equals("build")) {
-                price = player.buildH(decision);
-                temp = "build";
-                if (decision.equals("House")) {
-                    if (squareGUI.getPropertySquareGUI(selectedPropertyIndex) instanceof PropertySquareGUI) {
-                        for (int i = 1; i < 5; i++) {
-                            if (((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).isBuilding(i)) {
-                                ((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).setBuildingX(Color.GREEN, i);
-                                break;
-                            }
-                        }
-                    }
-                } else if (decision.equals("Hotel")) {
-                    if (squareGUI.getPropertySquareGUI(selectedPropertyIndex) instanceof PropertySquareGUI) {
-                        for (int i = 1; i < 5; i++) {
-                            if (((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).isBuilding(i)) {
-                                ((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).setBuildingX(Color.GREEN, i);
-                            }
-                        }
-                        ((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).setBuildingX(Color.RED, 5);
 
-                    }
+        ActionListener al = e -> {
+
+            String temp = "", decision = ((JButton) e.getSource()).getText();
+            int price = sellBuildBuilding(command, decision, player);
+            if (command.equals("build")) {
+                temp = "build";
+                if (player.getCash() < player.getSelectedSquare().getHousePrice()) {
+                    popup.dispose();
                 }
-            } else if (command.equals("sellH")) {
-                price = player.sellH(decision);
+                if (player.getSelectedSquare().hasHotel()) {
+                    popup.dispose();
+                }
+            } else {
                 temp = "sell";
-                if (decision.equals("House")) {
-                    if (squareGUI.getPropertySquareGUI(selectedPropertyIndex) instanceof PropertySquareGUI) {
-                        for (int i = 4; i > 0; i--) {
-                            if (!(((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).isBuilding(i))) {
-                                ((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).setBuildingX(Color.WHITE, i);
-                                break;
-                            }
-                        }
-                    }
-                } else if (decision.equals("Hotel")) {
-                    if (squareGUI.getPropertySquareGUI(selectedPropertyIndex) instanceof PropertySquareGUI) {
-                        ((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).setBuildingX(Color.WHITE, 5);
-                    }
+                hotel.setEnabled(player.getSelectedSquare().hasHotel());
+                house.setEnabled(!player.getSelectedSquare().hasHotel());
+                if (!player.getSelectedSquare().hasHouses()) {
+                    popup.dispose();
                 }
             }
             infoDisplayGUI.setCash(player.getCash());
             if (price >= 0) {
                 setMessage(player.getName() + " has " + temp + " a " + decision + " on "
                         + player.getSelectedSquare().getName() + "\n" + player.getName() +
-                        " paid $" + price + "to build it\n");
+                        " paid $" + price + " to build it\n");
             } else if (price == -1) {
                 setMessage(player.getName() + " cannot " + temp + " on " +
                         player.getSelectedSquare().getName() + "\n");
@@ -382,18 +343,98 @@ public class MonopolyGameGUI extends JFrame {
         popup.add(house);
         popup.add(hotel);
 
-
-        if (player.getCash() < player.getSelectedSquare().getHotelPrice()) {
-            hotel.setEnabled(false);
+        if (command.equals("build")) {
+            if (player.getCash() < player.getSelectedSquare().getHotelPrice()) {
+                hotel.setEnabled(false);
+            }
+            house.setEnabled(true);
+        } else {
+            hotel.setEnabled(player.getSelectedSquare().hasHotel());
+            house.setEnabled(!player.getSelectedSquare().hasHotel());
         }
-        house.setEnabled(true);
-
 
         popup.setVisible(true);
     }
 
     private void setMessage(String m) {
         this.message = m;
+    }
+
+    /**
+     * set build, sellH and sell buttons
+     */
+    private void setButtons(Player player) {
+        infoDisplayGUI.setBuildEnabled(!player.getAvailableProperties(player.removeRailroadUtility(player.hasWholeSet())).isEmpty());
+        infoDisplayGUI.setSellHEnabled(!player.hasBuilding().isEmpty());
+        infoDisplayGUI.setSellEnabled(!player.getProperties().isEmpty());
+    }
+
+    /**
+     * refresh players information
+     */
+    private void setPriceInfo(Square currentLocation, Player player) {
+        if (currentLocation instanceof PropertySquare location) {
+            Player owner = ((PropertySquare) player.getCurrentLocation()).getOwner();
+
+            if (owner == null) {
+                infoDisplayGUI.setBuyEnabled(player.getCash() >= location.getPrice());
+                infoDisplayGUI.setBuyPrice(location.getPrice());
+                infoDisplayGUI.setHousePrice(location.getHousePrice());
+                infoDisplayGUI.setHotelPrice(location.getHotelPrice());
+            } else {
+                infoDisplayGUI.setBuyPrice(-2);
+                infoDisplayGUI.setHousePrice(-2);
+                infoDisplayGUI.setHotelPrice(-2);
+            }
+            infoDisplayGUI.setRentPrice(location.getRentFee());
+        } else {
+            infoDisplayGUI.setBuyPrice(-1);
+            infoDisplayGUI.setHousePrice(-1);
+            infoDisplayGUI.setHotelPrice(-1);
+            infoDisplayGUI.setRentPrice(-1);
+            infoDisplayGUI.setBuyEnabled(false);
+        }
+        infoDisplayGUI.setCash(player.getCash());
+    }
+
+    /**
+     * a part of action listener in HouseOrHotel()
+     * build or sell houses or hotels on GUI map
+     */
+    public int sellBuildBuilding(String command, String decision, Player player) {
+        int price = -1;
+        if (command.equals("build")) {
+            price = player.buildH(decision);
+            if (decision.equals("House")) {
+                for (int i = 1; i < 5; i++) {
+                    if (((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).isBuilding(i)) {
+                        ((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).setBuildingX(Color.GREEN, i);
+                        break;
+                    }
+                }
+            } else if (decision.equals("Hotel")) {
+                for (int i = 1; i < 5; i++) {
+                    if (((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).isBuilding(i)) {
+                        ((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).setBuildingX(Color.GREEN, i);
+                    }
+                }
+                ((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).setBuildingX(Color.RED, 5);
+            }
+        } else if (command.equals("sellH")) {
+            price = player.sellH(decision);
+            if (decision.equals("House")) {
+                for (int i = 4; i > 0; i--) {
+                    if (!(((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).isBuilding(i))) {
+                        ((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).setBuildingX(Color.WHITE, i);
+                        break;
+                    }
+                }
+            } else if (decision.equals("Hotel")) {
+                ((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).setBuildingX(Color.WHITE, 5);
+            }
+
+        }
+        return price;
     }
 }
 

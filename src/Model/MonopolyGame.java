@@ -7,13 +7,10 @@ import java.util.*;
 public class MonopolyGame {
     public static MonopolyBoard board;
     public static Dice dice;
+    private final ArrayList<MonopolyGameGUI> views;
     public ArrayList<Player> players;
-    private ArrayList<MonopolyGameGUI> views;
-    private Player playerInTurn;
     private int doubleCounter;
-    private AIPlayer ai;
-    private PropertySquare square;
-    private MonopolyGame mg;
+    private Player playerInTurn;
 
     private ArrayList<Player> playersNotInTurn;
 
@@ -37,18 +34,26 @@ public class MonopolyGame {
         System.out.println("Welcome to Monopoly Game!!");
         System.out.println("There are 4 player in total");
 
-        int number = 4;                                                      // get the number of players to 4
+        // get the number of players to 4
+        int numberOfPlayer = 4;
+        int numberOfHuman = 2;
 
-        //create the 4 players
-        for (int i = 0; i < number; i++) {
+        //create the human players
+        for (int i = 0; i < numberOfHuman; i++) {
             String name = "" + (i + 1);
             Player p = new Player(name, board.startingSquare());
             p.setLastLocation(board.startingSquare());
             playerTempList.add(p);   // add players to a temp arraylist
-
+        }
+       // create AI players
+        for (int i = numberOfHuman; i < numberOfPlayer; i++) {
+            String name = "" + (i + 1);
+            Player p = new AIPlayer(name, board.startingSquare());
+            p.setLastLocation(board.startingSquare());
+            playerTempList.add(p);   // add players to a temp arraylist
         }
         this.playerInTurn = playerTempList.get(0);
-        return playerTempList;                                              // return the temp arrayList
+        return playerTempList;
     }
 
     /**
@@ -108,7 +113,6 @@ public class MonopolyGame {
 
     /**
      * sell properties
-     *
      */
     public void sellSquare() {
         if (!playerInTurn.getProperties().isEmpty()) {
@@ -168,6 +172,7 @@ public class MonopolyGame {
 
             } else {
                 System.out.println("You did not roll a double!");
+                updateViews(playerInTurn, "Doubles");
                 MonopolyBoard.jail.addCounter(playerInTurn);
                 //check if player hasn't rolled a double 3 times, make them pay jail fee and get out of jail
                 if (MonopolyBoard.jail.getMap().get(playerInTurn) == 2) {
@@ -179,27 +184,26 @@ public class MonopolyGame {
             if (dice.hasDoubles()) {
                 updateViews(playerInTurn, "Doubles");
                 doubleCounter++;
-            }else {
+            } else {
                 movePlayer(playerInTurn, distance);
                 updateViews(playerInTurn, "Roll Dice");
             }
 
         }
 
-
-
         if (playerInTurn.isBankrupt()) {
-            updateViews(playerInTurn, "Bankrupt");
+            if (!(playerInTurn instanceof AIPlayer)) {
+                updateViews(playerInTurn, "Bankrupt");
+            }
         }
-        //index = players.indexOf(playerInTurn);
 
         if (getWinner() != null) {
             updateViews(getWinner(), "Winner");
         }
     }
 
-    public void removeBankruptPlayer(Player player){
-        for(PropertySquare property: player.getProperties()){
+    public void removeBankruptPlayer(Player player) {
+        for (PropertySquare property : player.getProperties()) {
             property.setOwner(null);
         }
         players.remove(player);
@@ -235,10 +239,18 @@ public class MonopolyGame {
         }
     }
 
+    /**
+     * Gets the double counter int value
+     * @return
+     */
     public int getDoubleCounter() {
         return doubleCounter;
     }
 
+    /**
+     * Sets the double counter value
+     * @param doubleCounter
+     */
     public void setDoubleCounter(int doubleCounter) {
         this.doubleCounter = doubleCounter;
     }
@@ -254,6 +266,7 @@ public class MonopolyGame {
      * go to next player
      */
     public void nextTurn() {
+        doubleCounter = 0;
 
         int currentIndex = players.indexOf(this.playerInTurn);
         if (currentIndex == players.size() - 1) currentIndex = -1;
@@ -269,6 +282,7 @@ public class MonopolyGame {
         updateViews(playerInTurn, "Next Turn");
 
         AIProcess();
+        printPlayersInfo();
 
     }
 
@@ -299,19 +313,26 @@ public class MonopolyGame {
                     playersNotInTurn.add(player);
                 }
             } else {
-                if (playersNotInTurn.contains(player)) {
-                    playersNotInTurn.remove(player);
-                }
+                playersNotInTurn.remove(player);
             }
         }
         return playersNotInTurn;
     }
 
+    /**
+     * AI process during their turn
+     */
     public void AIProcess() {
         if (playerInTurn instanceof AIPlayer) {
             playRound();
             playerInTurn.buyProperty(playerInTurn.getCurrentLocation());
-            ((AIPlayer) playerInTurn).buildBuildings();
+            if (((AIPlayer) playerInTurn).buildBuildings()) {
+                views.get(0).sellBuildBuilding("House", "build", playerInTurn);
+            }
+            while (playerInTurn.isBankrupt() && !playerInTurn.hasBuilding().isEmpty()) {
+                ((AIPlayer) playerInTurn).sellBuildings();
+                views.get(0).sellBuildBuilding("House", "sellH", playerInTurn);
+            }
             ((AIPlayer) playerInTurn).sellSomeThing();
             nextTurn();
         }

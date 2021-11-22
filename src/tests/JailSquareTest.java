@@ -43,4 +43,5 @@ class JailSquareTest {
     void getMap() {
         Assertions.assertEquals(s.map, s.getMap());
     }
+
 }

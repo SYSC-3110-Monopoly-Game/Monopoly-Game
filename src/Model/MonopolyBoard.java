@@ -10,9 +10,9 @@ public class MonopolyBoard {
     private static final int SIZE = 34;
     private final Square[] squares;
     public static JailSquare jail;
-    private int buyPrice = 60, rentPrice = 70;
+    private final int buyPrice = 60, rentPrice = 70;
 
-    Color[] set = {Color.CYAN, Color.PINK, Color.ORANGE, Color.RED, Color.YELLOW, Color.GREEN, Color.GRAY, Color.BLUE, Color.BLACK};
+    Color[] set = {Color.CYAN, Color.PINK, Color.ORANGE, Color.RED, Color.YELLOW, Color.GREEN, Color.GRAY, Color.BLUE, Color.BLACK, Color.WHITE};
     public static ArrayList<Color> colors = new ArrayList<>();
 
 

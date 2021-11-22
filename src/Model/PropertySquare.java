@@ -83,11 +83,15 @@ public class PropertySquare extends Square {
     /**
      * sell a house from this property square
      */
-    public void sellHouse() {
+    public int sellHouse() {
         if(hasHouses()) {
             House h = this.houses.remove(0);
-            this.owner.increaseCash(h.getPrice()/2);
+            int result = h.getPrice()/2;
+            this.owner.increaseCash(result);
+            System.out.println("A house has been sold from " + this.getName());
+            return result;
         }
+        return -1;
     }
 
     /**
@@ -96,10 +100,11 @@ public class PropertySquare extends Square {
     public int buildHotel() {
         if(this.hotel == null){
             this.hotel = new Hotel(HousePrice);
-            for(int i=0; i<(4 - houses.size()); i++){
+            int size = houses.size();
+            int price = getHotelPrice();
+            for(int i=0; i<(4 - size); i++){
                 this.houses.add(new House(HousePrice));
             }
-            int price = getHotelPrice();
             this.owner.decreaseCash(price);
             System.out.println("A hotel has been built on " + this.getName());
             return price;
@@ -126,11 +131,15 @@ public class PropertySquare extends Square {
     /**
      * sell a hotel from the square
      */
-    public void sellHotel() {
+    public int sellHotel() {
         if(hasHotel()){
-            this.owner.increaseCash(this.hotel.getPrice()/2);
+            int result = this.hotel.getPrice()/2;
+            this.owner.increaseCash(result);
             this.hotel = null;
+            System.out.println("A hotel has been sold from " + this.getName());
+            return result;
         }
+        return -1;
     }
 
 
@@ -179,10 +188,13 @@ public class PropertySquare extends Square {
             return this.rentPrice;
         }
         if(this.owner.hasWholeSet().contains(this)){
-            if(this instanceof RailRoadSquare || this instanceof UtilitySquare){
+            if(this instanceof RailRoadSquare){
                 return this.rentPrice * this.owner.countNumber(Color.BLACK);
             }
-            return (this.rentPrice + this.rentPrice / 2 * (houses.size() + ((hasHotel()) ? 1 : 0))) * 2;
+            if(this instanceof UtilitySquare){
+                return this.rentPrice * this.owner.countNumber(Color.WHITE);
+            }
+            return (this.rentPrice + (this.rentPrice / 2) * (houses.size() + ((hasHotel()) ? 1 : 0))) * 2;
         }
         return this.rentPrice;
     }

@@ -11,7 +11,6 @@ public class TaxSquare extends Square {
 
     /** Player pays income tax when they land on this square
      *
-     * @param p
      */
     @Override
     public void landOn(Player p) {

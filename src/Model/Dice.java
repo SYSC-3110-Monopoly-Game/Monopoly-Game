@@ -4,8 +4,8 @@ import java.util.Random;
 
 public class Dice {
 
-    private Random random;
-    private int[] dice;
+    private final Random random;
+    private final int[] dice;
 
     /**
      * Constructs the default number of dice
@@ -36,7 +36,6 @@ public class Dice {
     }
 
     /**
-     *
      * Returns dice values
      */
     public int[] getDice() {

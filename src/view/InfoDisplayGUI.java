@@ -117,6 +117,9 @@ public class InfoDisplayGUI extends JPanel {
         this.setSellHEnabled(false);
     }
 
+    /**
+     * show the information of players who are not in turn
+     */
     public void setOtherPlayersInfo(ArrayList<Player> players) {
         String allPlayerInfo = "Information of Other Players currently in the game \n";
 
@@ -190,8 +193,8 @@ public class InfoDisplayGUI extends JPanel {
      * show the price to build a house on current location which the player who is currently playing lands on
      */
     public void setHousePrice(int housePrice) {
-        if (housePrice == -1) this.buyPrice.setText("House Price: Cannot build");
-        else if (housePrice == -2) this.buyPrice.setText("House Price: SOLD");
+        if (housePrice == -1) this.housePrice.setText("House Price: Cannot build");
+        else if (housePrice == -2) this.housePrice.setText("House Price: SOLD");
         else this.housePrice.setText("House Price: " + housePrice);
         this.housePrice.repaint();
     }

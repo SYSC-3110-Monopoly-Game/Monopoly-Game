@@ -122,17 +122,24 @@ public class SquareGridGUI extends JPanel {
      * refresh player's location on the map
      */
     public void changePlayerGUILocation(Player player, int currentLocationIndex, int nextLocationIndex) {
-        squareGUIs[currentLocationIndex].removePlayer(player.getName(), player.isInJail());
-
+        String name = player.getName();
+        if(player instanceof AIPlayer){
+            name = String.valueOf(player.getName().charAt(0));
+        }
+        squareGUIs[currentLocationIndex].removePlayer(name, player.isInJail());
+        JailSquareGUI jail = (JailSquareGUI) squareGUIs[8];
         if (player.isInJail() && nextLocationIndex == 8) {
-            JailSquareGUI jail = (JailSquareGUI) squareGUIs[8];
+
             //if player already not in jail
+            jail.removePlayer(name, false);
             jail.addPlayerToJail(player.getName());
         } else {
             if (!player.isInJail() && nextLocationIndex == 8 && currentLocationIndex == 8) {
-                JailSquareGUI jail = (JailSquareGUI) squareGUIs[nextLocationIndex];
-                jail.removePlayer(player.getName(), true);
-                jail.addPlayerToJail(player.getName());
+                name = player.getName();
+                if(player instanceof AIPlayer){
+                    name = String.valueOf(player.getName().charAt(0));
+                }
+                jail.removePlayer(name, true);
             }
             System.out.println("currentlocationIndex in square GUI " + currentLocationIndex);
             squareGUIs[nextLocationIndex].addPlayer(player.getName());
@@ -145,7 +152,11 @@ public class SquareGridGUI extends JPanel {
      * remove the player from the map
      */
     public void removePlayerGUILocation(Player player, int currentLocationIndex) {
-        squareGUIs[currentLocationIndex].removePlayer(player.getName(), player.isInJail());
+        String name = player.getName();
+        if(player instanceof AIPlayer){
+            name = String.valueOf(player.getName().charAt(0));
+        }
+        squareGUIs[currentLocationIndex].removePlayer(name, player.isInJail());
     }
 
     /**

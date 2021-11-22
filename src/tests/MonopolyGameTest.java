@@ -28,22 +28,9 @@ class MonopolyGameTest {
     }
 
     @Test
-    void sellSquare() {
-        game.getPlayerInTurn().setCurrentLocation(MonopolyGame.board.getSquares()[2]);
-        game.buySquare();
-        //game.sellSquare();
-        Assertions.assertEquals(0, game.getPlayerInTurn().getProperties().size());
-    }
-
-    @Test
     void playRound() {
         game.playRound();
         Assertions.assertNotEquals(MonopolyGame.board.startingSquare(), game.getPlayerInTurn().getCurrentLocation());
-    }
-
-    @Test
-    void printPlayersInfo() {
-
     }
 
     @Test
@@ -55,5 +42,21 @@ class MonopolyGameTest {
     void nextTurn() {
         game.nextTurn();
         Assertions.assertEquals(game.players.get(1), game.getPlayerInTurn());
+    }
+
+    @Test
+    void removeBankruptPlayer() {
+        game.removeBankruptPlayer(game.getPlayerInTurn());
+        Assertions.assertEquals(3, game.players.size());
+    }
+
+    @Test
+    void setANDgetDoubleCounter() {
+        game.setDoubleCounter(2);
+        Assertions.assertEquals(2, game.getDoubleCounter());
+    }
+
+    void getPlayerNotInTurn() {
+        Assertions.assertEquals(3, game.getPlayersNotInTurn().size());
     }
 }
