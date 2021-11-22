@@ -31,4 +31,9 @@ class MonopolyBoardTest {
         Square next = board.getNextSquare(board.startingSquare(), 3);
         Assertions.assertEquals("Income Tax", next.getName());
     }
+
+    @Test
+    void getSquareAt(){
+        Assertions.assertEquals(board.getSquareAt(0), board.startingSquare());
+    }
 }

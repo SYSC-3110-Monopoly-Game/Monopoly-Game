@@ -9,16 +9,17 @@ class taxSquareTest {
 
     private final TaxSquare square = new TaxSquare("go", 0, 100);
     private final Player p = new Player("player", square);
-
-
-    @Test
-    void landOn() {
-        square.landOn(p);
-        Assertions.assertEquals(200, p.getCash());
-    }
+    private final int playerinitialcash = 350;
 
     @Test
     void getTax() {
         Assertions.assertEquals(100, square.getTax());
     }
+
+    @Test
+    void landOn() {
+        square.landOn(p);
+        Assertions.assertEquals(playerinitialcash-square.getTax(), p.getCash());
+    }
+
 }

@@ -296,9 +296,9 @@ public class Player {
      */
     public int sellH(String answer) {
         if(answer.equals("House")){
-            this.getSelectedSquare().sellHouse();
+            return this.getSelectedSquare().sellHouse();
         } else if (answer.equals("Hotel")){
-            this.getSelectedSquare().sellHotel();
+            return this.getSelectedSquare().sellHotel();
         }
         return -1;
     }
