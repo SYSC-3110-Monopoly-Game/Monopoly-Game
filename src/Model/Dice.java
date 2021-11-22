@@ -24,6 +24,7 @@ public class Dice {
             int singleDie = this.random.nextInt(6)+1;
             this.dice[i] = singleDie;
         }
+
         return this.dice;
     }
 

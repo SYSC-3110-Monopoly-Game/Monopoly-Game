@@ -10,6 +10,7 @@ public class MonopolyGame {
     public ArrayList<Player> players;
     private ArrayList<MonopolyGameGUI> views;
     private Player playerInTurn;
+    private int doubleCounter;
     private AIPlayer ai;
     private PropertySquare square;
     private MonopolyGame mg;
@@ -157,14 +158,14 @@ public class MonopolyGame {
 
         boolean inJail = playerInTurn.isInJail();
         int distance = getDistance();
-        int counter = 0;
+
 
         //if player is in jail, only let player out if they rolled a double
         if (inJail) {
             if (dice.hasDoubles()) {
+                updateViews(playerInTurn, "Doubles");
                 System.out.println("You rolled a double, you can go out!");
-                //setting player out of jail
-                MonopolyBoard.jail.goOutJail(playerInTurn);
+
             } else {
                 System.out.println("You did not roll a double!");
                 MonopolyBoard.jail.addCounter(playerInTurn);
@@ -176,14 +177,16 @@ public class MonopolyGame {
             }
         } else {  // if player not in jail
             if (dice.hasDoubles()) {
+                updateViews(playerInTurn, "Doubles");
+                doubleCounter++;
+            }else {
+                movePlayer(playerInTurn, distance);
                 updateViews(playerInTurn, "Roll Dice");
             }
 
-            movePlayer(playerInTurn, distance);
-
         }
 
-        updateViews(playerInTurn, "Roll Dice");
+
 
         if (playerInTurn.isBankrupt()) {
             updateViews(playerInTurn, "Bankrupt");
@@ -230,6 +233,14 @@ public class MonopolyGame {
             view.handleUpdate(p, command, playersNotInTurn);
 
         }
+    }
+
+    public int getDoubleCounter() {
+        return doubleCounter;
+    }
+
+    public void setDoubleCounter(int doubleCounter) {
+        this.doubleCounter = doubleCounter;
     }
 
     /**
@@ -280,17 +291,16 @@ public class MonopolyGame {
     /**
      * List of players not in turn
      */
-    public ArrayList getPlayersNotInTurn() {
-        //playersNotInTurn.remove(0);
+    public ArrayList<Player> getPlayersNotInTurn() {
 
-        for (int i = 0; i < players.size(); i++) {
-            if (players.get(i) != playerInTurn) {
-                if (!playersNotInTurn.contains(players.get(i))) {
-                    playersNotInTurn.add(players.get(i));
+        for (Player player : players) {
+            if (player != playerInTurn) {
+                if (!playersNotInTurn.contains(player)) {
+                    playersNotInTurn.add(player);
                 }
-            } else if (players.get(i) == playerInTurn) {
-                if (playersNotInTurn.contains(players.get(i))) {
-                    playersNotInTurn.remove(players.get(i));
+            } else {
+                if (playersNotInTurn.contains(player)) {
+                    playersNotInTurn.remove(player);
                 }
             }
         }
