@@ -188,8 +188,11 @@ public class PropertySquare extends Square {
             return this.rentPrice;
         }
         if(this.owner.hasWholeSet().contains(this)){
-            if(this instanceof RailRoadSquare || this instanceof UtilitySquare){
+            if(this instanceof RailRoadSquare){
                 return this.rentPrice * this.owner.countNumber(Color.BLACK);
+            }
+            if(this instanceof UtilitySquare){
+                return this.rentPrice * this.owner.countNumber(Color.WHITE);
             }
             return (this.rentPrice + (this.rentPrice / 2) * (houses.size() + ((hasHotel()) ? 1 : 0))) * 2;
         }
