@@ -70,7 +70,6 @@ public class PropertySquare extends Square {
      * @return boolean
      */
     public boolean hasHouses() {
-        System.out.println("size of houses: "+houses.size());
         return !this.houses.isEmpty();
     }
 
