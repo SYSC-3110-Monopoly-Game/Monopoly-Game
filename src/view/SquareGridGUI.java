@@ -14,7 +14,7 @@ public class SquareGridGUI extends JPanel {
     private DiceGUI diceGUI;
 
     /**
-     * initialize the game map (left part)
+     * initalize the game map (left part)
      */
     public SquareGridGUI(Square[] square, ArrayList<Player> players) {
         this.square = square;
@@ -42,22 +42,21 @@ public class SquareGridGUI extends JPanel {
         c.insets = new Insets(1, 1, 0, 0);  //top padding
 
         NewMethod(c);
-        //originalMethod(c);
 
         message = new JTextArea();
-        message.setPreferredSize(new Dimension(270, 60));
-        message.setBackground(new Color(196, 206, 196));
+        message.setPreferredSize(new Dimension(350, 60));
+        message.setBackground(new Color(213, 218, 213));
         c.gridx = 3;
         c.gridy = 2;
         c.gridwidth = 4;
         this.add(message, c);
 
-        //dice gui
+        //add dice to board
+        diceGUI= new DiceGUI();
         c.weightx = 0.0;
         c.gridx = 4;
         c.gridy = 3;
         c.gridwidth = 2;
-        diceGUI= new DiceGUI();
         this.add(diceGUI, c);
     }
 
@@ -115,6 +114,11 @@ public class SquareGridGUI extends JPanel {
         }
     }
 
+    public SquareGUI getPropertySquareGUI(int index){
+        return squareGUIs[index];
+    }
+
+
     /**
      * refresh player's location on the map
      */
@@ -138,7 +142,7 @@ public class SquareGridGUI extends JPanel {
                 }
                 jail.removePlayer(name, true);
             }
-            System.out.println("current locationIndex in square GUI " + currentLocationIndex);
+            System.out.println("currentlocationIndex in square GUI " + currentLocationIndex);
             squareGUIs[nextLocationIndex].addPlayer(player.getName());
             System.out.println("nextLocationIndex in square GUI " + nextLocationIndex);
         }
@@ -157,6 +161,14 @@ public class SquareGridGUI extends JPanel {
     }
 
     /**
+     * add 2 dices to the map
+     */
+    public void addDiceGUI(DiceGUI diceGUI) {
+        GridBagConstraints c = new GridBagConstraints();
+
+    }
+
+    /**
      * set textArea message
      */
     public void setMessage(String string) {
@@ -170,20 +182,8 @@ public class SquareGridGUI extends JPanel {
         message.append(string);
     }
 
-    /**
-     * add 2 dices to the map
-     */
-    public void addDiceGUI(DiceGUI diceGUI) {
-        GridBagConstraints c = new GridBagConstraints();
-        c.weightx = 0.0;
-        c.gridx = 4;
-        c.gridy = 3;
-        c.gridwidth = 2;
-        this.add(diceGUI, c);
-    }
-
-    public SquareGUI getPropertySquareGUI(int index){
-        return squareGUIs[index];
+    public void setDiceImages(int diceValue, int diceValue1) {
+        this.diceGUI.setDiceImages( diceValue,  diceValue1);
     }
 }
 

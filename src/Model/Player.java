@@ -10,8 +10,10 @@ public class Player {
     private Square currentLocation;
     private Square lastLocation;
     private PropertySquare selectedSquare;
+
     private int cashTotal;
     private boolean isInJail;
+    private String buildingType;
 
     /**
      * Constructor of Player
@@ -20,9 +22,12 @@ public class Player {
     public Player(String name, Square square) {
         this.name = name;
         this.squaresOwned = new ArrayList<>();
-        this.cashTotal = 60;
+
+        this.cashTotal = 350;
+
         this.currentLocation = square;
         this.decision = null;
+        this.buildingType = null;
     }
 
 
@@ -44,6 +49,17 @@ public class Player {
     }
 
     /**
+     * return the property according to its name
+     */
+    public PropertySquare getPropertyFromName(String name) {
+        for (PropertySquare p: this.getProperties()){
+            if(p.getName().equals(name)){
+                return p;
+            }
+        }
+        return null;
+    }
+    /**
      * get which square the player would like to build/sell building
      *
      * @return selectedSquare
@@ -62,6 +78,10 @@ public class Player {
     public void setCurrentLocation(Square currentLocation) {
         this.lastLocation = this.currentLocation;
         this.currentLocation = currentLocation;
+    }
+
+    public void setLastLocation(Square lastLocation) {
+        this.lastLocation = lastLocation;
     }
 
     /**
@@ -265,8 +285,10 @@ public class Player {
      */
     public int buildH(String answer) {
         if(answer.equals("House")){
+            setBuildingType("House");
             return this.getSelectedSquare().buildHouse();
         } else if (answer.equals("Hotel")){
+            setBuildingType("Hotel");
             return this.getSelectedSquare().buildHotel();
         }
         return -1;
@@ -278,10 +300,20 @@ public class Player {
      */
     public int sellH(String answer) {
         if(answer.equals("House")){
+            setBuildingType("House");
             this.getSelectedSquare().sellHouse();
         } else if (answer.equals("Hotel")){
+            setBuildingType("Hotel");
             this.getSelectedSquare().sellHotel();
         }
         return -1;
+    }
+
+    public String getBuildingType() {
+        return buildingType;
+    }
+
+    public void setBuildingType(String buildingType) {
+        this.buildingType = buildingType;
     }
 }

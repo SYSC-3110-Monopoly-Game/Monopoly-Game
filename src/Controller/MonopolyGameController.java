@@ -1,22 +1,17 @@
 package Controller;
 
 import Model.MonopolyGame;
-import view.MonopolyGameGUI;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
-
 public class MonopolyGameController implements ActionListener {
 
     private final MonopolyGame game;
-    private final MonopolyGameGUI view;
 
-    public MonopolyGameController(MonopolyGame game, MonopolyGameGUI view) {
+    public MonopolyGameController(MonopolyGame game) {
         this.game=game;
-        this.view = view;
     }
 
     @Override

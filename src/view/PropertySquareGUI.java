@@ -4,14 +4,17 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PropertySquareGUI extends SimpleSquareGUI{
+    public static final int SIZE = 90;
+
     JPanel building1, building2, building3, building4, building5;
 
     public PropertySquareGUI(Color color, String name, String buyPrice) {
         super("src/images/empty.png", color);
 
+        //square name display + building
         //name part
         JLabel squareName = new JLabel("<html>" + name + "</html>");
-        squareName.setMaximumSize(new Dimension(SimpleSquareGUI.SIZE,27));
+        squareName.setMaximumSize(new Dimension(SIZE,27));
         squareName.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
         //building part
         JPanel buildings = new JPanel(new GridLayout(1,5));
@@ -52,13 +55,21 @@ public class PropertySquareGUI extends SimpleSquareGUI{
      */
     public boolean isBuilding(int buildingNumber){
         if (buildingNumber == 1){
-            return building1.getBackground() == Color.white;
+            if (building1.getBackground() == Color.white){
+                return true;
+            }
         }else if (buildingNumber == 2){
-            return building2.getBackground() == Color.white;
+            if (building2.getBackground() == Color.white){
+                return true;
+            }
         }else if(buildingNumber == 3){
-            return building3.getBackground() == Color.white;
+            if (building3.getBackground() == Color.white){
+                return true;
+            }
         }else if(buildingNumber == 4){
-            return building4.getBackground() == Color.white;
+            if (building4.getBackground() == Color.white){
+                return true;
+            }
         }else if(buildingNumber == 5){
             if (building5.getBackground() == Color.white){
                 return true;

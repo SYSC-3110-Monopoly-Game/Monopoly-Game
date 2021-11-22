@@ -6,11 +6,10 @@ import java.util.*;
 
 public class MonopolyGame {
     public static MonopolyBoard board;
+    public static Dice dice;
     public ArrayList<Player> players;
     private ArrayList<MonopolyGameGUI> views;
-    public static Dice dice;
     private Player playerInTurn;
-
     private AIPlayer ai;
     private PropertySquare square;
     private MonopolyGame mg;
@@ -38,16 +37,14 @@ public class MonopolyGame {
         System.out.println("There are 4 player in total");
 
         int number = 4;                                                      // get the number of players to 4
-        int playernum = 1;
 
         //create the 4 players
-        for (int i = 0; i < playernum; i++) {
+        for (int i = 0; i < number; i++) {
             String name = "" + (i + 1);
-            playerTempList.add(new Player(name, board.startingSquare()));   // add players to a temp arraylist
-        }
-        for (int j = playernum; j < number; j++) {
-            String name = "" + (j + 1);
-            playerTempList.add(new AIPlayer(name, board.startingSquare()));   // add players to a temp arraylist
+            Player p = new Player(name, board.startingSquare());
+            p.setLastLocation(board.startingSquare());
+            playerTempList.add(p);   // add players to a temp arraylist
+
         }
         this.playerInTurn = playerTempList.get(0);
         return playerTempList;                                              // return the temp arrayList
@@ -103,18 +100,18 @@ public class MonopolyGame {
      * buy the landed on property
      */
     public void buySquare() {
-        if(playerInTurn.buyProperty(playerInTurn.getCurrentLocation())) {
-            this.updateViews(playerInTurn, "Buy", playersNotInTurn);
+        if (playerInTurn.buyProperty(playerInTurn.getCurrentLocation())) {
+            this.updateViews(playerInTurn, "Buy");
         }
     }
 
     /**
      * sell properties
+     *
      */
     public void sellSquare() {
         if (!playerInTurn.getProperties().isEmpty()) {
-            playerInTurn.sellProperty(playerInTurn.getProperties().get(0));
-            this.updateViews(playerInTurn, "Sell", playersNotInTurn);
+            this.updateViews(playerInTurn, "Sell");
         }
     }
 
@@ -123,12 +120,12 @@ public class MonopolyGame {
      */
     public void checkAvailableBuild() {
         ArrayList<PropertySquare> propertyList = playerInTurn.removeRailroadUtility(playerInTurn.hasWholeSet());
-        if(!propertyList.isEmpty()){
+        if (!propertyList.isEmpty()) {
             propertyList = playerInTurn.getAvailableProperties(propertyList);
-            if(!propertyList.isEmpty()){
+            if (!propertyList.isEmpty()) {
                 views.get(0).getDecision(propertyList, this);
                 this.getPlayerInTurn().setDecision("build");
-            }else {
+            } else {
                 System.out.println("not enough money");
             }
         } else {
@@ -137,23 +134,11 @@ public class MonopolyGame {
     }
 
     /**
-     * return the property according to its name
-     */
-    public PropertySquare getProperty(String name) {
-        for (PropertySquare p: playerInTurn.getProperties()){
-            if(p.getName().equals(name)){
-                return p;
-            }
-        }
-        return null;
-    }
-
-    /**
      * check if the player can sell a building from any of its property square list
      */
     public void checkAvailableSell() {
         ArrayList<PropertySquare> propertyList = playerInTurn.hasBuilding();
-        if(!propertyList.isEmpty()){
+        if (!propertyList.isEmpty()) {
             views.get(0).getDecision(propertyList, this);
             this.getPlayerInTurn().setDecision("sellH");
         } else {
@@ -190,32 +175,34 @@ public class MonopolyGame {
                 }
             }
         } else {  // if player not in jail
+            if (dice.hasDoubles()) {
+                updateViews(playerInTurn, "Roll Dice");
+            }
+
             movePlayer(playerInTurn, distance);
 
         }
 
-        updateViews(playerInTurn, "Roll Dice", getPlayersNotInTurn());
+        updateViews(playerInTurn, "Roll Dice");
 
         if (playerInTurn.isBankrupt()) {
-            updateViews(playerInTurn, "Bankrupt", getPlayersNotInTurn());
-            for(PropertySquare property: playerInTurn.getProperties()){
-                property.setOwner(null);
-            }
-            index = players.indexOf(playerInTurn);
-
-            // if only 2 players left and one is bankrupt
-            if(players.size() == 2) {
-                //remove the player immediately
-                players.remove(playerInTurn);
-            }
-
+            updateViews(playerInTurn, "Bankrupt");
         }
+        //index = players.indexOf(playerInTurn);
 
-        if(getWinner()!=null){
-            updateViews(getWinner(), "Winner", getPlayersNotInTurn());
+        if (getWinner() != null) {
+            updateViews(getWinner(), "Winner");
         }
     }
 
+    public void removeBankruptPlayer(Player player){
+        for(PropertySquare property: player.getProperties()){
+            property.setOwner(null);
+        }
+        players.remove(player);
+
+
+    }
 
     /**
      * display all needed information about players
@@ -238,9 +225,10 @@ public class MonopolyGame {
     /**
      * update GUI
      */
-    private void updateViews(Player p, String command, ArrayList<Player> ps) {
+    private void updateViews(Player p, String command) {
         for (MonopolyGameGUI view : views) {
-            view.handleUpdate(p, command, ps);
+            view.handleUpdate(p, command, playersNotInTurn);
+
         }
     }
 
@@ -259,14 +247,15 @@ public class MonopolyGame {
         int currentIndex = players.indexOf(this.playerInTurn);
         if (currentIndex == players.size() - 1) currentIndex = -1;
         this.playerInTurn = players.get(currentIndex + 1);
-        if(index != -1) {
+        this.playersNotInTurn = getPlayersNotInTurn();
+        if (index != -1) {
             players.remove(index);
             index = -1;
         }
 
         this.playersNotInTurn = getPlayersNotInTurn();
 
-        updateViews(playerInTurn, "Next Turn",getPlayersNotInTurn());
+        updateViews(playerInTurn, "Next Turn");
 
         AIProcess();
 
@@ -277,11 +266,11 @@ public class MonopolyGame {
      * ask the player to choose whether you want to build/sell a house or a hotel
      */
     public int setSelectedProperty(String text) {
-        this.getPlayerInTurn().setSelectedSquare(this.getProperty(text));
-        updateViews(playerInTurn, this.getPlayerInTurn().getDecision(), playersNotInTurn);
+        playerInTurn.setSelectedSquare(playerInTurn.getPropertyFromName(text));
+        updateViews(playerInTurn, this.getPlayerInTurn().getDecision());
 
-        for (int i =0; i < board.getSquares().length; i++){
-            if (text.equals( board.getSquares()[i].getName())){
+        for (int i = 0; i < board.getSquares().length; i++) {
+            if (text.equals(board.getSquares()[i].getName())) {
                 return i;
             }
         }
@@ -291,14 +280,16 @@ public class MonopolyGame {
     /**
      * List of players not in turn
      */
-    public ArrayList<Player> getPlayersNotInTurn(){
-        for (int i = 0; i < players.size(); i++){
-            if (players.get(i) != playerInTurn){
-                if (!playersNotInTurn.contains(players.get(i))){
+    public ArrayList getPlayersNotInTurn() {
+        //playersNotInTurn.remove(0);
+
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i) != playerInTurn) {
+                if (!playersNotInTurn.contains(players.get(i))) {
                     playersNotInTurn.add(players.get(i));
                 }
-            }else if (players.get(i) == playerInTurn){
-                if (playersNotInTurn.contains(players.get(i))){
+            } else if (players.get(i) == playerInTurn) {
+                if (playersNotInTurn.contains(players.get(i))) {
                     playersNotInTurn.remove(players.get(i));
                 }
             }
@@ -306,16 +297,13 @@ public class MonopolyGame {
         return playersNotInTurn;
     }
 
-    public void AIProcess(){
-        if(playerInTurn instanceof AIPlayer) {
+    public void AIProcess() {
+        if (playerInTurn instanceof AIPlayer) {
             playRound();
-            if (!playerInTurn.isBankrupt()) {
-                playerInTurn.buyProperty(playerInTurn.getCurrentLocation());
-                ((AIPlayer) playerInTurn).buildBuildings();
-                ((AIPlayer) playerInTurn).sellSomeThing();
-            }
+            playerInTurn.buyProperty(playerInTurn.getCurrentLocation());
+            ((AIPlayer) playerInTurn).buildBuildings();
+            ((AIPlayer) playerInTurn).sellSomeThing();
             nextTurn();
         }
-
     }
 }
