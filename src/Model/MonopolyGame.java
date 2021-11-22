@@ -321,7 +321,7 @@ public class MonopolyGame {
             if (((AIPlayer) playerInTurn).buildBuildings()) {
                 views.get(0).sellBuildBuilding("House", "build", playerInTurn);
             }
-            while (playerInTurn.isBankrupt()) {
+            while (playerInTurn.isBankrupt() && !playerInTurn.getProperties().isEmpty()) {
                 ((AIPlayer) playerInTurn).sellBuildings();
                 views.get(0).sellBuildBuilding("House", "sellH", playerInTurn);
             }
