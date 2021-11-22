@@ -30,6 +30,8 @@ public class DiceGUI extends JPanel {
         this.add(dice1, BorderLayout.WEST);
         JLabel dice2 = new JLabel(dice2Image);
         this.add(dice2, BorderLayout.EAST);
+        this.revalidate();
+        this.repaint();
     }
 
 }

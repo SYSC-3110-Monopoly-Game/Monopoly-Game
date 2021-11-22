@@ -76,8 +76,8 @@ public class SquareGridGUI extends JPanel {
         } else if (square instanceof PropertySquare property) {
             s = new PropertySquareGUI(property.getColor(), property.getName(), String.valueOf(property.getPrice()));
 
-        } else if (square instanceof IncomeTaxSquare incomeTax) {
-            s = new IncomeTaxSquareGUI(incomeTax.getTax());
+        } else if (square instanceof TaxSquare incomeTax) {
+            s = new TaxSquareGUI(incomeTax.getTax(), incomeTax.getName());
 
         } else if (square instanceof GoToJailSquare) {
             s = new GoToJailGUI();
@@ -125,13 +125,14 @@ public class SquareGridGUI extends JPanel {
         squareGUIs[currentLocationIndex].removePlayer(player.getName(), player.isInJail());
 
         if (player.isInJail() && nextLocationIndex == 8) {
-            JailSquareGUI jail = (JailSquareGUI) squareGUIs[nextLocationIndex];
+            JailSquareGUI jail = (JailSquareGUI) squareGUIs[8];
             //if player already not in jail
             jail.addPlayerToJail(player.getName());
         } else {
             if (!player.isInJail() && nextLocationIndex == 8 && currentLocationIndex == 8) {
                 JailSquareGUI jail = (JailSquareGUI) squareGUIs[nextLocationIndex];
                 jail.removePlayer(player.getName(), true);
+                jail.addPlayerToJail(player.getName());
             }
             System.out.println("currentlocationIndex in square GUI " + currentLocationIndex);
             squareGUIs[nextLocationIndex].addPlayer(player.getName());
@@ -145,14 +146,6 @@ public class SquareGridGUI extends JPanel {
      */
     public void removePlayerGUILocation(Player player, int currentLocationIndex) {
         squareGUIs[currentLocationIndex].removePlayer(player.getName(), player.isInJail());
-    }
-
-    /**
-     * add 2 dices to the map
-     */
-    public void addDiceGUI(DiceGUI diceGUI) {
-        GridBagConstraints c = new GridBagConstraints();
-
     }
 
     /**
@@ -171,6 +164,7 @@ public class SquareGridGUI extends JPanel {
 
     public void setDiceImages(int diceValue, int diceValue1) {
         this.diceGUI.setDiceImages( diceValue,  diceValue1);
+        this.repaint();
     }
 }
 

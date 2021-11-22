@@ -1,13 +1,13 @@
 package tests;
 
-import Model.IncomeTaxSquare;
+import Model.TaxSquare;
 import Model.Player;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-class IncomeTaxSquareTest {
+class taxSquareTest {
 
-    private final IncomeTaxSquare square = new IncomeTaxSquare("go", 0, 100);
+    private final TaxSquare square = new TaxSquare("go", 0, 100);
     private final Player p = new Player("player", square);
 
 
