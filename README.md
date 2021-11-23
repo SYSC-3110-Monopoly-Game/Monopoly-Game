@@ -62,7 +62,7 @@ A player wins the game when all other players go bankrupt.
          <details><summary>Jail Square</summary>
              
 - When player gets to the jail, he/she can only move out of the jail in two ways:
-    1. Player rolls an even number.
+    1. Player rolls two the same number in  dices (e.g., '1 and 1', '2 and 2', '3 and 3', '4 and 4', '5 and 5' and '6 and 6'.).
     2. Player already stayed in the jail for 3 rounds.             
 </details> 
          <details><summary>Utility Square</summary>
@@ -86,6 +86,8 @@ A player wins the game when all other players go bankrupt.
 - House: indicates by green square.
 - Hotel: indicates by red square.
 - Buildings can only be built on Property Square! 
+- Sell Rules:
+    - when player owns a hotel, he/she must first sell the hotel, then the houses.        
 - In this Monopoly Game: 
     - At most four houses and one hotel can be built on a Property Square.       
     - If player chooses to build a hotel before owning four houses on that Property Square, the number of houses of the square will increase to 4.    
@@ -423,6 +425,12 @@ Liya Abebe
 Rebbeca Li
     
 - implemented hotel and house gui
+- refactored InfoDisplayGUI
+- implemented getPlayerNotInTurn() in MonopolyGame class
+- refactored handleUpdate() in MonopolyGameGUI class
+- refactored sellBuildBuilding() in MonopolyGameGUI class     
+- refactored PropertySquareGUI in PropertySquareGUI class
+- implemented isBuilding(), setBuidlingX in PropertySquareGUI class   
 - created user manual
 
 Shizhong Shang
