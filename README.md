@@ -254,7 +254,7 @@ Ideally we would want to wait for user input to roll dice again when doubles are
 all the dice pairs, not just the last rolled pair.
 </details>
 
-<details><summary>Milestone 2</summary>
+<details><summary>Milestone 3</summary>
     
 # Milestone 3
 
@@ -276,7 +276,10 @@ all the dice pairs, not just the last rolled pair.
 
 Liya Abebe
 
-- 
+- implemented property selling
+- implemented bankrupt logic when player has properties to sell
+- refactored game gui files
+- implemented more feedbacks to be shown during the game in the board info area
  
 Rebbeca Li
     
