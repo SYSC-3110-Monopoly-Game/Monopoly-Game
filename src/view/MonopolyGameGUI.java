@@ -248,7 +248,6 @@ public class MonopolyGameGUI extends JFrame {
                     if (player.isBankrupt()) {
                         JOptionPane.showMessageDialog(squareGUI, "You are still Bankrupt!! Unfortunately you can't stay in the game");
                         squareGUI.removePlayerGUILocation(player, player.getCurrentLocation().getNumber());
-                        infoDisplayGUI.setPropertyList(null);
                         game.removeBankruptPlayer(player);
                     }
                     popup.dispose();
@@ -262,7 +261,6 @@ public class MonopolyGameGUI extends JFrame {
                 if (player.isBankrupt()) {
                     JOptionPane.showMessageDialog(squareGUI, "You are still Bankrupt!! Unfortunately you can't stay in the game");
                     squareGUI.removePlayerGUILocation(player, player.getCurrentLocation().getNumber());
-                    infoDisplayGUI.setPropertyList(null);
                     game.removeBankruptPlayer(player);
                 }
             }
