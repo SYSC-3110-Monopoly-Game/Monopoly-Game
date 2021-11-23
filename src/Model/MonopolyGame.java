@@ -188,7 +188,6 @@ public class MonopolyGame {
                 movePlayer(playerInTurn, distance);
                 updateViews(playerInTurn, "Roll Dice");
             }
-
         }
 
         if (playerInTurn.isBankrupt()) {
@@ -283,7 +282,6 @@ public class MonopolyGame {
 
         AIProcess();
         printPlayersInfo();
-
     }
 
     /**
