@@ -26,8 +26,11 @@ public class AIPlayer extends Player {
     public PropertySquare getRandomSquare(ArrayList<PropertySquare> p)
     {
         Random r = new Random();
-        int randomIndex = r.nextInt(p.size());
-        return p.get(randomIndex);
+        if(!p.isEmpty()){
+            int randomIndex = r.nextInt(p.size());
+            return p.get(randomIndex);
+        }
+        return null;
     }
 
     /**
@@ -48,7 +51,13 @@ public class AIPlayer extends Player {
     public void sellSomeThing(){
         while(this.isBankrupt()){
             if(this.isBankrupt()){
-                this.sellProperty(this.getRandomSquare(this.getSellProperties()));
+                PropertySquare temp = this.getRandomSquare(this.getSellProperties());
+                if(temp != null) {
+                    this.sellProperty(temp);
+                } else {
+                    System.out.println("No properties");
+                    break;
+                }
             }
         }
     }
@@ -61,9 +70,14 @@ public class AIPlayer extends Player {
         if(!propertyList.isEmpty()){
             propertyList = this.getAvailableProperties(propertyList);
             if(!propertyList.isEmpty() && this.getBoolean()){
-                this.setSelectedSquare(this.getRandomSquare(propertyList));
-                if(this.getBoolean()){
-                    return this.buildH("House") > 0;
+                PropertySquare temp = this.getRandomSquare(propertyList);
+                if(temp != null) {
+                    this.setSelectedSquare(temp);
+                    if (this.getBoolean()) {
+                        return this.buildH("House") > 0;
+                    } else {
+                        System.out.println("No properties");
+                    }
                 }
             }else {
                 System.out.println("not enough money");
@@ -81,8 +95,13 @@ public class AIPlayer extends Player {
     public void sellBuildings() {
         ArrayList<PropertySquare> propertyList = this.hasBuilding();
         if (!propertyList.isEmpty()) {
-            this.setSelectedSquare(this.getRandomSquare(propertyList));
-            this.sellH("House");
+            PropertySquare temp = this.getRandomSquare(propertyList);
+            if(temp != null) {
+                this.setSelectedSquare(temp);
+                this.sellH("House");
+            } else {
+                System.out.println("No properties");
+            }
         } else {
             System.out.println("No houses neither hotels");
         }

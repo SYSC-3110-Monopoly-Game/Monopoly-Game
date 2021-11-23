@@ -334,7 +334,12 @@ public class MonopolyGame {
                 views.get(0).sellBuildBuilding("House", "sellH", playerInTurn);
             }
             ((AIPlayer) playerInTurn).sellSomeThing();
-            nextTurn();
+            if(playerInTurn.isBankrupt()){
+                this.removeBankruptPlayer(playerInTurn);
+                this.updateViews(playerInTurn, "Bankrupt");
+            } else {
+                nextTurn();
+            }
         }
     }
 }
