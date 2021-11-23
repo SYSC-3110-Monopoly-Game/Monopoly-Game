@@ -32,7 +32,7 @@ Players need to roll dices and move to next square depend on those dices. Differ
 A player wins the game when all other players go bankrupt.
 
 
-<details><summary>Board Game Section</summary>   
+<details><summary>Board Game Section</summary>
     <details><summary>Squares</summary>
         <details><summary>Property Square</summary>
     
@@ -94,7 +94,7 @@ A player wins the game when all other players go bankrupt.
         - (e.g., when player A owns ‘Baltic Avenue’ and ‘Mediterranean Avenue’, he/she can start to build houses or hotel on Property Square)         
 </details>       
 </details> 
-    
+    <br>
 <details><summary>Information Section</summary>    
 - Information Section is made up by five sections. (‘Players’ information’, ‘Current Player’s Information’. ‘Current Location’, ‘Square Information’ and ‘Buttons’)
     <details><summary>Players' Information</summary>
@@ -150,6 +150,8 @@ A player wins the game when all other players go bankrupt.
 </details>
 </details>
 </details>  
+</details>
+<br>
 <details><summary>Bankrupt</summary> 
     
 - When a player has 0 or negative cash, the system will sell his/her properties.
@@ -420,7 +422,8 @@ Liya Abebe
  
 Rebbeca Li
     
-- 
+- implemented hotel and house gui
+- created user manual
 
 Shizhong Shang
   
