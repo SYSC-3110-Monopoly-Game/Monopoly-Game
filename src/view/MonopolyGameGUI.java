@@ -218,6 +218,8 @@ public class MonopolyGameGUI extends JFrame {
                 infoDisplayGUI.setSellEnabled(false);
                 infoDisplayGUI.setNextEnabled(false);
                 infoDisplayGUI.setRollEnabled(false);
+                infoDisplayGUI.setBuildEnabled(false);
+                infoDisplayGUI.setSellHEnabled(false);
             }
             case "build", "sellH" -> HotelOrHouse(player, command);
             default -> throw new IllegalStateException("Unexpected value: " + command);
@@ -249,7 +251,7 @@ public class MonopolyGameGUI extends JFrame {
                         JOptionPane.showMessageDialog(squareGUI, "You are still Bankrupt!! Unfortunately you can't stay in the game");
                         squareGUI.removePlayerGUILocation(player, player.getCurrentLocation().getNumber());
                         game.removeBankruptPlayer(player);
-                        infoDisplayGUI.setPropertyList(null);
+                        infoDisplayGUI.setPropertyList("");
                     }
                     popup.dispose();
                 }
@@ -263,7 +265,7 @@ public class MonopolyGameGUI extends JFrame {
                     JOptionPane.showMessageDialog(squareGUI, "You are still Bankrupt!! Unfortunately you can't stay in the game");
                     squareGUI.removePlayerGUILocation(player, player.getCurrentLocation().getNumber());
                     game.removeBankruptPlayer(player);
-                    infoDisplayGUI.setPropertyList(null);
+                    infoDisplayGUI.setPropertyList("");
                 }
             }
         });
