@@ -194,7 +194,6 @@ public class MonopolyGameGUI extends JFrame {
                     infoDisplayGUI.setNextEnabled(true);
                     infoDisplayGUI.setRollEnabled(false);
                 } else {
-
                     if (game.getDoubleCounter() == 2) {
                         JOptionPane.showMessageDialog(squareGUI, "You rolled a double 3 times! You are going to jail");
                         JailSquare jail = (JailSquare) MonopolyGame.board.getSquareAt(8);
@@ -249,6 +248,7 @@ public class MonopolyGameGUI extends JFrame {
                     if (player.isBankrupt()) {
                         JOptionPane.showMessageDialog(squareGUI, "You are still Bankrupt!! Unfortunately you can't stay in the game");
                         squareGUI.removePlayerGUILocation(player, player.getCurrentLocation().getNumber());
+                        infoDisplayGUI.setPropertyList(null);
                         game.removeBankruptPlayer(player);
                     }
                     popup.dispose();
@@ -262,6 +262,7 @@ public class MonopolyGameGUI extends JFrame {
                 if (player.isBankrupt()) {
                     JOptionPane.showMessageDialog(squareGUI, "You are still Bankrupt!! Unfortunately you can't stay in the game");
                     squareGUI.removePlayerGUILocation(player, player.getCurrentLocation().getNumber());
+                    infoDisplayGUI.setPropertyList(null);
                     game.removeBankruptPlayer(player);
                 }
             }
