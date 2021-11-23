@@ -156,8 +156,12 @@ A player wins the game when all other players go bankrupt.
 <br>
 <details><summary>Bankrupt</summary> 
     
-- When a player has 0 or negative cash, the system will sell his/her properties.
-    - If that player still has negative cash after selling all his/her properties, he/she goes bankrupt.
+- When a player has 0 or negative cash, the system will ask player if he/she want to sell his/her properties.
+    - if yes:
+        - player will choose the properties he/she wants to sell
+        - If that player still has negative cash after selling his/her properties, he/she goes bankrupt.
+    - if no:
+        - player goes bankrupt directly
 - Bankrupt player will be moved out of the board             
 </details>
 
