@@ -23,6 +23,145 @@ the initial cost of the property.
 1. Download jar file and unzip
 2. Open MonopolyGame.java and run class
 
+# User Manual
+    
+This is a Simplify Monopoly Game.
+The game interface consists of a ‘board game’ section and an ‘information’ section.
+
+Players need to roll dices and move to next square depend on those dices. Different squares have different functions.
+A player wins the game when all other players go bankrupt.
+
+
+<details><summary>Board Game Section</summary>
+    <details><summary>Squares</summary>
+        <details><summary>Property Square</summary>
+    
+- There are ‘street name’, ‘price’, ‘color tag’ and ‘buildings area’ in each Property Square.
+- When players get to this kind of squares:
+    - They can buy the square, if it does not have an owner.
+    - They need to pay for the rent, if this square is owned by another player.
+        - The rent price for that square depend on the number of buildings on it.
+    - They can ‘sell’ or ‘build houses’ after they own that land.
+</details> 
+         <details><summary>Go Square</summary>
+             
+- The starting square when the game starts.
+- When players pass or reach it again, they will get $50.
+</details> 
+         <details><summary>Income Tax Square</summary>
+             
+- Players need to pay the tax ($ 100) when they get to this square.
+</details>
+         <details><summary>Rail Road Square</summary>
+             
+- When players get to this kind of squares:
+    - They can buy the square, if it does not have an owner.
+    - They need to pay for the rent, if this square is owned by another player.
+    - House cannot be built here!
+</details> 
+         <details><summary>Jail Square</summary>
+             
+- When player gets to the jail, he/she can only move out of the jail in two ways:
+    1. Player rolls two the same number in  dices (e.g., '1 and 1', '2 and 2', '3 and 3', '4 and 4', '5 and 5' and '6 and 6'.).
+    2. Player already stayed in the jail for 3 rounds.             
+</details> 
+         <details><summary>Utility Square</summary>
+             
+- When players get to this kind of squares:
+    - They can buy the square, if it does not have an owner.
+    - They need to pay for the rent, if this square is owned by another player.
+    - House cannot be built here!               
+</details>  
+         <details><summary>Free Parking Square</summary>
+             
+- Players do not need to do anything with this square.             
+</details> 
+         <details><summary>Go To Jail Square</summary>
+             
+- Players will be directly sent to ‘Jail Square’ when they get to ‘Go To Jail Square’.             
+</details>
+</details> 
+    <details><summary>Houses and Hotels</summary>   
+
+- House: indicates by green square.
+- Hotel: indicates by red square.
+- Buildings can only be built on Property Square! 
+- Sell Rules:
+    - when player owns a hotel, he/she must first sell the hotel, then the houses.        
+- In this Monopoly Game: 
+    - At most four houses and one hotel can be built on a Property Square.       
+    - If player chooses to build a hotel before owning four houses on that Property Square, the number of houses of the square will increase to 4.    
+        - (e.g., Player A already had a house on ‘Baltic Avenue’ and he wants to build a hotel there. He will have 4 houses and a hotel on ‘Baltic Avenue’ after he pressing the button for ‘build a hotel’.) 
+    - Player can build houses or hotels, when he/she owns all Property Squares of the same color.       
+        - (e.g., when player A owns ‘Baltic Avenue’ and ‘Mediterranean Avenue’, he/she can start to build houses or hotel on Property Square)         
+</details>       
+</details> 
+    <br>
+<details><summary>Information Section</summary>    
+- Information Section is made up by five sections. (‘Players’ information’, ‘Current Player’s Information’. ‘Current Location’, ‘Square Information’ and ‘Buttons’)
+    <details><summary>Players' Information</summary>
+            
+- List of players who are not in current.
+    - Showing their ‘name’ and ‘cash’.
+</details> 
+    <details><summary>Current Players' Information</summary>
+        
+-  Showing current player’s information.
+    - ‘Name’, ‘cash’ and ‘player owned property’.
+</details>
+    <details><summary>Current Location</summary>
+        
+- Showing the location of current player.
+</details>
+    <details><summary>Square Information</summary>
+        
+- Showing current square’s information.
+    - ‘Buy Price’, ‘Rent Price’, ‘House Price’ and ‘Hotel Price’.
+</details>
+    <details><summary>Buttons</summary>
+ - Buttons Section including six buttons: ‘Buy’, ‘Sell’, ‘Roll Dice’, ‘Next Turn’, ‘Build On Property’ and ‘Sell Houses/Hotels’.       
+        <details><summary>Buy Button</summary> 
+            
+- Click to buy the current square.
+</details>
+       <details><summary>Sell Button</summary>
+           
+- Click to sell the last bought square.
+</details>
+       <details><summary>Roll Dice Button</summary>
+           
+- Click to roll dices.
+  </details>
+       <details><summary>Next Turn Button</summary>
+           
+- Click to pass the turn to next player.
+ </details>
+       <details><summary>Build On Property Button</summary>
+           
+- Click to open a new window to choose the square you want to build houses/hotel.
+    - After you clicking the square 
+        - There is a new window for you to choose the building type (Houses/Hotel).
+            - Now, click ‘House’ (Hotel) if you want to build a house (hotel).
+</details>
+       <details><summary>Sell Houses/Hotels Button</summary>
+           
+- Click to open a new window show the square(s) you have houses/hotel on. Then choose you want to sell houses/hotel there.
+        - After you clicking the square 
+            - There is a new window for you to choose the building type (Houses/Hotel) you can sell.
+                - Now, click ‘House’ (Hotel) if you want to sell a house (hotel).       
+</details>
+</details>
+</details>  
+</details>
+<br>
+<details><summary>Bankrupt</summary> 
+    
+- When a player has 0 or negative cash, the system will sell his/her properties.
+    - If that player still has negative cash after selling all his/her properties, he/she goes bankrupt.
+- Bankrupt player will be moved out of the board             
+</details>
+
+
 # Authors
 
 - Liya Abebe
@@ -205,6 +344,8 @@ Zirui Qiao
 - Refactored the makeSquares() method in MonopolyBoard class
 - Provide a new method(no use after discussion) to SquareGridGUI class
 - README file documentation
+    
+
 
 
 ## Detailed Set Up
@@ -283,7 +424,14 @@ Liya Abebe
  
 Rebbeca Li
     
-- 
+- implemented hotel and house gui
+- refactored InfoDisplayGUI
+- implemented getPlayerNotInTurn() in MonopolyGame class
+- refactored handleUpdate() in MonopolyGameGUI class
+- refactored sellBuildBuilding() in MonopolyGameGUI class     
+- refactored PropertySquareGUI in PropertySquareGUI class
+- implemented isBuilding(), setBuidlingX in PropertySquareGUI class   
+- created user manual
 
 Shizhong Shang
   
