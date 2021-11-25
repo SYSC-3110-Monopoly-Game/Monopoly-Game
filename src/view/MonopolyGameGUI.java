@@ -186,13 +186,25 @@ public class MonopolyGameGUI extends JFrame {
                 squareGUI.setDiceImages(diceValues[0], diceValues[1]);
 
                 if (player.isInJail()) {
-                    JOptionPane.showMessageDialog(squareGUI, "You rolled a double!! You are going out of jail.");
+                    if(game.getDoubleCounter() == 1){
+                        JOptionPane.showMessageDialog(squareGUI, "You rolled a double!! You are going out of jail.");
 
-                    //setting player out of jail
-                    MonopolyBoard.jail.goOutJail(player);
-                    squareGUI.changePlayerGUILocation(player, 8, 8);
-                    infoDisplayGUI.setNextEnabled(true);
-                    infoDisplayGUI.setRollEnabled(false);
+                        //setting player out of jail
+                        MonopolyBoard.jail.goOutJail(player);
+                        squareGUI.changePlayerGUILocation(player, 8, 8);
+                        infoDisplayGUI.setNextEnabled(true);
+                        infoDisplayGUI.setRollEnabled(false);
+                    } else {
+                        if()
+                        JOptionPane.showMessageDialog(squareGUI, "You did not rolled a double");
+
+                        //setting player out of jail
+                        MonopolyBoard.jail.goOutJail(player);
+                        squareGUI.changePlayerGUILocation(player, 8, 8);
+                        infoDisplayGUI.setNextEnabled(true);
+                        infoDisplayGUI.setRollEnabled(false);
+                    }
+
                 } else {
                     if (game.getDoubleCounter() == 3) {
                         JOptionPane.showMessageDialog(squareGUI, "You rolled a double 3 times! You are going to jail");
@@ -413,6 +425,7 @@ public class MonopolyGameGUI extends JFrame {
                 for (int i = 1; i < 5; i++) {
                     if (((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).isBuilding(i)) {
                         ((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).setBuildingX(Color.GREEN, i);
+                        JOptionPane.showMessageDialog(squareGUI, player.getName()+" build a house!!!");
                         break;
                     }
                 }
@@ -420,6 +433,7 @@ public class MonopolyGameGUI extends JFrame {
                 for (int i = 1; i < 5; i++) {
                     if (((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).isBuilding(i)) {
                         ((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).setBuildingX(Color.GREEN, i);
+                        JOptionPane.showMessageDialog(squareGUI, player.getName()+" build a hotel!!!");
                     }
                 }
                 ((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).setBuildingX(Color.RED, 5);

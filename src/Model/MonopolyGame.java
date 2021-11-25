@@ -47,7 +47,7 @@ public class MonopolyGame {
 
         // get the number of players to 4
         int numberOfPlayer = 4;
-        int numberOfHuman = 2;
+        int numberOfHuman = 1;
 
         //create the human players
         for (int i = 0; i < numberOfHuman; i++) {
@@ -183,12 +183,13 @@ public class MonopolyGame {
 
             } else {
                 System.out.println("You did not roll a double!");
-                updateViews(playerInTurn, "Doubles");
+                updateViews(playerInTurn, "NoDoubles");
                 MonopolyBoard.jail.addCounter(playerInTurn);
                 //check if player hasn't rolled a double 3 times, make them pay jail fee and get out of jail
                 if (MonopolyBoard.jail.getMap().get(playerInTurn) == 2) {
                     playerInTurn.decreaseCash(MonopolyBoard.jail.getJailFee());
                     MonopolyBoard.jail.goOutJail(playerInTurn);
+
                 }
             }
         } else {  // if player not in jail
@@ -296,9 +297,9 @@ public class MonopolyGame {
         this.playersNotInTurn = getPlayersNotInTurn();
 
         updateViews(playerInTurn, "Next Turn");
+        printPlayersInfo();
 
         AIProcess();
-        printPlayersInfo();
     }
 
     /**
@@ -341,7 +342,7 @@ public class MonopolyGame {
         if (playerInTurn instanceof AIPlayer) {
             int temp = this.doubleCounter;
             playRound();
-            while(temp < this.doubleCounter && temp != 3){
+            while(!playerInTurn.isInJail() && temp < this.doubleCounter && temp != 3){
                 temp = this.doubleCounter;
                 playRound();
             }
@@ -362,7 +363,7 @@ public class MonopolyGame {
                 this.removeBankruptPlayer(playerInTurn);
                 this.updateViews(playerInTurn, "Bankrupt");
             } else if(this.getWinner() == playerInTurn){
-                this.updateViews(playerInTurn, "Bankrupt");
+                this.updateViews(playerInTurn, "Winner");
             } else {
                 nextTurn();
             }
