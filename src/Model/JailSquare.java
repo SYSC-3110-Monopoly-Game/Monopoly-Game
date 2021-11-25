@@ -48,7 +48,6 @@ public class JailSquare extends Square {
      * remove player from the jail hashmap
      */
     public void goOutJail(Player p) {
-
         this.map.remove(p);
         p.setInJail(false);
         this.landOn(p);

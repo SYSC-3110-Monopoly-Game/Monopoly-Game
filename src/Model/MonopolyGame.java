@@ -47,7 +47,7 @@ public class MonopolyGame {
 
         // get the number of players to 4
         int numberOfPlayer = 4;
-        int numberOfHuman = 1;
+        int numberOfHuman = 2;
 
         //create the human players
         for (int i = 0; i < numberOfHuman; i++) {
@@ -182,14 +182,13 @@ public class MonopolyGame {
                 System.out.println("You rolled a double, you can go out!");
 
             } else {
-                System.out.println("You did not roll a double!");
-                updateViews(playerInTurn, "NoDoubles");
                 MonopolyBoard.jail.addCounter(playerInTurn);
+                System.out.println("You did not roll a double!");
                 //check if player hasn't rolled a double 3 times, make them pay jail fee and get out of jail
                 if (MonopolyBoard.jail.getMap().get(playerInTurn) == 2) {
                     playerInTurn.decreaseCash(MonopolyBoard.jail.getJailFee());
                     MonopolyBoard.jail.goOutJail(playerInTurn);
-
+                    updateViews(playerInTurn, "NoDoubles");
                 }
             }
         } else {  // if player not in jail
@@ -252,7 +251,6 @@ public class MonopolyGame {
     private void updateViews(Player p, String command) {
         for (MonopolyGameGUI view : views) {
             view.handleUpdate(p, command, playersNotInTurn);
-
         }
     }
 
@@ -346,7 +344,9 @@ public class MonopolyGame {
                 temp = this.doubleCounter;
                 playRound();
             }
-            if(temp == 3){
+            if(playerInTurn.isInJail() && this.doubleCounter == 1){
+                updateViews(playerInTurn, "NoDoubles");
+            } else if(temp == 3){
                 updateViews(playerInTurn, "Doubles");
             } else {
                 playerInTurn.buyProperty(playerInTurn.getCurrentLocation());

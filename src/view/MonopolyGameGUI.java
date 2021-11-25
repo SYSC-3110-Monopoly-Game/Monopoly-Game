@@ -180,6 +180,12 @@ public class MonopolyGameGUI extends JFrame {
                 infoDisplayGUI.setNextEnabled(true);
                 infoDisplayGUI.setRollEnabled(false);
             }
+            case "NoDoubles" -> {
+                JOptionPane.showMessageDialog(squareGUI, "You stay in jail for 3 rounds, you can leave now");
+                squareGUI.changePlayerGUILocation(player, 8, 8);
+                infoDisplayGUI.setNextEnabled(true);
+                infoDisplayGUI.setRollEnabled(false);
+            }
             case "Doubles" -> {
                 //set dice value
                 int[] diceValues = MonopolyGame.dice.getDice();
@@ -194,22 +200,11 @@ public class MonopolyGameGUI extends JFrame {
                         squareGUI.changePlayerGUILocation(player, 8, 8);
                         infoDisplayGUI.setNextEnabled(true);
                         infoDisplayGUI.setRollEnabled(false);
-                    } else {
-                        if()
-                        JOptionPane.showMessageDialog(squareGUI, "You did not rolled a double");
-
-                        //setting player out of jail
-                        MonopolyBoard.jail.goOutJail(player);
-                        squareGUI.changePlayerGUILocation(player, 8, 8);
-                        infoDisplayGUI.setNextEnabled(true);
-                        infoDisplayGUI.setRollEnabled(false);
                     }
-
                 } else {
                     if (game.getDoubleCounter() == 3) {
                         JOptionPane.showMessageDialog(squareGUI, "You rolled a double 3 times! You are going to jail");
-                        JailSquare jail = (JailSquare) MonopolyGame.board.getSquareAt(8);
-                        jail.goJail(player);
+                        MonopolyBoard.jail.goJail(player);
                         squareGUI.changePlayerGUILocation(player, currentLocation.getNumber(), 8);
                         infoDisplayGUI.setNextEnabled(true);
                         infoDisplayGUI.setRollEnabled(false);
