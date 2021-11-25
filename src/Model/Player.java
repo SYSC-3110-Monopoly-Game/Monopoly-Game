@@ -157,7 +157,7 @@ public class Player {
      * @return boolean
      */
     public boolean isBankrupt() {
-        return this.cashTotal < 0;
+        return this.cashTotal <= -1;
     }
 
     /**

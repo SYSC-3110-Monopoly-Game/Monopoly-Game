@@ -53,6 +53,22 @@ public class PropertySquare extends Square {
         HousePrice = 50;
     }
 
+    public PropertySquare(String name, int number, int buy, int rent, Color color, int housePrice, int houseAmount, boolean hotel, Player owner) {
+        super(name, number);
+        this.buyPrice = buy;
+        this.rentPrice = rent;
+        this.color = color;
+        this.HousePrice = housePrice;
+        houses = new ArrayList<>();
+        for(int i=0; i<houseAmount; i++){
+            this.houses.add(new House(HousePrice));
+        }
+        if(hotel){
+            this.hotel = new Hotel(HousePrice);
+        }
+        this.owner = owner;
+    }
+
     public int buildHouse() {
         if(this.houses.size() < 4) {
             House h= new House(HousePrice);
@@ -142,6 +158,13 @@ public class PropertySquare extends Square {
         return -1;
     }
 
+    public void sellAll() {
+        for(int i=0; i<4; i++){
+            sellHouse();
+        }
+        sellHotel();
+    }
+
 
     /**
      * gets the color of the square
@@ -178,14 +201,6 @@ public class PropertySquare extends Square {
         this.owner = owner;
     }
 
-    public void sellAll() {
-        for(int i=0; i<4; i++){
-            sellHouse();
-        }
-        sellHotel();
-    }
-
-
     /**
      * calculate the rent fee of the square
      * according to the number of squares with the same color and the buildings on the square
@@ -219,7 +234,7 @@ public class PropertySquare extends Square {
 
         if (p != owner && owner != null) {              // if the property has an owner and the owner is not this player
 
-            HashMap jail = MonopolyBoard.jail.getMap();
+            HashMap<Player, Integer> jail = MonopolyBoard.jail.getMap();
             if (jail != null && jail.containsKey(owner)) {                  // if the owner of this property is in jail
                 System.out.println("The owner is in jail, no need to pay rent fee");    // do not pay rent fee
             } else {                                                        // if the owner is not in jail

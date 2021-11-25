@@ -50,14 +50,12 @@ public class AIPlayer extends Player {
      */
     public void sellSomeThing(){
         while(this.isBankrupt()){
-            if(this.isBankrupt()){
-                PropertySquare temp = this.getRandomSquare(this.getSellProperties());
-                if(temp != null) {
-                    this.sellProperty(temp);
-                } else {
-                    System.out.println("No properties");
-                    break;
-                }
+            PropertySquare temp = this.getRandomSquare(this.getSellProperties());
+            if(temp != null) {
+                this.sellProperty(temp);
+            } else {
+                System.out.println("No properties");
+                break;
             }
         }
     }
