@@ -193,8 +193,8 @@ public class MonopolyGame {
             }
         } else {  // if player not in jail
             if (dice.hasDoubles()) {
-                updateViews(playerInTurn, "Doubles");
                 doubleCounter++;
+                updateViews(playerInTurn, "Doubles");
             } else {
                 movePlayer(playerInTurn, distance);
                 updateViews(playerInTurn, "Roll Dice");

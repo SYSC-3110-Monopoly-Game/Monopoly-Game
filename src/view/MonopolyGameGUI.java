@@ -194,7 +194,7 @@ public class MonopolyGameGUI extends JFrame {
                     infoDisplayGUI.setNextEnabled(true);
                     infoDisplayGUI.setRollEnabled(false);
                 } else {
-                    if (game.getDoubleCounter() == 2) {
+                    if (game.getDoubleCounter() == 3) {
                         JOptionPane.showMessageDialog(squareGUI, "You rolled a double 3 times! You are going to jail");
                         JailSquare jail = (JailSquare) MonopolyGame.board.getSquareAt(8);
                         jail.goJail(player);
