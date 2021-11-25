@@ -341,7 +341,7 @@ public class MonopolyGame {
         if (playerInTurn instanceof AIPlayer) {
             int temp = this.doubleCounter;
             playRound();
-            while(temp < this.doubleCounter && temp != 2){
+            while(temp < this.doubleCounter && temp != 3){
                 temp = this.doubleCounter;
                 playRound();
             }
