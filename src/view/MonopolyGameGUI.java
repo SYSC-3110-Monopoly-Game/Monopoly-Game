@@ -369,7 +369,7 @@ public class MonopolyGameGUI extends JFrame {
      * set build, sellH and sell buttons
      */
     private void setButtons(Player player) {
-        infoDisplayGUI.setBuildEnabled(player.getAvailableProperties(player.removeRailroadUtility(player.hasWholeSet())).isEmpty());
+        infoDisplayGUI.setBuildEnabled(!player.getAvailableProperties(player.removeRailroadUtility(player.hasWholeSet())).isEmpty());
         infoDisplayGUI.setSellHEnabled(!player.hasBuilding().isEmpty());
         infoDisplayGUI.setSellEnabled(!player.getProperties().isEmpty());
     }
