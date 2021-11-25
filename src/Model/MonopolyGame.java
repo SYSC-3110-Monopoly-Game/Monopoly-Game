@@ -215,6 +215,7 @@ public class MonopolyGame {
     public void removeBankruptPlayer(Player player) {
         for (PropertySquare property : player.getProperties()) {
             property.sellAll();
+            player.setSelectedSquare(property);
             views.get(0).sellBuildBuilding("sellH", "Hotel", player);
             for(int i=0; i<4; i++){
                 views.get(0).sellBuildBuilding("sellH", "House", player);

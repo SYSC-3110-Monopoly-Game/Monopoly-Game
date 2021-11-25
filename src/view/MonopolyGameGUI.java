@@ -204,7 +204,6 @@ public class MonopolyGameGUI extends JFrame {
                     } else {
                         if (player instanceof AIPlayer) {
                             JOptionPane.showMessageDialog(squareGUI, "AI rolled a double!!Click ok to continue." + game.getDoubleCounter());
-                            game.playRound();
                         }
                         else
                             JOptionPane.showMessageDialog(squareGUI, "You rolled a double!!Roll Dice again.");
