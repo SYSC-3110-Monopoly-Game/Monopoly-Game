@@ -202,8 +202,10 @@ public class MonopolyGameGUI extends JFrame {
                         infoDisplayGUI.setNextEnabled(true);
                         infoDisplayGUI.setRollEnabled(false);
                     } else {
-                        if (player instanceof AIPlayer ai)
-                            JOptionPane.showMessageDialog(squareGUI, "AI rolled a double!!Click ok to continue.");
+                        if (player instanceof AIPlayer) {
+                            JOptionPane.showMessageDialog(squareGUI, "AI rolled a double!!Click ok to continue." + game.getDoubleCounter());
+                            game.playRound();
+                        }
                         else
                             JOptionPane.showMessageDialog(squareGUI, "You rolled a double!!Roll Dice again.");
                         infoDisplayGUI.setNextEnabled(false);
@@ -367,7 +369,7 @@ public class MonopolyGameGUI extends JFrame {
      * set build, sellH and sell buttons
      */
     private void setButtons(Player player) {
-        infoDisplayGUI.setBuildEnabled(!player.getAvailableProperties(player.removeRailroadUtility(player.hasWholeSet())).isEmpty());
+        infoDisplayGUI.setBuildEnabled(player.getAvailableProperties(player.removeRailroadUtility(player.hasWholeSet())).isEmpty());
         infoDisplayGUI.setSellHEnabled(!player.hasBuilding().isEmpty());
         infoDisplayGUI.setSellEnabled(!player.getProperties().isEmpty());
     }
