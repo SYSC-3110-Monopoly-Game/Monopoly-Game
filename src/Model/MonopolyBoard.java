@@ -22,6 +22,12 @@ public class MonopolyBoard {
         colors.addAll(Arrays.asList(set));
     }
 
+    public MonopolyBoard(String load) {
+        squares = new Square[SIZE];
+        makeSquares();//new method to make squares
+        colors.addAll(Arrays.asList(set));
+    }
+
     public Square[] getSquares() {
         return squares;
     }

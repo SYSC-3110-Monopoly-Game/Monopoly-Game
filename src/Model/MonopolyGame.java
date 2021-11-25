@@ -25,6 +25,17 @@ public class MonopolyGame {
         printPlayersInfo();
     }
 
+    public MonopolyGame(int doubleCounter, ArrayList<Player> playersNotInTurn, Player playerInTurn) {
+        board = new MonopolyBoard("load");
+        players = createPlayers();// new methods to create players
+        this.playersNotInTurn = playersNotInTurn;
+        this.playerInTurn = playerInTurn;
+        this.doubleCounter = doubleCounter;
+        dice = new Dice();
+        views = new ArrayList<>();
+        printPlayersInfo();
+    }
+
 
     /**
      * set 4 players
@@ -124,7 +135,7 @@ public class MonopolyGame {
      * check if the player can build a house on any of its property square list
      */
     public void checkAvailableBuild() {
-        ArrayList<PropertySquare> propertyList = playerInTurn.removeRailroadUtility(playerInTurn.hasWholeSet());
+        ArrayList<PropertySquare> propertyList = playerInTurn.getProperties();//playerInTurn.removeRailroadUtility(playerInTurn.hasWholeSet());
         if (!propertyList.isEmpty()) {
             propertyList = playerInTurn.getAvailableProperties(propertyList);
             if (!propertyList.isEmpty()) {
@@ -203,6 +214,11 @@ public class MonopolyGame {
 
     public void removeBankruptPlayer(Player player) {
         for (PropertySquare property : player.getProperties()) {
+            property.sellAll();
+            views.get(0).sellBuildBuilding("sellH", "Hotel", player);
+            for(int i=0; i<4; i++){
+                views.get(0).sellBuildBuilding("sellH", "House", player);
+            }
             property.setOwner(null);
         }
         players.remove(player);
@@ -322,18 +338,29 @@ public class MonopolyGame {
      */
     public void AIProcess() {
         if (playerInTurn instanceof AIPlayer) {
+            int temp = this.doubleCounter;
             playRound();
-            playerInTurn.buyProperty(playerInTurn.getCurrentLocation());
-            if (((AIPlayer) playerInTurn).buildBuildings()) {
-                views.get(0).sellBuildBuilding("House", "build", playerInTurn);
+            while(temp < this.doubleCounter && temp != 2){
+                temp = this.doubleCounter;
+                playRound();
             }
-            while (playerInTurn.isBankrupt() && !playerInTurn.hasBuilding().isEmpty()) {
-                ((AIPlayer) playerInTurn).sellBuildings();
-                views.get(0).sellBuildBuilding("House", "sellH", playerInTurn);
+            if(temp == 2){
+                updateViews(playerInTurn, "Doubles");
+            } else {
+                playerInTurn.buyProperty(playerInTurn.getCurrentLocation());
+                if (((AIPlayer) playerInTurn).buildBuildings()) {
+                    views.get(0).sellBuildBuilding("House", "build", playerInTurn);
+                }
+                while (playerInTurn.isBankrupt() && !playerInTurn.hasBuilding().isEmpty()) {
+                    ((AIPlayer) playerInTurn).sellBuildings();
+                    views.get(0).sellBuildBuilding("House", "sellH", playerInTurn);
+                }
+                ((AIPlayer) playerInTurn).sellSomeThing();
             }
-            ((AIPlayer) playerInTurn).sellSomeThing();
-            if(playerInTurn.isBankrupt()){
+            if(playerInTurn.isBankrupt()) {
                 this.removeBankruptPlayer(playerInTurn);
+                this.updateViews(playerInTurn, "Bankrupt");
+            } else if(this.getWinner() == playerInTurn){
                 this.updateViews(playerInTurn, "Bankrupt");
             } else {
                 nextTurn();

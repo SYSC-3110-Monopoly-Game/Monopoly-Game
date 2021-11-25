@@ -26,6 +26,17 @@ public class Player {
         this.decision = null;
     }
 
+    public Player(String name, int cash, boolean inJail, String decision, Square lastSquare, Square thisSquare, ArrayList<PropertySquare> squares, PropertySquare square){
+        this.name = name;
+        this.cashTotal = cash;
+        this.isInJail = inJail;
+        this.decision = decision;
+        this.lastLocation = lastSquare;
+        this.currentLocation = thisSquare;
+        this.squaresOwned = squares;
+        this.selectedSquare = square;
+    }
+
 
     /**
      * Returns the name of player
@@ -283,6 +294,9 @@ public class Player {
     public ArrayList<PropertySquare> getAvailableProperties(ArrayList<PropertySquare> p){
         if(!p.isEmpty()){
             p.removeIf(property -> this.getCash() < property.getHousePrice());
+        }
+        if(!p.isEmpty()){
+            p.removeIf(PropertySquare::hasHouses);
         }
         return p;
     }

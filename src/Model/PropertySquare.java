@@ -178,6 +178,13 @@ public class PropertySquare extends Square {
         this.owner = owner;
     }
 
+    public void sellAll() {
+        for(int i=0; i<4; i++){
+            sellHouse();
+        }
+        sellHotel();
+    }
+
 
     /**
      * calculate the rent fee of the square
