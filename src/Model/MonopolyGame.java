@@ -345,7 +345,7 @@ public class MonopolyGame {
                 temp = this.doubleCounter;
                 playRound();
             }
-            if(temp == 2){
+            if(temp == 3){
                 updateViews(playerInTurn, "Doubles");
             } else {
                 playerInTurn.buyProperty(playerInTurn.getCurrentLocation());

@@ -50,8 +50,8 @@ public class JailSquare extends Square {
     public void goOutJail(Player p) {
 
         this.map.remove(p);
-        this.landOn(p);
         p.setInJail(false);
+        this.landOn(p);
         message = " is out of jail\n";
     }
 
