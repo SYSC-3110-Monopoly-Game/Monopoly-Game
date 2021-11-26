@@ -45,7 +45,7 @@ class MonopolyBoardTest {
     void exportToXML() throws ParserConfigurationException, IOException, SAXException {
         board.exportToXML();
 
-        MonopolyBoard b2 = new MonopolyBoard("load");
+        MonopolyBoard b2 = new MonopolyBoard("initialize");
 
         for(Square s: b2.getSquares()){
             System.out.println(s.toString());

@@ -277,7 +277,7 @@ public class PropertySquare extends Square {
         if(this.getOwner() != null) {
             string.append("<Owner>" + this.getOwner().getName() + "</Owner>");
         } else {
-            string.append("<Owner> </Owner>");
+            string.append("<Owner></Owner>");
         }
         string.append("</Square>");
 

@@ -35,9 +35,14 @@ public class MonopolyBoard {
         colors.addAll(Arrays.asList(set));
     }
 
-    public MonopolyBoard(String load) throws ParserConfigurationException, IOException, SAXException {
+    public MonopolyBoard(String choice) throws ParserConfigurationException, IOException, SAXException {
         squares = new Square[SIZE];
-        makeSquaresFromXML();
+        String path = "";
+        if(choice.equals("initialize"))
+            path = "SavedBoard.xml";
+        else
+            path = "";
+        makeSquaresFromXML(path);
         colors.addAll(Arrays.asList(set));
     }
 
@@ -178,10 +183,9 @@ public class MonopolyBoard {
         squares[(int) variables.get("Number")] = s;
     }
 
-    private void makeSquaresFromXML() throws ParserConfigurationException, SAXException, IOException {
+    private void makeSquaresFromXML(String path) throws ParserConfigurationException, SAXException, IOException {
         SAXParserFactory factory = SAXParserFactory.newInstance();
         SAXParser saxParser = factory.newSAXParser();
-        String path = "SavedBoard.xml";
 
         HashMap<String, Object> square = new HashMap<>(Map.of("Name", "","Owner", "","Number", 0,
                 "Price", 0, "RentPrice", 0,"HousePrice", 0, "HouseAmount", 0,

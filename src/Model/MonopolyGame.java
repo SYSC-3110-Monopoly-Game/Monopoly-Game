@@ -29,7 +29,7 @@ public class MonopolyGame {
     }
 
     public MonopolyGame(int doubleCounter, ArrayList<Player> playersNotInTurn, Player playerInTurn) throws ParserConfigurationException, IOException, SAXException {
-        board = new MonopolyBoard("load");
+        board = new MonopolyBoard("Initialize");
         players = createPlayers();// new methods to create players
         this.playersNotInTurn = playersNotInTurn;
         this.playerInTurn = playerInTurn;
