@@ -34,4 +34,7 @@ public abstract class Square {
     }
 
     public abstract void landOn(Player p);
+
+    public abstract String toXML();
+
 }

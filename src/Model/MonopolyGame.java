@@ -1,7 +1,10 @@
 package Model;
 
+import org.xml.sax.SAXException;
 import view.MonopolyGameGUI;
 
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 import java.util.*;
 
 public class MonopolyGame {
@@ -25,7 +28,7 @@ public class MonopolyGame {
         printPlayersInfo();
     }
 
-    public MonopolyGame(int doubleCounter, ArrayList<Player> playersNotInTurn, Player playerInTurn) {
+    public MonopolyGame(int doubleCounter, ArrayList<Player> playersNotInTurn, Player playerInTurn) throws ParserConfigurationException, IOException, SAXException {
         board = new MonopolyBoard("load");
         players = createPlayers();// new methods to create players
         this.playersNotInTurn = playersNotInTurn;

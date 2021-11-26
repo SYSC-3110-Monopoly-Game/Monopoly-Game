@@ -17,4 +17,15 @@ public class FreeParkingSquare extends Square {
         System.out.println("Free Parking for player " + p.getName());
     }
 
+    @Override
+    public String toXML() {
+        StringBuffer string = new StringBuffer();
+        string.append("<Square type=\"FreeParking\">");
+        string.append("<Name>"+this.getName()+"</Name>");
+        string.append("<Number>"+this.getNumber()+"</Number>");
+        string.append("</Square>");
+
+        return string.toString();
+    }
+
 }

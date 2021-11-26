@@ -35,4 +35,16 @@ public class GoSquare extends Square{
         System.out.println("You passed GO Square! You will get " + this.addMoney);
     }
 
+    @Override
+    public String toXML() {
+        StringBuffer string = new StringBuffer();
+        string.append("<Square type=\"Go\">");
+        string.append("<Name>"+this.getName()+"</Name>");
+        string.append("<Number>"+this.getNumber()+"</Number>");
+        string.append("<Price>"+this.getAddMoney()+"</Price>");
+        string.append("</Square>");
+
+        return string.toString();
+    }
+
 }

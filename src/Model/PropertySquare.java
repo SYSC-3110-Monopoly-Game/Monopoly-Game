@@ -10,6 +10,7 @@ public class PropertySquare extends Square {
     private final int rentPrice; //the price that other players need to pay to the owner.
     private final Color color;
     private Player owner = null;
+    private String ownerName;
     private final int HousePrice;
 
 
@@ -53,7 +54,7 @@ public class PropertySquare extends Square {
         HousePrice = 50;
     }
 
-    public PropertySquare(String name, int number, int buy, int rent, Color color, int housePrice, int houseAmount, boolean hotel, Player owner) {
+    public PropertySquare(String name, int number, int buy, int rent, Color color, int housePrice, int houseAmount, int hotel, String owner) {
         super(name, number);
         this.buyPrice = buy;
         this.rentPrice = rent;
@@ -63,10 +64,10 @@ public class PropertySquare extends Square {
         for(int i=0; i<houseAmount; i++){
             this.houses.add(new House(HousePrice));
         }
-        if(hotel){
+        if(hotel == 1){
             this.hotel = new Hotel(HousePrice);
         }
-        this.owner = owner;
+        this.ownerName = owner;
     }
 
     public int buildHouse() {
@@ -201,6 +202,15 @@ public class PropertySquare extends Square {
         this.owner = owner;
     }
 
+
+
+    public String getOwnerName(){
+        if(this.owner == null){
+            return this.ownerName;
+        }
+        return this.owner.getName();
+    }
+
     /**
      * calculate the rent fee of the square
      * according to the number of squares with the same color and the buildings on the square
@@ -247,5 +257,30 @@ public class PropertySquare extends Square {
                 System.out.println(owner.getName() + " has received $" + fee);//
             }
         }
+    }
+
+    @Override
+    public String toXML() {
+        StringBuilder string = new StringBuilder();
+        string.append("<Square type=\"Property\">");
+        string.append("<Name>"+this.getName()+"</Name>");
+        string.append("<Number>"+this.getNumber()+"</Number>");
+        string.append("<Price>"+this.getPrice()+"</Price>");
+        string.append("<RentPrice>"+this.getRentFee()+"</RentPrice>");
+        String colorS = Integer.toString(this.getColor().getRGB());
+        string.append("<Color>"+colorS+"</Color>");
+        // call back: Color c = new Color(Integer.parseInt(colorS));
+        string.append("<HousePrice>"+this.getHousePrice()+"</HousePrice>");
+        string.append("<HouseAmount>"+this.houses.size()+"</HouseAmount>");
+        int hotelAmount = hasHotel() ? 1:0;
+        string.append("<HotelAmount>"+hotelAmount+"</HotelAmount>");
+        if(this.getOwner() != null) {
+            string.append("<Owner>" + this.getOwner().getName() + "</Owner>");
+        } else {
+            string.append("<Owner> </Owner>");
+        }
+        string.append("</Square>");
+
+        return string.toString();
     }
 }
