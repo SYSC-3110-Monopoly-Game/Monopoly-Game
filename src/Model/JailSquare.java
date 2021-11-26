@@ -76,16 +76,16 @@ public class JailSquare extends Square {
     @Override
     public String toXML() {
         StringBuffer string = new StringBuffer();
-        string.append("<Square type=\"Jail\">");
-        string.append("<Name>"+this.getName()+"</Name>");
-        string.append("<Number>"+this.getNumber()+"</Number>");
-        string.append("<Price>"+this.getJailFee()+"</Price>");
+        string.append("<Square type=\"Jail\">\n");
+        string.append("<Name>"+this.getName()+"</Name>\n");
+        string.append("<Number>"+this.getNumber()+"</Number>\n");
+        string.append("<Price>"+this.getJailFee()+"</Price>\n");
         string.append("<JailMap>");
         for(Player id: map.keySet()){
             string.append(id.getName()+ "=" +map.get(id)+ ",");
         }
-        string.append("</JailMap>");
-        string.append("</Square>");
+        string.append("</JailMap>\n");
+        string.append("</Square>\n");
 
         return string.toString();
     }

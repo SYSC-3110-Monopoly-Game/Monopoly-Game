@@ -42,13 +42,14 @@ class MonopolyBoardTest {
     }
 
     @Test
-    void exportToXML() throws ParserConfigurationException, IOException, SAXException {
+    void exportANDImportToXML() throws ParserConfigurationException, IOException, SAXException {
         board.exportToXML();
 
         MonopolyBoard b2 = new MonopolyBoard("initialize");
 
-        for(Square s: b2.getSquares()){
-            System.out.println(s.toString());
+        for(int i=0; i<board.getSquares().length; i++){
+            System.out.println(b2.getSquareAt(i).toString());
+            Assertions.assertEquals(b2.getSquareAt(i).toString(), board.getSquareAt(i).toString());
         }
     }
 }

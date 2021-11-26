@@ -38,11 +38,11 @@ public class GoSquare extends Square{
     @Override
     public String toXML() {
         StringBuffer string = new StringBuffer();
-        string.append("<Square type=\"Go\">");
-        string.append("<Name>"+this.getName()+"</Name>");
-        string.append("<Number>"+this.getNumber()+"</Number>");
-        string.append("<Price>"+this.getAddMoney()+"</Price>");
-        string.append("</Square>");
+        string.append("<Square type=\"Go\">\n");
+        string.append("<Name>" + this.getName() + "</Name>\n");
+        string.append("<Number>" + this.getNumber() + "</Number>\n");
+        string.append("<Price>" + this.getAddMoney() + "</Price>\n");
+        string.append("</Square>\n");
 
         return string.toString();
     }

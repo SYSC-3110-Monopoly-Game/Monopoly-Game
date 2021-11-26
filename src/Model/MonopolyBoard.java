@@ -221,6 +221,8 @@ public class MonopolyBoard {
                         if(squareType.get(name) == 1){
                             loadToSquare(name, square);
                             squareType.put(name, 0);
+                            square.put(variables[0], "");
+                            square.put(variables[1], "");
                         }
                     }
                 } else {
@@ -239,7 +241,7 @@ public class MonopolyBoard {
                 for(int i=0; i< load.length; i++){
                     if(load[i]){
                         if(i<2){
-                            square.put(variables[i], temp);
+                            square.put(variables[i], square.get(variables[i])+temp);
                         }
                         else if(i<8){
                             int num = Integer.parseInt(temp);

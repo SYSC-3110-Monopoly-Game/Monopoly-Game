@@ -20,10 +20,10 @@ public class FreeParkingSquare extends Square {
     @Override
     public String toXML() {
         StringBuffer string = new StringBuffer();
-        string.append("<Square type=\"FreeParking\">");
-        string.append("<Name>"+this.getName()+"</Name>");
-        string.append("<Number>"+this.getNumber()+"</Number>");
-        string.append("</Square>");
+        string.append("<Square type=\"FreeParking\">\n");
+        string.append("<Name>"+this.getName()+"</Name>\n");
+        string.append("<Number>"+this.getNumber()+"</Number>\n");
+        string.append("</Square>\n");
 
         return string.toString();
     }
