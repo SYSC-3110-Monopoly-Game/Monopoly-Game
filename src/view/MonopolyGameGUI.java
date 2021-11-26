@@ -181,7 +181,7 @@ public class MonopolyGameGUI extends JFrame {
                 infoDisplayGUI.setRollEnabled(false);
             }
             case "NoDoubles" -> {
-                JOptionPane.showMessageDialog(squareGUI, "You stay in jail for 3 rounds, you can leave now");
+                JOptionPane.showMessageDialog(squareGUI, "This is your 3rd rounds in jail, you can leave the jail next round");
                 squareGUI.changePlayerGUILocation(player, 8, 8);
                 infoDisplayGUI.setNextEnabled(true);
                 infoDisplayGUI.setRollEnabled(false);
