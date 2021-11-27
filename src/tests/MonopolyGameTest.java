@@ -67,6 +67,8 @@ class MonopolyGameTest {
 
     @Test
     void exportXML() {
+        /*game.playRound();
+        game.buySquare();*/
         game.exportGameToXML("testSaveFile.xml");
     }
 
@@ -74,5 +76,6 @@ class MonopolyGameTest {
     void loadXML() throws ParserConfigurationException, IOException, SAXException {
         MonopolyGame game = new MonopolyGame("testSaveFile.xml");
         game.printPlayersInfo();
+        game = null;
     }
 }

@@ -90,6 +90,11 @@ public class PropertySquare extends Square {
         return !this.houses.isEmpty();
     }
 
+
+    public int getHouseNumber() {
+        return this.houses.size();
+    }
+
     /**
      * return the price of building a house on this property square
      */
@@ -282,5 +287,13 @@ public class PropertySquare extends Square {
         string.append("</Square>\n");
 
         return string.toString();
+    }
+
+    public void setOwnerAccordingToOwnerName(ArrayList<Player> players) {
+        for(Player p: players){
+            if(p.getName().equals(this.ownerName)){
+                this.owner = p;
+            }
+        }
     }
 }

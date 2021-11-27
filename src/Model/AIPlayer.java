@@ -11,8 +11,8 @@ public class AIPlayer extends Player {
         super(name+"AI", square);
     }
 
-    public AIPlayer(String name, int cash, boolean b, String decision, Square lastLocation, Square currentLocation, ArrayList<PropertySquare> sOwned, PropertySquare selectedSquare) {
-        super(name, cash, b, decision, lastLocation, currentLocation, sOwned, selectedSquare);
+    public AIPlayer(String name, int cash, boolean b, boolean d, String decision, Square lastLocation, Square currentLocation, ArrayList<PropertySquare> sOwned, PropertySquare selectedSquare) {
+        super(name, cash, b, d, decision, lastLocation, currentLocation, sOwned, selectedSquare);
     }
 
 

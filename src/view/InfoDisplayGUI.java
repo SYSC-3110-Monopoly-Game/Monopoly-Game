@@ -2,6 +2,7 @@ package view;
 
 import Controller.MonopolyGameController;
 import Model.Player;
+import Model.PropertySquare;
 
 import javax.swing.*;
 import java.awt.*;
@@ -129,6 +130,46 @@ public class InfoDisplayGUI extends JPanel {
             allPlayerInfo = allPlayerInfo + info;
         }
         otherPlayers.setText(allPlayerInfo);
+    }
+
+
+    public void setPlayersInfo(ArrayList<Player> players, Player player){
+        setOtherPlayersInfo(players);
+        if(player.getDiceRolled()){
+            this.setRollEnabled(false);
+            this.setNextEnabled(true);
+        } else {
+            this.setRollEnabled(true);
+            this.setNextEnabled(false);
+        }
+        this.setName(player.getName());
+        this.setCash(player.getCash());
+        this.setPropertyList(player.getProperties().toString());
+        this.setCurrentLocation(player.getCurrentLocation().getName());
+        if (player.getCurrentLocation() instanceof PropertySquare location) {
+            Player owner = ((PropertySquare) player.getCurrentLocation()).getOwner();
+
+            if (owner == null) {
+                this.setBuyEnabled(player.getCash() >= location.getPrice());
+                this.setBuyPrice(location.getPrice());
+                this.setHousePrice(location.getHousePrice());
+                this.setHotelPrice(location.getHotelPrice());
+            } else {
+                this.setBuyPrice(-2);
+                this.setHousePrice(-2);
+                this.setHotelPrice(-2);
+            }
+            this.setRentPrice(location.getRentFee());
+        } else {
+            this.setBuyPrice(-1);
+            this.setHousePrice(-1);
+            this.setHotelPrice(-1);
+            this.setRentPrice(-1);
+            this.setBuyEnabled(false);
+        }
+        this.setBuildEnabled(!player.getAvailableProperties(player.removeRailroadUtility(player.hasWholeSet())).isEmpty());
+        this.setSellHEnabled(!player.hasBuilding().isEmpty());
+        this.setSellEnabled(!player.getProperties().isEmpty());
     }
 
 

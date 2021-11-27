@@ -25,7 +25,7 @@ public class SquareGridGUI extends JPanel {
         //this.makeSquares();
         this.createSquareGUI();
         for (Player p : players) {
-            this.squareGUIs[0].addPlayer(p.getName());
+            this.squareGUIs[p.getCurrentLocation().getNumber()].addPlayer(p.getName());
         }
     }
 
@@ -113,8 +113,29 @@ public class SquareGridGUI extends JPanel {
         }
     }
 
+
+
     public SquareGUI getPropertySquareGUI(int index){
         return squareGUIs[index];
+    }
+
+
+
+    public void loadSquaresOnMap(MonopolyBoard board){
+        for(int i=0; i<board.getSquares().length; i++){
+            if(board.getSquareAt(i) instanceof PropertySquare
+                    && !(board.getSquareAt(i) instanceof RailRoadSquare)
+                    && !(board.getSquareAt(i) instanceof UtilitySquare)){
+                if(((PropertySquare) board.getSquareAt(i)).hasHouses()){
+                    for(int j=0; j<((PropertySquare) board.getSquareAt(i)).getHouseNumber(); j++){
+                        buildSellBuilding("build", "House", i);
+                    }
+                    if(((PropertySquare) board.getSquareAt(i)).hasHotel()){
+                        buildSellBuilding("build", "Hotel", i);
+                    }
+                }
+            }
+        }
     }
 
 
@@ -173,9 +194,43 @@ public class SquareGridGUI extends JPanel {
         message.append(string);
     }
 
+
     public void setDiceImages(int diceValue, int diceValue1) {
         this.diceGUI.setDiceImages( diceValue,  diceValue1);
         this.repaint();
+    }
+
+
+    public void buildSellBuilding(String command, String decision, Integer index){
+        if (command.equals("build")) {
+            if (decision.equals("House")) {
+                for (int i = 1; i < 5; i++) {
+                    if (((PropertySquareGUI) this.getPropertySquareGUI(index)).isBuilding(i)) {
+                        ((PropertySquareGUI) this.getPropertySquareGUI(index)).setBuildingX(Color.GREEN, i);
+                        break;
+                    }
+                }
+            } else if (decision.equals("Hotel")) {
+                for (int i = 1; i < 5; i++) {
+                    if (((PropertySquareGUI) this.getPropertySquareGUI(index)).isBuilding(i)) {
+                        ((PropertySquareGUI) this.getPropertySquareGUI(index)).setBuildingX(Color.GREEN, i);
+                    }
+                }
+                ((PropertySquareGUI) this.getPropertySquareGUI(index)).setBuildingX(Color.RED, 5);
+            }
+        } else if (command.equals("sellH")) {
+            if (decision.equals("House")) {
+                for (int i = 4; i > 0; i--) {
+                    if (!(((PropertySquareGUI) this.getPropertySquareGUI(index)).isBuilding(i))) {
+                        ((PropertySquareGUI) this.getPropertySquareGUI(index)).setBuildingX(Color.WHITE, i);
+                        break;
+                    }
+                }
+            } else if (decision.equals("Hotel")) {
+                ((PropertySquareGUI) this.getPropertySquareGUI(index)).setBuildingX(Color.WHITE, 5);
+            }
+
+        }
     }
 }
 

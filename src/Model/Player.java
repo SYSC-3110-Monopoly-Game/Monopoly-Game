@@ -4,7 +4,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import javax.management.ObjectName;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -25,6 +24,7 @@ public class Player {
 
     private int cashTotal;
     private boolean isInJail;
+    private boolean diceRolled;
 
     /**
      * Constructor of Player
@@ -36,9 +36,10 @@ public class Player {
         this.cashTotal = 350;
         this.currentLocation = square;
         this.decision = "";
+        this.diceRolled = false;
     }
 
-    public Player(String name, int cash, boolean inJail, String decision, Square lastSquare, Square thisSquare, ArrayList<PropertySquare> squares, PropertySquare square){
+    public Player(String name, int cash, boolean inJail, boolean diceRolled, String decision, Square lastSquare, Square thisSquare, ArrayList<PropertySquare> squares, PropertySquare square){
         this.name = name;
         this.cashTotal = cash;
         this.isInJail = inJail;
@@ -47,6 +48,7 @@ public class Player {
         this.currentLocation = thisSquare;
         this.squaresOwned = squares;
         this.selectedSquare = square;
+        this.diceRolled = diceRolled;
     }
 
 
@@ -172,6 +174,30 @@ public class Player {
         return this.cashTotal <= -1;
     }
 
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        for (Square c : squaresOwned) {
+            s.append(c.toString());
+        }
+        return s.toString();
+    }
+
+    public boolean isInJail() {
+        return isInJail;
+    }
+
+    public void setInJail(boolean inJail) {
+        isInJail = inJail;
+    }
+
+    public void setDiceRolled(boolean b) {
+        this.diceRolled = b;
+    }
+
+    public boolean getDiceRolled() {
+        return this.diceRolled;
+    }
+
     /**
      * export the player as a xml file to file: fileName
      * @param fileName
@@ -193,19 +219,28 @@ public class Player {
      * @return
      */
     public static Player loadToPlayer(HashMap<String, Object> playerInfo){
-        String name = (String) playerInfo.get("Name");
-        String decision = (String) playerInfo.get("Decision");
-        int cash = (int) playerInfo.get("Cash");
-        int isInJail = (int) playerInfo.get("IsInJail");
-        Square currentLocation = (Square) playerInfo.get("CurrentLocation");
-        Square lastLocation = (Square) playerInfo.get("LastLocation");
-        PropertySquare selectedSquare = (PropertySquare) playerInfo.get("SelectedSquare");
-        ArrayList<PropertySquare> sOwned = (ArrayList<PropertySquare>) playerInfo.get("SquareOwned");
+        String name, decision;
+        int cash, isInJail, diceRolled;
+        Square currentLocation, lastLocation;
+        PropertySquare selectedSquare;
+        ArrayList<PropertySquare> sOwned = new ArrayList<>();
+
+        name = (String) playerInfo.get("Name");
+        decision = (String) playerInfo.get("Decision");
+        cash = (int) playerInfo.get("Cash");
+        isInJail = (int) playerInfo.get("IsInJail");
+        diceRolled = (int) playerInfo.get("DiceRolled");
+        currentLocation = (Square) playerInfo.get("CurrentLocation");
+        lastLocation = (Square) playerInfo.get("LastLocation");
+        selectedSquare = (PropertySquare) playerInfo.get("SelectedSquare");
+        if(playerInfo.get("SquareOwned") instanceof ArrayList){
+            sOwned = (ArrayList<PropertySquare>) playerInfo.get("SquareOwned");
+        }
 
         if(name.length() > 2 && name.charAt(1) == 'A' && name.charAt(2) == 'I'){
-            return new AIPlayer(name, cash, isInJail == 1, decision, lastLocation, currentLocation, sOwned, selectedSquare);
+            return new AIPlayer(name, cash, isInJail == 1, diceRolled == 1, decision, lastLocation, currentLocation, sOwned, selectedSquare);
         }
-        return new Player(name, cash, isInJail == 1, decision, lastLocation, currentLocation, sOwned, selectedSquare);
+        return new Player(name, cash, isInJail == 1, diceRolled == 1, decision, lastLocation, currentLocation, sOwned, selectedSquare);
     }
 
     /**
@@ -227,19 +262,19 @@ public class Player {
         Square s = board.getSquareAt(0);
         PropertySquare testProperty = (PropertySquare) board.getSquareAt(1);
 
-        HashMap<String, Object> playerInfo = new HashMap<>(Map.of("Name", "","Decision", "","Cash", 0,
-                "IsInJail", 0, "CurrentLocation", s,"LastLocation", s, "SelectedSquare", testProperty,
+        HashMap<String, Object> playerInfo = new HashMap<>(Map.of("Name", "","Decision", "",
+                "DiceRolled", 0, "Cash", 0, "IsInJail", 0, "CurrentLocation",
+                s,"LastLocation", s, "SelectedSquare", testProperty,
                 "SquareOwned", new ArrayList<PropertySquare>()));
 
-        boolean[] toLoad = {false,false,false,false,false,false,false,false,false};
-        int[] id = {0};
-        final String[] variables = {"Name","Decision","Cash", "IsInJail", "CurrentLocation", "LastLocation",
-                "SelectedSquare", "SquareOwned"};
+        boolean[] toLoad = {false,false,false,false,false,false,false,false,false,false};
+        final String[] variables = {"Name","Decision","Cash", "IsInJail", "DiceRolled", "CurrentLocation",
+                "LastLocation", "SelectedSquare", "SquareOwned"};
 
         saxParser.parse(path, new DefaultHandler(){
 
             @Override
-            public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+            public void startElement(String uri, String localName, String qName, Attributes attributes) {
                 if(qName.equals("Player")){
                     if(Integer.parseInt(attributes.getValue("id"))== index)
                         toLoad[0] = true;
@@ -253,7 +288,7 @@ public class Player {
             }
 
             @Override
-            public void endElement(String uri, String localName, String qName) throws SAXException {
+            public void endElement(String uri, String localName, String qName) {
                 if(qName.equals("Player")){
                     toLoad[0] = false;
                     returnPlayer[0] = loadToPlayer(playerInfo);
@@ -267,7 +302,7 @@ public class Player {
             }
 
             @Override
-            public void characters(char[] ch, int start, int length) throws SAXException {
+            public void characters(char[] ch, int start, int length) {
                 String temp = new String(ch, start, length);
 
                 for(int i=0; i< variables.length; i++){
@@ -275,11 +310,11 @@ public class Player {
                         if(i<2){
                             playerInfo.put(variables[i], playerInfo.get(variables[i])+temp);
                         }
-                        else if(i<4){
+                        else if(i<5){
                             int num = Integer.parseInt(temp);
                             playerInfo.put(variables[i], num);
                         }
-                        else if(i<7){
+                        else if(i<8){
                             int num = Integer.parseInt(temp);
                             playerInfo.put(variables[i], board.getSquareAt(num));
                         }
@@ -312,6 +347,7 @@ public class Player {
         string.append("<Decision>"+this.getDecision()+"</Decision>\n");
         string.append("<Cash>"+this.getCash()+"</Cash>\n");
         string.append("<IsInJail>"+(this.isInJail() ? 1:0)+"</IsInJail>\n");
+        string.append("<DiceRolled>"+(this.getDiceRolled() ? 1:0)+"</DiceRolled>\n");
         string.append("<CurrentLocation>"+this.getCurrentLocation().getNumber()+"</CurrentLocation>\n");
         if(this.getLastLocation() != null) {
             string.append("<LastLocation>"+this.getLastLocation().getNumber()+"</LastLocation>\n");
@@ -370,22 +406,6 @@ public class Player {
             ((PropertySquare) property).setOwner(null);             // set the owner of the property to nobody
             this.increaseCash(((PropertySquare) property).getPrice() / 2);    // reset the player's cash
         }
-    }
-
-    public String toString() {
-        StringBuilder s = new StringBuilder();
-        for (Square c : squaresOwned) {
-            s.append(c.toString());
-        }
-        return s.toString();
-    }
-
-    public boolean isInJail() {
-        return isInJail;
-    }
-
-    public void setInJail(boolean inJail) {
-        isInJail = inJail;
     }
 
     /**

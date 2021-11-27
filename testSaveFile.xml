@@ -320,6 +320,7 @@
 <Decision></Decision>
 <Cash>350</Cash>
 <IsInJail>0</IsInJail>
+<DiceRolled>0</DiceRolled>
 <CurrentLocation>0</CurrentLocation>
 <LastLocation>0</LastLocation>
 <SelectedSquare></SelectedSquare>
@@ -330,6 +331,7 @@
 <Decision></Decision>
 <Cash>350</Cash>
 <IsInJail>0</IsInJail>
+<DiceRolled>0</DiceRolled>
 <CurrentLocation>0</CurrentLocation>
 <LastLocation>0</LastLocation>
 <SelectedSquare></SelectedSquare>
@@ -340,6 +342,7 @@
 <Decision></Decision>
 <Cash>350</Cash>
 <IsInJail>0</IsInJail>
+<DiceRolled>0</DiceRolled>
 <CurrentLocation>0</CurrentLocation>
 <LastLocation>0</LastLocation>
 <SelectedSquare></SelectedSquare>
@@ -350,9 +353,10 @@
 <Decision></Decision>
 <Cash>350</Cash>
 <IsInJail>0</IsInJail>
+<DiceRolled>0</DiceRolled>
 <CurrentLocation>0</CurrentLocation>
 <LastLocation>0</LastLocation>
 <SelectedSquare></SelectedSquare>
 <SquareOwned></SquareOwned>
 </Player>
-<DoubleCounter>0</DoubleCounter><PlayerInTurn>1</PlayerInTurn><PlayerNotInTurn>2,3AI,4AI,</PlayerNotInTurn></Game>
+<DoubleCounter>0</DoubleCounter><PlayerInTurn>1</PlayerInTurn><PlayerNotInTurn>2,3AI,4AI,</PlayerNotInTurn><DiceValue>0,0</DiceValue></Game>

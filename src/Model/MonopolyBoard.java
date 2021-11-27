@@ -38,6 +38,7 @@ public class MonopolyBoard {
     public MonopolyBoard(String path) throws ParserConfigurationException, IOException, SAXException {
         squares = new Square[SIZE];
         makeSquaresFromXML(path);
+        jail = (JailSquare) getSquareAt(8);
         colors.addAll(Arrays.asList(set));
     }
 
@@ -149,16 +150,22 @@ public class MonopolyBoard {
      */
     private void loadToSquare(String type, HashMap variables){
         Square s;
-        String name = (String) variables.get("Name");
-        String owner = (String) variables.get("Owner");
-        int number = (int) variables.get("Number");
-        int price = (int) variables.get("Number");
-        int rentPrice = (int) variables.get("Number");
-        int housePrice = (int) variables.get("Number");
-        int houseAmount = (int) variables.get("Number");
-        int hotelAmount = (int) variables.get("Number");
+        String name, owner;
+        Color c = Color.LIGHT_GRAY;
+        int number, price, rentPrice, housePrice, houseAmount, hotelAmount;
+        name = (String) variables.get("Name");
+        owner = (String) variables.get("Owner");
+        number = (int) variables.get("Number");
+        price = (int) variables.get("Price");
+        rentPrice = (int) variables.get("RentPrice");
+        housePrice = (int) variables.get("HousePrice");
+        houseAmount = (int) variables.get("HouseAmount");
+        hotelAmount = (int) variables.get("HotelAmount");
+        if(variables.get("Color") != Color.LIGHT_GRAY){
+            c = (Color) variables.get("Color");
+        }
+
         HashMap<String, Integer> map = (HashMap<String, Integer>) variables.get("JailMap");
-        Color c = (Color) variables.get("Color");
         if(type.equals("Property")){
             s = new PropertySquare(name, number, price, rentPrice, c, housePrice, houseAmount, hotelAmount, owner);
         } else if (type.equals("RailRoad")) {
@@ -192,9 +199,9 @@ public class MonopolyBoard {
         SAXParserFactory factory = SAXParserFactory.newInstance();
         SAXParser saxParser = factory.newSAXParser();
 
-        HashMap<String, Object> square = new HashMap<>(Map.of("Name", "","Owner", "","Number", 0,
+        HashMap<String, Object> square = new HashMap<>(Map.of("Name",  "","Owner", "","Number", 0,
                 "Price", 0, "RentPrice", 0,"HousePrice", 0, "HouseAmount", 0,
-                "HotelAmount", 0,"Color", Color.BLACK, "JailMap", new HashMap<>()));
+                "HotelAmount", 0,"Color", Color.LIGHT_GRAY, "JailMap", new HashMap<String, Integer>()));
 
         boolean[] load = {false,false,false,false,false,false,false,false,false,false};
         final String[] variables = {"Name", "Owner", "Number", "Price", "RentPrice", "HousePrice", "HouseAmount",
@@ -207,7 +214,7 @@ public class MonopolyBoard {
         saxParser.parse(path, new DefaultHandler(){
 
             @Override
-            public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+            public void startElement(String uri, String localName, String qName, Attributes attributes){
                 if(qName.equals("Square")){
                     squareType.put(attributes.getValue("type"), 1);
                 } else {
@@ -220,7 +227,7 @@ public class MonopolyBoard {
             }
 
             @Override
-            public void endElement(String uri, String localName, String qName) throws SAXException {
+            public void endElement(String uri, String localName, String qName){
                 if(qName.equals("Square")){
                     for(String name: squareType.keySet()){
                         if(squareType.get(name) == 1){
@@ -240,7 +247,7 @@ public class MonopolyBoard {
             }
 
             @Override
-            public void characters(char[] ch, int start, int length) throws SAXException {
+            public void characters(char[] ch, int start, int length){
                 String temp = new String(ch, start, length);
 
                 for(int i=0; i< load.length; i++){
