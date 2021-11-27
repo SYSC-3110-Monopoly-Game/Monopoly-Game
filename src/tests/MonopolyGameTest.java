@@ -5,6 +5,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 
 class MonopolyGameTest {
 
@@ -56,7 +60,19 @@ class MonopolyGameTest {
         Assertions.assertEquals(2, game.getDoubleCounter());
     }
 
+    @Test
     void getPlayerNotInTurn() {
         Assertions.assertEquals(3, game.getPlayersNotInTurn().size());
+    }
+
+    @Test
+    void exportXML() {
+        game.exportGameToXML("testSaveFile.xml");
+    }
+
+    @Test
+    void loadXML() throws ParserConfigurationException, IOException, SAXException {
+        MonopolyGame game = new MonopolyGame("testSaveFile.xml");
+        game.printPlayersInfo();
     }
 }

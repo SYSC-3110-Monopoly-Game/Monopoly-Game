@@ -35,13 +35,8 @@ public class MonopolyBoard {
         colors.addAll(Arrays.asList(set));
     }
 
-    public MonopolyBoard(String choice) throws ParserConfigurationException, IOException, SAXException {
+    public MonopolyBoard(String path) throws ParserConfigurationException, IOException, SAXException {
         squares = new Square[SIZE];
-        String path = "";
-        if(choice.equals("initialize"))
-            path = "SavedBoard.xml";
-        else
-            path = "";
         makeSquaresFromXML(path);
         colors.addAll(Arrays.asList(set));
     }
@@ -133,22 +128,25 @@ public class MonopolyBoard {
         return squares[0];
     }
 
-    public void exportToXML() {
+    public void exportToXML(String fileName) {
         try {
-            File writename = new File("SavedBoard.xml");
-            writename.createNewFile();
-            BufferedWriter out = new BufferedWriter(new FileWriter(writename));
-            out.write("<Board>");
+            FileWriter writer = new FileWriter(fileName, true);
+            writer.write("<Board>");
             for(Square s: squares){
-                out.write(s.toXML());
+                writer.write(s.toXML());
             }
-            out.write("</Board>");
-            out.close();
-        } catch (Exception e) {
+            writer.write("</Board>");
+            writer.close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * create a map from the given variables
+     * @param type
+     * @param variables
+     */
     private void loadToSquare(String type, HashMap variables){
         Square s;
         String name = (String) variables.get("Name");
@@ -183,6 +181,13 @@ public class MonopolyBoard {
         squares[(int) variables.get("Number")] = s;
     }
 
+    /**
+     * load the file from the given xml path
+     * @param path
+     * @throws ParserConfigurationException
+     * @throws SAXException
+     * @throws IOException
+     */
     private void makeSquaresFromXML(String path) throws ParserConfigurationException, SAXException, IOException {
         SAXParserFactory factory = SAXParserFactory.newInstance();
         SAXParser saxParser = factory.newSAXParser();

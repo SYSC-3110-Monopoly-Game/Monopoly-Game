@@ -1,7 +1,19 @@
 package Model;
 
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+
+import javax.management.ObjectName;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import java.awt.*;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Player {
     private final String name;
@@ -23,7 +35,7 @@ public class Player {
         this.squaresOwned = new ArrayList<>();
         this.cashTotal = 350;
         this.currentLocation = square;
-        this.decision = null;
+        this.decision = "";
     }
 
     public Player(String name, int cash, boolean inJail, String decision, Square lastSquare, Square thisSquare, ArrayList<PropertySquare> squares, PropertySquare square){
@@ -158,6 +170,168 @@ public class Player {
      */
     public boolean isBankrupt() {
         return this.cashTotal <= -1;
+    }
+
+    /**
+     * export the player as a xml file to file: fileName
+     * @param fileName
+     * @param id
+     */
+    public void exportPlayers(String fileName, int id) {
+        try {
+            FileWriter writer = new FileWriter(fileName, true);
+            writer.write(this.toXML(id));
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * create a player with given variables
+     * @param playerInfo
+     * @return
+     */
+    public static Player loadToPlayer(HashMap<String, Object> playerInfo){
+        String name = (String) playerInfo.get("Name");
+        String decision = (String) playerInfo.get("Decision");
+        int cash = (int) playerInfo.get("Cash");
+        int isInJail = (int) playerInfo.get("IsInJail");
+        Square currentLocation = (Square) playerInfo.get("CurrentLocation");
+        Square lastLocation = (Square) playerInfo.get("LastLocation");
+        PropertySquare selectedSquare = (PropertySquare) playerInfo.get("SelectedSquare");
+        ArrayList<PropertySquare> sOwned = (ArrayList<PropertySquare>) playerInfo.get("SquareOwned");
+
+        if(name.length() > 2 && name.charAt(1) == 'A' && name.charAt(2) == 'I'){
+            return new AIPlayer(name, cash, isInJail == 1, decision, lastLocation, currentLocation, sOwned, selectedSquare);
+        }
+        return new Player(name, cash, isInJail == 1, decision, lastLocation, currentLocation, sOwned, selectedSquare);
+    }
+
+    /**
+     * create a player from the given xml file path
+     * @param board
+     * @param path
+     * @param index
+     * @return
+     * @throws ParserConfigurationException
+     * @throws SAXException
+     * @throws IOException
+     */
+    public static Player makePlayerFromXML(MonopolyBoard board, String path, int index) throws ParserConfigurationException, SAXException, IOException {
+        SAXParserFactory factory = SAXParserFactory.newInstance();
+        SAXParser saxParser = factory.newSAXParser();
+
+
+        final Player[] returnPlayer = new Player[1];
+        Square s = board.getSquareAt(0);
+        PropertySquare testProperty = (PropertySquare) board.getSquareAt(1);
+
+        HashMap<String, Object> playerInfo = new HashMap<>(Map.of("Name", "","Decision", "","Cash", 0,
+                "IsInJail", 0, "CurrentLocation", s,"LastLocation", s, "SelectedSquare", testProperty,
+                "SquareOwned", new ArrayList<PropertySquare>()));
+
+        boolean[] toLoad = {false,false,false,false,false,false,false,false,false};
+        int[] id = {0};
+        final String[] variables = {"Name","Decision","Cash", "IsInJail", "CurrentLocation", "LastLocation",
+                "SelectedSquare", "SquareOwned"};
+
+        saxParser.parse(path, new DefaultHandler(){
+
+            @Override
+            public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+                if(qName.equals("Player")){
+                    if(Integer.parseInt(attributes.getValue("id"))== index)
+                        toLoad[0] = true;
+                } else {
+                    for(int i=0; i< variables.length; i++){
+                        if(qName.equals(variables[i])){
+                            toLoad[i+1] = true;
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void endElement(String uri, String localName, String qName) throws SAXException {
+                if(qName.equals("Player")){
+                    toLoad[0] = false;
+                    returnPlayer[0] = loadToPlayer(playerInfo);
+                } else {
+                    for(int i=0; i< variables.length; i++){
+                        if(qName.equals(variables[i])){
+                            toLoad[i+1] = false;
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void characters(char[] ch, int start, int length) throws SAXException {
+                String temp = new String(ch, start, length);
+
+                for(int i=0; i< variables.length; i++){
+                    if(toLoad[i+1] && toLoad[0]){
+                        if(i<2){
+                            playerInfo.put(variables[i], playerInfo.get(variables[i])+temp);
+                        }
+                        else if(i<4){
+                            int num = Integer.parseInt(temp);
+                            playerInfo.put(variables[i], num);
+                        }
+                        else if(i<7){
+                            int num = Integer.parseInt(temp);
+                            playerInfo.put(variables[i], board.getSquareAt(num));
+                        }
+                        else {
+                            String[] map = temp.split(",");
+                            ArrayList<PropertySquare> squareOwn = new ArrayList<>();
+                            for(String s: map){
+                                squareOwn.add((PropertySquare) board.getSquareAt(Integer.parseInt(s)));
+                            }
+
+                            playerInfo.put(variables[i], squareOwn);
+                        }
+                        break;
+                    }
+                }
+            }
+        });
+        return returnPlayer[0];
+    }
+
+    /**
+     * convert the player to xml format
+     * @param id
+     * @return
+     */
+    private String toXML(int id) {
+        StringBuilder string = new StringBuilder();
+        string.append("<Player id=\""+ id +"\">\n");
+        string.append("<Name>"+this.getName()+"</Name>\n");
+        string.append("<Decision>"+this.getDecision()+"</Decision>\n");
+        string.append("<Cash>"+this.getCash()+"</Cash>\n");
+        string.append("<IsInJail>"+(this.isInJail() ? 1:0)+"</IsInJail>\n");
+        string.append("<CurrentLocation>"+this.getCurrentLocation().getNumber()+"</CurrentLocation>\n");
+        if(this.getLastLocation() != null) {
+            string.append("<LastLocation>"+this.getLastLocation().getNumber()+"</LastLocation>\n");
+        } else {
+            string.append("<LastLocation></LastLocation>\n");
+        }
+        if(this.getSelectedSquare() != null) {
+            string.append("<SelectedSquare>"+this.getSelectedSquare().getNumber()+"</SelectedSquare>\n");
+        } else {
+            string.append("<SelectedSquare></SelectedSquare>\n");
+        }
+        string.append("<SquareOwned>");
+        for(PropertySquare p: this.getProperties()){
+            string.append(p.getNumber()+ ",");
+        }
+        string.append("</SquareOwned>\n");
+
+        string.append("</Player>\n");
+
+        return string.toString();
     }
 
     /**

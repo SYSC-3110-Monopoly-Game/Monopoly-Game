@@ -1,4 +1,4 @@
-<Board><Square type="Go">
+<Game><Board><Square type="Go">
 <Name>GO</Name>
 <Number>0</Number>
 <Price>50</Price>
@@ -315,4 +315,44 @@
 <HotelAmount>0</HotelAmount>
 <Owner></Owner>
 </Square>
-</Board>
+</Board><Player id="0">
+<Name>1</Name>
+<Decision></Decision>
+<Cash>350</Cash>
+<IsInJail>0</IsInJail>
+<CurrentLocation>0</CurrentLocation>
+<LastLocation>0</LastLocation>
+<SelectedSquare></SelectedSquare>
+<SquareOwned></SquareOwned>
+</Player>
+<Player id="1">
+<Name>2</Name>
+<Decision></Decision>
+<Cash>350</Cash>
+<IsInJail>0</IsInJail>
+<CurrentLocation>0</CurrentLocation>
+<LastLocation>0</LastLocation>
+<SelectedSquare></SelectedSquare>
+<SquareOwned></SquareOwned>
+</Player>
+<Player id="2">
+<Name>3AI</Name>
+<Decision></Decision>
+<Cash>350</Cash>
+<IsInJail>0</IsInJail>
+<CurrentLocation>0</CurrentLocation>
+<LastLocation>0</LastLocation>
+<SelectedSquare></SelectedSquare>
+<SquareOwned></SquareOwned>
+</Player>
+<Player id="3">
+<Name>4AI</Name>
+<Decision></Decision>
+<Cash>350</Cash>
+<IsInJail>0</IsInJail>
+<CurrentLocation>0</CurrentLocation>
+<LastLocation>0</LastLocation>
+<SelectedSquare></SelectedSquare>
+<SquareOwned></SquareOwned>
+</Player>
+<DoubleCounter>0</DoubleCounter><PlayerInTurn>1</PlayerInTurn><PlayerNotInTurn>2,3AI,4AI,</PlayerNotInTurn></Game>
