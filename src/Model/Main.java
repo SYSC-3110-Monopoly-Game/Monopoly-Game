@@ -10,7 +10,8 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
-        MonopolyGame game = new MonopolyGame("testSaveFile.xml");
+        MonopolyGame game;
+        game = new MonopolyGame("testSaveFile.xml");
         MonopolyGameGUI view = new MonopolyGameGUI(game);
         MonopolyGameController controller = new MonopolyGameController(game);
         view.setController(controller);

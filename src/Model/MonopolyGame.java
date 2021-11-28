@@ -42,10 +42,10 @@ public class MonopolyGame {
     }
 
     /**
-     * export the whole game to an xml file: path
+     * export the whole game to a xml file: path
      * @param path
      */
-    public void exportGameToXML(String path){
+    public void exportGameToXML(String path) {
         try {
             File writename = new File(path);
             writename.createNewFile();
