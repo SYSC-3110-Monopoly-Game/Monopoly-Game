@@ -199,8 +199,8 @@ public class Player {
 
     /**
      * export the player as a xml file to file: fileName
-     * @param fileName
-     * @param id
+     * @param fileName: file name of the xml file
+     * @param id: the sequence the player is in the game
      */
     public void exportPlayers(String fileName, int id) {
         try {
@@ -214,8 +214,8 @@ public class Player {
 
     /**
      * create a player with given variables
-     * @param playerInfo
-     * @return
+     * @param playerInfo: variables contains information of this player
+     * @return: The instance of player or AIPlayer with the given index
      */
     public static Player loadToPlayer(HashMap<String, Object> playerInfo){
         String name, decision;
@@ -244,10 +244,10 @@ public class Player {
 
     /**
      * create a player from the given xml file path
-     * @param board
-     * @param path
-     * @param index
-     * @return
+     * @param board: Monopoly board
+     * @param path: file name of the xml file
+     * @param index: the sequence the player is in the game
+     * @return: The instance of player with the given index
      * @throws ParserConfigurationException
      * @throws SAXException
      * @throws IOException
@@ -336,8 +336,8 @@ public class Player {
 
     /**
      * convert the player to xml format
-     * @param id
-     * @return
+     * @param id: the sequence the player is in the game
+     * @return: xml format String
      */
     private String toXML(int id) {
         StringBuilder string = new StringBuilder();

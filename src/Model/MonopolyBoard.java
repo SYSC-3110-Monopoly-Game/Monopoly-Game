@@ -3,13 +3,10 @@ package Model;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.awt.*;
-import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -129,6 +126,10 @@ public class MonopolyBoard {
         return squares[0];
     }
 
+    /**
+     * export the game board to path
+     * @param fileName: file name of the xml file
+     */
     public void exportToXML(String fileName) {
         try {
             FileWriter writer = new FileWriter(fileName, true);
@@ -145,8 +146,8 @@ public class MonopolyBoard {
 
     /**
      * create a map from the given variables
-     * @param type
-     * @param variables
+     * @param type: type of the square
+     * @param variables: variables contains squares' information
      */
     private void loadToSquare(String type, HashMap variables){
         Square s;
@@ -189,8 +190,8 @@ public class MonopolyBoard {
     }
 
     /**
-     * load the file from the given xml path
-     * @param path
+     * load the file from path
+     * @param path: file name of the xml file
      * @throws ParserConfigurationException
      * @throws SAXException
      * @throws IOException

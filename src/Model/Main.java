@@ -11,7 +11,7 @@ public class Main {
 
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException {
         MonopolyGame game;
-        game = new MonopolyGame("testSaveFile.xml");
+        game = new MonopolyGame("NewGame.xml");
         MonopolyGameGUI view = new MonopolyGameGUI(game);
         MonopolyGameController controller = new MonopolyGameController(game);
         view.setController(controller);

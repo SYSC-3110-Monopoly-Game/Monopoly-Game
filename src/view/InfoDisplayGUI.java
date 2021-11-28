@@ -120,6 +120,7 @@ public class InfoDisplayGUI extends JPanel {
 
     /**
      * show the information of players who are not in turn
+     * @param players: players not in turn
      */
     public void setOtherPlayersInfo(ArrayList<Player> players) {
         String allPlayerInfo = "Information of Other Players currently in the game \n";
@@ -132,9 +133,15 @@ public class InfoDisplayGUI extends JPanel {
         otherPlayers.setText(allPlayerInfo);
     }
 
-
+    /**
+     * set player info and buttons according to players
+     * @param players: players not in turns
+     * @param player: player in turn
+     */
     public void setPlayersInfo(ArrayList<Player> players, Player player){
         setOtherPlayersInfo(players);
+        int placeSold = -2;
+        int placeNonSale = -1;
         if(player.getDiceRolled()){
             this.setRollEnabled(false);
             this.setNextEnabled(true);
@@ -155,16 +162,16 @@ public class InfoDisplayGUI extends JPanel {
                 this.setHousePrice(location.getHousePrice());
                 this.setHotelPrice(location.getHotelPrice());
             } else {
-                this.setBuyPrice(-2);
-                this.setHousePrice(-2);
-                this.setHotelPrice(-2);
+                this.setBuyPrice(placeSold);
+                this.setHousePrice(placeSold);
+                this.setHotelPrice(placeSold);
             }
             this.setRentPrice(location.getRentFee());
         } else {
-            this.setBuyPrice(-1);
-            this.setHousePrice(-1);
-            this.setHotelPrice(-1);
-            this.setRentPrice(-1);
+            this.setBuyPrice(placeNonSale);
+            this.setHousePrice(placeNonSale);
+            this.setHotelPrice(placeNonSale);
+            this.setRentPrice(placeNonSale);
             this.setBuyEnabled(false);
         }
         this.setBuildEnabled(!player.getAvailableProperties(player.removeRailroadUtility(player.hasWholeSet())).isEmpty());
@@ -187,6 +194,7 @@ public class InfoDisplayGUI extends JPanel {
 
     /**
      * show the properties of the player who is currently playing
+     * @param propertyList: a string of property list
      */
     public void setPropertyList(String propertyList) {
         this.propertyList.setText("<html>" + "Property List: " + propertyList + "</html>");
@@ -201,11 +209,17 @@ public class InfoDisplayGUI extends JPanel {
         this.currentLocation.repaint();
     }
 
+    /**
+     * show the cash of player in turn
+     */
     public void setCash(int cash) {
         this.cash.setText("Cash: " + cash);
         this.cash.repaint();
     }
 
+    /**
+     * show the name of player in turn
+     */
     public void setName(String name) {
         this.name.setText("Player Name: " + name);
         this.name.repaint();

@@ -4,7 +4,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 import view.MonopolyGameGUI;
-
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -35,6 +34,13 @@ public class MonopolyGame {
         printPlayersInfo();
     }
 
+    /**
+     * load game from path
+     * @param path: file name of the xml file
+     * @throws ParserConfigurationException
+     * @throws IOException
+     * @throws SAXException
+     */
     public MonopolyGame(String path) throws ParserConfigurationException, IOException, SAXException {
         views = new ArrayList<>();
         dice = new Dice();
@@ -42,8 +48,8 @@ public class MonopolyGame {
     }
 
     /**
-     * export the whole game to a xml file: path
-     * @param path
+     * export the whole game to path
+     * @param path: file name of the xml file
      */
     public void exportGameToXML(String path) {
         try {
@@ -79,9 +85,8 @@ public class MonopolyGame {
     }
 
     /**
-     * load the game from the given xml file: path
-     * @param path
-     * @return
+     * load the game from path
+     * @param path: file name of the xml file
      * @throws ParserConfigurationException
      * @throws SAXException
      * @throws IOException
@@ -155,10 +160,7 @@ public class MonopolyGame {
                 ((PropertySquare) s).setOwnerAccordingToOwnerName(players);
             }
         }
-
     }
-
-
 
 
     /**

@@ -15,7 +15,6 @@ public class MonopolyGameGUI extends JFrame {
     private final SquareGridGUI squareGUI;
     private final MonopolyGame game;
     private String message;
-    private int selectedPropertyIndex;
 
     /**
      * Initialize the gui frame
@@ -73,9 +72,6 @@ public class MonopolyGameGUI extends JFrame {
         //information about player used
         Square currentLocation = player.getCurrentLocation();
         Square lastLocation = player.getLastLocation();
-        String propertyList = player.getProperties().toString();
-        int cash = player.getCash();
-        String name = player.getName();
         switch (command) {
             case "Next Turn" -> {
                 if(currentLocation instanceof PropertySquare square && square.getOwner()==player)
@@ -233,7 +229,7 @@ public class MonopolyGameGUI extends JFrame {
         popup.setLayout(new GridLayout());
         JButton btn;
         for (PropertySquare property : p) {
-            btn = new JButton(property.getName());
+            btn = new JButton("<html>"+property.getName()+"<br>Sell Price: "+property.getPrice()/2+"</html>");
             btn.setBackground(property.getColor());
             btn.addActionListener(e -> {
                 JButton b = (JButton) e.getSource();
@@ -282,7 +278,7 @@ public class MonopolyGameGUI extends JFrame {
             btn.setBackground(property.getColor());
             btn.addActionListener(e -> {
                 JButton b = (JButton) e.getSource();
-                selectedPropertyIndex = game.setSelectedProperty(b.getText());
+                game.setSelectedProperty(b.getText());
                 popup.dispose();
             });
             popup.add(btn);
@@ -365,7 +361,7 @@ public class MonopolyGameGUI extends JFrame {
      * build or sell houses or hotels on GUI map
      */
     public int sellBuildBuilding(String command, String decision, Player player) {
-        int price = -1;
+        int price;
         if(command.equals("build")){
             price = player.buildH(decision);
         } else {

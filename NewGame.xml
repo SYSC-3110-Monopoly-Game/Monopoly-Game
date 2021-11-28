@@ -1,13 +1,13 @@
 <Game><Board><Square type="Go">
 <Name>GO</Name>
 <Number>0</Number>
-<Price>50</Price>
+<Price>100</Price>
 </Square>
 <Square type="Property">
 <Name>Mediterranean Avenue</Name>
 <Number>1</Number>
 <Price>60</Price>
-<RentPrice>70</RentPrice>
+<RentPrice>60</RentPrice>
 <Color>-8355712</Color>
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
@@ -18,7 +18,7 @@
 <Name>Baltic Avenue</Name>
 <Number>2</Number>
 <Price>60</Price>
-<RentPrice>70</RentPrice>
+<RentPrice>60</RentPrice>
 <Color>-8355712</Color>
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
@@ -32,16 +32,16 @@
 </Square><Square type="RailRoad">
 <Name>Reading RailRoad</Name>
 <Number>4</Number>
-<Price>60</Price>
-<RentPrice>70</RentPrice>
+<Price>80</Price>
+<RentPrice>90</RentPrice>
 <Color>-16777216</Color>
 <Owner></Owner>
 </Square>
 <Square type="Property">
 <Name>Oriental Avenue</Name>
 <Number>5</Number>
-<Price>60</Price>
-<RentPrice>70</RentPrice>
+<Price>50</Price>
+<RentPrice>60</RentPrice>
 <Color>-16711681</Color>
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
@@ -51,8 +51,8 @@
 <Square type="Property">
 <Name>Vermont Avenue</Name>
 <Number>6</Number>
-<Price>60</Price>
-<RentPrice>70</RentPrice>
+<Price>50</Price>
+<RentPrice>60</RentPrice>
 <Color>-16711681</Color>
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
@@ -62,8 +62,8 @@
 <Square type="Property">
 <Name>Connecticut Avenue</Name>
 <Number>7</Number>
-<Price>60</Price>
-<RentPrice>70</RentPrice>
+<Price>50</Price>
+<RentPrice>60</RentPrice>
 <Color>-16711681</Color>
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
@@ -79,8 +79,8 @@
 <Square type="Property">
 <Name>St. Charles Place</Name>
 <Number>9</Number>
-<Price>60</Price>
-<RentPrice>70</RentPrice>
+<Price>55</Price>
+<RentPrice>80</RentPrice>
 <Color>-20561</Color>
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
@@ -90,16 +90,16 @@
 <Square type="Utility">
 <Name>Electric Company</Name>
 <Number>10</Number>
-<Price>60</Price>
-<RentPrice>70</RentPrice>
+<Price>100</Price>
+<RentPrice>100</RentPrice>
 <Color>-1</Color>
 <Owner></Owner>
 </Square>
 <Square type="Property">
 <Name>States Avenue</Name>
 <Number>11</Number>
-<Price>60</Price>
-<RentPrice>70</RentPrice>
+<Price>55</Price>
+<RentPrice>80</RentPrice>
 <Color>-20561</Color>
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
@@ -109,8 +109,8 @@
 <Square type="Property">
 <Name>Virginia Avenue</Name>
 <Number>12</Number>
-<Price>60</Price>
-<RentPrice>70</RentPrice>
+<Price>55</Price>
+<RentPrice>80</RentPrice>
 <Color>-20561</Color>
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
@@ -120,8 +120,8 @@
 <Square type="RailRoad">
 <Name>Pennsylvania RailRoad</Name>
 <Number>13</Number>
-<Price>60</Price>
-<RentPrice>70</RentPrice>
+<Price>80</Price>
+<RentPrice>90</RentPrice>
 <Color>-16777216</Color>
 <Owner></Owner>
 </Square>
@@ -165,8 +165,8 @@
 <Square type="Property">
 <Name>Kentucky Avenue</Name>
 <Number>18</Number>
-<Price>60</Price>
-<RentPrice>70</RentPrice>
+<Price>40</Price>
+<RentPrice>65</RentPrice>
 <Color>-65536</Color>
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
@@ -176,8 +176,8 @@
 <Square type="Property">
 <Name>Indiana Avenue</Name>
 <Number>19</Number>
-<Price>60</Price>
-<RentPrice>70</RentPrice>
+<Price>40</Price>
+<RentPrice>65</RentPrice>
 <Color>-65536</Color>
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
@@ -187,8 +187,8 @@
 <Square type="Property">
 <Name>Illinois Avenue</Name>
 <Number>20</Number>
-<Price>60</Price>
-<RentPrice>70</RentPrice>
+<Price>40</Price>
+<RentPrice>65</RentPrice>
 <Color>-65536</Color>
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
@@ -198,16 +198,16 @@
 <Square type="RailRoad">
 <Name>B.&amp; O. RailRoad</Name>
 <Number>21</Number>
-<Price>60</Price>
-<RentPrice>70</RentPrice>
+<Price>80</Price>
+<RentPrice>90</RentPrice>
 <Color>-16777216</Color>
 <Owner></Owner>
 </Square>
 <Square type="Property">
 <Name>Atlantic Avenue</Name>
 <Number>22</Number>
-<Price>60</Price>
-<RentPrice>70</RentPrice>
+<Price>70</Price>
+<RentPrice>60</RentPrice>
 <Color>-256</Color>
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
@@ -217,8 +217,8 @@
 <Square type="Property">
 <Name>Ventnor Avenue</Name>
 <Number>23</Number>
-<Price>60</Price>
-<RentPrice>70</RentPrice>
+<Price>70</Price>
+<RentPrice>60</RentPrice>
 <Color>-256</Color>
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
@@ -228,16 +228,16 @@
 <Square type="Utility">
 <Name>Water Works</Name>
 <Number>24</Number>
-<Price>60</Price>
-<RentPrice>70</RentPrice>
+<Price>100</Price>
+<RentPrice>100</RentPrice>
 <Color>-1</Color>
 <Owner></Owner>
 </Square>
 <Square type="Property">
 <Name>Marvin Gardens</Name>
 <Number>25</Number>
-<Price>60</Price>
-<RentPrice>70</RentPrice>
+<Price>70</Price>
+<RentPrice>60</RentPrice>
 <Color>-256</Color>
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
@@ -252,7 +252,7 @@
 <Name>Pacific Avenue</Name>
 <Number>27</Number>
 <Price>60</Price>
-<RentPrice>70</RentPrice>
+<RentPrice>50</RentPrice>
 <Color>-16711936</Color>
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
@@ -263,7 +263,7 @@
 <Name>North Carolina Avenue</Name>
 <Number>28</Number>
 <Price>60</Price>
-<RentPrice>70</RentPrice>
+<RentPrice>50</RentPrice>
 <Color>-16711936</Color>
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
@@ -274,7 +274,7 @@
 <Name>Pennsylvania Avenue</Name>
 <Number>29</Number>
 <Price>60</Price>
-<RentPrice>70</RentPrice>
+<RentPrice>50</RentPrice>
 <Color>-16711936</Color>
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
@@ -284,7 +284,7 @@
 <Square type="RailRoad">
 <Name>Short Line</Name>
 <Number>30</Number>
-<Price>60</Price>
+<Price>90</Price>
 <RentPrice>70</RentPrice>
 <Color>-16777216</Color>
 <Owner></Owner>
@@ -292,7 +292,7 @@
 <Square type="Property">
 <Name>Park Place</Name>
 <Number>31</Number>
-<Price>60</Price>
+<Price>90</Price>
 <RentPrice>70</RentPrice>
 <Color>-16776961</Color>
 <HousePrice>50</HousePrice>
@@ -303,11 +303,11 @@
 <Square type="Tax">
 <Name>Luxury Tax</Name>
 <Number>32</Number>
-<Price>100</Price>
+<Price>150</Price>
 </Square><Square type="Property">
 <Name>Boardwalk</Name>
 <Number>33</Number>
-<Price>60</Price>
+<Price>90</Price>
 <RentPrice>70</RentPrice>
 <Color>-16776961</Color>
 <HousePrice>50</HousePrice>
@@ -318,7 +318,7 @@
 </Board><Player id="0">
 <Name>1</Name>
 <Decision></Decision>
-<Cash>350</Cash>
+<Cash>600</Cash>
 <IsInJail>0</IsInJail>
 <DiceRolled>0</DiceRolled>
 <CurrentLocation>0</CurrentLocation>
@@ -329,7 +329,7 @@
 <Player id="1">
 <Name>2</Name>
 <Decision></Decision>
-<Cash>350</Cash>
+<Cash>600</Cash>
 <IsInJail>0</IsInJail>
 <DiceRolled>0</DiceRolled>
 <CurrentLocation>0</CurrentLocation>
@@ -340,7 +340,7 @@
 <Player id="2">
 <Name>3AI</Name>
 <Decision></Decision>
-<Cash>350</Cash>
+<Cash>600</Cash>
 <IsInJail>0</IsInJail>
 <DiceRolled>0</DiceRolled>
 <CurrentLocation>0</CurrentLocation>
@@ -351,7 +351,7 @@
 <Player id="3">
 <Name>4AI</Name>
 <Decision></Decision>
-<Cash>350</Cash>
+<Cash>600</Cash>
 <IsInJail>0</IsInJail>
 <DiceRolled>0</DiceRolled>
 <CurrentLocation>0</CurrentLocation>
@@ -359,8 +359,4 @@
 <SelectedSquare></SelectedSquare>
 <SquareOwned></SquareOwned>
 </Player>
-<DoubleCounter>0</DoubleCounter>
-<PlayerInTurn>1</PlayerInTurn>
-<PlayerNotInTurn>2,3AI,4AI,</PlayerNotInTurn>
-<DiceValue>0,0</DiceValue>
-</Game>
+<DoubleCounter>0</DoubleCounter><PlayerInTurn>1</PlayerInTurn><PlayerNotInTurn>2,3AI,4AI,</PlayerNotInTurn><DiceValue>0,0</DiceValue></Game>
