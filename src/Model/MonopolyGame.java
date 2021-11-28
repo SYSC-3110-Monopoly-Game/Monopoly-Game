@@ -25,14 +25,14 @@ public class MonopolyGame {
 
     private int index = -1;
 
-    public MonopolyGame(){
+    /*public MonopolyGame(){
         board = new MonopolyBoard();
         players = createPlayers();
         playersNotInTurn = new ArrayList<>();
         dice = new Dice();
         views = new ArrayList<>();
         printPlayersInfo();
-    }
+    }*/
 
     /**
      * load game from path

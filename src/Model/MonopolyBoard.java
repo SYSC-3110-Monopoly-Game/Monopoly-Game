@@ -26,11 +26,11 @@ public class MonopolyBoard {
     public static ArrayList<Color> colors = new ArrayList<>();
 
 
-    public MonopolyBoard() {
+    /*public MonopolyBoard() {
         squares = new Square[SIZE];
         makeSquares();
         colors.addAll(Arrays.asList(set));
-    }
+    }*/
 
     public MonopolyBoard(String path) throws ParserConfigurationException, IOException, SAXException {
         squares = new Square[SIZE];

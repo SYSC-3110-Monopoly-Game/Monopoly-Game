@@ -18,8 +18,8 @@ class MonopolyBoardTest {
     private MonopolyGame game;
 
     @BeforeEach
-    void setUp() {
-        game = new MonopolyGame();
+    void setUp() throws ParserConfigurationException, IOException, SAXException {
+        game = new MonopolyGame("NewGame.xml");
         board = MonopolyGame.board;
     }
 

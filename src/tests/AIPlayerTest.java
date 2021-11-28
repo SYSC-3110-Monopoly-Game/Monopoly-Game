@@ -7,8 +7,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -17,8 +20,8 @@ class AIPlayerTest {
     AIPlayer ai;
 
     @BeforeEach
-    void setUp() {
-        MonopolyGame game = new MonopolyGame();
+    void setUp() throws ParserConfigurationException, IOException, SAXException {
+        MonopolyGame game = new MonopolyGame("NewGame.xml");
         ai = new AIPlayer("1", MonopolyGame.board.startingSquare());
     }
 

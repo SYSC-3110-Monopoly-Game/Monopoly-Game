@@ -8,8 +8,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
+import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -112,8 +115,8 @@ class PropertySquareTest {
     }
 
     @Test
-    void landOn() {
-        new MonopolyGame();
+    void landOn() throws ParserConfigurationException, IOException, SAXException {
+        new MonopolyGame("NewGame.xml");
         Player p1 = new Player("p1", property);
         Player p2 = new Player("p2", property);
         property.setOwner(p1);

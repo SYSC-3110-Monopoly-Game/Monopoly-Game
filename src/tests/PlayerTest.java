@@ -7,8 +7,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,8 +24,8 @@ class PlayerTest {
     private final int playerinitialcash = 350;
 
     @BeforeEach
-    void setUp() {
-        game = new MonopolyGame();
+    void setUp() throws ParserConfigurationException, IOException, SAXException {
+        game = new MonopolyGame("NewGame.xml");
         player = game.getPlayerInTurn();
     }
 
