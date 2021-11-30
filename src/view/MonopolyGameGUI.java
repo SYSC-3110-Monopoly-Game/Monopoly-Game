@@ -2,12 +2,15 @@ package view;
 
 import Controller.*;
 import Model.*;
+import org.xml.sax.SAXException;
 
 import javax.swing.*;
+import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MonopolyGameGUI extends JFrame {
@@ -15,6 +18,7 @@ public class MonopolyGameGUI extends JFrame {
     private final SquareGridGUI squareGUI;
     private final MonopolyGame game;
     private String message;
+    private JFrame beforeGame;
 
     /**
      * Initialize the gui frame
@@ -41,6 +45,14 @@ public class MonopolyGameGUI extends JFrame {
         this.infoDisplayGUI = new InfoDisplayGUI(game.getPlayerInTurn(), game.getPlayersNotInTurn());
         this.add(infoDisplayGUI, BorderLayout.EAST);
 
+        //load/export gui
+        JPanel lAndE = new JPanel(new GridLayout(1,2));
+        JButton loadPreviousGame = new JButton("Back To Previous Game");
+        JButton exportCurrentGame = new JButton("Export Current Game");
+        lAndE.add(loadPreviousGame);
+        lAndE.add(exportCurrentGame);
+        this.add(lAndE, BorderLayout.PAGE_START);
+
 
         this.pack();
         this.setLocationRelativeTo(null);
@@ -48,6 +60,25 @@ public class MonopolyGameGUI extends JFrame {
 
         //subscribe to game
         this.game.addView(this);
+
+        //before game
+        beforeGame = new JFrame();
+        beforeGame.setSize(500,300);
+        beforeGame.setLocation(500,300);
+
+        JPanel full = new JPanel(new GridLayout(2,1));
+        JPanel buttons = new JPanel(new GridLayout(1,2));
+        JLabel text = new JLabel("Welcome to Monopoly Game!");
+        JButton newGame = new JButton("Start new game");
+        JButton load = new JButton("Load previous game");
+
+        buttons.add(newGame);
+        buttons.add(load);
+        full.add(text);
+        full.add(buttons);
+        beforeGame.add(full);
+        beforeGame.setVisible(true);
+
     }
 
     /**
@@ -214,6 +245,9 @@ public class MonopolyGameGUI extends JFrame {
                 infoDisplayGUI.setBuildEnabled(false);
                 infoDisplayGUI.setSellHEnabled(false);
             }
+            case "Start new game", "Load previous game" -> {
+                beforeGame.setVisible(false);
+            }
             case "build", "sellH" -> HotelOrHouse(player, command);
             default -> throw new IllegalStateException("Unexpected value: " + command);
         }
@@ -278,7 +312,15 @@ public class MonopolyGameGUI extends JFrame {
             btn.setBackground(property.getColor());
             btn.addActionListener(e -> {
                 JButton b = (JButton) e.getSource();
-                game.setSelectedProperty(b.getText());
+                try {
+                    game.setSelectedProperty(b.getText());
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                } catch (SAXException saxException) {
+                    saxException.printStackTrace();
+                } catch (ParserConfigurationException parserConfigurationException) {
+                    parserConfigurationException.printStackTrace();
+                }
                 popup.dispose();
             });
             popup.add(btn);

@@ -242,7 +242,7 @@ public class MonopolyGame {
     /**
      * buy the landed on property
      */
-    public void buySquare() {
+    public void buySquare() throws IOException, SAXException, ParserConfigurationException {
         if (playerInTurn.buyProperty(playerInTurn.getCurrentLocation())) {
             this.updateViews(playerInTurn, "Buy");
         }
@@ -251,7 +251,7 @@ public class MonopolyGame {
     /**
      * sell properties
      */
-    public void sellSquare() {
+    public void sellSquare() throws IOException, SAXException, ParserConfigurationException {
         if (!playerInTurn.getProperties().isEmpty()) {
             this.updateViews(playerInTurn, "Sell");
         }
@@ -291,7 +291,7 @@ public class MonopolyGame {
     /**
      * A round of playing for every player
      */
-    public void playRound() {
+    public void playRound() throws IOException, SAXException, ParserConfigurationException {
         // print which player's turn it is
         System.out.println("+----------+");
         System.out.println("NEXT ROUND : " + playerInTurn.getName());
@@ -381,7 +381,7 @@ public class MonopolyGame {
     /**
      * update GUI
      */
-    private void updateViews(Player p, String command) {
+    private void updateViews(Player p, String command) throws ParserConfigurationException, SAXException, IOException {
         for (MonopolyGameGUI view : views) {
             view.handleUpdate(p, command, playersNotInTurn);
         }
@@ -413,7 +413,7 @@ public class MonopolyGame {
     /**
      * go to next player
      */
-    public void nextTurn() {
+    public void nextTurn() throws IOException, SAXException, ParserConfigurationException {
         doubleCounter = 0;
         playerInTurn.setDiceRolled(false);
 
@@ -438,7 +438,7 @@ public class MonopolyGame {
      * set the selected property to the player in turn
      * ask the player to choose whether you want to build/sell a house or a hotel
      */
-    public int setSelectedProperty(String text) {
+    public int setSelectedProperty(String text) throws IOException, SAXException, ParserConfigurationException {
         playerInTurn.setSelectedSquare(playerInTurn.getPropertyFromName(text));
         updateViews(playerInTurn, this.getPlayerInTurn().getDecision());
 
@@ -470,7 +470,7 @@ public class MonopolyGame {
     /**
      * AI process during their turn
      */
-    public void AIProcess() {
+    public void AIProcess() throws IOException, SAXException, ParserConfigurationException {
         if (playerInTurn instanceof AIPlayer) {
             int temp = this.doubleCounter;
             playRound();
