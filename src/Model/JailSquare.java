@@ -5,12 +5,20 @@ import java.util.HashMap;
 public class JailSquare extends Square {
 
     public HashMap<Player, Integer> map;
+    public HashMap<String, Integer> stringMap;
     private final int jailFee;
 
     public JailSquare(String name, int number, int jailFee) {
         super(name,number);
         this.map = new HashMap<>();
         this.jailFee = jailFee;
+    }
+
+    public JailSquare(String name, int number, int jailFee, HashMap<String, Integer> map) {
+        super(name,number);
+        this.map = new HashMap<>();
+        this.jailFee = jailFee;
+        this.stringMap = map;
     }
 
     /**
@@ -63,6 +71,23 @@ public class JailSquare extends Square {
 
     public HashMap<Player, Integer> getMap() {
         return this.map;
+    }
+
+    @Override
+    public String toXML() {
+        StringBuffer string = new StringBuffer();
+        string.append("<Square type=\"Jail\">\n");
+        string.append("<Name>"+this.getName()+"</Name>\n");
+        string.append("<Number>"+this.getNumber()+"</Number>\n");
+        string.append("<Price>"+this.getJailFee()+"</Price>\n");
+        string.append("<JailMap>");
+        for(Player id: map.keySet()){
+            string.append(id.getName()+ "=" +map.get(id)+ ",");
+        }
+        string.append("</JailMap>\n");
+        string.append("</Square>\n");
+
+        return string.toString();
     }
 
 }

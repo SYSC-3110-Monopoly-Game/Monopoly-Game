@@ -1,7 +1,16 @@
 package Model;
 
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
 import view.MonopolyGameGUI;
-
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class MonopolyGame {
@@ -16,24 +25,141 @@ public class MonopolyGame {
 
     private int index = -1;
 
-    public MonopolyGame() {
+    /*public MonopolyGame(){
         board = new MonopolyBoard();
         players = createPlayers();
         playersNotInTurn = new ArrayList<>();
         dice = new Dice();
         views = new ArrayList<>();
         printPlayersInfo();
+    }*/
+
+    /**
+     * load game from path
+     * @param path: file name of the xml file
+     * @throws ParserConfigurationException
+     * @throws IOException
+     * @throws SAXException
+     */
+    public MonopolyGame(String path) throws ParserConfigurationException, IOException, SAXException {
+        views = new ArrayList<>();
+        dice = new Dice();
+        loadGame(path);
     }
 
-    public MonopolyGame(int doubleCounter, ArrayList<Player> playersNotInTurn, Player playerInTurn) {
-        board = new MonopolyBoard("load");
-        players = createPlayers();// new methods to create players
-        this.playersNotInTurn = playersNotInTurn;
-        this.playerInTurn = playerInTurn;
-        this.doubleCounter = doubleCounter;
-        dice = new Dice();
-        views = new ArrayList<>();
-        printPlayersInfo();
+    /**
+     * export the whole game to path
+     * @param path: file name of the xml file
+     */
+    public void exportGameToXML(String path) {
+        try {
+            File writename = new File(path);
+            writename.createNewFile();
+            BufferedWriter out = new BufferedWriter(new FileWriter(writename));
+            out.write("<Game>");
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        board.exportToXML(path);
+        for(int i=0; i<players.size(); i++){
+            players.get(i).exportPlayers(path, i);
+        }
+        try {
+            FileWriter writer = new FileWriter(path, true);
+            writer.write("<DoubleCounter>"+this.getDoubleCounter()+"</DoubleCounter>");
+            writer.write("<PlayerInTurn>"+this.getPlayerInTurn().getName()+"</PlayerInTurn>");
+            writer.write("<PlayerNotInTurn>");
+            for(Player p: this.getPlayersNotInTurn()){
+                writer.write(p.getName()+",");
+            }
+            writer.write("</PlayerNotInTurn>");
+            writer.write("<DiceValue>");
+            writer.write(dice.getDice()[0]+","+ dice.getDice()[1]);
+            writer.write("</DiceValue>");
+            writer.write("</Game>");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * load the game from path
+     * @param path: file name of the xml file
+     * @throws ParserConfigurationException
+     * @throws SAXException
+     * @throws IOException
+     */
+    public void loadGame(String path) throws ParserConfigurationException, SAXException, IOException {
+        board = new MonopolyBoard(path);
+        players = new ArrayList<>();
+        for(int i=0; i<4; i++){
+            players.add(i, Player.makePlayerFromXML(board, path, i));
+        }
+        SAXParserFactory factory = SAXParserFactory.newInstance();
+        SAXParser saxParser = factory.newSAXParser();
+        final boolean[] ccl = {false, false, false, false};
+        //int[] diceValue = {0, 0};
+        saxParser.parse(path, new DefaultHandler(){
+
+            @Override
+            public void startElement(String uri, String localName, String qName, Attributes attributes) {
+                switch (qName) {
+                    case "PlayerInTurn" -> ccl[0] = true;
+                    case "PlayerNotInTurn" -> ccl[1] = true;
+                    case "DoubleCounter" -> ccl[2] = true;
+                    case "DiceValue" -> ccl[3] = true;
+                }
+            }
+
+            @Override
+            public void endElement(String uri, String localName, String qName) {
+                switch (qName) {
+                    case "PlayerInTurn" -> ccl[0] = false;
+                    case "PlayerNotInTurn" -> ccl[1] = false;
+                    case "DoubleCounter" -> ccl[2] = false;
+                    case "DiceValue" -> ccl[3] = false;
+                }
+            }
+
+            @Override
+            public void characters(char[] ch, int start, int length) {
+                String string = new String(ch, start, length);
+                if(ccl[0]){
+                    for(Player p: players){
+                        if(p.getName().equals(string)){
+                            playerInTurn = p;
+                        }
+                    }
+                }
+                else if (ccl[1]){
+                    ArrayList<Player> playerss = new ArrayList<>();
+                    String[] ps = string.split(",");
+                    for(String s: ps){
+                        for(Player p: players){
+                            if(p.getName().equals(s)){
+                                playerss.add(p);
+                            }
+                        }
+                    }
+                    playersNotInTurn = playerss;
+                }
+                else if (ccl[2]){
+                    doubleCounter = Integer.parseInt(string);
+                }
+                /*else if (ccl[3]){
+                    String[] values = string.split(",");
+                    diceValue[0] = Integer.parseInt(values[0]);
+                    diceValue[1] = Integer.parseInt(values[1]);
+                }*/
+            }
+        });
+        for(Square s:board.getSquares()){
+            if(s instanceof PropertySquare){
+                ((PropertySquare) s).setOwnerAccordingToOwnerName(players);
+            }
+        }
     }
 
 
@@ -210,6 +336,12 @@ public class MonopolyGame {
         if (getWinner() != null) {
             updateViews(getWinner(), "Winner");
         }
+
+        if (doubleCounter == 3 || doubleCounter == 0 && playerInTurn instanceof AIPlayer){
+            playerInTurn.setDiceRolled(true);
+        } else if(!(playerInTurn instanceof AIPlayer)){
+            playerInTurn.setDiceRolled(true);
+        }
     }
 
     public void removeBankruptPlayer(Player player) {
@@ -243,6 +375,7 @@ public class MonopolyGame {
 
     public void addView(MonopolyGameGUI view) {
         views.add(view);
+        view.loadGameGUI(board, players, playerInTurn);
     }
 
     /**
@@ -282,6 +415,7 @@ public class MonopolyGame {
      */
     public void nextTurn() {
         doubleCounter = 0;
+        playerInTurn.setDiceRolled(false);
 
         int currentIndex = players.indexOf(this.playerInTurn);
         if (currentIndex == players.size() - 1) currentIndex = -1;

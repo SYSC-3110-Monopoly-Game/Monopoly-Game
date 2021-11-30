@@ -10,6 +10,7 @@ public class PropertySquare extends Square {
     private final int rentPrice; //the price that other players need to pay to the owner.
     private final Color color;
     private Player owner = null;
+    private String ownerName;
     private final int HousePrice;
 
 
@@ -53,7 +54,7 @@ public class PropertySquare extends Square {
         HousePrice = 50;
     }
 
-    public PropertySquare(String name, int number, int buy, int rent, Color color, int housePrice, int houseAmount, boolean hotel, Player owner) {
+    public PropertySquare(String name, int number, int buy, int rent, Color color, int housePrice, int houseAmount, int hotel, String owner) {
         super(name, number);
         this.buyPrice = buy;
         this.rentPrice = rent;
@@ -63,10 +64,10 @@ public class PropertySquare extends Square {
         for(int i=0; i<houseAmount; i++){
             this.houses.add(new House(HousePrice));
         }
-        if(hotel){
+        if(hotel == 1){
             this.hotel = new Hotel(HousePrice);
         }
-        this.owner = owner;
+        this.ownerName = owner;
     }
 
     public int buildHouse() {
@@ -87,6 +88,11 @@ public class PropertySquare extends Square {
      */
     public boolean hasHouses() {
         return !this.houses.isEmpty();
+    }
+
+
+    public int getHouseNumber() {
+        return this.houses.size();
     }
 
     /**
@@ -201,6 +207,15 @@ public class PropertySquare extends Square {
         this.owner = owner;
     }
 
+
+
+    public String getOwnerName(){
+        if(this.owner == null){
+            return this.ownerName;
+        }
+        return this.owner.getName();
+    }
+
     /**
      * calculate the rent fee of the square
      * according to the number of squares with the same color and the buildings on the square
@@ -245,6 +260,39 @@ public class PropertySquare extends Square {
                 System.out.println("!!!You need to pay rent!!!");           //
                 System.out.println(p.getName() + " has paid $" + fee);      // print the player paid the rent fee
                 System.out.println(owner.getName() + " has received $" + fee);//
+            }
+        }
+    }
+
+    @Override
+    public String toXML() {
+        StringBuilder string = new StringBuilder();
+        string.append("<Square type=\"Property\">\n");
+        string.append("<Name>"+this.getName()+"</Name>\n");
+        string.append("<Number>"+this.getNumber()+"</Number>\n");
+        string.append("<Price>"+this.getPrice()+"</Price>\n");
+        string.append("<RentPrice>"+this.getRentFee()+"</RentPrice>\n");
+        String colorS = Integer.toString(this.getColor().getRGB());
+        string.append("<Color>"+colorS+"</Color>\n");
+        // call back: Color c = new Color(Integer.parseInt(colorS));
+        string.append("<HousePrice>"+this.getHousePrice()+"</HousePrice>\n");
+        string.append("<HouseAmount>"+this.houses.size()+"</HouseAmount>\n");
+        int hotelAmount = hasHotel() ? 1:0;
+        string.append("<HotelAmount>"+hotelAmount+"</HotelAmount>\n");
+        if(this.getOwner() != null) {
+            string.append("<Owner>" + this.getOwner().getName() + "</Owner>\n");
+        } else {
+            string.append("<Owner></Owner>\n");
+        }
+        string.append("</Square>\n");
+
+        return string.toString();
+    }
+
+    public void setOwnerAccordingToOwnerName(ArrayList<Player> players) {
+        for(Player p: players){
+            if(p.getName().equals(this.ownerName)){
+                this.owner = p;
             }
         }
     }

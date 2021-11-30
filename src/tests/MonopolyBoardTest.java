@@ -1,24 +1,31 @@
 package tests;
 
 import Model.MonopolyBoard;
+import Model.MonopolyGame;
 import Model.Square;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 
 class MonopolyBoardTest {
 
     private MonopolyBoard board;
+    private MonopolyGame game;
 
     @BeforeEach
-    void setUp() {
-        board = new MonopolyBoard();
+    void setUp() throws ParserConfigurationException, IOException, SAXException {
+        game = new MonopolyGame("NewGame.xml");
+        board = MonopolyGame.board;
     }
 
     @AfterEach
     void tearDown() {
-        board = null;
+        game = null;
     }
 
     @Test
@@ -36,4 +43,7 @@ class MonopolyBoardTest {
     void getSquareAt(){
         Assertions.assertEquals(board.getSquareAt(0), board.startingSquare());
     }
+
+    @Test
+    void exportANDImportToXML() throws ParserConfigurationException, IOException, SAXException {}
 }

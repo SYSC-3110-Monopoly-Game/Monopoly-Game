@@ -22,10 +22,9 @@ public class SquareGridGUI extends JPanel {
         this.setLayout(new GridBagLayout());
         this.setPreferredSize(new Dimension(920, 680));
 
-        //this.makeSquares();
         this.createSquareGUI();
         for (Player p : players) {
-            this.squareGUIs[0].addPlayer(p.getName());
+            this.squareGUIs[p.getCurrentLocation().getNumber()].addPlayer(p.getName());
         }
     }
 
@@ -40,7 +39,7 @@ public class SquareGridGUI extends JPanel {
         c.weighty = 0.0;
         c.insets = new Insets(1, 1, 0, 0);  //top padding
 
-        NewMethod(c);
+        makeSquares(c);
 
         message = new JTextArea();
         message.setPreferredSize(new Dimension(350, 60));
@@ -60,43 +59,9 @@ public class SquareGridGUI extends JPanel {
     }
 
     /**
-     * load different kinds of squares
-     */
-     private void LoadSquareGUI(Square square, GridBagConstraints c, int number) {
-        SquareGUI s = null;
-        if (square instanceof GoSquare){
-            s = new GoSquareGUI();
-
-        } else if (square instanceof UtilitySquare utility) {
-            s = new UtilitySquareGUI(300, utility.getName());
-
-        } else if (square instanceof RailRoadSquare railRoad) {
-            s = new RailRoadSquareGUI(railRoad.getName(), railRoad.getPrice());
-
-        } else if (square instanceof PropertySquare property) {
-            s = new PropertySquareGUI(property.getColor(), property.getName(), String.valueOf(property.getPrice()));
-
-        } else if (square instanceof TaxSquare incomeTax) {
-            s = new TaxSquareGUI(incomeTax.getTax(), incomeTax.getName());
-
-        } else if (square instanceof GoToJailSquare) {
-            s = new GoToJailGUI();
-
-        } else if (square instanceof JailSquare) {
-            s = new JailSquareGUI();
-
-        } else if (square instanceof FreeParkingSquare) {
-            s = new FreeParkingSquareGUI();
-        }
-         assert s != null;
-         this.add(s, c);
-         this.squareGUIs[number] = s;
-    }
-
-    /**
      * initialization of the map called by createSquareGUI()
      */
-    public void NewMethod(GridBagConstraints c){
+    public void makeSquares(GridBagConstraints c){
         c.gridy = 7;
         c.gridx = 10;
         for(int j=0; j < square.length; j++){
@@ -109,12 +74,67 @@ public class SquareGridGUI extends JPanel {
             else if(j < 30) c.gridx += 1;
             else c.gridy += 1;
 
-            LoadSquareGUI(square[j], c, j);
+            SquareGUI s = null;
+            if (square[j] instanceof GoSquare){
+                s = new GoSquareGUI();
+
+            } else if (square[j] instanceof UtilitySquare utility) {
+                s = new UtilitySquareGUI(300, utility.getName());
+
+            } else if (square[j] instanceof RailRoadSquare railRoad) {
+                s = new RailRoadSquareGUI(railRoad.getName(), railRoad.getPrice());
+
+            } else if (square[j] instanceof PropertySquare property) {
+                s = new PropertySquareGUI(property.getColor(), property.getName(), String.valueOf(property.getPrice()));
+
+            } else if (square[j] instanceof TaxSquare incomeTax) {
+                s = new TaxSquareGUI(incomeTax.getTax(), incomeTax.getName());
+
+            } else if (square[j] instanceof GoToJailSquare) {
+                s = new GoToJailGUI();
+
+            } else if (square[j] instanceof JailSquare) {
+                s = new JailSquareGUI();
+
+            } else if (square[j] instanceof FreeParkingSquare) {
+                s = new FreeParkingSquareGUI();
+            }
+            assert s != null;
+            this.add(s, c);
+            this.squareGUIs[j] = s;
         }
     }
 
+
+    /**
+     * get the property by its index
+     * @param index
+     * @return
+     */
     public SquareGUI getPropertySquareGUI(int index){
         return squareGUIs[index];
+    }
+
+
+    /**
+     * load the squares from Monopoly board.
+     * @param board
+     */
+    public void loadSquaresOnMap(MonopolyBoard board){
+        for(int i=0; i<board.getSquares().length; i++){
+            if(board.getSquareAt(i) instanceof PropertySquare
+                    && !(board.getSquareAt(i) instanceof RailRoadSquare)
+                    && !(board.getSquareAt(i) instanceof UtilitySquare)){
+                if(((PropertySquare) board.getSquareAt(i)).hasHouses()){
+                    for(int j=0; j<((PropertySquare) board.getSquareAt(i)).getHouseNumber(); j++){
+                        buildSellBuilding("build", "House", i);
+                    }
+                    if(((PropertySquare) board.getSquareAt(i)).hasHotel()){
+                        buildSellBuilding("build", "Hotel", i);
+                    }
+                }
+            }
+        }
     }
 
 
@@ -173,9 +193,56 @@ public class SquareGridGUI extends JPanel {
         message.append(string);
     }
 
+
+    /**
+     * refresh dice images
+     * @param diceValue
+     * @param diceValue1
+     */
     public void setDiceImages(int diceValue, int diceValue1) {
         this.diceGUI.setDiceImages( diceValue,  diceValue1);
         this.repaint();
+    }
+
+
+    /**
+     * build/sell (command) house/hotel (decision) on property on index.
+     * @param command
+     * @param decision
+     * @param index
+     */
+    public void buildSellBuilding(String command, String decision, Integer index){
+        int maxHouseNumber = 4;
+        if (command.equals("build")) {
+            if (decision.equals("House")) {
+                for (int i = 1; i < maxHouseNumber; i++) {
+                    if (((PropertySquareGUI) this.getPropertySquareGUI(index)).isBuilding(i)) {
+                        ((PropertySquareGUI) this.getPropertySquareGUI(index)).setBuildingX(Color.GREEN, i);
+                        break;
+                    }
+                }
+            } else if (decision.equals("Hotel")) {
+                // when building a hotel, the property will build the 4 houses automatically
+                for (int i = 1; i < maxHouseNumber; i++) {
+                    if (((PropertySquareGUI) this.getPropertySquareGUI(index)).isBuilding(i)) {
+                        ((PropertySquareGUI) this.getPropertySquareGUI(index)).setBuildingX(Color.GREEN, i);
+                    }
+                }
+                ((PropertySquareGUI) this.getPropertySquareGUI(index)).setBuildingX(Color.RED, 5);
+            }
+        } else if (command.equals("sellH")) {
+            if (decision.equals("House")) {
+                for (int i = maxHouseNumber; i > 0; i--) {
+                    if (!(((PropertySquareGUI) this.getPropertySquareGUI(index)).isBuilding(i))) {
+                        ((PropertySquareGUI) this.getPropertySquareGUI(index)).setBuildingX(Color.WHITE, i);
+                        break;
+                    }
+                }
+            } else if (decision.equals("Hotel")) {
+                ((PropertySquareGUI) this.getPropertySquareGUI(index)).setBuildingX(Color.WHITE, 5);
+            }
+
+        }
     }
 }
 

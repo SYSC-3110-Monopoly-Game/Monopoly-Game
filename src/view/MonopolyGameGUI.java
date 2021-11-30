@@ -15,7 +15,6 @@ public class MonopolyGameGUI extends JFrame {
     private final SquareGridGUI squareGUI;
     private final MonopolyGame game;
     private String message;
-    private int selectedPropertyIndex;
 
     /**
      * Initialize the gui frame
@@ -23,8 +22,7 @@ public class MonopolyGameGUI extends JFrame {
     public MonopolyGameGUI(MonopolyGame game) {
         this.message="";
         this.game = game;
-        //subscribe to game
-        this.game.addView(this);
+
         //adding frame settings
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setPreferredSize(new Dimension(1320, 670));
@@ -47,6 +45,9 @@ public class MonopolyGameGUI extends JFrame {
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+
+        //subscribe to game
+        this.game.addView(this);
     }
 
     /**
@@ -56,6 +57,14 @@ public class MonopolyGameGUI extends JFrame {
         this.infoDisplayGUI.setButtonControllers(controller);
     }
 
+
+    public void loadGameGUI(MonopolyBoard board, ArrayList<Player> players, Player player) {
+        squareGUI.loadSquaresOnMap(board);
+        ArrayList<Player> playerNotInTurn = new ArrayList<>(players);
+        playerNotInTurn.remove(player);
+        infoDisplayGUI.setPlayersInfo(playerNotInTurn, player);
+    }
+
     /**
      * apply change to gui according to the command
      */
@@ -63,31 +72,16 @@ public class MonopolyGameGUI extends JFrame {
         //information about player used
         Square currentLocation = player.getCurrentLocation();
         Square lastLocation = player.getLastLocation();
-        String propertyList = player.getProperties().toString();
-        int cash = player.getCash();
-        String name = player.getName();
         switch (command) {
             case "Next Turn" -> {
                 if(currentLocation instanceof PropertySquare square && square.getOwner()==player)
                     squareGUI.setMessage("You own this property!");
                 else
                     squareGUI.setMessage("");
-                //update the info panel with the current player info
-                infoDisplayGUI.setName(name);
-                infoDisplayGUI.setCash(cash);
-                infoDisplayGUI.setPropertyList(propertyList);
 
-                //update the info panel about not current players info
-                infoDisplayGUI.setOtherPlayersInfo(players);
+                infoDisplayGUI.setPlayersInfo(players, player);
 
-                // refresh location, buy, rent.
-                infoDisplayGUI.setCurrentLocation(currentLocation.getName());
-
-                setPriceInfo(currentLocation, player);
-                setButtons(player);
                 infoDisplayGUI.setBuyEnabled(false);
-
-
                 infoDisplayGUI.setNextEnabled(false);
                 infoDisplayGUI.setRollEnabled(true);
 
@@ -95,21 +89,16 @@ public class MonopolyGameGUI extends JFrame {
             }
             case "Buy" -> {
                 ArrayList<PropertySquare> property = player.getProperties();
-                infoDisplayGUI.setPropertyList(property.toString());
-                infoDisplayGUI.setCash(cash);
                 squareGUI.addMessage(player.getName() +
                         " just bought " + property.get(property.size() - 1).getName() +
                         "[" + property.get(property.size() - 1).getNumber() + "]\n");
 
-                setButtons(player);
+                infoDisplayGUI.setPlayersInfo(players, player);
 
                 infoDisplayGUI.setBuyEnabled(false);
             }
             case "Sell" -> {
-                infoDisplayGUI.setPropertyList(propertyList);
-                infoDisplayGUI.setCash(cash);
-
-                setButtons(player);
+                infoDisplayGUI.setPlayersInfo(players, player);
 
                 ArrayList<PropertySquare> PropertiesCanBeSell = player.getProperties();
                 PropertiesCanBeSell.remove(player.hasBuilding());
@@ -142,9 +131,7 @@ public class MonopolyGameGUI extends JFrame {
 
                 // refresh location, buy, rent and cash.
                 //start here
-                infoDisplayGUI.setCurrentLocation(currentLocation.getName());
-
-                setPriceInfo(currentLocation, player);
+                infoDisplayGUI.setPlayersInfo(players, player);
 
                 if (currentLocation instanceof PropertySquare location) {
                     Player owner = ((PropertySquare) player.getCurrentLocation()).getOwner();
@@ -158,8 +145,6 @@ public class MonopolyGameGUI extends JFrame {
                     else
                         message.append(player.getName() + " is on Square " + player.getCurrentLocation().getName());
                 }
-
-                setButtons(player);
 
                 infoDisplayGUI.setNextEnabled(true);
                 infoDisplayGUI.setRollEnabled(false);
@@ -244,7 +229,7 @@ public class MonopolyGameGUI extends JFrame {
         popup.setLayout(new GridLayout());
         JButton btn;
         for (PropertySquare property : p) {
-            btn = new JButton(property.getName());
+            btn = new JButton("<html>"+property.getName()+"<br>Sell Price: "+property.getPrice()/2+"</html>");
             btn.setBackground(property.getColor());
             btn.addActionListener(e -> {
                 JButton b = (JButton) e.getSource();
@@ -293,7 +278,7 @@ public class MonopolyGameGUI extends JFrame {
             btn.setBackground(property.getColor());
             btn.addActionListener(e -> {
                 JButton b = (JButton) e.getSource();
-                selectedPropertyIndex = game.setSelectedProperty(b.getText());
+                game.setSelectedProperty(b.getText());
                 popup.dispose();
             });
             popup.add(btn);
@@ -372,81 +357,19 @@ public class MonopolyGameGUI extends JFrame {
     }
 
     /**
-     * set build, sellH and sell buttons
-     */
-    private void setButtons(Player player) {
-        infoDisplayGUI.setBuildEnabled(!player.getAvailableProperties(player.removeRailroadUtility(player.hasWholeSet())).isEmpty());
-        infoDisplayGUI.setSellHEnabled(!player.hasBuilding().isEmpty());
-        infoDisplayGUI.setSellEnabled(!player.getProperties().isEmpty());
-    }
-
-    /**
-     * refresh players information
-     */
-    private void setPriceInfo(Square currentLocation, Player player) {
-        if (currentLocation instanceof PropertySquare location) {
-            Player owner = ((PropertySquare) player.getCurrentLocation()).getOwner();
-
-            if (owner == null) {
-                infoDisplayGUI.setBuyEnabled(player.getCash() >= location.getPrice());
-                infoDisplayGUI.setBuyPrice(location.getPrice());
-                infoDisplayGUI.setHousePrice(location.getHousePrice());
-                infoDisplayGUI.setHotelPrice(location.getHotelPrice());
-            } else {
-                infoDisplayGUI.setBuyPrice(-2);
-                infoDisplayGUI.setHousePrice(-2);
-                infoDisplayGUI.setHotelPrice(-2);
-            }
-            infoDisplayGUI.setRentPrice(location.getRentFee());
-        } else {
-            infoDisplayGUI.setBuyPrice(-1);
-            infoDisplayGUI.setHousePrice(-1);
-            infoDisplayGUI.setHotelPrice(-1);
-            infoDisplayGUI.setRentPrice(-1);
-            infoDisplayGUI.setBuyEnabled(false);
-        }
-        infoDisplayGUI.setCash(player.getCash());
-    }
-
-    /**
      * a part of action listener in HouseOrHotel()
      * build or sell houses or hotels on GUI map
      */
     public int sellBuildBuilding(String command, String decision, Player player) {
-        int price = -1;
-        if (command.equals("build")) {
+        int price;
+        if(command.equals("build")){
             price = player.buildH(decision);
-            if (decision.equals("House")) {
-                for (int i = 1; i < 5; i++) {
-                    if (((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).isBuilding(i)) {
-                        ((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).setBuildingX(Color.GREEN, i);
-                        JOptionPane.showMessageDialog(squareGUI, player.getName()+" build a house!!!");
-                        break;
-                    }
-                }
-            } else if (decision.equals("Hotel")) {
-                for (int i = 1; i < 5; i++) {
-                    if (((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).isBuilding(i)) {
-                        ((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).setBuildingX(Color.GREEN, i);
-                        JOptionPane.showMessageDialog(squareGUI, player.getName()+" build a hotel!!!");
-                    }
-                }
-                ((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).setBuildingX(Color.RED, 5);
-            }
-        } else if (command.equals("sellH")) {
+        } else {
             price = player.sellH(decision);
-            if (decision.equals("House")) {
-                for (int i = 4; i > 0; i--) {
-                    if (!(((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).isBuilding(i))) {
-                        ((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).setBuildingX(Color.WHITE, i);
-                        break;
-                    }
-                }
-            } else if (decision.equals("Hotel")) {
-                ((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).setBuildingX(Color.WHITE, 5);
-            }
-
         }
+
+        int index = player.getSelectedSquare().getNumber();
+        squareGUI.buildSellBuilding(command, decision, index);
         return price;
     }
 }

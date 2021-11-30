@@ -34,4 +34,11 @@ public abstract class Square {
     }
 
     public abstract void landOn(Player p);
+
+    /**
+     * convert the square to xml version
+     * @return xml version String
+     */
+    public abstract String toXML();
+
 }

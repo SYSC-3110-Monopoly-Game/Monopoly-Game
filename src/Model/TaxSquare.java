@@ -25,4 +25,16 @@ public class TaxSquare extends Square {
     public int getTax() {
         return this.tax;
     }
+
+    @Override
+    public String toXML() {
+        StringBuffer string = new StringBuffer();
+        string.append("<Square type=\"Tax\">\n");
+        string.append("<Name>"+this.getName()+"</Name>\n");
+        string.append("<Number>"+this.getNumber()+"</Number>\n");
+        string.append("<Price>"+this.getTax()+"</Price>\n");
+        string.append("</Square>");
+
+        return string.toString();
+    }
 }
