@@ -73,8 +73,7 @@ public class JailSquareGUI extends SquareGUI {
             components = this.colorTag.getComponents();
         }
 
-        for (Component label : components
-        ) {
+        for (Component label : components) {
             JLabel player = (JLabel) label;
             if (player.getText().equals(name)) {
                 player.setVisible(false);

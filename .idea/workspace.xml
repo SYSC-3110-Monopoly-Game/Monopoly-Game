@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="8d1575f9-b2b5-4f5e-af84-ff682d3e0ed0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Controller/LandEController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Monopoly-Game.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Monopoly-Game.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Controller/MonopolyGameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Controller/MonopolyGameController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/AIPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/AIPlayer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/Dice.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/Dice.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/FreeParkingSquare.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/FreeParkingSquare.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/GoSquare.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/GoSquare.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/GoToJailSquare.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/GoToJailSquare.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/JailSquare.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/JailSquare.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/MonopolyBoard$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/MonopolyBoard$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/MonopolyBoard.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/MonopolyBoard.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/MonopolyGame$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/MonopolyGame$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/MonopolyGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/MonopolyGame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/Player$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/Player$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/PropertySquare$Hotel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/PropertySquare$Hotel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/PropertySquare$House.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/PropertySquare$House.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/PropertySquare.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/PropertySquare.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/RailRoadSquare.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/RailRoadSquare.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/Square.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/Square.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/TaxSquare.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/TaxSquare.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/UtilitySquare.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/UtilitySquare.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/AIPlayerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/AIPlayerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/DiceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/DiceTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/FreeParkingSquareTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/FreeParkingSquareTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/GoSquareTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/GoSquareTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/GoToJailSquareTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/GoToJailSquareTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/JailSquareTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/JailSquareTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/MonopolyBoardTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/MonopolyBoardTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/MonopolyGameTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/MonopolyGameTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/PlayerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/PlayerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/PropertySquareTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/PropertySquareTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/taxSquareTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/taxSquareTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/DiceGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/DiceGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/FreeParkingSquareGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/FreeParkingSquareGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/GoSquareGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/GoSquareGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/GoToJailGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/GoToJailGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/InfoDisplayGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/InfoDisplayGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/JailSquareGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/JailSquareGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/MonopolyGameGUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/MonopolyGameGUI$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/MonopolyGameGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/MonopolyGameGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/PlayerGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/PlayerGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/PropertySquareGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/PropertySquareGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/RailRoadSquareGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/RailRoadSquareGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/SimpleSquareGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/SimpleSquareGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/SquareGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/SquareGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/SquareGridGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/SquareGridGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/TaxSquareGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/TaxSquareGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/UtilitySquareGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/UtilitySquareGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/MonopolyGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MonopolyGameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/JailSquare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/JailSquare.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/MonopolyBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/MonopolyBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/MonopolyGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/MonopolyGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/JailSquareGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/JailSquareGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/MonopolyGameGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MonopolyGameGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/SquareGridGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/SquareGridGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testSaveFile.xml" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="JavaMethodFindUsagesOptions.isSearchForBaseMethod" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Model.Main" />
+      <module name="Monopoly-Game" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="TaskManager">
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.ArrayIndexOutOfBoundsException" package="java.lang" />
+          <option name="timeStamp" value="7" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>

@@ -18,7 +18,6 @@ public class MonopolyGameGUI extends JFrame {
     private final SquareGridGUI squareGUI;
     private final MonopolyGame game;
     private String message;
-    private JFrame beforeGame;
 
     /**
      * Initialize the gui frame
@@ -47,9 +46,8 @@ public class MonopolyGameGUI extends JFrame {
 
         //load/export gui
         JPanel lAndE = new JPanel(new GridLayout(1,2));
-        JButton loadPreviousGame = new JButton("Back To Previous Game");
         JButton exportCurrentGame = new JButton("Export Current Game");
-        lAndE.add(loadPreviousGame);
+        exportCurrentGame.addActionListener(e -> {this.game.exportGameToXML("SavedGame.xml");});
         lAndE.add(exportCurrentGame);
         this.add(lAndE, BorderLayout.PAGE_START);
 
@@ -60,24 +58,6 @@ public class MonopolyGameGUI extends JFrame {
 
         //subscribe to game
         this.game.addView(this);
-
-        //before game
-        beforeGame = new JFrame();
-        beforeGame.setSize(500,300);
-        beforeGame.setLocation(500,300);
-
-        JPanel full = new JPanel(new GridLayout(2,1));
-        JPanel buttons = new JPanel(new GridLayout(1,2));
-        JLabel text = new JLabel("Welcome to Monopoly Game!");
-        JButton newGame = new JButton("Start new game");
-        JButton load = new JButton("Load previous game");
-
-        buttons.add(newGame);
-        buttons.add(load);
-        full.add(text);
-        full.add(buttons);
-        beforeGame.add(full);
-        beforeGame.setVisible(true);
 
     }
 
@@ -245,9 +225,6 @@ public class MonopolyGameGUI extends JFrame {
                 infoDisplayGUI.setBuildEnabled(false);
                 infoDisplayGUI.setSellHEnabled(false);
             }
-            case "Start new game", "Load previous game" -> {
-                beforeGame.setVisible(false);
-            }
             case "build", "sellH" -> HotelOrHouse(player, command);
             default -> throw new IllegalStateException("Unexpected value: " + command);
         }
@@ -314,12 +291,8 @@ public class MonopolyGameGUI extends JFrame {
                 JButton b = (JButton) e.getSource();
                 try {
                     game.setSelectedProperty(b.getText());
-                } catch (IOException ioException) {
+                } catch (IOException | SAXException | ParserConfigurationException ioException) {
                     ioException.printStackTrace();
-                } catch (SAXException saxException) {
-                    saxException.printStackTrace();
-                } catch (ParserConfigurationException parserConfigurationException) {
-                    parserConfigurationException.printStackTrace();
                 }
                 popup.dispose();
             });

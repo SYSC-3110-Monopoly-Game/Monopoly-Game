@@ -159,6 +159,9 @@ public class MonopolyGame {
             if(s instanceof PropertySquare){
                 ((PropertySquare) s).setOwnerAccordingToOwnerName(players);
             }
+            if(s instanceof JailSquare){
+                ((JailSquare) s).loadMapAccordingStringMap(players);
+            }
         }
     }
 

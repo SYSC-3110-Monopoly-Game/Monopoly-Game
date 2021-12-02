@@ -1,4 +1,5 @@
 package Model;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -71,6 +72,18 @@ public class JailSquare extends Square {
 
     public HashMap<Player, Integer> getMap() {
         return this.map;
+    }
+
+    public void loadMapAccordingStringMap(ArrayList<Player> players) {
+        if(!this.stringMap.isEmpty()){
+            for(String s: stringMap.keySet()){
+                for(Player p: players){
+                    if(s.equals(p.getName())){
+                        this.map.put(p, stringMap.get(s));
+                    }
+                }
+            }
+        }
     }
 
     @Override

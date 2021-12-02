@@ -135,6 +135,20 @@ public class SquareGridGUI extends JPanel {
                 }
             }
         }
+        JailSquare jail = (JailSquare) board.getSquareAt(8);
+        JailSquareGUI jailGUI = (JailSquareGUI) squareGUIs[8];
+        String name;
+        if(!jail.getMap().isEmpty()){
+            for(Player p: jail.getMap().keySet()){
+                if(p instanceof AIPlayer){
+                    name = String.valueOf(p.getName().charAt(0));
+                } else {
+                    name = p.getName();
+                }
+                jailGUI.removePlayer(name, false);
+                jailGUI.addPlayerToJail(name);
+            }
+        }
     }
 
 
@@ -161,9 +175,9 @@ public class SquareGridGUI extends JPanel {
                 }
                 jail.removePlayer(name, true);
             }
-            System.out.println("currentlocationIndex in square GUI " + currentLocationIndex);
+            System.out.println("current location Index in square GUI " + currentLocationIndex);
             squareGUIs[nextLocationIndex].addPlayer(player.getName());
-            System.out.println("nextLocationIndex in square GUI " + nextLocationIndex);
+            System.out.println("next Location Index in square GUI " + nextLocationIndex);
         }
 
     }

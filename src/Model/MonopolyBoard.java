@@ -36,6 +36,8 @@ public class MonopolyBoard {
         squares = new Square[SIZE];
         makeSquaresFromXML(path);
         jail = (JailSquare) getSquareAt(8);
+        GoToJailSquare goToJail = (GoToJailSquare) getSquareAt(26);
+        goToJail.setJail(jail);
         colors.addAll(Arrays.asList(set));
     }
 
@@ -165,8 +167,16 @@ public class MonopolyBoard {
         if(variables.get("Color") != Color.LIGHT_GRAY){
             c = (Color) variables.get("Color");
         }
+        String temp = (String) variables.get("JailMap");
+        String[] map = temp.split(",");
+        HashMap<String, Integer> hashMap = new HashMap<>();
+        if(temp.length()!= 0){
+            for(String string: map){
+                String[] sp = string.split("=");
+                hashMap.put(sp[0], Integer.parseInt(sp[1]));
+            }
+        }
 
-        HashMap<String, Integer> map = (HashMap<String, Integer>) variables.get("JailMap");
         if(type.equals("Property")){
             s = new PropertySquare(name, number, price, rentPrice, c, housePrice, houseAmount, hotelAmount, owner);
         } else if (type.equals("RailRoad")) {
@@ -174,7 +184,7 @@ public class MonopolyBoard {
         } else if (type.equals("Utility")) {
             s = new UtilitySquare(name, number, price, rentPrice, c);
         } else if (type.equals("Jail")) {
-            s = new JailSquare(name, number, price, map);
+            s = new JailSquare(name, number, price, hashMap);
         } else if (type.equals("Tax")) {
             s = new TaxSquare(name, number, price);
         } else if (type.equals("Go")) {
@@ -202,7 +212,7 @@ public class MonopolyBoard {
 
         HashMap<String, Object> square = new HashMap<>(Map.of("Name",  "","Owner", "","Number", 0,
                 "Price", 0, "RentPrice", 0,"HousePrice", 0, "HouseAmount", 0,
-                "HotelAmount", 0,"Color", Color.LIGHT_GRAY, "JailMap", new HashMap<String, Integer>()));
+                "HotelAmount", 0,"Color", Color.LIGHT_GRAY, "JailMap", ""));
 
         boolean[] load = {false,false,false,false,false,false,false,false,false,false};
         final String[] variables = {"Name", "Owner", "Number", "Price", "RentPrice", "HousePrice", "HouseAmount",
@@ -236,6 +246,7 @@ public class MonopolyBoard {
                             squareType.put(name, 0);
                             square.put(variables[0], "");
                             square.put(variables[1], "");
+                            square.put(variables[9], "");
                         }
                     }
                 } else {
@@ -253,25 +264,16 @@ public class MonopolyBoard {
 
                 for(int i=0; i< load.length; i++){
                     if(load[i]){
-                        if(i<2){
+                        if(i<2 || i == 9){
                             square.put(variables[i], square.get(variables[i])+temp);
                         }
                         else if(i<8){
                             int num = Integer.parseInt(temp);
                             square.put(variables[i], num);
                         }
-                        else if(i == 8){
+                        else {
                             Color c = new Color(Integer.parseInt(temp));
                             square.put(variables[i], c);
-                        }
-                        else {
-                            String[] map = temp.split(",");
-                            HashMap<String, Integer> hashMap = new HashMap<>();
-                            for(String s: map){
-                                String[] sp = s.split("=");
-                                hashMap.put(sp[0], Integer.parseInt(sp[1]));
-                            }
-                            square.put(variables[i], hashMap);
                         }
                         break;
                     }
