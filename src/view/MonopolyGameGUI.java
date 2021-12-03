@@ -2,12 +2,15 @@ package view;
 
 import Controller.*;
 import Model.*;
+import org.xml.sax.SAXException;
 
 import javax.swing.*;
+import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MonopolyGameGUI extends JFrame {
@@ -41,6 +44,13 @@ public class MonopolyGameGUI extends JFrame {
         this.infoDisplayGUI = new InfoDisplayGUI(game.getPlayerInTurn(), game.getPlayersNotInTurn());
         this.add(infoDisplayGUI, BorderLayout.EAST);
 
+        //load/export gui
+        JPanel lAndE = new JPanel(new GridLayout(1,2));
+        JButton exportCurrentGame = new JButton("Export Current Game");
+        exportCurrentGame.addActionListener(e -> {this.game.exportGameToXML("SavedGame.xml");});
+        lAndE.add(exportCurrentGame);
+        this.add(lAndE, BorderLayout.PAGE_START);
+
 
         this.pack();
         this.setLocationRelativeTo(null);
@@ -48,6 +58,7 @@ public class MonopolyGameGUI extends JFrame {
 
         //subscribe to game
         this.game.addView(this);
+
     }
 
     /**
@@ -278,7 +289,11 @@ public class MonopolyGameGUI extends JFrame {
             btn.setBackground(property.getColor());
             btn.addActionListener(e -> {
                 JButton b = (JButton) e.getSource();
-                game.setSelectedProperty(b.getText());
+                try {
+                    game.setSelectedProperty(b.getText());
+                } catch (IOException | SAXException | ParserConfigurationException ioException) {
+                    ioException.printStackTrace();
+                }
                 popup.dispose();
             });
             popup.add(btn);

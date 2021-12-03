@@ -25,14 +25,14 @@ class MonopolyGameTest {
     }
 
     @Test
-    void buySquare() {
+    void buySquare() throws ParserConfigurationException, SAXException, IOException {
         game.getPlayerInTurn().setCurrentLocation(MonopolyGame.board.getSquares()[2]);
         game.buySquare();
         Assertions.assertEquals("Baltic Avenue", game.getPlayerInTurn().getProperties().get(0).getName());
     }
 
     @Test
-    void playRound() {
+    void playRound() throws ParserConfigurationException, SAXException, IOException {
         game.playRound();
         Assertions.assertNotEquals(MonopolyGame.board.startingSquare(), game.getPlayerInTurn().getCurrentLocation());
     }
@@ -43,7 +43,7 @@ class MonopolyGameTest {
     }
 
     @Test
-    void nextTurn() {
+    void nextTurn() throws ParserConfigurationException, SAXException, IOException {
         game.nextTurn();
         Assertions.assertEquals(game.players.get(1), game.getPlayerInTurn());
     }
