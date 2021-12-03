@@ -3,6 +3,7 @@ package Model;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+import view.Enums;
 import view.MonopolyGameGUI;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -247,7 +248,7 @@ public class MonopolyGame {
      */
     public void buySquare() throws IOException, SAXException, ParserConfigurationException {
         if (playerInTurn.buyProperty(playerInTurn.getCurrentLocation())) {
-            this.updateViews(playerInTurn, "Buy");
+            this.updateViews(playerInTurn, Enums.BUY);
         }
     }
 
@@ -256,7 +257,7 @@ public class MonopolyGame {
      */
     public void sellSquare() throws IOException, SAXException, ParserConfigurationException {
         if (!playerInTurn.getProperties().isEmpty()) {
-            this.updateViews(playerInTurn, "Sell");
+            this.updateViews(playerInTurn, Enums.SELL);
         }
     }
 
@@ -269,7 +270,7 @@ public class MonopolyGame {
             propertyList = playerInTurn.getAvailableProperties(propertyList);
             if (!propertyList.isEmpty()) {
                 views.get(0).getDecision(propertyList, this);
-                this.getPlayerInTurn().setDecision("build");
+                this.getPlayerInTurn().setDecision(Enums.BUILD);
             } else {
                 System.out.println("not enough money");
             }
@@ -285,7 +286,7 @@ public class MonopolyGame {
         ArrayList<PropertySquare> propertyList = playerInTurn.hasBuilding();
         if (!propertyList.isEmpty()) {
             views.get(0).getDecision(propertyList, this);
-            this.getPlayerInTurn().setDecision("sellH");
+            this.getPlayerInTurn().setDecision(Enums.SELLH);
         } else {
             System.out.println("No houses neither hotels");
         }
@@ -307,7 +308,7 @@ public class MonopolyGame {
         //if player is in jail, only let player out if they rolled a double
         if (inJail) {
             if (dice.hasDoubles()) {
-                updateViews(playerInTurn, "Doubles");
+                updateViews(playerInTurn, Enums.DOUBLES);
                 System.out.println("You rolled a double, you can go out!");
 
             } else {
@@ -317,27 +318,27 @@ public class MonopolyGame {
                 if (MonopolyBoard.jail.getMap().get(playerInTurn) == 2) {
                     playerInTurn.decreaseCash(MonopolyBoard.jail.getJailFee());
                     MonopolyBoard.jail.goOutJail(playerInTurn);
-                    updateViews(playerInTurn, "NoDoubles");
+                    updateViews(playerInTurn, Enums.NO_DOUBLES);
                 }
             }
         } else {  // if player not in jail
             if (dice.hasDoubles()) {
                 doubleCounter++;
-                updateViews(playerInTurn, "Doubles");
+                updateViews(playerInTurn, Enums.DOUBLES);
             } else {
                 movePlayer(playerInTurn, distance);
-                updateViews(playerInTurn, "Roll Dice");
+                updateViews(playerInTurn, Enums.ROLL_DICE);
             }
         }
 
         if (playerInTurn.isBankrupt()) {
             if (!(playerInTurn instanceof AIPlayer)) {
-                updateViews(playerInTurn, "Bankrupt");
+                updateViews(playerInTurn, Enums.BANKRUPT);
             }
         }
 
         if (getWinner() != null) {
-            updateViews(getWinner(), "Winner");
+            updateViews(getWinner(), Enums.WINNER);
         }
 
         if (doubleCounter == 3 || doubleCounter == 0 && playerInTurn instanceof AIPlayer){
@@ -351,9 +352,9 @@ public class MonopolyGame {
         for (PropertySquare property : player.getProperties()) {
             property.sellAll();
             player.setSelectedSquare(property);
-            views.get(0).sellBuildBuilding("sellH", "Hotel", player);
+            views.get(0).sellBuildBuilding(Enums.SELLH, Enums.HOTEL, player);
             for(int i=0; i<4; i++){
-                views.get(0).sellBuildBuilding("sellH", "House", player);
+                views.get(0).sellBuildBuilding(Enums.SELLH, Enums.HOUSE, player);
             }
             property.setOwner(null);
         }
@@ -384,7 +385,7 @@ public class MonopolyGame {
     /**
      * update GUI
      */
-    private void updateViews(Player p, String command) throws ParserConfigurationException, SAXException, IOException {
+    private void updateViews(Player p, Enums command) throws ParserConfigurationException, SAXException, IOException {
         for (MonopolyGameGUI view : views) {
             view.handleUpdate(p, command, playersNotInTurn);
         }
@@ -431,7 +432,7 @@ public class MonopolyGame {
 
         this.playersNotInTurn = getPlayersNotInTurn();
 
-        updateViews(playerInTurn, "Next Turn");
+        updateViews(playerInTurn, Enums.NEXT_TURN);
         printPlayersInfo();
 
         AIProcess();
@@ -482,25 +483,25 @@ public class MonopolyGame {
                 playRound();
             }
             if(playerInTurn.isInJail() && this.doubleCounter == 1){
-                updateViews(playerInTurn, "NoDoubles");
+                updateViews(playerInTurn, Enums.NO_DOUBLES);
             } else if(temp == 3){
-                updateViews(playerInTurn, "Doubles");
+                updateViews(playerInTurn, Enums.DOUBLES);
             } else {
                 playerInTurn.buyProperty(playerInTurn.getCurrentLocation());
                 if (((AIPlayer) playerInTurn).buildBuildings()) {
-                    views.get(0).sellBuildBuilding("House", "build", playerInTurn);
+                    views.get(0).sellBuildBuilding(Enums.BUILD, Enums.HOUSE , playerInTurn);
                 }
                 while (playerInTurn.isBankrupt() && !playerInTurn.hasBuilding().isEmpty()) {
                     ((AIPlayer) playerInTurn).sellBuildings();
-                    views.get(0).sellBuildBuilding("House", "sellH", playerInTurn);
+                    views.get(0).sellBuildBuilding(Enums.SELLH, Enums.HOUSE , playerInTurn);
                 }
                 ((AIPlayer) playerInTurn).sellSomeThing();
             }
             if(playerInTurn.isBankrupt()) {
                 this.removeBankruptPlayer(playerInTurn);
-                this.updateViews(playerInTurn, "Bankrupt");
+                this.updateViews(playerInTurn, Enums.BANKRUPT);
             } else if(this.getWinner() == playerInTurn){
-                this.updateViews(playerInTurn, "Winner");
+                this.updateViews(playerInTurn, Enums.WINNER);
             } else {
                 nextTurn();
             }

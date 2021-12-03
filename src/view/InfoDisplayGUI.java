@@ -82,12 +82,12 @@ public class InfoDisplayGUI extends JPanel {
         JPanel buttons = new JPanel(new GridLayout(3, 2));
         buttons.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 
-        buy = new JButton("Buy");
-        sell = new JButton("Sell");
-        rollDice = new JButton("Roll Dice");
-        nextTurn = new JButton("Next Turn");
-        build = new JButton("Build On Property");
-        sellH = new JButton("Sell Houses/Hotels");
+        buy = new JButton(Enums.BUY.toString());
+        sell = new JButton(Enums.SELL.toString());
+        rollDice = new JButton(Enums.ROLL_DICE.toString());
+        nextTurn = new JButton(Enums.NEXT_TURN.toString());
+        build = new JButton(Enums.BUILD_ON_PROPERTY.toString());
+        sellH = new JButton(Enums.SELL_HOUSES_HOTELS.toString());
 
 
         buy.setBorder(BorderFactory.createLineBorder(Color.black, 1));

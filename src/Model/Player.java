@@ -3,6 +3,8 @@ package Model;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+import view.Enums;
+
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -15,7 +17,7 @@ import java.util.Map;
 
 public class Player {
     private final String name;
-    private String decision;
+    private Enums decision;
     private final ArrayList<PropertySquare> squaresOwned;
     private Square currentLocation;
     private Square lastLocation;
@@ -34,11 +36,11 @@ public class Player {
         this.squaresOwned = new ArrayList<>();
         this.cashTotal = 350;
         this.currentLocation = square;
-        this.decision = "";
+        this.decision = null;
         this.diceRolled = false;
     }
 
-    public Player(String name, int cash, boolean inJail, boolean diceRolled, String decision, Square lastSquare, Square thisSquare, ArrayList<PropertySquare> squares, PropertySquare square){
+    public Player(String name, int cash, boolean inJail, boolean diceRolled, Enums decision, Square lastSquare, Square thisSquare, ArrayList<PropertySquare> squares, PropertySquare square){
         this.name = name;
         this.cashTotal = cash;
         this.isInJail = inJail;
@@ -121,14 +123,14 @@ public class Player {
      *
      * @return decision
      */
-    public String getDecision() {
+    public Enums getDecision() {
         return decision;
     }
 
     /**
      * set decision (a private field in player)
      */
-    public void setDecision(String decision) {
+    public void setDecision(Enums decision) {
         this.decision = decision;
     }
 
@@ -218,14 +220,17 @@ public class Player {
      * @return: The instance of player or AIPlayer with the given index
      */
     public static Player loadToPlayer(HashMap<String, Object> playerInfo){
-        String name, decision;
+        String name;
+        Enums decision = null;
         int cash, isInJail, diceRolled;
         Square currentLocation, lastLocation;
         PropertySquare selectedSquare;
         ArrayList<PropertySquare> sOwned = new ArrayList<>();
 
         name = (String) playerInfo.get("Name");
-        decision = (String) playerInfo.get("Decision");
+        if( ((String) playerInfo.get("Decision")).equals(Enums.HOTEL.toString())) decision = Enums.HOTEL;
+        else if( ((String) playerInfo.get("Decision")).equals(Enums.HOUSE.toString())) decision = Enums.HOUSE;
+
         cash = (int) playerInfo.get("Cash");
         isInJail = (int) playerInfo.get("IsInJail");
         diceRolled = (int) playerInfo.get("DiceRolled");
@@ -498,10 +503,10 @@ public class Player {
      * player build a house or a hotel according to the command on the selected square(a private field in player)
      *
      */
-    public int buildH(String answer) {
-        if(answer.equals("House")){
+    public int buildH(Enums answer) {
+        if(answer== Enums.HOUSE){
             return this.getSelectedSquare().buildHouse();
-        } else if (answer.equals("Hotel")){
+        } else if (answer== Enums.HOTEL){
             return this.getSelectedSquare().buildHotel();
         }
         return -1;
@@ -511,10 +516,10 @@ public class Player {
      * player sell a house or a hotel according to the command on the selected square(a private field in player)
      *
      */
-    public int sellH(String answer) {
-        if(answer.equals("House")){
+    public int sellH(Enums answer) {
+        if(answer== Enums.HOUSE){
             return this.getSelectedSquare().sellHouse();
-        } else if (answer.equals("Hotel")){
+        } else if (answer== Enums.HOTEL){
             return this.getSelectedSquare().sellHotel();
         }
         return -1;

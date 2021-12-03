@@ -23,7 +23,7 @@ public class MonopolyGameGUI extends JFrame {
      * Initialize the gui frame
      */
     public MonopolyGameGUI(MonopolyGame game) {
-        this.message="";
+        this.message = "";
         this.game = game;
 
         //adding frame settings
@@ -45,9 +45,9 @@ public class MonopolyGameGUI extends JFrame {
         this.add(infoDisplayGUI, BorderLayout.EAST);
 
         //load/export gui
-        JPanel lAndE = new JPanel(new GridLayout(1,2));
+        JPanel lAndE = new JPanel(new GridLayout(1, 2));
         JButton exportCurrentGame = new JButton("Export Current Game");
-        exportCurrentGame.addActionListener(e -> {this.game.exportGameToXML("SavedGame.xml");});
+        exportCurrentGame.addActionListener(e -> this.game.exportGameToXML("SavedGame.xml"));
         lAndE.add(exportCurrentGame);
         this.add(lAndE, BorderLayout.PAGE_START);
 
@@ -68,7 +68,6 @@ public class MonopolyGameGUI extends JFrame {
         this.infoDisplayGUI.setButtonControllers(controller);
     }
 
-
     public void loadGameGUI(MonopolyBoard board, ArrayList<Player> players, Player player) {
         squareGUI.loadSquaresOnMap(board);
         ArrayList<Player> playerNotInTurn = new ArrayList<>(players);
@@ -79,155 +78,196 @@ public class MonopolyGameGUI extends JFrame {
     /**
      * apply change to gui according to the command
      */
-    public void handleUpdate(Player player, String command, ArrayList<Player> players) {
+    public void handleUpdate(Player player, Enums command, ArrayList<Player> players) {
         //information about player used
         Square currentLocation = player.getCurrentLocation();
         Square lastLocation = player.getLastLocation();
         switch (command) {
-            case "Next Turn" -> {
-                if(currentLocation instanceof PropertySquare square && square.getOwner()==player)
-                    squareGUI.setMessage("You own this property!");
-                else
-                    squareGUI.setMessage("");
-
-                infoDisplayGUI.setPlayersInfo(players, player);
-
-                infoDisplayGUI.setBuyEnabled(false);
-                infoDisplayGUI.setNextEnabled(false);
-                infoDisplayGUI.setRollEnabled(true);
-
-
+            case NEXT_TURN -> {
+                handleNextTurn(currentLocation, player, players);
+                break;
             }
-            case "Buy" -> {
-                ArrayList<PropertySquare> property = player.getProperties();
-                squareGUI.addMessage(player.getName() +
-                        " just bought " + property.get(property.size() - 1).getName() +
-                        "[" + property.get(property.size() - 1).getNumber() + "]\n");
-
-                infoDisplayGUI.setPlayersInfo(players, player);
-
-                infoDisplayGUI.setBuyEnabled(false);
+            case BUY -> {
+                handleBuy(player, players);
+                break;
             }
-            case "Sell" -> {
-                infoDisplayGUI.setPlayersInfo(players, player);
-
-                ArrayList<PropertySquare> PropertiesCanBeSell = player.getProperties();
-                PropertiesCanBeSell.remove(player.hasBuilding());
-                this.getSellDecision(PropertiesCanBeSell, player);
+            case SELL -> {
+                handleSell(player, players);
+                break;
             }
-            case "Roll Dice" -> {
+            case ROLL_DICE -> {
+                handleRollDice(currentLocation, lastLocation, player, players);
+                break;
+            }
+            case BANKRUPT -> {
+                handleBankrupt(currentLocation, player);
+                break;
+            }
+            case NO_DOUBLES -> {
+                handleNoDoubles(player);
+                break;
+            }
+            case DOUBLES -> {
+                handleDoubles(currentLocation, player);
+                break;
+            }
+            case WINNER -> {
+                handleWinner(lastLocation, player);
+                break;
+            }
+            case BUILD, SELLH -> {
+                HotelOrHouse(player, command);
+                break;
+            }
+            default -> throw new IllegalStateException("Unexpected value: " + command);
+        }
+    }
 
-                StringBuilder message = new StringBuilder(player.getName() +
-                        " moved from " + lastLocation.getName() + "[" +
-                        lastLocation.getNumber() + "] to "
-                        + currentLocation.getName() + "["
-                        + currentLocation.getNumber() + "]\n");
 
-                //remove player gui form last location and add to new location
-                squareGUI.changePlayerGUILocation(player, lastLocation.getNumber(), currentLocation.getNumber());
+    public void handleNextTurn(Square currentLocation, Player player, ArrayList<Player> players) {
+        if (currentLocation instanceof PropertySquare square && square.getOwner() == player)
+            squareGUI.setMessage("You own this property!");
+        else
+            squareGUI.setMessage("");
 
-                //set dice value
-                int[] diceValues = MonopolyGame.dice.getDice();
-                squareGUI.setDiceImages(diceValues[0], diceValues[1]);
+        infoDisplayGUI.setPlayersInfo(players, player);
 
-                if (player.isInJail()) {
-                    if (MonopolyGame.dice.hasDoubles())
-                        JOptionPane.showMessageDialog(squareGUI, "You rolled a double!! You get to get out of jail fo free!");
-                    else {
-                        message.append("You did not roll a double!! You cannot get out of jail fo free!");
-                        infoDisplayGUI.setNextEnabled(true);
-                        infoDisplayGUI.setRollEnabled(false);
-                    }
-                }
+        infoDisplayGUI.setBuyEnabled(false);
+        infoDisplayGUI.setNextEnabled(false);
+        infoDisplayGUI.setRollEnabled(true);
+    }
 
-                // refresh location, buy, rent and cash.
-                //start here
-                infoDisplayGUI.setPlayersInfo(players, player);
+    public void handleBuy(Player player, ArrayList<Player> players) {
+        ArrayList<PropertySquare> property = player.getProperties();
+        squareGUI.addMessage(player.getName() +
+                " just bought " + property.get(property.size() - 1).getName() +
+                "[" + property.get(property.size() - 1).getNumber() + "]\n");
 
-                if (currentLocation instanceof PropertySquare location) {
-                    Player owner = ((PropertySquare) player.getCurrentLocation()).getOwner();
+        infoDisplayGUI.setPlayersInfo(players, player);
 
-                    if (owner != null && owner != player) {
-                        message.append(player.getName()).append(" just paid ").append(owner.getName()).append(" $").append(location.getRentFee()).append(" as rent fee\n");
-                    }
-                } else {
-                    if (currentLocation instanceof TaxSquare location)
-                        message.append(player.getName() + " paid " + player.getCurrentLocation().getName());
-                    else
-                        message.append(player.getName() + " is on Square " + player.getCurrentLocation().getName());
-                }
+        infoDisplayGUI.setBuyEnabled(false);
+    }
 
+    public void handleSell(Player player, ArrayList<Player> players) {
+        infoDisplayGUI.setPlayersInfo(players, player);
+
+        ArrayList<PropertySquare> PropertiesCanBeSell = player.getProperties();
+        PropertiesCanBeSell.remove(player.hasBuilding());
+        this.getSellDecision(PropertiesCanBeSell, player);
+    }
+
+    public void handleRollDice(Square currentLocation, Square lastLocation, Player player, ArrayList<Player> players) {
+
+        StringBuilder message = new StringBuilder(player.getName() +
+                " moved from " + lastLocation.getName() + "[" +
+                lastLocation.getNumber() + "] to "
+                + currentLocation.getName() + "["
+                + currentLocation.getNumber() + "]\n");
+
+        //remove player gui form last location and add to new location
+        squareGUI.changePlayerGUILocation(player, lastLocation.getNumber(), currentLocation.getNumber());
+
+        //set dice value
+        int[] diceValues = MonopolyGame.dice.getDice();
+        squareGUI.setDiceImages(diceValues[0], diceValues[1]);
+
+        if (player.isInJail()) {
+            if (MonopolyGame.dice.hasDoubles())
+                JOptionPane.showMessageDialog(squareGUI, "You rolled a double!! You get to get out of jail fo free!");
+            else {
+                message.append("You did not roll a double!! You cannot get out of jail fo free!");
                 infoDisplayGUI.setNextEnabled(true);
                 infoDisplayGUI.setRollEnabled(false);
-                squareGUI.setMessage(message.toString());
             }
-            case "Bankrupt" -> {
-                int result = JOptionPane.showConfirmDialog(squareGUI, "You are Bankrupt!! Do you want to sell your properties and stay in the game?");
-                switch (result) {
-                    case JOptionPane.YES_OPTION -> this.getSellDecision(player.getProperties(), player);
-                    case JOptionPane.NO_OPTION, JOptionPane.CLOSED_OPTION, JOptionPane.CANCEL_OPTION -> {
-                        squareGUI.removePlayerGUILocation(player, currentLocation.getNumber());
-                        game.removeBankruptPlayer(player);
-                    }
-                }
+        }
 
-                infoDisplayGUI.setBuyEnabled(false);
-                infoDisplayGUI.setSellEnabled(false);
-                infoDisplayGUI.setNextEnabled(true);
-                infoDisplayGUI.setRollEnabled(false);
+        // refresh location, buy, rent and cash.
+        //start here
+        infoDisplayGUI.setPlayersInfo(players, player);
+
+        if (currentLocation instanceof PropertySquare location) {
+            Player owner = ((PropertySquare) player.getCurrentLocation()).getOwner();
+
+            if (owner != null && owner != player) {
+                message.append(player.getName()).append(" just paid ").append(owner.getName()).append(" $").append(location.getRentFee()).append(" as rent fee\n");
             }
-            case "NoDoubles" -> {
-                JOptionPane.showMessageDialog(squareGUI, "This is your 3rd rounds in jail, you can leave the jail next round");
+        } else {
+            if (currentLocation instanceof TaxSquare location)
+                message.append(player.getName()).append(" paid ").append(location.getName());
+            else
+                message.append(player.getName()).append(" is on Square ").append(player.getCurrentLocation().getName());
+        }
+
+        infoDisplayGUI.setNextEnabled(true);
+        infoDisplayGUI.setRollEnabled(false);
+        squareGUI.setMessage(message.toString());
+    }
+
+    public void handleBankrupt(Square currentLocation, Player player) {
+        int result = JOptionPane.showConfirmDialog(squareGUI, "You are Bankrupt!! Do you want to sell your properties and stay in the game?");
+        switch (result) {
+            case JOptionPane.YES_OPTION -> this.getSellDecision(player.getProperties(), player);
+            case JOptionPane.NO_OPTION, JOptionPane.CLOSED_OPTION, JOptionPane.CANCEL_OPTION -> {
+                squareGUI.removePlayerGUILocation(player, currentLocation.getNumber());
+                game.removeBankruptPlayer(player);
+            }
+        }
+
+        infoDisplayGUI.setBuyEnabled(false);
+        infoDisplayGUI.setSellEnabled(false);
+        infoDisplayGUI.setNextEnabled(true);
+        infoDisplayGUI.setRollEnabled(false);
+    }
+
+    public void handleNoDoubles(Player player) {
+        JOptionPane.showMessageDialog(squareGUI, "This is your 3rd rounds in jail, you can leave the jail next round");
+        squareGUI.changePlayerGUILocation(player, 8, 8);
+        infoDisplayGUI.setNextEnabled(true);
+        infoDisplayGUI.setRollEnabled(false);
+    }
+
+    public void handleDoubles(Square currentLocation, Player player) {
+        //set dice value
+        int[] diceValues = MonopolyGame.dice.getDice();
+        squareGUI.setDiceImages(diceValues[0], diceValues[1]);
+
+        if (player.isInJail()) {
+            if (game.getDoubleCounter() == 1) {
+                JOptionPane.showMessageDialog(squareGUI, "You rolled a double!! You are going out of jail.");
+
+                //setting player out of jail
+                MonopolyBoard.jail.goOutJail(player);
                 squareGUI.changePlayerGUILocation(player, 8, 8);
                 infoDisplayGUI.setNextEnabled(true);
                 infoDisplayGUI.setRollEnabled(false);
             }
-            case "Doubles" -> {
-                //set dice value
-                int[] diceValues = MonopolyGame.dice.getDice();
-                squareGUI.setDiceImages(diceValues[0], diceValues[1]);
-
-                if (player.isInJail()) {
-                    if(game.getDoubleCounter() == 1){
-                        JOptionPane.showMessageDialog(squareGUI, "You rolled a double!! You are going out of jail.");
-
-                        //setting player out of jail
-                        MonopolyBoard.jail.goOutJail(player);
-                        squareGUI.changePlayerGUILocation(player, 8, 8);
-                        infoDisplayGUI.setNextEnabled(true);
-                        infoDisplayGUI.setRollEnabled(false);
-                    }
-                } else {
-                    if (game.getDoubleCounter() == 3) {
-                        JOptionPane.showMessageDialog(squareGUI, "You rolled a double 3 times! You are going to jail");
-                        MonopolyBoard.jail.goJail(player);
-                        squareGUI.changePlayerGUILocation(player, currentLocation.getNumber(), 8);
-                        infoDisplayGUI.setNextEnabled(true);
-                        infoDisplayGUI.setRollEnabled(false);
-                    } else {
-                        if (player instanceof AIPlayer) {
-                            JOptionPane.showMessageDialog(squareGUI, "AI rolled a double!!Click ok to continue." + game.getDoubleCounter());
-                        }
-                        else
-                            JOptionPane.showMessageDialog(squareGUI, "You rolled a double!!Roll Dice again.");
-                        infoDisplayGUI.setNextEnabled(false);
-                        infoDisplayGUI.setRollEnabled(true);
-                    }
-                }
-            }
-            case "Winner" -> {
-                squareGUI.removePlayerGUILocation(player, lastLocation.getNumber());
-                JOptionPane.showMessageDialog(this, "We have a Winner!! Player " + player.getName());
-                infoDisplayGUI.setBuyEnabled(false);
-                infoDisplayGUI.setSellEnabled(false);
-                infoDisplayGUI.setNextEnabled(false);
+        } else {
+            if (game.getDoubleCounter() == 3) {
+                JOptionPane.showMessageDialog(squareGUI, "You rolled a double 3 times! You are going to jail");
+                MonopolyBoard.jail.goJail(player);
+                squareGUI.changePlayerGUILocation(player, currentLocation.getNumber(), 8);
+                infoDisplayGUI.setNextEnabled(true);
                 infoDisplayGUI.setRollEnabled(false);
-                infoDisplayGUI.setBuildEnabled(false);
-                infoDisplayGUI.setSellHEnabled(false);
+            } else {
+                if (player instanceof AIPlayer) {
+                    JOptionPane.showMessageDialog(squareGUI, "AI rolled a double " + game.getDoubleCounter() + "times" + "!!Click ok to continue.");
+                } else
+                    JOptionPane.showMessageDialog(squareGUI, "You rolled a double!!Roll Dice again.");
+                infoDisplayGUI.setNextEnabled(false);
+                infoDisplayGUI.setRollEnabled(true);
             }
-            case "build", "sellH" -> HotelOrHouse(player, command);
-            default -> throw new IllegalStateException("Unexpected value: " + command);
         }
+    }
+
+    public void handleWinner(Square lastLocation, Player player) {
+        squareGUI.removePlayerGUILocation(player, lastLocation.getNumber());
+        JOptionPane.showMessageDialog(this, "We have a Winner!! Player " + player.getName());
+        infoDisplayGUI.setBuyEnabled(false);
+        infoDisplayGUI.setSellEnabled(false);
+        infoDisplayGUI.setNextEnabled(false);
+        infoDisplayGUI.setRollEnabled(false);
+        infoDisplayGUI.setBuildEnabled(false);
+        infoDisplayGUI.setSellHEnabled(false);
     }
 
     /**
@@ -240,7 +280,7 @@ public class MonopolyGameGUI extends JFrame {
         popup.setLayout(new GridLayout());
         JButton btn;
         for (PropertySquare property : p) {
-            btn = new JButton("<html>"+property.getName()+"<br>Sell Price: "+property.getPrice()/2+"</html>");
+            btn = new JButton("<html>" + property.getName() + "<br>Sell Price: " + property.getPrice() / 2 + "</html>");
             btn.setBackground(property.getColor());
             btn.addActionListener(e -> {
                 JButton b = (JButton) e.getSource();
@@ -305,18 +345,22 @@ public class MonopolyGameGUI extends JFrame {
      * popup a window and ask player to decide whether to build/sell a house or a hotel
      * on the selected property
      */
-    public void HotelOrHouse(Player player, String command) {
+    public void HotelOrHouse(Player player, Enums command) {
         JFrame popup = new JFrame("House or Hotel");
         popup.setBounds(500, 400, 160, 120);
         GridLayout grid = new GridLayout(1, 2);
         popup.setLayout(grid);
-        JButton house = new JButton("House"), hotel = new JButton("Hotel");
+        JButton house = new JButton(Enums.HOUSE.toString()), hotel = new JButton(Enums.HOTEL.toString());
 
         ActionListener al = e -> {
+            String message;
+            String temp;
+            Enums decision = null;
+            if (((JButton) e.getSource()).getText().equals(Enums.HOTEL.toString())) decision = Enums.HOTEL;
+            else if (((JButton) e.getSource()).getText().equals(Enums.HOUSE.toString())) decision = Enums.HOUSE;
 
-            String temp = "", decision = ((JButton) e.getSource()).getText();
             int price = sellBuildBuilding(command, decision, player);
-            if (command.equals("build")) {
+            if (command == Enums.BUILD) {
                 temp = "build";
                 if (player.getCash() < player.getSelectedSquare().getHousePrice()) {
                     popup.dispose();
@@ -334,27 +378,26 @@ public class MonopolyGameGUI extends JFrame {
             }
             infoDisplayGUI.setCash(player.getCash());
             if (price >= 0) {
-                setMessage(player.getName() + " has " + temp + " a " + decision + " on "
+                message = player.getName() + " has " + temp + " a " + decision + " on "
                         + player.getSelectedSquare().getName() + "\n" + player.getName() +
-                        " paid $" + price + " to build it\n");
+                        " paid $" + price + " to build it\n";
             } else if (price == -1) {
-                setMessage(player.getName() + " cannot " + temp + " on " +
-                        player.getSelectedSquare().getName() + "\n");
+                message = player.getName() + " cannot " + temp + " on " +
+                        player.getSelectedSquare().getName() + "\n";
             } else {
-                setMessage(null);
+                message = "";
             }
             if (!player.hasBuilding().isEmpty()) {
                 infoDisplayGUI.setSellHEnabled(true);
             }
             squareGUI.setMessage(message);
-            setMessage(null);
         };
         house.addActionListener(al);
         hotel.addActionListener(al);
         popup.add(house);
         popup.add(hotel);
 
-        if (command.equals("build")) {
+        if (command == Enums.BUILD) {
             if (player.getCash() < player.getSelectedSquare().getHotelPrice()) {
                 hotel.setEnabled(false);
             }
@@ -367,17 +410,13 @@ public class MonopolyGameGUI extends JFrame {
         popup.setVisible(true);
     }
 
-    private void setMessage(String m) {
-        this.message = m;
-    }
-
     /**
      * a part of action listener in HouseOrHotel()
      * build or sell houses or hotels on GUI map
      */
-    public int sellBuildBuilding(String command, String decision, Player player) {
+    public int sellBuildBuilding(Enums command, Enums decision, Player player) {
         int price;
-        if(command.equals("build")){
+        if (command == Enums.BUILD) {
             price = player.buildH(decision);
         } else {
             price = player.sellH(decision);

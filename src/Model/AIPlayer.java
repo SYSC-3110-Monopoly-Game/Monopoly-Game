@@ -1,5 +1,7 @@
 package Model;
 
+import view.Enums;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -11,7 +13,7 @@ public class AIPlayer extends Player {
         super(name+"AI", square);
     }
 
-    public AIPlayer(String name, int cash, boolean b, boolean d, String decision, Square lastLocation, Square currentLocation, ArrayList<PropertySquare> sOwned, PropertySquare selectedSquare) {
+    public AIPlayer(String name, int cash, boolean b, boolean d, Enums decision, Square lastLocation, Square currentLocation, ArrayList<PropertySquare> sOwned, PropertySquare selectedSquare) {
         super(name, cash, b, d, decision, lastLocation, currentLocation, sOwned, selectedSquare);
     }
 
@@ -77,7 +79,7 @@ public class AIPlayer extends Player {
                 if(temp != null) {
                     this.setSelectedSquare(temp);
                     if (this.getBoolean()) {
-                        return this.buildH("House") > 0;
+                        return this.buildH(Enums.HOUSE) > 0;
                     } else {
                         System.out.println("No properties");
                     }
@@ -101,7 +103,7 @@ public class AIPlayer extends Player {
             PropertySquare temp = this.getRandomSquare(propertyList);
             if(temp != null) {
                 this.setSelectedSquare(temp);
-                this.sellH("House");
+                this.sellH(Enums.HOUSE);
             } else {
                 System.out.println("No properties");
             }
