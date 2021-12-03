@@ -17,13 +17,11 @@ public class MonopolyGameGUI extends JFrame {
     private final InfoDisplayGUI infoDisplayGUI;
     private final SquareGridGUI squareGUI;
     private final MonopolyGame game;
-    private String message;
 
     /**
      * Initialize the gui frame
      */
     public MonopolyGameGUI(MonopolyGame game) {
-        this.message = "";
         this.game = game;
 
         //adding frame settings
@@ -83,48 +81,22 @@ public class MonopolyGameGUI extends JFrame {
         Square currentLocation = player.getCurrentLocation();
         Square lastLocation = player.getLastLocation();
         switch (command) {
-            case NEXT_TURN -> {
-                handleNextTurn(currentLocation, player, players);
-                break;
-            }
-            case BUY -> {
-                handleBuy(player, players);
-                break;
-            }
-            case SELL -> {
-                handleSell(player, players);
-                break;
-            }
-            case ROLL_DICE -> {
-                handleRollDice(currentLocation, lastLocation, player, players);
-                break;
-            }
-            case BANKRUPT -> {
-                handleBankrupt(currentLocation, player);
-                break;
-            }
-            case NO_DOUBLES -> {
-                handleNoDoubles(player);
-                break;
-            }
-            case DOUBLES -> {
-                handleDoubles(currentLocation, player);
-                break;
-            }
-            case WINNER -> {
-                handleWinner(lastLocation, player);
-                break;
-            }
-            case BUILD, SELLH -> {
-                HotelOrHouse(player, command);
-                break;
-            }
+            case NEXT_TURN -> handleNextTurn(currentLocation, player, players);
+            case BUY -> handleBuyOrSell(player, players, Enums.BUY);
+            case SELL -> handleBuyOrSell(player, players, Enums.SELL);
+            case ROLL_DICE -> handleRollDice(currentLocation, lastLocation, player, players);
+            case BANKRUPT -> handleBankrupt(currentLocation, player);
+            case NO_DOUBLES -> handleNoDoubles(player);
+            case DOUBLES -> handleDoubles(currentLocation, player);
+            case WINNER -> handleWinner(lastLocation, player);
+            case BUILD, SELLH -> HotelOrHouse(player, command);
             default -> throw new IllegalStateException("Unexpected value: " + command);
         }
     }
 
 
-    public void handleNextTurn(Square currentLocation, Player player, ArrayList<Player> players) {
+    // the following methods aid handleUpdate method
+    private void handleNextTurn(Square currentLocation, Player player, ArrayList<Player> players) {
         if (currentLocation instanceof PropertySquare square && square.getOwner() == player)
             squareGUI.setMessage("You own this property!");
         else
@@ -137,26 +109,24 @@ public class MonopolyGameGUI extends JFrame {
         infoDisplayGUI.setRollEnabled(true);
     }
 
-    public void handleBuy(Player player, ArrayList<Player> players) {
+    private void handleBuyOrSell(Player player, ArrayList<Player> players, Enums command) {
         ArrayList<PropertySquare> property = player.getProperties();
-        squareGUI.addMessage(player.getName() +
-                " just bought " + property.get(property.size() - 1).getName() +
-                "[" + property.get(property.size() - 1).getNumber() + "]\n");
+
+        if (command == Enums.BUY) {
+            squareGUI.addMessage(player.getName() +
+                    " just bought " + property.get(property.size() - 1).getName() +
+                    "[" + property.get(property.size() - 1).getNumber() + "]\n");
+
+            infoDisplayGUI.setBuyEnabled(false);
+        } else if (command == Enums.SELL) {
+            property.remove(player.hasBuilding());
+            this.getSellDecision(property, player);
+        }
 
         infoDisplayGUI.setPlayersInfo(players, player);
-
-        infoDisplayGUI.setBuyEnabled(false);
     }
 
-    public void handleSell(Player player, ArrayList<Player> players) {
-        infoDisplayGUI.setPlayersInfo(players, player);
-
-        ArrayList<PropertySquare> PropertiesCanBeSell = player.getProperties();
-        PropertiesCanBeSell.remove(player.hasBuilding());
-        this.getSellDecision(PropertiesCanBeSell, player);
-    }
-
-    public void handleRollDice(Square currentLocation, Square lastLocation, Player player, ArrayList<Player> players) {
+    private void handleRollDice(Square currentLocation, Square lastLocation, Player player, ArrayList<Player> players) {
 
         StringBuilder message = new StringBuilder(player.getName() +
                 " moved from " + lastLocation.getName() + "[" +
@@ -203,7 +173,7 @@ public class MonopolyGameGUI extends JFrame {
         squareGUI.setMessage(message.toString());
     }
 
-    public void handleBankrupt(Square currentLocation, Player player) {
+    private void handleBankrupt(Square currentLocation, Player player) {
         int result = JOptionPane.showConfirmDialog(squareGUI, "You are Bankrupt!! Do you want to sell your properties and stay in the game?");
         switch (result) {
             case JOptionPane.YES_OPTION -> this.getSellDecision(player.getProperties(), player);
@@ -219,14 +189,14 @@ public class MonopolyGameGUI extends JFrame {
         infoDisplayGUI.setRollEnabled(false);
     }
 
-    public void handleNoDoubles(Player player) {
+    private void handleNoDoubles(Player player) {
         JOptionPane.showMessageDialog(squareGUI, "This is your 3rd rounds in jail, you can leave the jail next round");
         squareGUI.changePlayerGUILocation(player, 8, 8);
         infoDisplayGUI.setNextEnabled(true);
         infoDisplayGUI.setRollEnabled(false);
     }
 
-    public void handleDoubles(Square currentLocation, Player player) {
+    private void handleDoubles(Square currentLocation, Player player) {
         //set dice value
         int[] diceValues = MonopolyGame.dice.getDice();
         squareGUI.setDiceImages(diceValues[0], diceValues[1]);
@@ -259,7 +229,7 @@ public class MonopolyGameGUI extends JFrame {
         }
     }
 
-    public void handleWinner(Square lastLocation, Player player) {
+    private void handleWinner(Square lastLocation, Player player) {
         squareGUI.removePlayerGUILocation(player, lastLocation.getNumber());
         JOptionPane.showMessageDialog(this, "We have a Winner!! Player " + player.getName());
         infoDisplayGUI.setBuyEnabled(false);

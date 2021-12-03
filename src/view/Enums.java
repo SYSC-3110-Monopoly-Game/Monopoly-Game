@@ -11,7 +11,7 @@ public enum Enums {
     HOUSE("House"),
     DOUBLES(""), NO_DOUBLES(""), BANKRUPT(""), WINNER(""), BUILD(""), SELLH("");
 
-    
+
     private final String text;
 
     /**
