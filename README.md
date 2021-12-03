@@ -10,6 +10,18 @@
         - Folders/Files included
         - Team Responsibilities
         - Detailed Set Up
+    - Milestone 2
+        - Tests included
+        - GUI added
+        - Special squares added
+    - Milestone 3
+        - Houses and Hotels included
+        - Selling and building improved
+        - AI Player included
+        - User manual Added
+    - Milestone 4
+        - bugs fixed
+        - game save/load function added
         
 # Project Description
 
@@ -22,6 +34,149 @@ the initial cost of the property.
 
 1. Download jar file and unzip
 2. Open MonopolyGame.java and run class
+
+# User Manual
+    
+This is a Simplify Monopoly Game.
+The game interface consists of a ‘board game’ section and an ‘information’ section.
+
+Players need to roll dices and move to next square depend on those dices. Different squares have different functions.
+A player wins the game when all other players go bankrupt.
+
+
+<details><summary>Board Game Section</summary>
+    <details><summary>Squares</summary>
+        <details><summary>Property Square</summary>
+    
+- There are ‘street name’, ‘price’, ‘color tag’ and ‘buildings area’ in each Property Square.
+- When players get to this kind of squares:
+    - They can buy the square, if it does not have an owner.
+    - They need to pay for the rent, if this square is owned by another player.
+        - The rent price for that square depend on the number of buildings on it.
+    - They can ‘sell’ or ‘build houses’ after they own that land.
+</details> 
+         <details><summary>Go Square</summary>
+             
+- The starting square when the game starts.
+- When players pass or reach it again, they will get $50.
+</details> 
+         <details><summary>Income Tax Square</summary>
+             
+- Players need to pay the tax ($ 100) when they get to this square.
+</details>
+         <details><summary>Rail Road Square</summary>
+             
+- When players get to this kind of squares:
+    - They can buy the square, if it does not have an owner.
+    - They need to pay for the rent, if this square is owned by another player.
+    - House cannot be built here!
+</details> 
+         <details><summary>Jail Square</summary>
+             
+- When player gets to the jail, he/she can only move out of the jail in two ways:
+    1. Player rolls two the same number in  dices (e.g., '1 and 1', '2 and 2', '3 and 3', '4 and 4', '5 and 5' and '6 and 6'.).
+    2. Player already stayed in the jail for 3 rounds.             
+</details> 
+         <details><summary>Utility Square</summary>
+             
+- When players get to this kind of squares:
+    - They can buy the square, if it does not have an owner.
+    - They need to pay for the rent, if this square is owned by another player.
+    - House cannot be built here!               
+</details>  
+         <details><summary>Free Parking Square</summary>
+             
+- Players do not need to do anything with this square.             
+</details> 
+         <details><summary>Go To Jail Square</summary>
+             
+- Players will be directly sent to ‘Jail Square’ when they get to ‘Go To Jail Square’.             
+</details>
+</details> 
+    <details><summary>Houses and Hotels</summary>   
+
+- House: indicates by green square.
+- Hotel: indicates by red square.
+- Buildings can only be built on Property Square! 
+- Sell Rules:
+    - when player owns a hotel, he/she must first sell the hotel, then the houses.        
+- In this Monopoly Game: 
+    - At most four houses and one hotel can be built on a Property Square.       
+    - If player chooses to build a hotel before owning four houses on that Property Square, the number of houses of the square will increase to 4.    
+        - (e.g., Player A already had a house on ‘Baltic Avenue’ and he wants to build a hotel there. He will have 4 houses and a hotel on ‘Baltic Avenue’ after he pressing the button for ‘build a hotel’.) 
+    - Player can build houses or hotels, when he/she owns all Property Squares of the same color.       
+        - (e.g., when player A owns ‘Baltic Avenue’ and ‘Mediterranean Avenue’, he/she can start to build houses or hotel on Property Square)         
+</details>       
+</details> 
+    <br>
+<details><summary>Information Section</summary>    
+- Information Section is made up by five sections. (‘Players’ information’, ‘Current Player’s Information’. ‘Current Location’, ‘Square Information’ and ‘Buttons’)
+    <details><summary>Players' Information</summary>
+            
+- List of players who are not in current.
+    - Showing their ‘name’ and ‘cash’.
+</details> 
+    <details><summary>Current Players' Information</summary>
+        
+-  Showing current player’s information.
+    - ‘Name’, ‘cash’ and ‘player owned property’.
+</details>
+    <details><summary>Current Location</summary>
+        
+- Showing the location of current player.
+</details>
+    <details><summary>Square Information</summary>
+        
+- Showing current square’s information.
+    - ‘Buy Price’, ‘Rent Price’, ‘House Price’ and ‘Hotel Price’.
+</details>
+    <details><summary>Buttons</summary>
+ - Buttons Section including six buttons: ‘Buy’, ‘Sell’, ‘Roll Dice’, ‘Next Turn’, ‘Build On Property’ and ‘Sell Houses/Hotels’.       
+        <details><summary>Buy Button</summary> 
+            
+- Click to buy the current square.
+</details>
+       <details><summary>Sell Button</summary>
+           
+- Click to sell the last bought square.
+</details>
+       <details><summary>Roll Dice Button</summary>
+           
+- Click to roll dices.
+  </details>
+       <details><summary>Next Turn Button</summary>
+           
+- Click to pass the turn to next player.
+ </details>
+       <details><summary>Build On Property Button</summary>
+           
+- Click to open a new window to choose the square you want to build houses/hotel.
+    - After you clicking the square 
+        - There is a new window for you to choose the building type (Houses/Hotel).
+            - Now, click ‘House’ (Hotel) if you want to build a house (hotel).
+</details>
+       <details><summary>Sell Houses/Hotels Button</summary>
+           
+- Click to open a new window show the square(s) you have houses/hotel on. Then choose you want to sell houses/hotel there.
+        - After you clicking the square 
+            - There is a new window for you to choose the building type (Houses/Hotel) you can sell.
+                - Now, click ‘House’ (Hotel) if you want to sell a house (hotel).       
+</details>
+</details>
+</details>  
+</details>
+<br>
+<details><summary>Bankrupt</summary> 
+    
+- When a player has 0 or negative cash, the system will ask player if he/she want to sell his/her properties.
+    - if yes:
+        - player will choose the properties he/she wants to sell
+        - If that player still has negative cash after selling his/her properties, he/she goes bankrupt.
+    - if no:
+        - player goes bankrupt directly
+- Bankrupt player will be moved out of the board             
+</details>
+
 
 # Authors
 
@@ -205,6 +360,8 @@ Zirui Qiao
 - Refactored the makeSquares() method in MonopolyBoard class
 - Provide a new method(no use after discussion) to SquareGridGUI class
 - README file documentation
+    
+
 
 
 ## Detailed Set Up
@@ -254,3 +411,158 @@ Ideally we would want to wait for user input to roll dice again when doubles are
 all the dice pairs, not just the last rolled pair.
 </details>
 
+<details><summary>Milestone 3</summary>
+    
+# Milestone 3
+
+## Folders/Files added
+
+* src
+    - Model
+        + AIPlayer.java
+    - view
+        + SimpleSquareGUI.java
+    - test
+        + AIPlayertest.java
+    - UML and Sequence Diagrams
+        - Milestone3
+
+   
+
+## Team Responsibilities
+
+Liya Abebe
+
+- implemented property selling
+- implemented bankrupt logic when player has properties to sell
+- refactored game gui files
+- implemented more feedbacks to be shown during the game in the board info area
+ 
+Rebbeca Li
+    
+- implemented hotel and house gui
+- refactored InfoDisplayGUI
+- implemented getPlayerNotInTurn() in MonopolyGame class
+- refactored handleUpdate() in MonopolyGameGUI class
+- refactored sellBuildBuilding() in MonopolyGameGUI class     
+- refactored PropertySquareGUI in PropertySquareGUI class
+- implemented isBuilding(), setBuidlingX in PropertySquareGUI class   
+- created user manual
+
+Shizhong Shang
+  
+- Implemented AIPlayer class
+- improved the UML diagram 
+- Improve the sequence diagram PressButtonBuy_Action
+- Improve the sequence diagram PressButtonSell_Action
+- Improve the sequence diagram PressButtonRollDice_Action
+- Improve the sequence diagram PressButtonSell_HouseOrHotel_Action
+- Improve the sequence diagram PressButtonBuild_On_Property_Action
+- Improve the sequence diagram PressButtonNextTurn_Action
+- improved the Jail class
+- Add AIPlayer in the MonopolyGame class
+
+Zirui Qiao
+
+- Implemented SimpleSquareGUI class
+- Improved GUI code in all GUI square by merging repeated codes into SimpleSquareGUI class
+- Improved the map of the game by using new method to generate map GUI
+- refresh the GUI information more frequently by adding details in MonopolyGameGUI class
+- Improved the code in MonopolyGameGUI class by packing redundant codes into methods
+- Fixed the bug that when player trying to buy properties when lacking of money, wrong message
+were shown.
+- Included bankrupt feedback
+- Write nearly all javadocs in package view
+- Created getDecision() and HotelOrHouse() in MonopolyGameGUI class
+- Packing redundant codes into setButtons(), setPriceInfo() and sellBuildBuilding() in
+MonopolyGameGUI class
+- Created inner classes houses and hotels in PropertySquare class
+- Implemented buildHouse(), hasHouses(), getHousePrice(), sellHouse(), buildHotel(), getHotelPrice(), hasHotel(), 
+sellHotel() in PropertySqaure class
+- Implemented calculateRentFee() in PropertySquare class to get higher rent fee when the owner of this square 
+owns all other squares with the same color(or more than 1 railroad and utility), the price also increase when 
+there are houses or hotel built on this square.
+- Refactoed AIPlayer so that it can run properly
+- Implemented AIPlayertest class
+- Updated all tests
+
+In Player class:
+- Implemented hasWholeSet() which return all properties in 1 or more whole sets owned by the player
+- Implemented hasBuilding() which return all properties with houses or hotel
+- Implemented countNumber() which gives the number the squares (owned by the player) with a given color
+- Implemented getAvailableProperties() which remove all properties that the player does not has enough money to 
+build at least a house on it from the given property list
+- Implemented buildH() which builds a house or a hotel on the selected square according to parameter passed
+- Implemented sellH() which sells a house or a hotel from the selected square according to parameter passed
+
+In MonopolyGame class:
+- Implemented checkAvailableBuild() and checkAvailableSell() which build or sell buildings on the selected square
+- Implemented AIProcess() which runs the process of AI when it is its turn
+
+
+
+## Detailed Set Up
+    
+In this Milestone, we focused on 3 parts: fixing existing bugs and features; implementing build/sell houses/hotel
+and its GUI; implementing AI players. The existing bugs and features include: incorrect feedbacks; feature lost; 
+Misunderstanding of the rules; few bugs and UML&sequence diagrams. Implementing build/sell houses/hotel and its GUI
+include: implementing the logic of building/selling a house/hotel; getting decision from human players and showing 
+houses/hotel changes on the GUI map. Implementing AI players include: implementing AI logic, fitting AI to the game
+(how AI use original methods and how to fit the original loops) and showing AI on information tab and the GUI map.
+Some of codes are be complicated because we want to fit MVC pattern as good as possible.
+
+
+## Known Issues/bugs
+
+If player rolls a double and lands on go to jail, the double lets them get out of jail.
+
+</details>
+
+<details><summary>Milestone 3</summary>
+    
+# Milestone 4
+
+## Folders/Files added
+
+* src
+    - UML and Sequence Diagrams
+        - Milestone3
+
+
+## Team Responsibilities
+
+Liya Abebe
+
+- 
+
+ 
+Rebbeca Li
+    
+- 
+
+Shizhong Shang
+  
+- 
+
+Zirui Qiao
+
+- implement new constructors in all square classes, Player class, MonopolyGame class and MonopolyBoard class.
+- implement toXML() method in all square classes and Player class.
+- implement exportPlayers(), loadToPlayer() and makePlayerFromXML() in Player class.
+- implement exportToXML(), loadToSquare() and makeSquaresFromXML() in MonopolyBoard class.
+- implement exportGameToXML() and loadGame() in MonopolyGame class.
+- implement loadGameGUI() in MonopolyGameGUI class.
+- implement loadSquaresOnMap() in SquareGridGUI class.
+- fixed some bugs
+- improved some smelly code
+
+
+
+## Detailed Set Up
+    
+In this milestone, the main job is to add methods to load/save game from/to XML files and refactor smelly codes. For all classes that their data needed to be saved for next game, a toXML() method was created inside of it. For some important classes, for example, MonopolyGame class. Those classes are responsible for arranging other classes, methods used to analyze XML files and package data into XML files are created. 
+
+## Known Issues/bugs
+
+
+</details>

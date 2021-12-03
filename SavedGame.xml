@@ -287,7 +287,7 @@
 <Price>90</Price>
 <RentPrice>70</RentPrice>
 <Color>-16777216</Color>
-<Owner>1</Owner>
+<Owner></Owner>
 </Square>
 <Square type="Property">
 <Name>Park Place</Name>
@@ -359,4 +359,4 @@
 <SelectedSquare>1</SelectedSquare>
 <SquareOwned>7,15,25,</SquareOwned>
 </Player>
-<DoubleCounter>0</DoubleCounter><PlayerInTurn>1</PlayerInTurn><PlayerNotInTurn>2,3AI,4AI,</PlayerNotInTurn><DiceValue>5,3</DiceValue></Game>
+<DoubleCounter>0</DoubleCounter><PlayerInTurn>1</PlayerInTurn><PlayerNotInTurn>2,3AI,4AI,</PlayerNotInTurn><DiceValue>0,0</DiceValue></Game>

@@ -13,7 +13,7 @@ public class SquareGridGUI extends JPanel {
     private DiceGUI diceGUI;
 
     /**
-     * initalize the game map (left part)
+     * initialize the game map (left part)
      */
     public SquareGridGUI(Square[] square, ArrayList<Player> players) {
         this.square = square;
