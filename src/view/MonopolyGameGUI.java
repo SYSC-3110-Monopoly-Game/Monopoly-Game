@@ -191,7 +191,7 @@ public class MonopolyGameGUI extends JFrame {
 
     private void handleNoDoubles(Player player) {
         JOptionPane.showMessageDialog(squareGUI, "This is your 3rd rounds in jail, you can leave the jail next round");
-        squareGUI.changePlayerGUILocation(player, 8, 8);
+        squareGUI.changePlayerGUILocation(player, Constants.JAIL_SQUARE_INDEX, Constants.JAIL_SQUARE_INDEX);
         infoDisplayGUI.setNextEnabled(true);
         infoDisplayGUI.setRollEnabled(false);
     }
@@ -207,7 +207,7 @@ public class MonopolyGameGUI extends JFrame {
 
                 //setting player out of jail
                 MonopolyBoard.jail.goOutJail(player);
-                squareGUI.changePlayerGUILocation(player, 8, 8);
+                squareGUI.changePlayerGUILocation(player, Constants.JAIL_SQUARE_INDEX, Constants.JAIL_SQUARE_INDEX);
                 infoDisplayGUI.setNextEnabled(true);
                 infoDisplayGUI.setRollEnabled(false);
             }

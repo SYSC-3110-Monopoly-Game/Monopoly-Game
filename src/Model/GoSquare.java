@@ -1,10 +1,11 @@
 package Model;
 
-public class GoSquare extends Square{
+public class GoSquare extends Square {
     private final int addMoney;
 
 
-    /** Represents the GO Square
+    /**
+     * Represents the GO Square
      *
      * @param name
      * @param number
@@ -15,7 +16,8 @@ public class GoSquare extends Square{
         this.addMoney = money;
     }
 
-    /** Returns the GO Square money
+    /**
+     * Returns the GO Square money
      *
      * @return amount of money a player gets when they pass go
      */
@@ -24,7 +26,8 @@ public class GoSquare extends Square{
         return addMoney;
     }
 
-    /** Player passed GO square, gets free money
+    /**
+     * Player passed GO square, gets free money
      *
      * @param p
      */

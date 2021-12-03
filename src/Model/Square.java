@@ -12,14 +12,15 @@ public abstract class Square {
     }
 
     /**
-    get the name of the square
+     * get the name of the square
      */
     public String getName() {
         return name;
     }
 
     /**
-     *  String representation of square
+     * String representation of square
+     *
      * @return string
      */
     public String toString() {
@@ -27,7 +28,7 @@ public abstract class Square {
     }
 
     /**
-    get the specific id of the square
+     * get the specific id of the square
      */
     public int getNumber() {
         return this.number;
@@ -37,6 +38,7 @@ public abstract class Square {
 
     /**
      * convert the square to xml version
+     *
      * @return xml version String
      */
     public abstract String toXML();

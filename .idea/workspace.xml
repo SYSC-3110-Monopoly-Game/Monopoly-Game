@@ -7,7 +7,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b3cb6e01-e85c-476d-a8c3-3d7553fdc473" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Model/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/AIPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/AIPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Dice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Dice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/FreeParkingSquare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/FreeParkingSquare.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/GoSquare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/GoSquare.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/GoToJailSquare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/GoToJailSquare.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/JailSquare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/JailSquare.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/MonopolyBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/MonopolyBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/MonopolyGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/MonopolyGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/PropertySquare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/PropertySquare.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/RailRoadSquare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/RailRoadSquare.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Square.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/TaxSquare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/TaxSquare.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/UtilitySquare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/UtilitySquare.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/AIPlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/AIPlayerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/InfoDisplayGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/InfoDisplayGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/MonopolyGameGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MonopolyGameGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/SquareGridGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/SquareGridGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,8 +46,13 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="ProjectId" id="21mm0y6PetCMLnXYskjvqPKV5Rt" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="Downloaded.Files.Path.Enabled" value="false" />
@@ -35,11 +60,15 @@
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JUnit.AIPlayerTest">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Model.Main" />
       <module name="Monopoly-Game" />
@@ -117,19 +146,19 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.Main" />
       <item itemvalue="JUnit.AIPlayerTest" />
       <item itemvalue="JUnit.MonopolyBoardTest.exportToXML" />
       <item itemvalue="JUnit.MonopolyGameTest.exportXML" />
       <item itemvalue="JUnit.MonopolyGameTest.loadXML" />
-      <item itemvalue="Application.Main" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.AIPlayerTest" />
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.MonopolyGameTest.exportXML" />
         <item itemvalue="JUnit.MonopolyGameTest.loadXML" />
         <item itemvalue="JUnit.MonopolyBoardTest.exportToXML" />
-        <item itemvalue="JUnit.AIPlayerTest" />
       </list>
     </recent_temporary>
   </component>
@@ -141,8 +170,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1635090572449</updated>
+      <workItem from="1638554440999" duration="5189000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.History.Properties">
     <option name="COLUMN_ID_ORDER">
