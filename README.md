@@ -518,7 +518,7 @@ If player rolls a double and lands on go to jail, the double lets them get out o
 
 </details>
 
-<details><summary>Milestone 3</summary>
+<details><summary>Milestone 4</summary>
     
 # Milestone 4
 
