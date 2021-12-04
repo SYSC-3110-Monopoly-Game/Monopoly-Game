@@ -12,6 +12,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MonopolyGameGUI extends JFrame {
     private final InfoDisplayGUI infoDisplayGUI;
@@ -177,8 +178,10 @@ public class MonopolyGameGUI extends JFrame {
                 infoDisplayGUI.setRollEnabled(false);
             }
             case "NoDoubles" -> {
-                JOptionPane.showMessageDialog(squareGUI, "This is your 3rd rounds in jail, you can leave the jail next round");
-                squareGUI.changePlayerGUILocation(player, 8, 8);
+                if(!player.isInJail()){
+                    JOptionPane.showMessageDialog(squareGUI, "This is your 3rd rounds in jail, you can leave the jail next round");
+                    squareGUI.changePlayerGUILocation(player, 8, 8);
+                }
                 infoDisplayGUI.setNextEnabled(true);
                 infoDisplayGUI.setRollEnabled(false);
             }
@@ -188,7 +191,7 @@ public class MonopolyGameGUI extends JFrame {
                 squareGUI.setDiceImages(diceValues[0], diceValues[1]);
 
                 if (player.isInJail()) {
-                    if(game.getDoubleCounter() == 1){
+                    if(MonopolyGame.dice.hasDoubles()){
                         JOptionPane.showMessageDialog(squareGUI, "You rolled a double!! You are going out of jail.");
 
                         //setting player out of jail
@@ -244,7 +247,8 @@ public class MonopolyGameGUI extends JFrame {
             btn.setBackground(property.getColor());
             btn.addActionListener(e -> {
                 JButton b = (JButton) e.getSource();
-                player.sellProperty(player.getPropertyFromName(b.getText()));
+                String[] chosenProperty = b.getText().split("<html>|<", 3);
+                player.sellProperty(player.getPropertyFromName(chosenProperty[1]));
                 infoDisplayGUI.setCash(player.getCash());
                 infoDisplayGUI.setPropertyList(player.getProperties().toString());
                 popup.getContentPane().remove(b);

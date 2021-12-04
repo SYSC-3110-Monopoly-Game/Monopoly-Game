@@ -4,8 +4,11 @@ import java.awt.Color;
 
 public class RailRoadSquare extends PropertySquare {
 
-    public RailRoadSquare(String name, int number, int buy, int rent, Color color) {
-        super(name, number, buy, rent, color);
+    int rent;
+
+    public RailRoadSquare(String name, int number, int buy, int rent, Color color, String owner) {
+        super(name, number, buy, rent, color, 0, 0, 0, owner);
+        this.rent = rent;
     }
 
     @Override
@@ -18,13 +21,12 @@ public class RailRoadSquare extends PropertySquare {
                 tempName.replace(i, i+1, "&amp;");
             }
         }
-        string.append("<Name>"+tempName.toString()+"</Name>\n");
+        string.append("<Name>"+tempName+"</Name>\n");
         string.append("<Number>"+this.getNumber()+"</Number>\n");
         string.append("<Price>"+this.getPrice()+"</Price>\n");
-        string.append("<RentPrice>"+this.getRentFee()+"</RentPrice>\n");
+        string.append("<RentPrice>"+this.rent+"</RentPrice>\n");
         String colorS = Integer.toString(this.getColor().getRGB());
         string.append("<Color>"+colorS+"</Color>\n");
-        // call back: Color c = new Color(Integer.parseInt(colorS));
         if(this.getOwner() != null) {
             string.append("<Owner>" + this.getOwner().getName() + "</Owner>\n");
         } else {

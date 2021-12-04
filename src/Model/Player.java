@@ -418,7 +418,7 @@ public class Player {
 
         for(PropertySquare p: squaresOwned){
             for(int i=0; i<c.size(); i++){
-                if (p.getColor() == c.get(i)){
+                if (p.getColor().equals(c.get(i))){
                     counter[i]++;
                 }
             }
@@ -426,7 +426,7 @@ public class Player {
         for(int i=0; i<(c.size()-4); i++){
             if (counter[i] == 3){
                 for(PropertySquare p: squaresOwned){
-                    if(p.getColor() == c.get(i)){
+                    if(p.getColor().equals(c.get(i))){
                         result.add(p);
                     }
                 }
@@ -435,7 +435,7 @@ public class Player {
         for(int i=(c.size()-4); i<c.size(); i++){
             if (counter[i] >= 2){
                 for(PropertySquare p: squaresOwned){
-                    if(p.getColor() == c.get(i)){
+                    if(p.getColor().equals(c.get(i))){
                         result.add(p);
                     }
                 }
@@ -475,7 +475,7 @@ public class Player {
         int counter = 0;
         ArrayList<PropertySquare> temp = this.hasWholeSet();
         for(PropertySquare p: temp){
-            if(p.getColor() == color){
+            if(p.getColor().equals(color)){
                 counter++;
             }
         }

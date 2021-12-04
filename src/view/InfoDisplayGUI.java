@@ -159,13 +159,11 @@ public class InfoDisplayGUI extends JPanel {
             if (owner == null) {
                 this.setBuyEnabled(player.getCash() >= location.getPrice());
                 this.setBuyPrice(location.getPrice());
-                this.setHousePrice(location.getHousePrice());
-                this.setHotelPrice(location.getHotelPrice());
             } else {
                 this.setBuyPrice(placeSold);
-                this.setHousePrice(placeSold);
-                this.setHotelPrice(placeSold);
             }
+            this.setHousePrice(location.getHousePrice());
+            this.setHotelPrice(location.getHotelPrice());
             this.setRentPrice(location.getRentFee());
         } else {
             this.setBuyPrice(placeNonSale);

@@ -94,13 +94,21 @@ public class MonopolyGame {
     public void loadGame(String path) throws ParserConfigurationException, SAXException, IOException {
         board = new MonopolyBoard(path);
         players = new ArrayList<>();
-        for(int i=0; i<4; i++){
-            players.add(i, Player.makePlayerFromXML(board, path, i));
-        }
+        final int[] numberOfPlayer = {0};
         SAXParserFactory factory = SAXParserFactory.newInstance();
         SAXParser saxParser = factory.newSAXParser();
+        saxParser.parse(path, new DefaultHandler(){
+            @Override
+            public void startElement(String uri, String localName, String qName, Attributes attributes) {
+                if(qName.equals("Player")){
+                    numberOfPlayer[0]++;
+                }
+            }
+        });
+        for(int i=0; i<numberOfPlayer[0]; i++){
+            players.add(i, Player.makePlayerFromXML(board, path, i));
+        }
         final boolean[] ccl = {false, false, false, false};
-        //int[] diceValue = {0, 0};
         saxParser.parse(path, new DefaultHandler(){
 
             @Override
@@ -148,11 +156,6 @@ public class MonopolyGame {
                 else if (ccl[2]){
                     doubleCounter = Integer.parseInt(string);
                 }
-                /*else if (ccl[3]){
-                    String[] values = string.split(",");
-                    diceValue[0] = Integer.parseInt(values[0]);
-                    diceValue[1] = Integer.parseInt(values[1]);
-                }*/
             }
         });
         for(Square s:board.getSquares()){
@@ -317,8 +320,8 @@ public class MonopolyGame {
                 if (MonopolyBoard.jail.getMap().get(playerInTurn) == 2) {
                     playerInTurn.decreaseCash(MonopolyBoard.jail.getJailFee());
                     MonopolyBoard.jail.goOutJail(playerInTurn);
-                    updateViews(playerInTurn, "NoDoubles");
                 }
+                updateViews(playerInTurn, "NoDoubles");
             }
         } else {  // if player not in jail
             if (dice.hasDoubles()) {

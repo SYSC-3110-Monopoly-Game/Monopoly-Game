@@ -237,7 +237,7 @@ public class SquareGridGUI extends JPanel {
                 }
             } else if (decision.equals("Hotel")) {
                 // when building a hotel, the property will build the 4 houses automatically
-                for (int i = 1; i < maxHouseNumber; i++) {
+                for (int i = 1; i < maxHouseNumber + 1; i++) {
                     if (((PropertySquareGUI) this.getPropertySquareGUI(index)).isBuilding(i)) {
                         ((PropertySquareGUI) this.getPropertySquareGUI(index)).setBuildingX(Color.GREEN, i);
                     }
