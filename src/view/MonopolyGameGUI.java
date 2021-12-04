@@ -239,8 +239,9 @@ public class MonopolyGameGUI extends JFrame {
     public void getSellDecision(ArrayList<PropertySquare> p, Player player) {
         JFrame popup = new JFrame("Select a property to sell");
 
-        popup.setBounds(500, 400, 740, 120);
-        popup.setLayout(new GridLayout());
+        int temp = p.size()/6 + (p.size()%6 > 0 ? 1:0);
+        popup.setBounds(500, 400, 740, 120 * temp);
+        popup.setLayout(new GridLayout(temp, 6));
         JButton btn;
         for (PropertySquare property : p) {
             btn = new JButton("<html>"+property.getName()+"<br>Sell Price: "+property.getPrice()/2+"</html>");
@@ -284,8 +285,9 @@ public class MonopolyGameGUI extends JFrame {
      */
     public void getDecision(ArrayList<PropertySquare> p, MonopolyGame game) {
         JFrame popup = new JFrame("Select a property");
-        popup.setBounds(500, 400, 640, 120);
-        GridLayout grid = new GridLayout(0, 4);
+        int temp = p.size()/6 + (p.size()%6 > 0 ? 1:0);
+        popup.setBounds(500, 400, 640, 120 * temp);
+        GridLayout grid = new GridLayout(temp, 6);
         popup.setLayout(grid);
         JButton btn;
         for (PropertySquare property : p) {

@@ -9,16 +9,8 @@
     <list default="true" id="b3cb6e01-e85c-476d-a8c3-3d7553fdc473" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SavedGame.xml" beforeDir="false" afterPath="$PROJECT_DIR$/SavedGame.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/MonopolyBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/MonopolyBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/MonopolyGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/MonopolyGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/PropertySquare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/PropertySquare.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/RailRoadSquare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/RailRoadSquare.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/UtilitySquare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/UtilitySquare.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/InfoDisplayGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/InfoDisplayGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/MonopolyGameGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MonopolyGameGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/PropertySquareGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/PropertySquareGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/SquareGridGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/SquareGridGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

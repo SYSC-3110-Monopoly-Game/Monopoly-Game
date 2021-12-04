@@ -490,7 +490,7 @@ public class Player {
             p.removeIf(property -> this.getCash() < property.getHousePrice());
         }
         if(!p.isEmpty()){
-            p.removeIf(PropertySquare::hasHouses);
+            p.removeIf(PropertySquare::hasHotel);
         }
         return p;
     }
