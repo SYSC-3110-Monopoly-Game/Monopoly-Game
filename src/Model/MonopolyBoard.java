@@ -3,6 +3,7 @@ package Model;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -18,24 +19,16 @@ public class MonopolyBoard {
 
 
     private static final int SIZE = 34;
-    private final Square[] squares;
     public static JailSquare jail;
-
-    Color[] set = {Color.CYAN, Color.PINK, Color.ORANGE, Color.RED, Color.YELLOW, Color.GREEN, Color.GRAY, Color.BLUE, Color.BLACK, Color.WHITE};
     public static ArrayList<Color> colors = new ArrayList<>();
-
-
-    /*public MonopolyBoard() {
-        squares = new Square[SIZE];
-        makeSquares();
-        colors.addAll(Arrays.asList(set));
-    }*/
+    private final Square[] squares;
+    Color[] set = {Color.CYAN, Color.PINK, Color.ORANGE, Color.RED, Color.YELLOW, Color.GREEN, Color.GRAY, Color.BLUE, Color.BLACK, Color.WHITE};
 
     public MonopolyBoard(String path) throws ParserConfigurationException, IOException, SAXException {
         squares = new Square[SIZE];
         makeSquaresFromXML(path);
-        jail = (JailSquare) getSquareAt(8);
-        GoToJailSquare goToJail = (GoToJailSquare) getSquareAt(26);
+        jail = (JailSquare) getSquareAt(Constants.JAIL_SQUARE_INDEX);
+        GoToJailSquare goToJail = (GoToJailSquare) getSquareAt(Constants.GO_TO_JAIL_SQUARE_INDEX);
         goToJail.setJail(jail);
         colors.addAll(Arrays.asList(set));
     }
@@ -66,13 +59,14 @@ public class MonopolyBoard {
 
     /**
      * export the game board to path
+     *
      * @param fileName: file name of the xml file
      */
     public void exportToXML(String fileName) {
         try {
             FileWriter writer = new FileWriter(fileName, true);
             writer.write("<Board>");
-            for(Square s: squares){
+            for (Square s : squares) {
                 writer.write(s.toXML());
             }
             writer.write("</Board>");
@@ -84,10 +78,11 @@ public class MonopolyBoard {
 
     /**
      * create a map from the given variables
-     * @param type: type of the square
+     *
+     * @param type:      type of the square
      * @param variables: variables contains squares' information
      */
-    private void loadToSquare(String type, HashMap variables){
+    private void loadToSquare(String type, HashMap variables) {
         Square s;
         String name, owner;
         Color c = Color.LIGHT_GRAY;
@@ -100,14 +95,14 @@ public class MonopolyBoard {
         housePrice = (int) variables.get("HousePrice");
         houseAmount = (int) variables.get("HouseAmount");
         hotelAmount = (int) variables.get("HotelAmount");
-        if(variables.get("Color") != Color.LIGHT_GRAY){
+        if (variables.get("Color") != Color.LIGHT_GRAY) {
             c = (Color) variables.get("Color");
         }
         String temp = (String) variables.get("JailMap");
         String[] map = temp.split(",");
         HashMap<String, Integer> hashMap = new HashMap<>();
-        if(temp.length()!= 0){
-            for(String string: map){
+        if (temp.length() != 0) {
+            for (String string : map) {
                 String[] sp = string.split("=");
                 hashMap.put(sp[0], Integer.parseInt(sp[1]));
             }
@@ -128,20 +123,18 @@ public class MonopolyBoard {
 
     /**
      * load the file from path
+     *
      * @param path: file name of the xml file
-     * @throws ParserConfigurationException
-     * @throws SAXException
-     * @throws IOException
      */
     private void makeSquaresFromXML(String path) throws ParserConfigurationException, SAXException, IOException {
         SAXParserFactory factory = SAXParserFactory.newInstance();
         SAXParser saxParser = factory.newSAXParser();
 
-        HashMap<String, Object> square = new HashMap<>(Map.of("Name",  "","Owner", "","Number", 0,
-                "Price", 0, "RentPrice", 0,"HousePrice", 0, "HouseAmount", 0,
-                "HotelAmount", 0,"Color", Color.LIGHT_GRAY, "JailMap", ""));
+        HashMap<String, Object> square = new HashMap<>(Map.of("Name", "", "Owner", "", "Number", 0,
+                "Price", 0, "RentPrice", 0, "HousePrice", 0, "HouseAmount", 0,
+                "HotelAmount", 0, "Color", Color.LIGHT_GRAY, "JailMap", ""));
 
-        boolean[] load = {false,false,false,false,false,false,false,false,false,false};
+        boolean[] load = {false, false, false, false, false, false, false, false, false, false};
         final String[] variables = {"Name", "Owner", "Number", "Price", "RentPrice", "HousePrice", "HouseAmount",
                 "HotelAmount", "Color", "JailMap"};
 
@@ -149,15 +142,15 @@ public class MonopolyBoard {
                 "Property", 0, "RailRoad", 0, "Utility", 0, "Jail", 0
                 , "Tax", 0, "Go", 0, "GoToJail", 0, "FreeParking", 0));
 
-        saxParser.parse(path, new DefaultHandler(){
+        saxParser.parse(path, new DefaultHandler() {
 
             @Override
-            public void startElement(String uri, String localName, String qName, Attributes attributes){
-                if(qName.equals("Square")){
+            public void startElement(String uri, String localName, String qName, Attributes attributes) {
+                if (qName.equals("Square")) {
                     squareType.put(attributes.getValue("type"), 1);
                 } else {
-                    for(int i=0; i< variables.length; i++){
-                        if(qName.equals(variables[i])){
+                    for (int i = 0; i < variables.length; i++) {
+                        if (qName.equals(variables[i])) {
                             load[i] = true;
                         }
                     }
@@ -165,10 +158,10 @@ public class MonopolyBoard {
             }
 
             @Override
-            public void endElement(String uri, String localName, String qName){
-                if(qName.equals("Square")){
-                    for(String name: squareType.keySet()){
-                        if(squareType.get(name) == 1){
+            public void endElement(String uri, String localName, String qName) {
+                if (qName.equals("Square")) {
+                    for (String name : squareType.keySet()) {
+                        if (squareType.get(name) == 1) {
                             loadToSquare(name, square);
                             squareType.put(name, 0);
                             square.put(variables[0], "");
@@ -177,8 +170,8 @@ public class MonopolyBoard {
                         }
                     }
                 } else {
-                    for(int i=0; i< variables.length; i++){
-                        if(qName.equals(variables[i])){
+                    for (int i = 0; i < variables.length; i++) {
+                        if (qName.equals(variables[i])) {
                             load[i] = false;
                         }
                     }
@@ -186,19 +179,17 @@ public class MonopolyBoard {
             }
 
             @Override
-            public void characters(char[] ch, int start, int length){
+            public void characters(char[] ch, int start, int length) {
                 String temp = new String(ch, start, length);
 
-                for(int i=0; i< load.length; i++){
-                    if(load[i]){
-                        if(i<2 || i == 9){
-                            square.put(variables[i], square.get(variables[i])+temp);
-                        }
-                        else if(i<8){
+                for (int i = 0; i < load.length; i++) {
+                    if (load[i]) {
+                        if (i < 2 || i == 9) {
+                            square.put(variables[i], square.get(variables[i]) + temp);
+                        } else if (i < 8) {
                             int num = Integer.parseInt(temp);
                             square.put(variables[i], num);
-                        }
-                        else {
+                        } else {
                             Color c = new Color(Integer.parseInt(temp));
                             square.put(variables[i], c);
                         }

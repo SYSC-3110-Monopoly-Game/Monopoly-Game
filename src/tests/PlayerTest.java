@@ -8,12 +8,12 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
+import view.Enums;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 class PlayerTest {
@@ -91,8 +91,8 @@ class PlayerTest {
 
     @Test
     void setANDgetDecision() {
-        player.setDecision("test");
-        Assertions.assertEquals("test", player.getDecision());
+        player.setDecision(Enums.SELL);
+        Assertions.assertEquals(Enums.SELL, player.getDecision());
     }
 
     @Test
@@ -186,7 +186,7 @@ class PlayerTest {
         PropertySquare p1 = new PropertySquare("test", 0, 50, 50, Color.BLACK);
         player.buyProperty(p1);
         player.setSelectedSquare(p1);
-        Assertions.assertEquals(player.buildH("House"), 50);
+        Assertions.assertEquals(player.buildH(Enums.HOUSE), 50);
         Assertions.assertEquals(new ArrayList<PropertySquare>(List.of(p1)), player.hasBuilding());
     }
 
@@ -195,8 +195,8 @@ class PlayerTest {
         PropertySquare p1 = new PropertySquare("test", 0, 50, 50, Color.BLACK);
         player.buyProperty(p1);
         player.setSelectedSquare(p1);
-        player.buildH("House");
-        Assertions.assertEquals(25, player.sellH("House"));
+        player.buildH(Enums.HOUSE);
+        Assertions.assertEquals(25, player.sellH(Enums.HOUSE));
         Assertions.assertEquals(new ArrayList<PropertySquare>(), player.hasBuilding());
     }
 

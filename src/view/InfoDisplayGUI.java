@@ -1,6 +1,7 @@
 package view;
 
 import Controller.MonopolyGameController;
+import Model.Constants;
 import Model.Player;
 import Model.PropertySquare;
 
@@ -83,12 +84,12 @@ public class InfoDisplayGUI extends JPanel {
         JPanel buttons = new JPanel(new GridLayout(3, 2));
         buttons.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 
-        buy = new JButton("Buy");
-        sell = new JButton("Sell");
-        rollDice = new JButton("Roll Dice");
-        nextTurn = new JButton("Next Turn");
-        build = new JButton("Build On Property");
-        sellH = new JButton("Sell Houses/Hotels");
+        buy = new JButton(Enums.BUY.toString());
+        sell = new JButton(Enums.SELL.toString());
+        rollDice = new JButton(Enums.ROLL_DICE.toString());
+        nextTurn = new JButton(Enums.NEXT_TURN.toString());
+        build = new JButton(Enums.BUILD_ON_PROPERTY.toString());
+        sellH = new JButton(Enums.SELL_HOUSES_HOTELS.toString());
 
 
         buy.setBorder(BorderFactory.createLineBorder(Color.black, 1));
@@ -141,8 +142,6 @@ public class InfoDisplayGUI extends JPanel {
      */
     public void setPlayersInfo(ArrayList<Player> players, Player player){
         setOtherPlayersInfo(players);
-        int placeSold = -2;
-        int placeNonSale = -1;
         if(player.getDiceRolled()){
             this.setRollEnabled(false);
             this.setNextEnabled(true);
@@ -161,16 +160,16 @@ public class InfoDisplayGUI extends JPanel {
                 this.setBuyEnabled(player.getCash() >= location.getPrice());
                 this.setBuyPrice(location.getPrice());
             } else {
-                this.setBuyPrice(placeSold);
+                this.setBuyPrice(Constants.PROPERTY_SOLD);
             }
             this.setHousePrice(location.getHousePrice());
             this.setHotelPrice(location.getHotelPrice());
             this.setRentPrice(location.getRentFee());
         } else {
-            this.setBuyPrice(placeNonSale);
-            this.setHousePrice(placeNonSale);
-            this.setHotelPrice(placeNonSale);
-            this.setRentPrice(placeNonSale);
+            this.setBuyPrice(Constants.PROPERTY_NON_SALE);
+            this.setHousePrice(Constants.PROPERTY_NON_SALE);
+            this.setHotelPrice(Constants.PROPERTY_NON_SALE);
+            this.setRentPrice(Constants.PROPERTY_NON_SALE);
             this.setBuyEnabled(false);
         }
         this.setBuildEnabled(!player.getAvailableProperties(player.removeRailroadUtility(player.hasWholeSet())).isEmpty());
@@ -228,8 +227,8 @@ public class InfoDisplayGUI extends JPanel {
      * show the price of current location which the player who is currently playing lands on
      */
     public void setBuyPrice(int buyPrice) {
-        if (buyPrice == -1) this.buyPrice.setText("Buy Price: Non-sale");
-        else if (buyPrice == -2) this.buyPrice.setText("Buy Price: SOLD");
+        if (buyPrice == Constants.PROPERTY_NON_SALE) this.buyPrice.setText("Buy Price: Non-sale");
+        else if (buyPrice == Constants.PROPERTY_SOLD) this.buyPrice.setText("Buy Price: SOLD");
         else this.buyPrice.setText("Buy Price: " + buyPrice);
         this.buyPrice.repaint();
     }
@@ -238,7 +237,7 @@ public class InfoDisplayGUI extends JPanel {
      * show the rent fee of current location which the player who is currently playing lands on
      */
     public void setRentPrice(int rentPrice) {
-        if (rentPrice == -1) this.rentPrice.setText("Rent Price: Non-rental");
+        if (rentPrice == Constants.PROPERTY_NON_SALE) this.rentPrice.setText("Rent Price: Non-rental");
         else this.rentPrice.setText("Rent Price: " + rentPrice);
         this.rentPrice.repaint();
     }
@@ -247,8 +246,8 @@ public class InfoDisplayGUI extends JPanel {
      * show the price to build a house on current location which the player who is currently playing lands on
      */
     public void setHousePrice(int housePrice) {
-        if (housePrice == -1) this.housePrice.setText("House Price: Cannot build");
-        else if (housePrice == -2) this.housePrice.setText("House Price: SOLD");
+        if (housePrice == Constants.PROPERTY_NON_SALE) this.housePrice.setText("House Price: Cannot build");
+        else if (housePrice == Constants.PROPERTY_SOLD) this.housePrice.setText("House Price: SOLD");
         else this.housePrice.setText("House Price: " + housePrice);
         this.housePrice.repaint();
     }
@@ -257,8 +256,8 @@ public class InfoDisplayGUI extends JPanel {
      * show the price to build a hotel on current location which the player who is currently playing lands on
      */
     public void setHotelPrice(int hotelPrice) {
-        if (hotelPrice == -1) this.hotelPrice.setText("Hotel Price: Cannot build");
-        else if (hotelPrice == -2) this.hotelPrice.setText("Hotel Price: SOLD");
+        if (hotelPrice == Constants.PROPERTY_NON_SALE) this.hotelPrice.setText("Hotel Price: Cannot build");
+        else if (hotelPrice == Constants.PROPERTY_SOLD) this.hotelPrice.setText("Hotel Price: SOLD");
         else this.hotelPrice.setText("Hotel Price: " + hotelPrice);
         this.hotelPrice.repaint();
     }

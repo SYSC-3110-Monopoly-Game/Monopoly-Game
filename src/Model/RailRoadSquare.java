@@ -16,18 +16,19 @@ public class RailRoadSquare extends PropertySquare {
         StringBuffer string = new StringBuffer();
         string.append("<Square type=\"RailRoad\">\n");
         StringBuffer tempName = new StringBuffer(this.getName());
-        for(int i=0; i<tempName.length(); i++){
-            if(tempName.charAt(i) == '&'){
-                tempName.replace(i, i+1, "&amp;");
+        for (int i = 0; i < tempName.length(); i++) {
+            if (tempName.charAt(i) == '&') {
+                tempName.replace(i, i + 1, "&amp;");
             }
         }
-        string.append("<Name>"+tempName+"</Name>\n");
-        string.append("<Number>"+this.getNumber()+"</Number>\n");
-        string.append("<Price>"+this.getPrice()+"</Price>\n");
-        string.append("<RentPrice>"+this.rent+"</RentPrice>\n");
+        string.append("<Name>" + tempName.toString() + "</Name>\n");
+        string.append("<Number>" + this.getNumber() + "</Number>\n");
+        string.append("<Price>" + this.getPrice() + "</Price>\n");
+        string.append("<RentPrice>" + this.rent + "</RentPrice>\n");
         String colorS = Integer.toString(this.getColor().getRGB());
-        string.append("<Color>"+colorS+"</Color>\n");
-        if(this.getOwner() != null) {
+        string.append("<Color>" + colorS + "</Color>\n");
+        // call back: Color c = new Color(Integer.parseInt(colorS));
+        if (this.getOwner() != null) {
             string.append("<Owner>" + this.getOwner().getName() + "</Owner>\n");
         } else {
             string.append("<Owner></Owner>\n");

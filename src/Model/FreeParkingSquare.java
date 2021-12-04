@@ -7,7 +7,8 @@ public class FreeParkingSquare extends Square {
         message = " is on Free Parking\n";
     }
 
-    /** Player gets a free parking
+    /**
+     * Player gets a free parking
      *
      * @param p
      */
@@ -21,8 +22,8 @@ public class FreeParkingSquare extends Square {
     public String toXML() {
         StringBuffer string = new StringBuffer();
         string.append("<Square type=\"FreeParking\">\n");
-        string.append("<Name>"+this.getName()+"</Name>\n");
-        string.append("<Number>"+this.getNumber()+"</Number>\n");
+        string.append("<Name>" + this.getName() + "</Name>\n");
+        string.append("<Number>" + this.getNumber() + "</Number>\n");
         string.append("</Square>\n");
 
         return string.toString();

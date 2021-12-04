@@ -3,6 +3,7 @@ package tests;
 import Model.AIPlayer;
 import Model.MonopolyGame;
 import Model.PropertySquare;
+import Model.Square;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,8 +23,9 @@ class AIPlayerTest {
     @BeforeEach
     void setUp() throws ParserConfigurationException, IOException, SAXException {
         MonopolyGame game = new MonopolyGame("NewGame.xml");
-        ai = new AIPlayer("1", MonopolyGame.board.startingSquare());
-    }
+        ai = new AIPlayer("1", 500, false, false, null, MonopolyGame.board.startingSquare(), MonopolyGame.board.startingSquare(), null, null);
+
+        }
 
     @AfterEach
     void tearDown() {

@@ -1,6 +1,8 @@
 package tests;
 
+import Model.AIPlayer;
 import Model.JailSquare;
+import Model.MonopolyGame;
 import Model.Player;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -10,7 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class JailSquareTest {
 
     private final JailSquare s= new JailSquare("go", 0, 100);
-    private final Player p= new Player("player", s);
+    private final Player p  = new Player("player1", 500, false, false, null, s, s, null, null);
+
 
 
     @Test

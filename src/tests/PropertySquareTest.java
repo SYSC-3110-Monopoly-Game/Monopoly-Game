@@ -1,5 +1,6 @@
 package tests;
 
+import Model.AIPlayer;
 import Model.MonopolyGame;
 import Model.Player;
 import Model.PropertySquare;
@@ -19,11 +20,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class PropertySquareTest {
 
     private PropertySquare property;
+    private  Player p1;
+    private  Player p2;
+
     private final int playerinitialcash = 350;
 
     @BeforeEach
     void setUp() {
         property = new PropertySquare("p", 0, 50, 50, Color.BLACK);
+        p1= new Player("player1", 500, false, false, null, property, property,null, property);
+        p2= new Player("player2", 500, false, false, null, property, property,null, property);
+
     }
 
     @AfterEach
@@ -43,14 +50,12 @@ class PropertySquareTest {
 
     @Test
     void buildHouse() {
-        Player p1 = new Player("p1", property);
         property.setOwner(p1);
         Assertions.assertEquals(50, property.buildHouse());
     }
 
     @Test
     void buildHotel() {
-        Player p1 = new Player("p1", property);
         property.setOwner(p1);
         property.buildHouse();
         Assertions.assertEquals(200, property.buildHotel());
@@ -58,7 +63,6 @@ class PropertySquareTest {
 
     @Test
     void hasHouses() {
-        Player p1 = new Player("p1", property);
         property.setOwner(p1);
         property.buildHotel();
         assertTrue(property.hasHouses());
@@ -66,7 +70,6 @@ class PropertySquareTest {
 
     @Test
     void hasHotel() {
-        Player p1 = new Player("p1", property);
         property.setOwner(p1);
         property.buildHotel();
         assertTrue(property.hasHotel());
@@ -109,16 +112,13 @@ class PropertySquareTest {
 
     @Test
     void setOwner() {
-        Player p = new Player("p", property);
-        property.setOwner(p);
-        Assertions.assertEquals(p, property.getOwner());
+        property.setOwner(p2);
+        Assertions.assertEquals(p2, property.getOwner());
     }
 
     @Test
     void landOn() throws ParserConfigurationException, IOException, SAXException {
         new MonopolyGame("NewGame.xml");
-        Player p1 = new Player("p1", property);
-        Player p2 = new Player("p2", property);
         property.setOwner(p1);
         property.landOn(p2);
         Assertions.assertEquals(playerinitialcash+50, p1.getCash());

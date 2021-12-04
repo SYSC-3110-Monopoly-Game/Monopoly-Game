@@ -9,39 +9,11 @@ public class PropertySquare extends Square {
     private final int buyPrice; //price for the player buy this land
     private final int rentPrice; //the price that other players need to pay to the owner.
     private final Color color;
+    private final int HousePrice;
+    private final ArrayList<House> houses;
     private Player owner = null;
     private String ownerName;
-    private final int HousePrice;
-
-
-    private static class House {
-        private final int price;
-
-        public House(int price){
-            this.price = price;
-        }
-
-        public int getPrice(){
-            return this.price;
-        }
-    }
-
-    private static class Hotel {
-        private final int price;
-
-        public Hotel(int price){
-            this.price = price;
-        }
-
-        public int getPrice() {
-            return this.price;
-        }
-
-    }
-
-
     private Hotel hotel;
-    private final ArrayList<House> houses;
 
 
     public PropertySquare(String name, int number, int buy, int rent, Color color) {
@@ -49,11 +21,10 @@ public class PropertySquare extends Square {
         this.buyPrice = buy;
         this.rentPrice = rent;
         this.color = color;
-        houses = new ArrayList<>();
-        hotel = null;
-        HousePrice = 50;
+        this.houses = new ArrayList<>();
+        this.hotel = null;
+        this.HousePrice = 0;
     }
-
     public PropertySquare(String name, int number, int buy, int rent, Color color, int housePrice, int houseAmount, int hotel, String owner) {
         super(name, number);
         this.buyPrice = buy;
@@ -61,18 +32,18 @@ public class PropertySquare extends Square {
         this.color = color;
         this.HousePrice = housePrice;
         houses = new ArrayList<>();
-        for(int i=0; i<houseAmount; i++){
+        for (int i = 0; i < houseAmount; i++) {
             this.houses.add(new House(HousePrice));
         }
-        if(hotel == 1){
+        if (hotel == 1) {
             this.hotel = new Hotel(HousePrice);
         }
         this.ownerName = owner;
     }
 
     public int buildHouse() {
-        if(this.houses.size() < 4) {
-            House h= new House(HousePrice);
+        if (this.houses.size() < Constants.MAX_HOUSE_NUMBER) {
+            House h = new House(HousePrice);
             this.houses.add(h);
             this.owner.decreaseCash(h.getPrice());
             System.out.println("A house has been built on " + this.getName());
@@ -90,7 +61,6 @@ public class PropertySquare extends Square {
         return !this.houses.isEmpty();
     }
 
-
     public int getHouseNumber() {
         return this.houses.size();
     }
@@ -106,9 +76,9 @@ public class PropertySquare extends Square {
      * sell a house from this property square
      */
     public int sellHouse() {
-        if(hasHouses()) {
+        if (hasHouses()) {
             House h = this.houses.remove(0);
-            int result = h.getPrice()/2;
+            int result = h.getPrice() / 2;
             this.owner.increaseCash(result);
             System.out.println("A house has been sold from " + this.getName());
             return result;
@@ -120,11 +90,11 @@ public class PropertySquare extends Square {
      * build a hotel on this property square
      */
     public int buildHotel() {
-        if(this.hotel == null){
+        if (this.hotel == null) {
             this.hotel = new Hotel(HousePrice);
             int size = houses.size();
             int price = getHotelPrice();
-            for(int i=0; i<(4 - size); i++){
+            for (int i = 0; i < (Constants.MAX_HOUSE_NUMBER - size); i++) {
                 this.houses.add(new House(HousePrice));
             }
             this.owner.decreaseCash(price);
@@ -138,8 +108,8 @@ public class PropertySquare extends Square {
      * return the price of building a hotel on this property square
      */
     public int getHotelPrice() {
-        return HousePrice*(5 - houses.size());
-    }
+        return HousePrice * (5 - houses.size());
+    } // 5 is the number of properties that can be built ( including hotels and houses)
 
     /**
      * check if the square has a hotel
@@ -147,15 +117,15 @@ public class PropertySquare extends Square {
      * @return boolean
      */
     public boolean hasHotel() {
-        return !(this.hotel ==null);
+        return !(this.hotel == null);
     }
 
     /**
      * sell a hotel from the square
      */
     public int sellHotel() {
-        if(hasHotel()){
-            int result = this.hotel.getPrice()/2;
+        if (hasHotel()) {
+            int result = this.hotel.getPrice() / 2;
             this.owner.increaseCash(result);
             this.hotel = null;
             System.out.println("A hotel has been sold from " + this.getName());
@@ -165,12 +135,11 @@ public class PropertySquare extends Square {
     }
 
     public void sellAll() {
-        for(int i=0; i<4; i++){
+        for (int i = 0; i < Constants.MAX_HOUSE_NUMBER; i++) {
             sellHouse();
         }
         sellHotel();
     }
-
 
     /**
      * gets the color of the square
@@ -207,28 +176,19 @@ public class PropertySquare extends Square {
         this.owner = owner;
     }
 
-
-
-    public String getOwnerName(){
-        if(this.owner == null){
-            return this.ownerName;
-        }
-        return this.owner.getName();
-    }
-
     /**
      * calculate the rent fee of the square
      * according to the number of squares with the same color and the buildings on the square
      */
     private int calculateRentFee() {
-        if(this.owner == null){
+        if (this.owner == null) {
             return this.rentPrice;
         }
-        if(this.owner.hasWholeSet().contains(this)){
-            if(this instanceof RailRoadSquare){
+        if (this.owner.hasWholeSet().contains(this)) {
+            if (this instanceof RailRoadSquare) {
                 return this.rentPrice * this.owner.countNumber(Color.BLACK);
             }
-            if(this instanceof UtilitySquare){
+            if (this instanceof UtilitySquare) {
                 return this.rentPrice * this.owner.countNumber(Color.WHITE);
             }
             return (this.rentPrice + (this.rentPrice / 2) * (houses.size() + ((hasHotel()) ? 1 : 0))) * 2;
@@ -268,18 +228,18 @@ public class PropertySquare extends Square {
     public String toXML() {
         StringBuilder string = new StringBuilder();
         string.append("<Square type=\"Property\">\n");
-        string.append("<Name>"+this.getName()+"</Name>\n");
-        string.append("<Number>"+this.getNumber()+"</Number>\n");
-        string.append("<Price>"+this.getPrice()+"</Price>\n");
-        string.append("<RentPrice>"+this.rentPrice+"</RentPrice>\n");
+        string.append("<Name>" + this.getName() + "</Name>\n");
+        string.append("<Number>" + this.getNumber() + "</Number>\n");
+        string.append("<Price>" + this.getPrice() + "</Price>\n");
+        string.append("<RentPrice>" + this.rentPrice + "</RentPrice>\n");
         String colorS = Integer.toString(this.getColor().getRGB());
-        string.append("<Color>"+colorS+"</Color>\n");
+        string.append("<Color>" + colorS + "</Color>\n");
         // call back: Color c = new Color(Integer.parseInt(colorS));
-        string.append("<HousePrice>"+this.getHousePrice()+"</HousePrice>\n");
-        string.append("<HouseAmount>"+this.houses.size()+"</HouseAmount>\n");
-        int hotelAmount = hasHotel() ? 1:0;
-        string.append("<HotelAmount>"+hotelAmount+"</HotelAmount>\n");
-        if(this.getOwner() != null) {
+        string.append("<HousePrice>" + this.getHousePrice() + "</HousePrice>\n");
+        string.append("<HouseAmount>" + this.houses.size() + "</HouseAmount>\n");
+        int hotelAmount = hasHotel() ? 1 : 0;
+        string.append("<HotelAmount>" + hotelAmount + "</HotelAmount>\n");
+        if (this.getOwner() != null) {
             string.append("<Owner>" + this.getOwner().getName() + "</Owner>\n");
         } else {
             string.append("<Owner></Owner>\n");
@@ -290,10 +250,35 @@ public class PropertySquare extends Square {
     }
 
     public void setOwnerAccordingToOwnerName(ArrayList<Player> players) {
-        for(Player p: players){
-            if(p.getName().equals(this.ownerName)){
+        for (Player p : players) {
+            if (p.getName().equals(this.ownerName)) {
                 this.owner = p;
             }
         }
+    }
+
+    private static class House {
+        private final int price;
+
+        public House(int price) {
+            this.price = price;
+        }
+
+        public int getPrice() {
+            return this.price;
+        }
+    }
+
+    private static class Hotel {
+        private final int price;
+
+        public Hotel(int price) {
+            this.price = price;
+        }
+
+        public int getPrice() {
+            return this.price;
+        }
+
     }
 }
