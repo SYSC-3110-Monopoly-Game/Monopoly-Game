@@ -258,10 +258,31 @@ public class MonopolyGame {
         System.out.println("NEXT ROUND : " + playerInTurn.getName());
         System.out.println("+----------+");
 
+        //check and handle player hail status
         boolean inJail = playerInTurn.isInJail();
         int distance = getDistance();
+        handlePlayerJailStatus(inJail,distance);
 
+        //check and handle player bankrupt status
+        if (playerInTurn.isBankrupt()) {
+            if (!(playerInTurn instanceof AIPlayer)) {
+                updateViews(playerInTurn, Enums.BANKRUPT);
+            }
+        }
 
+        //check and handle game winner( if there is any)
+        if (getWinner() != null) {
+            updateViews(getWinner(), Enums.WINNER);
+        }
+
+        if (doubleCounter == 3 || doubleCounter == 0 && playerInTurn instanceof AIPlayer) {
+            playerInTurn.setDiceRolled(true);
+        } else if (!(playerInTurn instanceof AIPlayer)) {
+            playerInTurn.setDiceRolled(true);
+        }
+    }
+
+    public void handlePlayerJailStatus(Boolean inJail, int distanceToMove){
         //if player is in jail, only let player out if they rolled a double
         if (inJail) {
             if (dice.hasDoubles()) {
@@ -283,25 +304,9 @@ public class MonopolyGame {
                 doubleCounter++;
                 updateViews(playerInTurn, Enums.DOUBLES);
             } else {
-                movePlayer(playerInTurn, distance);
+                movePlayer(playerInTurn, distanceToMove);
                 updateViews(playerInTurn, Enums.ROLL_DICE);
             }
-        }
-
-        if (playerInTurn.isBankrupt()) {
-            if (!(playerInTurn instanceof AIPlayer)) {
-                updateViews(playerInTurn, Enums.BANKRUPT);
-            }
-        }
-
-        if (getWinner() != null) {
-            updateViews(getWinner(), Enums.WINNER);
-        }
-
-        if (doubleCounter == 3 || doubleCounter == 0 && playerInTurn instanceof AIPlayer) {
-            playerInTurn.setDiceRolled(true);
-        } else if (!(playerInTurn instanceof AIPlayer)) {
-            playerInTurn.setDiceRolled(true);
         }
     }
 
