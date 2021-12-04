@@ -37,7 +37,7 @@ public class InfoDisplayGUI extends JPanel {
 
 
         //current player name, cash, property list
-        JPanel playerInfo = new JPanel(new GridLayout(3, 2));
+        JPanel playerInfo = new JPanel(new GridLayout(3, 1));
         playerInfo.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 
         name = new JLabel();
@@ -48,6 +48,7 @@ public class InfoDisplayGUI extends JPanel {
         cash.setText("Cash: " + playerInTurn.getCash());
         String properties = playerInTurn.getProperties().toString();
         propertyList.setText("Property List: " + properties);
+
 
         playerInfo.add(name);
         playerInfo.add(cash);
