@@ -8,9 +8,13 @@
   <component name="ChangeListManager">
     <list default="true" id="b3cb6e01-e85c-476d-a8c3-3d7553fdc473" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SavedGame.xml" beforeDir="false" afterPath="$PROJECT_DIR$/SavedGame.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/SquareGridGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/SquareGridGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/MonopolyGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/MonopolyGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/FreeParkingSquareTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/FreeParkingSquareTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/GoSquareTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/GoSquareTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/GoToJailSquareTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/GoToJailSquareTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/JailSquareTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/JailSquareTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/PropertySquareTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/PropertySquareTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/taxSquareTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/taxSquareTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,14 +26,17 @@
       <list>
         <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="21knQuozcF2U1u8sa1nfZR41q4u" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="21mm0y6PetCMLnXYskjvqPKV5Rt" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -42,12 +49,14 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Model.Main" />
       <module name="Monopoly-Game" />
       <extension name="coverage">
@@ -75,7 +84,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MonopolyBoardTest.exportToXML" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GoToJailSquareTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Monopoly-Game" />
       <extension name="coverage">
         <pattern>
@@ -84,14 +93,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.MonopolyBoardTest" />
-      <option name="METHOD_NAME" value="exportToXML" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="tests.GoToJailSquareTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MonopolyGameTest.exportXML" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PropertySquareTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Monopoly-Game" />
       <extension name="coverage">
         <pattern>
@@ -100,14 +108,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.MonopolyGameTest" />
-      <option name="METHOD_NAME" value="exportXML" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="tests.PropertySquareTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MonopolyGameTest.loadXML" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="taxSquareTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Monopoly-Game" />
       <extension name="coverage">
         <pattern>
@@ -116,9 +123,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.MonopolyGameTest" />
-      <option name="METHOD_NAME" value="loadXML" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="tests.taxSquareTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -126,16 +132,17 @@
     <list>
       <item itemvalue="Application.Main" />
       <item itemvalue="JUnit.AIPlayerTest" />
-      <item itemvalue="JUnit.MonopolyBoardTest.exportToXML" />
-      <item itemvalue="JUnit.MonopolyGameTest.exportXML" />
-      <item itemvalue="JUnit.MonopolyGameTest.loadXML" />
+      <item itemvalue="JUnit.GoToJailSquareTest" />
+      <item itemvalue="JUnit.taxSquareTest" />
+      <item itemvalue="JUnit.PropertySquareTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.PropertySquareTest" />
+        <item itemvalue="JUnit.taxSquareTest" />
+        <item itemvalue="JUnit.GoToJailSquareTest" />
         <item itemvalue="JUnit.AIPlayerTest" />
-        <item itemvalue="JUnit.MonopolyGameTest.exportXML" />
-        <item itemvalue="JUnit.MonopolyGameTest.loadXML" />
-        <item itemvalue="JUnit.MonopolyBoardTest.exportToXML" />
       </list>
     </recent_temporary>
   </component>
@@ -147,8 +154,13 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1635090572449</updated>
+      <workItem from="1638554440999" duration="5189000" />
+      <workItem from="1638644955595" duration="1227000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.History.Properties">
     <option name="COLUMN_ID_ORDER">

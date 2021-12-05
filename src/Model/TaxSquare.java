@@ -9,8 +9,8 @@ public class TaxSquare extends Square {
         this.tax = tax;
     }
 
-    /** Player pays income tax when they land on this square
-     *
+    /**
+     * Player pays income tax when they land on this square
      */
     @Override
     public void landOn(Player p) {
@@ -30,9 +30,9 @@ public class TaxSquare extends Square {
     public String toXML() {
         StringBuffer string = new StringBuffer();
         string.append("<Square type=\"Tax\">\n");
-        string.append("<Name>"+this.getName()+"</Name>\n");
-        string.append("<Number>"+this.getNumber()+"</Number>\n");
-        string.append("<Price>"+this.getTax()+"</Price>\n");
+        string.append("<Name>" + this.getName() + "</Name>\n");
+        string.append("<Number>" + this.getNumber() + "</Number>\n");
+        string.append("<Price>" + this.getTax() + "</Price>\n");
         string.append("</Square>");
 
         return string.toString();

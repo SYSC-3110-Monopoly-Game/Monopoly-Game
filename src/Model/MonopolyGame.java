@@ -3,7 +3,9 @@ package Model;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+import view.Enums;
 import view.MonopolyGameGUI;
+
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -25,17 +27,9 @@ public class MonopolyGame {
 
     private int index = -1;
 
-    /*public MonopolyGame(){
-        board = new MonopolyBoard();
-        players = createPlayers();
-        playersNotInTurn = new ArrayList<>();
-        dice = new Dice();
-        views = new ArrayList<>();
-        printPlayersInfo();
-    }*/
-
     /**
      * load game from path
+     *
      * @param path: file name of the xml file
      * @throws ParserConfigurationException
      * @throws IOException
@@ -49,6 +43,7 @@ public class MonopolyGame {
 
     /**
      * export the whole game to path
+     *
      * @param path: file name of the xml file
      */
     public void exportGameToXML(String path) {
@@ -62,20 +57,20 @@ public class MonopolyGame {
             e.printStackTrace();
         }
         board.exportToXML(path);
-        for(int i=0; i<players.size(); i++){
+        for (int i = 0; i < players.size(); i++) {
             players.get(i).exportPlayers(path, i);
         }
         try {
             FileWriter writer = new FileWriter(path, true);
-            writer.write("<DoubleCounter>"+this.getDoubleCounter()+"</DoubleCounter>");
-            writer.write("<PlayerInTurn>"+this.getPlayerInTurn().getName()+"</PlayerInTurn>");
+            writer.write("<DoubleCounter>" + this.getDoubleCounter() + "</DoubleCounter>");
+            writer.write("<PlayerInTurn>" + this.getPlayerInTurn().getName() + "</PlayerInTurn>");
             writer.write("<PlayerNotInTurn>");
-            for(Player p: this.getPlayersNotInTurn()){
-                writer.write(p.getName()+",");
+            for (Player p : this.getPlayersNotInTurn()) {
+                writer.write(p.getName() + ",");
             }
             writer.write("</PlayerNotInTurn>");
             writer.write("<DiceValue>");
-            writer.write(dice.getDice()[0]+","+ dice.getDice()[1]);
+            writer.write(dice.getDice()[0] + "," + dice.getDice()[1]);
             writer.write("</DiceValue>");
             writer.write("</Game>");
             writer.close();
@@ -86,6 +81,7 @@ public class MonopolyGame {
 
     /**
      * load the game from path
+     *
      * @param path: file name of the xml file
      * @throws ParserConfigurationException
      * @throws SAXException
@@ -94,14 +90,14 @@ public class MonopolyGame {
     public void loadGame(String path) throws ParserConfigurationException, SAXException, IOException {
         board = new MonopolyBoard(path);
         players = new ArrayList<>();
-        for(int i=0; i<4; i++){
+        for (int i = 0; i < 4; i++) {
             players.add(i, Player.makePlayerFromXML(board, path, i));
         }
         SAXParserFactory factory = SAXParserFactory.newInstance();
         SAXParser saxParser = factory.newSAXParser();
         final boolean[] ccl = {false, false, false, false};
         //int[] diceValue = {0, 0};
-        saxParser.parse(path, new DefaultHandler(){
+        saxParser.parse(path, new DefaultHandler() {
 
             @Override
             public void startElement(String uri, String localName, String qName, Attributes attributes) {
@@ -126,74 +122,36 @@ public class MonopolyGame {
             @Override
             public void characters(char[] ch, int start, int length) {
                 String string = new String(ch, start, length);
-                if(ccl[0]){
-                    for(Player p: players){
-                        if(p.getName().equals(string)){
+                if (ccl[0]) {
+                    for (Player p : players) {
+                        if (p.getName().equals(string)) {
                             playerInTurn = p;
                         }
                     }
-                }
-                else if (ccl[1]){
+                } else if (ccl[1]) {
                     ArrayList<Player> playerss = new ArrayList<>();
                     String[] ps = string.split(",");
-                    for(String s: ps){
-                        for(Player p: players){
-                            if(p.getName().equals(s)){
+                    for (String s : ps) {
+                        for (Player p : players) {
+                            if (p.getName().equals(s)) {
                                 playerss.add(p);
                             }
                         }
                     }
                     playersNotInTurn = playerss;
-                }
-                else if (ccl[2]){
+                } else if (ccl[2]) {
                     doubleCounter = Integer.parseInt(string);
                 }
-                /*else if (ccl[3]){
-                    String[] values = string.split(",");
-                    diceValue[0] = Integer.parseInt(values[0]);
-                    diceValue[1] = Integer.parseInt(values[1]);
-                }*/
             }
         });
-        for(Square s:board.getSquares()){
-            if(s instanceof PropertySquare){
+        for (Square s : board.getSquares()) {
+            if (s instanceof PropertySquare) {
                 ((PropertySquare) s).setOwnerAccordingToOwnerName(players);
             }
-            if(s instanceof JailSquare){
+            if (s instanceof JailSquare) {
                 ((JailSquare) s).loadMapAccordingStringMap(players);
             }
         }
-    }
-
-
-    /**
-     * set 4 players
-     */
-    private ArrayList<Player> createPlayers() {
-        ArrayList<Player> playerTempList = new ArrayList<>();
-        System.out.println("Welcome to Monopoly Game!!");
-        System.out.println("There are 4 player in total");
-
-        // get the number of players to 4
-        int numberOfPlayer = 4;
-        int numberOfHuman = 2;
-
-        //create the human players
-        for (int i = 0; i < numberOfHuman; i++) {
-            String name = "" + (i + 1);
-            Player p = new Player(name, board.startingSquare());
-            p.setLastLocation(board.startingSquare());
-            playerTempList.add(p);   // add players to a temp arraylist
-        }
-       // create AI players
-        for (int i = numberOfHuman; i < numberOfPlayer; i++) {
-            String name = "" + (i + 1);
-            Player p = new AIPlayer(name, board.startingSquare());
-            p.setLastLocation(board.startingSquare());
-            playerTempList.add(p);   // add players to a temp arraylist
-        }
-        this.playerInTurn = playerTempList.get(0);
-        return playerTempList;
     }
 
     /**
@@ -247,7 +205,7 @@ public class MonopolyGame {
      */
     public void buySquare() throws IOException, SAXException, ParserConfigurationException {
         if (playerInTurn.buyProperty(playerInTurn.getCurrentLocation())) {
-            this.updateViews(playerInTurn, "Buy");
+            this.updateViews(playerInTurn, Enums.BUY);
         }
     }
 
@@ -256,7 +214,7 @@ public class MonopolyGame {
      */
     public void sellSquare() throws IOException, SAXException, ParserConfigurationException {
         if (!playerInTurn.getProperties().isEmpty()) {
-            this.updateViews(playerInTurn, "Sell");
+            this.updateViews(playerInTurn, Enums.SELL);
         }
     }
 
@@ -269,7 +227,7 @@ public class MonopolyGame {
             propertyList = playerInTurn.getAvailableProperties(propertyList);
             if (!propertyList.isEmpty()) {
                 views.get(0).getDecision(propertyList, this);
-                this.getPlayerInTurn().setDecision("build");
+                this.getPlayerInTurn().setDecision(Enums.BUILD);
             } else {
                 System.out.println("not enough money");
             }
@@ -285,7 +243,7 @@ public class MonopolyGame {
         ArrayList<PropertySquare> propertyList = playerInTurn.hasBuilding();
         if (!propertyList.isEmpty()) {
             views.get(0).getDecision(propertyList, this);
-            this.getPlayerInTurn().setDecision("sellH");
+            this.getPlayerInTurn().setDecision(Enums.SELLH);
         } else {
             System.out.println("No houses neither hotels");
         }
@@ -300,14 +258,35 @@ public class MonopolyGame {
         System.out.println("NEXT ROUND : " + playerInTurn.getName());
         System.out.println("+----------+");
 
+        //check and handle player hail status
         boolean inJail = playerInTurn.isInJail();
         int distance = getDistance();
+        handlePlayerJailStatus(inJail,distance);
 
+        //check and handle player bankrupt status
+        if (playerInTurn.isBankrupt()) {
+            if (!(playerInTurn instanceof AIPlayer)) {
+                updateViews(playerInTurn, Enums.BANKRUPT);
+            }
+        }
 
+        //check and handle game winner( if there is any)
+        if (getWinner() != null) {
+            updateViews(getWinner(), Enums.WINNER);
+        }
+
+        if (doubleCounter == 3 || doubleCounter == 0 && playerInTurn instanceof AIPlayer) {
+            playerInTurn.setDiceRolled(true);
+        } else if (!(playerInTurn instanceof AIPlayer)) {
+            playerInTurn.setDiceRolled(true);
+        }
+    }
+
+    public void handlePlayerJailStatus(Boolean inJail, int distanceToMove){
         //if player is in jail, only let player out if they rolled a double
         if (inJail) {
             if (dice.hasDoubles()) {
-                updateViews(playerInTurn, "Doubles");
+                updateViews(playerInTurn, Enums.DOUBLES);
                 System.out.println("You rolled a double, you can go out!");
 
             } else {
@@ -317,33 +296,17 @@ public class MonopolyGame {
                 if (MonopolyBoard.jail.getMap().get(playerInTurn) == 2) {
                     playerInTurn.decreaseCash(MonopolyBoard.jail.getJailFee());
                     MonopolyBoard.jail.goOutJail(playerInTurn);
-                    updateViews(playerInTurn, "NoDoubles");
+                    updateViews(playerInTurn, Enums.NO_DOUBLES);
                 }
             }
         } else {  // if player not in jail
             if (dice.hasDoubles()) {
                 doubleCounter++;
-                updateViews(playerInTurn, "Doubles");
+                updateViews(playerInTurn, Enums.DOUBLES);
             } else {
-                movePlayer(playerInTurn, distance);
-                updateViews(playerInTurn, "Roll Dice");
+                movePlayer(playerInTurn, distanceToMove);
+                updateViews(playerInTurn, Enums.ROLL_DICE);
             }
-        }
-
-        if (playerInTurn.isBankrupt()) {
-            if (!(playerInTurn instanceof AIPlayer)) {
-                updateViews(playerInTurn, "Bankrupt");
-            }
-        }
-
-        if (getWinner() != null) {
-            updateViews(getWinner(), "Winner");
-        }
-
-        if (doubleCounter == 3 || doubleCounter == 0 && playerInTurn instanceof AIPlayer){
-            playerInTurn.setDiceRolled(true);
-        } else if(!(playerInTurn instanceof AIPlayer)){
-            playerInTurn.setDiceRolled(true);
         }
     }
 
@@ -351,9 +314,9 @@ public class MonopolyGame {
         for (PropertySquare property : player.getProperties()) {
             property.sellAll();
             player.setSelectedSquare(property);
-            views.get(0).sellBuildBuilding("sellH", "Hotel", player);
-            for(int i=0; i<4; i++){
-                views.get(0).sellBuildBuilding("sellH", "House", player);
+            views.get(0).sellBuildBuilding(Enums.SELLH, Enums.HOTEL, player);
+            for (int i = 0; i < 4; i++) {
+                views.get(0).sellBuildBuilding(Enums.SELLH, Enums.HOUSE, player);
             }
             property.setOwner(null);
         }
@@ -384,7 +347,7 @@ public class MonopolyGame {
     /**
      * update GUI
      */
-    private void updateViews(Player p, String command) throws ParserConfigurationException, SAXException, IOException {
+    private void updateViews(Player p, Enums command) {
         for (MonopolyGameGUI view : views) {
             view.handleUpdate(p, command, playersNotInTurn);
         }
@@ -392,6 +355,7 @@ public class MonopolyGame {
 
     /**
      * Gets the double counter int value
+     *
      * @return
      */
     public int getDoubleCounter() {
@@ -400,6 +364,7 @@ public class MonopolyGame {
 
     /**
      * Sets the double counter value
+     *
      * @param doubleCounter
      */
     public void setDoubleCounter(int doubleCounter) {
@@ -431,7 +396,7 @@ public class MonopolyGame {
 
         this.playersNotInTurn = getPlayersNotInTurn();
 
-        updateViews(playerInTurn, "Next Turn");
+        updateViews(playerInTurn, Enums.NEXT_TURN);
         printPlayersInfo();
 
         AIProcess();
@@ -441,16 +406,9 @@ public class MonopolyGame {
      * set the selected property to the player in turn
      * ask the player to choose whether you want to build/sell a house or a hotel
      */
-    public int setSelectedProperty(String text) throws IOException, SAXException, ParserConfigurationException {
+    public void setSelectedProperty(String text) throws IOException, SAXException, ParserConfigurationException {
         playerInTurn.setSelectedSquare(playerInTurn.getPropertyFromName(text));
         updateViews(playerInTurn, this.getPlayerInTurn().getDecision());
-
-        for (int i = 0; i < board.getSquares().length; i++) {
-            if (text.equals(board.getSquares()[i].getName())) {
-                return i;
-            }
-        }
-        return -1;
     }
 
     /**
@@ -477,30 +435,30 @@ public class MonopolyGame {
         if (playerInTurn instanceof AIPlayer) {
             int temp = this.doubleCounter;
             playRound();
-            while(!playerInTurn.isInJail() && temp < this.doubleCounter && temp != 3){
+            while (!playerInTurn.isInJail() && temp < this.doubleCounter && temp != 3) {
                 temp = this.doubleCounter;
                 playRound();
             }
-            if(playerInTurn.isInJail() && this.doubleCounter == 1){
-                updateViews(playerInTurn, "NoDoubles");
-            } else if(temp == 3){
-                updateViews(playerInTurn, "Doubles");
+            if (playerInTurn.isInJail() && this.doubleCounter == 1) {
+                updateViews(playerInTurn, Enums.NO_DOUBLES);
+            } else if (temp == 3) {
+                updateViews(playerInTurn, Enums.DOUBLES);
             } else {
                 playerInTurn.buyProperty(playerInTurn.getCurrentLocation());
                 if (((AIPlayer) playerInTurn).buildBuildings()) {
-                    views.get(0).sellBuildBuilding("House", "build", playerInTurn);
+                    views.get(0).sellBuildBuilding(Enums.BUILD, Enums.HOUSE, playerInTurn);
                 }
                 while (playerInTurn.isBankrupt() && !playerInTurn.hasBuilding().isEmpty()) {
                     ((AIPlayer) playerInTurn).sellBuildings();
-                    views.get(0).sellBuildBuilding("House", "sellH", playerInTurn);
+                    views.get(0).sellBuildBuilding(Enums.SELLH, Enums.HOUSE, playerInTurn);
                 }
                 ((AIPlayer) playerInTurn).sellSomeThing();
             }
-            if(playerInTurn.isBankrupt()) {
+            if (playerInTurn.isBankrupt()) {
                 this.removeBankruptPlayer(playerInTurn);
-                this.updateViews(playerInTurn, "Bankrupt");
-            } else if(this.getWinner() == playerInTurn){
-                this.updateViews(playerInTurn, "Winner");
+                this.updateViews(playerInTurn, Enums.BANKRUPT);
+            } else if (this.getWinner() == playerInTurn) {
+                this.updateViews(playerInTurn, Enums.WINNER);
             } else {
                 nextTurn();
             }

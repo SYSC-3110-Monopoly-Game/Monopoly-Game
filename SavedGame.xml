@@ -35,7 +35,7 @@
 <Price>80</Price>
 <RentPrice>90</RentPrice>
 <Color>-16777216</Color>
-<Owner></Owner>
+<Owner>3AI</Owner>
 </Square>
 <Square type="Property">
 <Name>Oriental Avenue</Name>
@@ -46,7 +46,7 @@
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
 <HotelAmount>0</HotelAmount>
-<Owner></Owner>
+<Owner>2</Owner>
 </Square>
 <Square type="Property">
 <Name>Vermont Avenue</Name>
@@ -57,7 +57,7 @@
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
 <HotelAmount>0</HotelAmount>
-<Owner>1</Owner>
+<Owner>4AI</Owner>
 </Square>
 <Square type="Property">
 <Name>Connecticut Avenue</Name>
@@ -68,13 +68,13 @@
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
 <HotelAmount>0</HotelAmount>
-<Owner>4AI</Owner>
+<Owner>1</Owner>
 </Square>
 <Square type="Jail">
 <Name>Jail</Name>
 <Number>8</Number>
 <Price>100</Price>
-<JailMap>3AI=0,</JailMap>
+<JailMap></JailMap>
 </Square>
 <Square type="Property">
 <Name>St. Charles Place</Name>
@@ -104,7 +104,7 @@
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
 <HotelAmount>0</HotelAmount>
-<Owner>3AI</Owner>
+<Owner>1</Owner>
 </Square>
 <Square type="Property">
 <Name>Virginia Avenue</Name>
@@ -115,7 +115,7 @@
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
 <HotelAmount>0</HotelAmount>
-<Owner></Owner>
+<Owner>2</Owner>
 </Square>
 <Square type="RailRoad">
 <Name>Pennsylvania RailRoad</Name>
@@ -134,7 +134,7 @@
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
 <HotelAmount>0</HotelAmount>
-<Owner></Owner>
+<Owner>4AI</Owner>
 </Square>
 <Square type="Property">
 <Name>Tennessee Avenue</Name>
@@ -145,7 +145,7 @@
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
 <HotelAmount>0</HotelAmount>
-<Owner>4AI</Owner>
+<Owner></Owner>
 </Square>
 <Square type="Property">
 <Name>New York Avenue</Name>
@@ -171,7 +171,7 @@
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
 <HotelAmount>0</HotelAmount>
-<Owner>3AI</Owner>
+<Owner>1</Owner>
 </Square>
 <Square type="Property">
 <Name>Indiana Avenue</Name>
@@ -212,7 +212,7 @@
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
 <HotelAmount>0</HotelAmount>
-<Owner>1</Owner>
+<Owner></Owner>
 </Square>
 <Square type="Property">
 <Name>Ventnor Avenue</Name>
@@ -223,7 +223,7 @@
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
 <HotelAmount>0</HotelAmount>
-<Owner>2</Owner>
+<Owner></Owner>
 </Square>
 <Square type="Utility">
 <Name>Water Works</Name>
@@ -242,7 +242,7 @@
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
 <HotelAmount>0</HotelAmount>
-<Owner>4AI</Owner>
+<Owner></Owner>
 </Square>
 <Square type="GoToJail">
 <Name>Go to jail</Name>
@@ -317,46 +317,46 @@
 </Square>
 </Board><Player id="0">
 <Name>1</Name>
-<Decision></Decision>
-<Cash>370</Cash>
+<Decision>null</Decision>
+<Cash>535</Cash>
 <IsInJail>0</IsInJail>
 <DiceRolled>1</DiceRolled>
-<CurrentLocation>30</CurrentLocation>
-<LastLocation>22</LastLocation>
+<CurrentLocation>18</CurrentLocation>
+<LastLocation>11</LastLocation>
 <SelectedSquare>1</SelectedSquare>
-<SquareOwned>6,22,30,</SquareOwned>
+<SquareOwned>7,11,18,</SquareOwned>
 </Player>
 <Player id="1">
 <Name>2</Name>
-<Decision></Decision>
-<Cash>470</Cash>
+<Decision>null</Decision>
+<Cash>495</Cash>
 <IsInJail>0</IsInJail>
 <DiceRolled>0</DiceRolled>
-<CurrentLocation>23</CurrentLocation>
-<LastLocation>17</LastLocation>
+<CurrentLocation>12</CurrentLocation>
+<LastLocation>5</LastLocation>
 <SelectedSquare>1</SelectedSquare>
-<SquareOwned>23,</SquareOwned>
+<SquareOwned>5,12,</SquareOwned>
 </Player>
 <Player id="2">
 <Name>3AI</Name>
-<Decision></Decision>
-<Cash>585</Cash>
-<IsInJail>1</IsInJail>
+<Decision>null</Decision>
+<Cash>440</Cash>
+<IsInJail>0</IsInJail>
 <DiceRolled>0</DiceRolled>
-<CurrentLocation>8</CurrentLocation>
-<LastLocation>18</LastLocation>
+<CurrentLocation>11</CurrentLocation>
+<LastLocation>4</LastLocation>
 <SelectedSquare>1</SelectedSquare>
-<SquareOwned>11,18,</SquareOwned>
+<SquareOwned>4,</SquareOwned>
 </Player>
 <Player id="3">
 <Name>4AI</Name>
-<Decision></Decision>
-<Cash>420</Cash>
+<Decision>null</Decision>
+<Cash>490</Cash>
 <IsInJail>0</IsInJail>
 <DiceRolled>0</DiceRolled>
-<CurrentLocation>25</CurrentLocation>
-<LastLocation>15</LastLocation>
+<CurrentLocation>14</CurrentLocation>
+<LastLocation>6</LastLocation>
 <SelectedSquare>1</SelectedSquare>
-<SquareOwned>7,15,25,</SquareOwned>
+<SquareOwned>6,14,</SquareOwned>
 </Player>
-<DoubleCounter>0</DoubleCounter><PlayerInTurn>1</PlayerInTurn><PlayerNotInTurn>2,3AI,4AI,</PlayerNotInTurn><DiceValue>0,0</DiceValue></Game>
+<DoubleCounter>0</DoubleCounter><PlayerInTurn>1</PlayerInTurn><PlayerNotInTurn>2,3AI,4AI,</PlayerNotInTurn><DiceValue>2,5</DiceValue></Game>

@@ -79,7 +79,7 @@ public class SquareGridGUI extends JPanel {
                 s = new GoSquareGUI();
 
             } else if (square[j] instanceof UtilitySquare utility) {
-                s = new UtilitySquareGUI(300, utility.getName());
+                s = new UtilitySquareGUI(utility.getPrice(), utility.getName());
 
             } else if (square[j] instanceof RailRoadSquare railRoad) {
                 s = new RailRoadSquareGUI(railRoad.getName(), railRoad.getPrice());
@@ -127,16 +127,16 @@ public class SquareGridGUI extends JPanel {
                     && !(board.getSquareAt(i) instanceof UtilitySquare)){
                 if(((PropertySquare) board.getSquareAt(i)).hasHouses()){
                     for(int j=0; j<((PropertySquare) board.getSquareAt(i)).getHouseNumber(); j++){
-                        buildSellBuilding("build", "House", i);
+                        buildSellBuilding(Enums.BUILD, Enums.HOTEL, i);
                     }
                     if(((PropertySquare) board.getSquareAt(i)).hasHotel()){
-                        buildSellBuilding("build", "Hotel", i);
+                        buildSellBuilding(Enums.BUILD, Enums.HOTEL, i);
                     }
                 }
             }
         }
-        JailSquare jail = (JailSquare) board.getSquareAt(8);
-        JailSquareGUI jailGUI = (JailSquareGUI) squareGUIs[8];
+        JailSquare jail = (JailSquare) board.getSquareAt(Constants.JAIL_SQUARE_INDEX);
+        JailSquareGUI jailGUI = (JailSquareGUI) squareGUIs[Constants.JAIL_SQUARE_INDEX];
         String name;
         if(!jail.getMap().isEmpty()){
             for(Player p: jail.getMap().keySet()){
@@ -161,14 +161,14 @@ public class SquareGridGUI extends JPanel {
             name = String.valueOf(player.getName().charAt(0));
         }
         squareGUIs[currentLocationIndex].removePlayer(name, player.isInJail());
-        JailSquareGUI jail = (JailSquareGUI) squareGUIs[8];
+        JailSquareGUI jail = (JailSquareGUI) squareGUIs[Constants.JAIL_SQUARE_INDEX];
         if (player.isInJail() && nextLocationIndex == 8) {
 
             //if player already not in jail
             jail.removePlayer(name, false);
             jail.addPlayerToJail(player.getName());
         } else {
-            if (!player.isInJail() && nextLocationIndex == 8 && currentLocationIndex == 8) {
+            if (!player.isInJail() && nextLocationIndex == Constants.JAIL_SQUARE_INDEX && currentLocationIndex == Constants.JAIL_SQUARE_INDEX) {
                 name = player.getName();
                 if(player instanceof AIPlayer){
                     name = String.valueOf(player.getName().charAt(0));
@@ -225,34 +225,33 @@ public class SquareGridGUI extends JPanel {
      * @param decision
      * @param index
      */
-    public void buildSellBuilding(String command, String decision, Integer index){
-        int maxHouseNumber = 4;
-        if (command.equals("build")) {
-            if (decision.equals("House")) {
-                for (int i = 1; i < maxHouseNumber; i++) {
+    public void buildSellBuilding(Enums command, Enums decision, Integer index){
+        if (command== Enums.BUILD) {
+            if (decision== Enums.HOUSE) {
+                for (int i = 1; i < Constants.MAX_HOUSE_NUMBER; i++) {
                     if (((PropertySquareGUI) this.getPropertySquareGUI(index)).isBuilding(i)) {
                         ((PropertySquareGUI) this.getPropertySquareGUI(index)).setBuildingX(Color.GREEN, i);
                         break;
                     }
                 }
-            } else if (decision.equals("Hotel")) {
+            } else if (decision== Enums.HOTEL) {
                 // when building a hotel, the property will build the 4 houses automatically
-                for (int i = 1; i < maxHouseNumber; i++) {
+                for (int i = 1; i < Constants.MAX_HOUSE_NUMBER; i++) {
                     if (((PropertySquareGUI) this.getPropertySquareGUI(index)).isBuilding(i)) {
                         ((PropertySquareGUI) this.getPropertySquareGUI(index)).setBuildingX(Color.GREEN, i);
                     }
                 }
                 ((PropertySquareGUI) this.getPropertySquareGUI(index)).setBuildingX(Color.RED, 5);
             }
-        } else if (command.equals("sellH")) {
-            if (decision.equals("House")) {
-                for (int i = maxHouseNumber; i > 0; i--) {
+        } else if (command== Enums.BUILD) {
+            if (decision== Enums.HOUSE) {
+                for (int i = Constants.MAX_HOUSE_NUMBER; i > 0; i--) {
                     if (!(((PropertySquareGUI) this.getPropertySquareGUI(index)).isBuilding(i))) {
                         ((PropertySquareGUI) this.getPropertySquareGUI(index)).setBuildingX(Color.WHITE, i);
                         break;
                     }
                 }
-            } else if (decision.equals("Hotel")) {
+            } else if (decision== Enums.HOTEL) {
                 ((PropertySquareGUI) this.getPropertySquareGUI(index)).setBuildingX(Color.WHITE, 5);
             }
 

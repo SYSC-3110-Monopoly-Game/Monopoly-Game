@@ -8,16 +8,17 @@ public class GoToJailSquare extends Square {
         super(name, number);
     }
 
-    public void setJail(JailSquare jail){
+    public void setJail(JailSquare jail) {
         this.jail = jail;
     }
 
-    /** Sends player to Jail Square when player lands on square
+    /**
+     * Sends player to Jail Square when player lands on square
      *
      * @param p
      */
     @Override
-    public void landOn(Player p){
+    public void landOn(Player p) {
         this.jail.goJail(p);
         p.setInJail(true);
         System.out.println("Oh no! You have to go to jail player " + p.getName());
@@ -27,8 +28,8 @@ public class GoToJailSquare extends Square {
     public String toXML() {
         StringBuffer string = new StringBuffer();
         string.append("<Square type=\"GoToJail\">\n");
-        string.append("<Name>"+this.getName()+"</Name>\n");
-        string.append("<Number>"+this.getNumber()+"</Number>\n");
+        string.append("<Name>" + this.getName() + "</Name>\n");
+        string.append("<Number>" + this.getNumber() + "</Number>\n");
         string.append("</Square>\n");
 
         return string.toString();

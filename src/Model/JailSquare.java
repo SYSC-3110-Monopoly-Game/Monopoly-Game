@@ -1,22 +1,23 @@
 package Model;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
 
 public class JailSquare extends Square {
 
+    private final int jailFee;
     public HashMap<Player, Integer> map;
     public HashMap<String, Integer> stringMap;
-    private final int jailFee;
 
     public JailSquare(String name, int number, int jailFee) {
-        super(name,number);
+        super(name, number);
         this.map = new HashMap<>();
         this.jailFee = jailFee;
     }
 
     public JailSquare(String name, int number, int jailFee, HashMap<String, Integer> map) {
-        super(name,number);
+        super(name, number);
         this.map = new HashMap<>();
         this.jailFee = jailFee;
         this.stringMap = map;
@@ -31,7 +32,8 @@ public class JailSquare extends Square {
         map.put(p, map.get(p) + 1);
     }
 
-    /** Player is passing by and is not in jail
+    /**
+     * Player is passing by and is not in jail
      *
      * @param p
      */
@@ -42,7 +44,8 @@ public class JailSquare extends Square {
         message = " is visiting jail\n";
     }
 
-    /** Adds player to jail hashmap
+    /**
+     * Adds player to jail hashmap
      *
      * @param p
      */
@@ -66,7 +69,7 @@ public class JailSquare extends Square {
     /**
      * get the money a player need to go out of jail
      */
-    public int getJailFee(){
+    public int getJailFee() {
         return this.jailFee;
     }
 
@@ -75,10 +78,10 @@ public class JailSquare extends Square {
     }
 
     public void loadMapAccordingStringMap(ArrayList<Player> players) {
-        if(!this.stringMap.isEmpty()){
-            for(String s: stringMap.keySet()){
-                for(Player p: players){
-                    if(s.equals(p.getName())){
+        if (!this.stringMap.isEmpty()) {
+            for (String s : stringMap.keySet()) {
+                for (Player p : players) {
+                    if (s.equals(p.getName())) {
                         this.map.put(p, stringMap.get(s));
                     }
                 }
@@ -90,12 +93,12 @@ public class JailSquare extends Square {
     public String toXML() {
         StringBuffer string = new StringBuffer();
         string.append("<Square type=\"Jail\">\n");
-        string.append("<Name>"+this.getName()+"</Name>\n");
-        string.append("<Number>"+this.getNumber()+"</Number>\n");
-        string.append("<Price>"+this.getJailFee()+"</Price>\n");
+        string.append("<Name>" + this.getName() + "</Name>\n");
+        string.append("<Number>" + this.getNumber() + "</Number>\n");
+        string.append("<Price>" + this.getJailFee() + "</Price>\n");
         string.append("<JailMap>");
-        for(Player id: map.keySet()){
-            string.append(id.getName()+ "=" +map.get(id)+ ",");
+        for (Player id : map.keySet()) {
+            string.append(id.getName() + "=" + map.get(id) + ",");
         }
         string.append("</JailMap>\n");
         string.append("</Square>\n");
