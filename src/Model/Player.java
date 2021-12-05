@@ -398,26 +398,27 @@ public class Player {
         ArrayList<PropertySquare> result = new ArrayList<>();
         ArrayList<Color> c = MonopolyBoard.colors;
 
-        for (PropertySquare p : squaresOwned) {
-            for (int i = 0; i < c.size(); i++) {
-                if (p.getColor() == c.get(i)) {
+
+        for(PropertySquare p: squaresOwned) {
+            for(int i=0; i<c.size(); i++) {
+                if (p.getColor().equals(c.get(i))) {
                     counter[i]++;
                 }
             }
         }
-        for (int i = 0; i < (c.size() - 4); i++) {
+        for(int i=0; i<(c.size()-4); i++) {
             if (counter[i] == 3) {
-                for (PropertySquare p : squaresOwned) {
-                    if (p.getColor() == c.get(i)) {
+                for(PropertySquare p: squaresOwned) {
+                    if(p.getColor().equals(c.get(i))) {
                         result.add(p);
                     }
                 }
             }
         }
-        for (int i = (c.size() - 4); i < c.size(); i++) {
-            if (counter[i] >= 2) {
-                for (PropertySquare p : squaresOwned) {
-                    if (p.getColor() == c.get(i)) {
+        for(int i=(c.size()-4); i<c.size(); i++) {
+            if (counter[i] >= 2){
+                for(PropertySquare p: squaresOwned) {
+                    if(p.getColor().equals(c.get(i))) {
                         result.add(p);
                     }
                 }
@@ -456,8 +457,8 @@ public class Player {
     public int countNumber(Color color) {
         int counter = 0;
         ArrayList<PropertySquare> temp = this.hasWholeSet();
-        for (PropertySquare p : temp) {
-            if (p.getColor() == color) {
+        for(PropertySquare p: temp) {
+            if(p.getColor().equals(color)) {
                 counter++;
             }
         }
@@ -471,8 +472,8 @@ public class Player {
         if (!p.isEmpty()) {
             p.removeIf(property -> this.getCash() < property.getHousePrice());
         }
-        if (!p.isEmpty()) {
-            p.removeIf(PropertySquare::hasHouses);
+        if(!p.isEmpty()) {
+            p.removeIf(PropertySquare::hasHotel);
         }
         return p;
     }

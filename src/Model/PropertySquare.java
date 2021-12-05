@@ -191,7 +191,8 @@ public class PropertySquare extends Square {
             if (this instanceof UtilitySquare) {
                 return this.rentPrice * this.owner.countNumber(Color.WHITE);
             }
-            return (this.rentPrice + (this.rentPrice / 2) * (houses.size() + ((hasHotel()) ? 1 : 0))) * 2;
+            int temp = (this.rentPrice + (this.rentPrice / 2) * (houses.size() + ((hasHotel()) ? 1 : 0))) * 2;
+            return temp;
         }
         return this.rentPrice;
     }
@@ -231,7 +232,7 @@ public class PropertySquare extends Square {
         string.append("<Name>" + this.getName() + "</Name>\n");
         string.append("<Number>" + this.getNumber() + "</Number>\n");
         string.append("<Price>" + this.getPrice() + "</Price>\n");
-        string.append("<RentPrice>" + this.getRentFee() + "</RentPrice>\n");
+        string.append("<RentPrice>" + this.rentPrice + "</RentPrice>\n");
         String colorS = Integer.toString(this.getColor().getRGB());
         string.append("<Color>" + colorS + "</Color>\n");
         // call back: Color c = new Color(Integer.parseInt(colorS));

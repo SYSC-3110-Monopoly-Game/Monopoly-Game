@@ -90,13 +90,23 @@ public class MonopolyGame {
     public void loadGame(String path) throws ParserConfigurationException, SAXException, IOException {
         board = new MonopolyBoard(path);
         players = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            players.add(i, Player.makePlayerFromXML(board, path, i));
-        }
+        final int[] numberOfPlayer = {0};
+
         SAXParserFactory factory = SAXParserFactory.newInstance();
         SAXParser saxParser = factory.newSAXParser();
+        saxParser.parse(path, new DefaultHandler(){
+            @Override
+            public void startElement(String uri, String localName, String qName, Attributes attributes) {
+                if(qName.equals("Player")){
+                    numberOfPlayer[0]++;
+                }
+            }
+        });
+        for(int i=0; i<numberOfPlayer[0]; i++){
+            players.add(i, Player.makePlayerFromXML(board, path, i));
+        }
         final boolean[] ccl = {false, false, false, false};
-        //int[] diceValue = {0, 0};
+
         saxParser.parse(path, new DefaultHandler() {
 
             @Override
@@ -296,8 +306,8 @@ public class MonopolyGame {
                 if (MonopolyBoard.jail.getMap().get(playerInTurn) == 2) {
                     playerInTurn.decreaseCash(MonopolyBoard.jail.getJailFee());
                     MonopolyBoard.jail.goOutJail(playerInTurn);
-                    updateViews(playerInTurn, Enums.NO_DOUBLES);
                 }
+                updateViews(playerInTurn, Enums.NO_DOUBLES);
             }
         } else {  // if player not in jail
             if (dice.hasDoubles()) {
@@ -336,6 +346,13 @@ public class MonopolyGame {
             System.out.println("Properties = " + p.getProperties());                         // player properties
             System.out.println("Current location =  " + p.getCurrentLocation().toString());         // player location
         }
+        System.out.print("Properties that are not bought yet: ");
+        for(Square s: board.getSquares()){
+            if(s instanceof PropertySquare && ((PropertySquare) s).getOwner() == null){
+                System.out.print(s.getName() + "[" + s.getNumber() + "], ");
+            }
+        }
+        System.out.println();
         System.out.println("+-------------------+\n");
     }
 

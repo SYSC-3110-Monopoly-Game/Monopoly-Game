@@ -35,7 +35,6 @@ public class JailSquareGUI extends SquareGUI {
         boolean playerGUIAlreadyAdded = false;
 
         Component[] components = this.jailTag.getComponents();
-        System.out.println("Jail tag components: " + components.toString());
         for (Component labelComponent : components
         ) {
             JLabel label = (JLabel) labelComponent;

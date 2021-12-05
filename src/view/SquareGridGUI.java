@@ -127,7 +127,7 @@ public class SquareGridGUI extends JPanel {
                     && !(board.getSquareAt(i) instanceof UtilitySquare)){
                 if(((PropertySquare) board.getSquareAt(i)).hasHouses()){
                     for(int j=0; j<((PropertySquare) board.getSquareAt(i)).getHouseNumber(); j++){
-                        buildSellBuilding(Enums.BUILD, Enums.HOTEL, i);
+                        buildSellBuilding(Enums.BUILD, Enums.HOUSE, i);
                     }
                     if(((PropertySquare) board.getSquareAt(i)).hasHotel()){
                         buildSellBuilding(Enums.BUILD, Enums.HOTEL, i);
@@ -226,9 +226,9 @@ public class SquareGridGUI extends JPanel {
      * @param index
      */
     public void buildSellBuilding(Enums command, Enums decision, Integer index){
-        if (command== Enums.BUILD) {
+        if (command == Enums.BUILD) {
             if (decision== Enums.HOUSE) {
-                for (int i = 1; i < Constants.MAX_HOUSE_NUMBER; i++) {
+                for (int i = 1; i <= Constants.MAX_HOUSE_NUMBER; i++) {
                     if (((PropertySquareGUI) this.getPropertySquareGUI(index)).isBuilding(i)) {
                         ((PropertySquareGUI) this.getPropertySquareGUI(index)).setBuildingX(Color.GREEN, i);
                         break;
@@ -236,14 +236,14 @@ public class SquareGridGUI extends JPanel {
                 }
             } else if (decision== Enums.HOTEL) {
                 // when building a hotel, the property will build the 4 houses automatically
-                for (int i = 1; i < Constants.MAX_HOUSE_NUMBER; i++) {
+                for (int i = 1; i <= Constants.MAX_HOUSE_NUMBER; i++) {
                     if (((PropertySquareGUI) this.getPropertySquareGUI(index)).isBuilding(i)) {
                         ((PropertySquareGUI) this.getPropertySquareGUI(index)).setBuildingX(Color.GREEN, i);
                     }
                 }
                 ((PropertySquareGUI) this.getPropertySquareGUI(index)).setBuildingX(Color.RED, 5);
             }
-        } else if (command== Enums.BUILD) {
+        } else if (command == Enums.SELLH) {
             if (decision== Enums.HOUSE) {
                 for (int i = Constants.MAX_HOUSE_NUMBER; i > 0; i--) {
                     if (!(((PropertySquareGUI) this.getPropertySquareGUI(index)).isBuilding(i))) {

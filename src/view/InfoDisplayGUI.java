@@ -38,7 +38,7 @@ public class InfoDisplayGUI extends JPanel {
 
 
         //current player name, cash, property list
-        JPanel playerInfo = new JPanel(new GridLayout(3, 2));
+        JPanel playerInfo = new JPanel(new GridLayout(3, 1));
         playerInfo.setBorder(BorderFactory.createLineBorder(Color.black, 1));
 
         name = new JLabel();
@@ -49,6 +49,7 @@ public class InfoDisplayGUI extends JPanel {
         cash.setText("Cash: " + playerInTurn.getCash());
         String properties = playerInTurn.getProperties().toString();
         propertyList.setText("Property List: " + properties);
+
 
         playerInfo.add(name);
         playerInfo.add(cash);
@@ -158,13 +159,11 @@ public class InfoDisplayGUI extends JPanel {
             if (owner == null) {
                 this.setBuyEnabled(player.getCash() >= location.getPrice());
                 this.setBuyPrice(location.getPrice());
-                this.setHousePrice(location.getHousePrice());
-                this.setHotelPrice(location.getHotelPrice());
             } else {
                 this.setBuyPrice(Constants.PROPERTY_SOLD);
-                this.setHousePrice(Constants.PROPERTY_SOLD);
-                this.setHotelPrice(Constants.PROPERTY_SOLD);
             }
+            this.setHousePrice(location.getHousePrice());
+            this.setHotelPrice(location.getHotelPrice());
             this.setRentPrice(location.getRentFee());
         } else {
             this.setBuyPrice(Constants.PROPERTY_NON_SALE);

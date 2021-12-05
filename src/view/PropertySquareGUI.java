@@ -6,7 +6,7 @@ import java.awt.*;
 public class PropertySquareGUI extends SimpleSquareGUI{
     public static final int SIZE = 90;
 
-    JPanel[] building = new JPanel[5];
+    JPanel[] building = {new JPanel(), new JPanel(), new JPanel(), new JPanel(), new JPanel()};
 
     public PropertySquareGUI(Color color, String name, String buyPrice) {
         super("src/images/empty.png", color);
@@ -20,7 +20,6 @@ public class PropertySquareGUI extends SimpleSquareGUI{
         JPanel buildings = new JPanel(new GridLayout(1,5));
         //
         for(JPanel b: building){
-            b = new JPanel(new GridLayout(1,1));
             b.setBackground(Color.WHITE);
             buildings.add(b);
         }
@@ -41,9 +40,7 @@ public class PropertySquareGUI extends SimpleSquareGUI{
      */
     public boolean isBuilding(int buildingNumber){
         if (buildingNumber > 0 && buildingNumber < 6){
-            if (building[buildingNumber-1].getBackground() == Color.white){
-                return true;
-            }
+            return building[buildingNumber - 1].getBackground().equals(Color.white);
         }
         return false;
     }

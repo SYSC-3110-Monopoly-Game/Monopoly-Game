@@ -12,6 +12,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MonopolyGameGUI extends JFrame {
     private final InfoDisplayGUI infoDisplayGUI;
@@ -190,8 +191,10 @@ public class MonopolyGameGUI extends JFrame {
     }
 
     private void handleNoDoubles(Player player) {
-        JOptionPane.showMessageDialog(squareGUI, "This is your 3rd rounds in jail, you can leave the jail next round");
-        squareGUI.changePlayerGUILocation(player, Constants.JAIL_SQUARE_INDEX, Constants.JAIL_SQUARE_INDEX);
+        if(!player.isInJail()){
+            JOptionPane.showMessageDialog(squareGUI, "This is your 3rd rounds in jail, you can leave the jail next round");
+            squareGUI.changePlayerGUILocation(player, Constants.JAIL_SQUARE_INDEX, Constants.JAIL_SQUARE_INDEX);
+        }
         infoDisplayGUI.setNextEnabled(true);
         infoDisplayGUI.setRollEnabled(false);
     }
@@ -202,7 +205,7 @@ public class MonopolyGameGUI extends JFrame {
         squareGUI.setDiceImages(diceValues[0], diceValues[1]);
 
         if (player.isInJail()) {
-            if (game.getDoubleCounter() == 1) {
+            if (MonopolyGame.dice.hasDoubles()) {
                 JOptionPane.showMessageDialog(squareGUI, "You rolled a double!! You are going out of jail.");
 
                 //setting player out of jail
@@ -211,6 +214,7 @@ public class MonopolyGameGUI extends JFrame {
                 infoDisplayGUI.setNextEnabled(true);
                 infoDisplayGUI.setRollEnabled(false);
             }
+
         } else {
             if (game.getDoubleCounter() == 3) {
                 JOptionPane.showMessageDialog(squareGUI, "You rolled a double 3 times! You are going to jail");
@@ -246,15 +250,17 @@ public class MonopolyGameGUI extends JFrame {
     public void getSellDecision(ArrayList<PropertySquare> p, Player player) {
         JFrame popup = new JFrame("Select a property to sell");
 
-        popup.setBounds(500, 400, 740, 120);
-        popup.setLayout(new GridLayout());
+        int temp = p.size()/6 + (p.size()%6 > 0 ? 1:0);
+        popup.setBounds(500, 400, 740, 120 * temp);
+        popup.setLayout(new GridLayout(temp, 6));
         JButton btn;
         for (PropertySquare property : p) {
             btn = new JButton("<html>" + property.getName() + "<br>Sell Price: " + property.getPrice() / 2 + "</html>");
             btn.setBackground(property.getColor());
             btn.addActionListener(e -> {
                 JButton b = (JButton) e.getSource();
-                player.sellProperty(player.getPropertyFromName(b.getText()));
+                String[] chosenProperty = b.getText().split("<html>|<", 3);
+                player.sellProperty(player.getPropertyFromName(chosenProperty[1]));
                 infoDisplayGUI.setCash(player.getCash());
                 infoDisplayGUI.setPropertyList(player.getProperties().toString());
                 popup.getContentPane().remove(b);
@@ -290,8 +296,9 @@ public class MonopolyGameGUI extends JFrame {
      */
     public void getDecision(ArrayList<PropertySquare> p, MonopolyGame game) {
         JFrame popup = new JFrame("Select a property");
-        popup.setBounds(500, 400, 640, 120);
-        GridLayout grid = new GridLayout(0, 4);
+        int temp = p.size()/6 + (p.size()%6 > 0 ? 1:0);
+        popup.setBounds(500, 400, 640, 120 * temp);
+        GridLayout grid = new GridLayout(temp, 6);
         popup.setLayout(grid);
         JButton btn;
         for (PropertySquare property : p) {
@@ -385,11 +392,15 @@ public class MonopolyGameGUI extends JFrame {
      * build or sell houses or hotels on GUI map
      */
     public int sellBuildBuilding(Enums command, Enums decision, Player player) {
-        int price;
+        int price = 0;
         if (command == Enums.BUILD) {
-            price = player.buildH(decision);
+            if (!(player instanceof AIPlayer)) {
+                price = player.buildH(decision);
+            }
         } else {
-            price = player.sellH(decision);
+            if (!(player instanceof AIPlayer)) {
+                price = player.sellH(decision);
+            }
         }
 
         int index = player.getSelectedSquare().getNumber();

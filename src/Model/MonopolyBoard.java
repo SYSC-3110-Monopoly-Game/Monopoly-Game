@@ -110,11 +110,10 @@ public class MonopolyBoard {
 
         s = switch (type) {
             case "Property" -> new PropertySquare(name, number, price, rentPrice, c, housePrice, houseAmount, hotelAmount, owner);
-            case "RailRoad" -> new RailRoadSquare(name, number, price, rentPrice, c);
-            case "Utility" -> new UtilitySquare(name, number, price, rentPrice, c);
+            case "RailRoad" -> new RailRoadSquare(name, number, price, rentPrice, c, owner);
+            case "Utility" -> new UtilitySquare(name, number, price, rentPrice, c, owner);
             case "Jail" -> new JailSquare(name, number, price, hashMap);
             case "Tax" -> new TaxSquare(name, number, price);
-            case "Go" -> new GoSquare(name, number, price);
             case "GoToJail" -> new GoToJailSquare(name, number);
             case "FreeParking" -> new FreeParkingSquare(name, number);
             default -> new GoSquare(name, number, price);
