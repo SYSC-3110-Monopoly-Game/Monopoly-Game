@@ -44,7 +44,7 @@
 <RentPrice>60</RentPrice>
 <Color>-16711681</Color>
 <HousePrice>50</HousePrice>
-<HouseAmount>0</HouseAmount>
+<HouseAmount>4</HouseAmount>
 <HotelAmount>0</HotelAmount>
 <Owner>2</Owner>
 </Square>
@@ -55,8 +55,8 @@
 <RentPrice>60</RentPrice>
 <Color>-16711681</Color>
 <HousePrice>50</HousePrice>
-<HouseAmount>0</HouseAmount>
-<HotelAmount>0</HotelAmount>
+<HouseAmount>4</HouseAmount>
+<HotelAmount>1</HotelAmount>
 <Owner>2</Owner>
 </Square>
 <Square type="Property">
@@ -66,15 +66,15 @@
 <RentPrice>60</RentPrice>
 <Color>-16711681</Color>
 <HousePrice>50</HousePrice>
-<HouseAmount>0</HouseAmount>
-<HotelAmount>0</HotelAmount>
-<Owner></Owner>
+<HouseAmount>4</HouseAmount>
+<HotelAmount>1</HotelAmount>
+<Owner>2</Owner>
 </Square>
 <Square type="Jail">
 <Name>Jail</Name>
 <Number>8</Number>
 <Price>100</Price>
-<JailMap>3AI=1,</JailMap>
+<JailMap></JailMap>
 </Square>
 <Square type="Property">
 <Name>St. Charles Place</Name>
@@ -115,7 +115,7 @@
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
 <HotelAmount>0</HotelAmount>
-<Owner></Owner>
+<Owner>2</Owner>
 </Square>
 <Square type="RailRoad">
 <Name>Pennsylvania RailRoad</Name>
@@ -212,7 +212,7 @@
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
 <HotelAmount>0</HotelAmount>
-<Owner></Owner>
+<Owner>2</Owner>
 </Square>
 <Square type="Property">
 <Name>Ventnor Avenue</Name>
@@ -242,7 +242,7 @@
 <HousePrice>50</HousePrice>
 <HouseAmount>0</HouseAmount>
 <HotelAmount>0</HotelAmount>
-<Owner></Owner>
+<Owner>3AI</Owner>
 </Square>
 <Square type="GoToJail">
 <Name>Go to jail</Name>
@@ -296,7 +296,7 @@
 <RentPrice>70</RentPrice>
 <Color>-16776961</Color>
 <HousePrice>50</HousePrice>
-<HouseAmount>2</HouseAmount>
+<HouseAmount>4</HouseAmount>
 <HotelAmount>0</HotelAmount>
 <Owner>3AI</Owner>
 </Square>
@@ -311,41 +311,41 @@
 <RentPrice>70</RentPrice>
 <Color>-16776961</Color>
 <HousePrice>50</HousePrice>
-<HouseAmount>2</HouseAmount>
+<HouseAmount>4</HouseAmount>
 <HotelAmount>0</HotelAmount>
 <Owner>3AI</Owner>
 </Square>
 </Board><Player id="0">
 <Name>1</Name>
-<Decision></Decision>
-<Cash>540</Cash>
+<Decision>null</Decision>
+<Cash>270</Cash>
 <IsInJail>0</IsInJail>
 <DiceRolled>0</DiceRolled>
-<CurrentLocation>27</CurrentLocation>
-<LastLocation>21</LastLocation>
+<CurrentLocation>32</CurrentLocation>
+<LastLocation>23</LastLocation>
 <SelectedSquare>1</SelectedSquare>
 <SquareOwned>15,21,28,1,18,30,16,</SquareOwned>
 </Player>
 <Player id="1">
 <Name>2</Name>
-<Decision></Decision>
-<Cash>760</Cash>
+<Decision>null</Decision>
+<Cash>10</Cash>
 <IsInJail>0</IsInJail>
-<DiceRolled>1</DiceRolled>
-<CurrentLocation>2</CurrentLocation>
-<LastLocation>29</LastLocation>
-<SelectedSquare>1</SelectedSquare>
-<SquareOwned>10,24,27,5,11,6,29,4,2,</SquareOwned>
+<DiceRolled>0</DiceRolled>
+<CurrentLocation>21</CurrentLocation>
+<LastLocation>14</LastLocation>
+<SelectedSquare>5</SelectedSquare>
+<SquareOwned>10,24,27,5,11,6,29,4,2,7,12,22,</SquareOwned>
 </Player>
 <Player id="2">
 <Name>3AI</Name>
-<Decision></Decision>
-<Cash>660</Cash>
-<IsInJail>1</IsInJail>
+<Decision>null</Decision>
+<Cash>1160</Cash>
+<IsInJail>0</IsInJail>
 <DiceRolled>0</DiceRolled>
-<CurrentLocation>8</CurrentLocation>
-<LastLocation>19</LastLocation>
-<SelectedSquare>31</SelectedSquare>
-<SquareOwned>9,13,20,31,14,23,33,19,</SquareOwned>
+<CurrentLocation>17</CurrentLocation>
+<LastLocation>9</LastLocation>
+<SelectedSquare>33</SelectedSquare>
+<SquareOwned>9,13,20,31,14,23,33,19,25,</SquareOwned>
 </Player>
-<DoubleCounter>0</DoubleCounter><PlayerInTurn>2</PlayerInTurn><PlayerNotInTurn>3AI,1,</PlayerNotInTurn><DiceValue>5,2</DiceValue></Game>
+<DoubleCounter>0</DoubleCounter><PlayerInTurn>2</PlayerInTurn><PlayerNotInTurn>3AI,1,</PlayerNotInTurn><DiceValue>5,4</DiceValue></Game>

@@ -191,8 +191,10 @@ public class MonopolyGameGUI extends JFrame {
     }
 
     private void handleNoDoubles(Player player) {
-        JOptionPane.showMessageDialog(squareGUI, "This is your 3rd rounds in jail, you can leave the jail next round");
-        squareGUI.changePlayerGUILocation(player, Constants.JAIL_SQUARE_INDEX, Constants.JAIL_SQUARE_INDEX);
+        if(!player.isInJail()){
+            JOptionPane.showMessageDialog(squareGUI, "This is your 3rd rounds in jail, you can leave the jail next round");
+            squareGUI.changePlayerGUILocation(player, Constants.JAIL_SQUARE_INDEX, Constants.JAIL_SQUARE_INDEX);
+        }
         infoDisplayGUI.setNextEnabled(true);
         infoDisplayGUI.setRollEnabled(false);
     }
@@ -203,7 +205,7 @@ public class MonopolyGameGUI extends JFrame {
         squareGUI.setDiceImages(diceValues[0], diceValues[1]);
 
         if (player.isInJail()) {
-            if (MonopolyGame.dice.getDouble()) {
+            if (MonopolyGame.dice.hasDoubles()) {
                 JOptionPane.showMessageDialog(squareGUI, "You rolled a double!! You are going out of jail.");
 
                 //setting player out of jail
@@ -212,14 +214,6 @@ public class MonopolyGameGUI extends JFrame {
                 infoDisplayGUI.setNextEnabled(true);
                 infoDisplayGUI.setRollEnabled(false);
             }
-            // case "NoDoubles" -> {
-            //     if(!player.isInJail()){
-            //         JOptionPane.showMessageDialog(squareGUI, "This is your 3rd rounds in jail, you can leave the jail next round");
-            //         squareGUI.changePlayerGUILocation(player, 8, 8);
-            //     }
-            //     infoDisplayGUI.setNextEnabled(true);
-            //     infoDisplayGUI.setRollEnabled(false);
-            // }
 
         } else {
             if (game.getDoubleCounter() == 3) {
@@ -398,11 +392,15 @@ public class MonopolyGameGUI extends JFrame {
      * build or sell houses or hotels on GUI map
      */
     public int sellBuildBuilding(Enums command, Enums decision, Player player) {
-        int price;
+        int price = 0;
         if (command == Enums.BUILD) {
-            price = player.buildH(decision);
+            if (!(player instanceof AIPlayer)) {
+                price = player.buildH(decision);
+            }
         } else {
-            price = player.sellH(decision);
+            if (!(player instanceof AIPlayer)) {
+                price = player.sellH(decision);
+            }
         }
 
         int index = player.getSelectedSquare().getNumber();

@@ -191,7 +191,8 @@ public class PropertySquare extends Square {
             if (this instanceof UtilitySquare) {
                 return this.rentPrice * this.owner.countNumber(Color.WHITE);
             }
-            return (this.rentPrice + (this.rentPrice / 2) * (houses.size() + ((hasHotel()) ? 1 : 0))) * 2;
+            int temp = (this.rentPrice + (this.rentPrice / 2) * (houses.size() + ((hasHotel()) ? 1 : 0))) * 2;
+            return temp;
         }
         return this.rentPrice;
     }
