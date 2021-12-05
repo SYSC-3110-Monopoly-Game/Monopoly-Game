@@ -144,9 +144,9 @@ public class MonopolyGameGUI extends JFrame {
 
         if (player.isInJail()) {
             if (MonopolyGame.dice.hasDoubles())
-                JOptionPane.showMessageDialog(squareGUI, "You rolled a double!! You get to get out of jail fo free!");
+                JOptionPane.showMessageDialog(squareGUI, "You rolled a double!! You get to get out of jail fo free!\n");
             else {
-                message.append("You did not roll a double!! You cannot get out of jail fo free!");
+                message.append("You did not roll a double!! You cannot get out of jail fo free!\n");
                 infoDisplayGUI.setNextEnabled(true);
                 infoDisplayGUI.setRollEnabled(false);
             }
@@ -192,7 +192,7 @@ public class MonopolyGameGUI extends JFrame {
 
     private void handleNoDoubles(Player player) {
         if(!player.isInJail()){
-            JOptionPane.showMessageDialog(squareGUI, "This is your 3rd rounds in jail, you can leave the jail next round");
+            JOptionPane.showMessageDialog(squareGUI, "This is your 2nd round in jail, you can leave the jail next round");
             squareGUI.changePlayerGUILocation(player, Constants.JAIL_SQUARE_INDEX, Constants.JAIL_SQUARE_INDEX);
         }
         infoDisplayGUI.setNextEnabled(true);
@@ -206,7 +206,7 @@ public class MonopolyGameGUI extends JFrame {
 
         if (player.isInJail()) {
             if (MonopolyGame.dice.hasDoubles()) {
-                JOptionPane.showMessageDialog(squareGUI, "You rolled a double!! You are going out of jail.");
+                JOptionPane.showMessageDialog(squareGUI, "You rolled a double!! You are going out of jail.\n");
 
                 //setting player out of jail
                 MonopolyBoard.jail.goOutJail(player);
@@ -223,10 +223,10 @@ public class MonopolyGameGUI extends JFrame {
                 infoDisplayGUI.setNextEnabled(true);
                 infoDisplayGUI.setRollEnabled(false);
             } else {
-                if (player instanceof AIPlayer) {
-                    JOptionPane.showMessageDialog(squareGUI, "AI rolled a double " + game.getDoubleCounter() + "times" + "!!Click ok to continue.");
+                if (player instanceof AIPlayer p) {
+                    JOptionPane.showMessageDialog(squareGUI, p.getName()+ " rolled a double " + game.getDoubleCounter() + " times" + "!! Click ok to continue.\n");
                 } else
-                    JOptionPane.showMessageDialog(squareGUI, "You rolled a double!!Roll Dice again.");
+                    JOptionPane.showMessageDialog(squareGUI, "You rolled a double!! Roll Dice again.\n");
                 infoDisplayGUI.setNextEnabled(false);
                 infoDisplayGUI.setRollEnabled(true);
             }

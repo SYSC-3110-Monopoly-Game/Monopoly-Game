@@ -8,12 +8,9 @@
   <component name="ChangeListManager">
     <list default="true" id="b3cb6e01-e85c-476d-a8c3-3d7553fdc473" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SavedGame.xml" beforeDir="false" afterPath="$PROJECT_DIR$/SavedGame.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/AIPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/AIPlayer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/MonopolyGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/MonopolyGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/PropertySquare.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/PropertySquare.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/JailSquareGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/JailSquareGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/MonopolyGameGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MonopolyGameGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/SquareGridGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/SquareGridGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -194,6 +191,11 @@
           <url>file://$PROJECT_DIR$/src/view/MonopolyGameGUI.java</url>
           <line>338</line>
           <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Model/AIPlayer.java</url>
+          <line>118</line>
+          <option name="timeStamp" value="34" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
