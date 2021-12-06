@@ -50,7 +50,8 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/testUseFile.xml" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -163,13 +164,14 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b3cb6e01-e85c-476d-a8c3-3d7553fdc473" name="Changes" comment="" />
+      <changelist id="935d1840-f7e3-487d-b6a7-99f15601c367" name="Changes" comment="" />
       <created>1635090572449</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1635090572449</updated>
       <workItem from="1638554440999" duration="5189000" />
       <workItem from="1638644955595" duration="1227000" />
+      <workItem from="1638833505178" duration="217000" />
     </task>
     <servers />
   </component>
