@@ -415,7 +415,7 @@ public class MonopolyGameGUI extends JFrame {
     public int sellBuildBuilding(String command, String decision, Player player) {
         int price = -1;
         if (command.equals("build")) {
-            price = player.buildH(decision);
+            price = player.buildHouseOrHotel(decision);
             if (decision.equals("House")) {
                 for (int i = 1; i < 5; i++) {
                     if (((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).isBuilding(i)) {
@@ -434,7 +434,7 @@ public class MonopolyGameGUI extends JFrame {
                 ((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).setBuildingX(Color.RED, 5);
             }
         } else if (command.equals("sellH")) {
-            price = player.sellH(decision);
+            price = player.sellHouseOrHotel(decision);
             if (decision.equals("House")) {
                 for (int i = 4; i > 0; i--) {
                     if (!(((PropertySquareGUI) squareGUI.getPropertySquareGUI(selectedPropertyIndex)).isBuilding(i))) {

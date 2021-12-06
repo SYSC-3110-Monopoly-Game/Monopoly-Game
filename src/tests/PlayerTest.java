@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 class PlayerTest {
@@ -183,7 +182,7 @@ class PlayerTest {
         PropertySquare p1 = new PropertySquare("test", 0, 50, 50, Color.BLACK);
         player.buyProperty(p1);
         player.setSelectedSquare(p1);
-        Assertions.assertEquals(player.buildH("House"), 50);
+        Assertions.assertEquals(player.buildHouseOrHotel("House"), 50);
         Assertions.assertEquals(new ArrayList<PropertySquare>(List.of(p1)), player.hasBuilding());
     }
 
@@ -192,8 +191,8 @@ class PlayerTest {
         PropertySquare p1 = new PropertySquare("test", 0, 50, 50, Color.BLACK);
         player.buyProperty(p1);
         player.setSelectedSquare(p1);
-        player.buildH("House");
-        Assertions.assertEquals(25, player.sellH("House"));
+        player.buildHouseOrHotel("House");
+        Assertions.assertEquals(25, player.sellHouseOrHotel("House"));
         Assertions.assertEquals(new ArrayList<PropertySquare>(), player.hasBuilding());
     }
 

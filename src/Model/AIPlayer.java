@@ -72,7 +72,7 @@ public class AIPlayer extends Player {
                 if(temp != null) {
                     this.setSelectedSquare(temp);
                     if (this.getBoolean()) {
-                        return this.buildH("House") > 0;
+                        return this.buildHouseOrHotel("House") > 0;
                     } else {
                         System.out.println("No properties");
                     }
@@ -96,7 +96,7 @@ public class AIPlayer extends Player {
             PropertySquare temp = this.getRandomSquare(propertyList);
             if(temp != null) {
                 this.setSelectedSquare(temp);
-                this.sellH("House");
+                this.sellHouseOrHotel("House");
             } else {
                 System.out.println("No properties");
             }

@@ -305,7 +305,7 @@ public class Player {
      * player build a house or a hotel according to the command on the selected square(a private field in player)
      *
      */
-    public int buildH(String answer) {
+    public int buildHouseOrHotel(String answer) {
         if(answer.equals("House")){
             return this.getSelectedSquare().buildHouse();
         } else if (answer.equals("Hotel")){
@@ -318,7 +318,7 @@ public class Player {
      * player sell a house or a hotel according to the command on the selected square(a private field in player)
      *
      */
-    public int sellH(String answer) {
+    public int sellHouseOrHotel(String answer) {
         if(answer.equals("House")){
             return this.getSelectedSquare().sellHouse();
         } else if (answer.equals("Hotel")){
