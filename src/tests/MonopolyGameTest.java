@@ -1,6 +1,8 @@
 package tests;
 
+import Model.AIPlayer;
 import Model.MonopolyGame;
+import Model.Square;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +28,7 @@ class MonopolyGameTest {
 
     @Test
     void buySquare() throws ParserConfigurationException, SAXException, IOException {
-        game.getPlayerInTurn().setCurrentLocation(MonopolyGame.board.getSquares()[2]);
+        game.getPlayerInTurn().setCurrentLocation(game.board.getSquares()[2]);
         game.buySquare();
         Assertions.assertEquals("Baltic Avenue", game.getPlayerInTurn().getProperties().get(0).getName());
     }
@@ -34,7 +36,7 @@ class MonopolyGameTest {
     @Test
     void playRound() throws ParserConfigurationException, SAXException, IOException {
         game.playRound();
-        Assertions.assertNotEquals(MonopolyGame.board.startingSquare(), game.getPlayerInTurn().getCurrentLocation());
+        Assertions.assertNotEquals(game.board.startingSquare(), game.getPlayerInTurn().getCurrentLocation());
     }
 
     @Test
@@ -66,16 +68,34 @@ class MonopolyGameTest {
     }
 
     @Test
-    void exportXML() {
-        /*game.playRound();
-        game.buySquare();*/
-        game.exportGameToXML("testSaveFile.xml");
+    void testLoadGame() {
+        Square[] map = game.board.getSquares();
+        Assertions.assertEquals(game.players.size(), 4);
+        for (int i = 0; i < game.players.size(); i++) {
+            if (i < 2) {
+                Assertions.assertFalse( game.players.get(i) instanceof AIPlayer);
+            } else {
+                Assertions.assertTrue( game.players.get(i) instanceof AIPlayer);
+            }
+        }
+        Assertions.assertEquals(map.length, 34);
+        for (int i = 0; i < map.length; i++) {
+            Assertions.assertEquals( map[i].getNumber(), i);
+        }
     }
 
     @Test
-    void loadXML() throws ParserConfigurationException, IOException, SAXException {
-        MonopolyGame game = new MonopolyGame("testSaveFile.xml");
-        game.printPlayersInfo();
-        game = null;
+    void testExportGameAndLoadGame() throws ParserConfigurationException, IOException, SAXException {
+        game.exportGameToXML("testUseFile.xml");
+        MonopolyGame game2 = new MonopolyGame("testUseFile.xml");
+        Assertions.assertEquals(game.players.size(), game2.players.size());
+        for (int i = 0; i < game.players.size(); i++) {
+            Assertions.assertEquals(game.players.get(i).getName(), game2.players.get(i).getName());
+        }
+        Assertions.assertEquals(game.board.getSquares().length, game2.board.getSquares().length);
+        for (int i = 0; i < game.board.getSquares().length; i++) {
+            Assertions.assertEquals(game.board.getSquareAt(i).getName(), game2.board.getSquareAt(i).getName());
+            Assertions.assertEquals(game.board.getSquareAt(i).getNumber(), game2.board.getSquareAt(i).getNumber());
+        }
     }
 }

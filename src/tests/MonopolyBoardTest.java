@@ -20,7 +20,7 @@ class MonopolyBoardTest {
     @BeforeEach
     void setUp() throws ParserConfigurationException, IOException, SAXException {
         game = new MonopolyGame("NewGame.xml");
-        board = MonopolyGame.board;
+        board = game.board;
     }
 
     @AfterEach
