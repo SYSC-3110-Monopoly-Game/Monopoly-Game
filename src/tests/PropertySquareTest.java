@@ -14,51 +14,53 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class PropertySquareTest {
 
+    private final int playerinitialcash = 500;
     private PropertySquare property;
-    private  Player p1;
-    private  Player p2;
-
-    private final int playerinitialcash = 350;
+    private Player p1;
+    private Player p2;
 
     @BeforeEach
     void setUp() {
-        property = new PropertySquare("p", 0, 50, 50, Color.BLACK);
-        p1= new Player("player1", 500, false, false, null, property, property,null, property);
-        p2= new Player("player2", 500, false, false, null, property, property,null, property);
+        property = new PropertySquare("p", 0, 50, 50, Color.BLACK, 30, 0, 50, null);
+        p1 = new Player("player1", 500, false, false, null, property, property, new ArrayList<PropertySquare>(), property);
+        p2 = new Player("player2", 500, false, false, null, property, property, new ArrayList<PropertySquare>(), property);
 
     }
 
     @AfterEach
     void tearDown() {
         property = null;
+        p1 = null;
+        p2 = null;
     }
 
     @Test
-    void getHousePrice(){
-        Assertions.assertEquals(50, property.getHousePrice());
+    void getHousePrice() {
+        Assertions.assertEquals(30, property.getHousePrice());
     }
 
     @Test
     void getHotelPrice() {
-        Assertions.assertEquals(250, property.getHotelPrice());
+        Assertions.assertEquals(150, property.getHotelPrice());
     }
 
     @Test
     void buildHouse() {
         property.setOwner(p1);
-        Assertions.assertEquals(50, property.buildHouse());
+        Assertions.assertEquals(30, property.buildHouse());
     }
 
     @Test
     void buildHotel() {
         property.setOwner(p1);
         property.buildHouse();
-        Assertions.assertEquals(200, property.buildHotel());
+        Assertions.assertEquals(120, property.buildHotel());
     }
 
     @Test
@@ -119,9 +121,29 @@ class PropertySquareTest {
     @Test
     void landOn() throws ParserConfigurationException, IOException, SAXException {
         new MonopolyGame("NewGame.xml");
+        p1 = new Player("player1", 500, false, false, null, property, property, new ArrayList<PropertySquare>(), property);
+        p2 = new Player("player2", 500, false, false, null, property, property, new ArrayList<PropertySquare>(), property);
+
         property.setOwner(p1);
         property.landOn(p2);
-        Assertions.assertEquals(playerinitialcash+50, p1.getCash());
-        Assertions.assertEquals(playerinitialcash-50, p2.getCash());
+        Assertions.assertEquals(playerinitialcash + 50, p1.getCash());
+        Assertions.assertEquals(playerinitialcash - 50, p2.getCash());
+    }
+
+    @Test
+    void toXML() {
+        String xml =
+                "<Square type=\"Property\">\n" +
+                        "<Name>p</Name>\n" +
+                        "<Number>0</Number>\n" +
+                        "<Price>50</Price>\n" +
+                        "<RentPrice>50</RentPrice>\n" +
+                        "<Color>-16777216</Color>\n" +
+                        "<HousePrice>30</HousePrice>\n" +
+                        "<HouseAmount>0</HouseAmount>\n" +
+                        "<HotelAmount>0</HotelAmount>\n" +
+                        "<Owner></Owner>\n" +
+                        "</Square>\n";
+        Assertions.assertEquals(property.toXML(), xml);
     }
 }

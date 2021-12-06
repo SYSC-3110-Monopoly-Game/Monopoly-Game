@@ -15,16 +15,6 @@ public class PropertySquare extends Square {
     private String ownerName;
     private Hotel hotel;
 
-
-    public PropertySquare(String name, int number, int buy, int rent, Color color) {
-        super(name, number);
-        this.buyPrice = buy;
-        this.rentPrice = rent;
-        this.color = color;
-        this.houses = new ArrayList<>();
-        this.hotel = null;
-        this.HousePrice = 0;
-    }
     public PropertySquare(String name, int number, int buy, int rent, Color color, int housePrice, int houseAmount, int hotel, String owner) {
         super(name, number);
         this.buyPrice = buy;

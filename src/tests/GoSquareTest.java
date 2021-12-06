@@ -1,9 +1,6 @@
 package tests;
 
-import Model.AIPlayer;
-import Model.GoSquare;
-import Model.MonopolyGame;
-import Model.Player;
+import Model.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
@@ -31,5 +28,16 @@ class GoSquareTest {
     void landOn() {
         goSquare.landOn(p);
         Assertions.assertEquals(goSquare, p.getCurrentLocation());
+    }
+
+    @Test
+    void toXML() {
+        String s =
+               "<Square type=\"Go\">\n" +
+                       "<Name>go</Name>\n" +
+                       "<Number>0</Number>\n" +
+                       "<Price>100</Price>\n" +
+                       "</Square>\n";
+        Assertions.assertEquals(goSquare.toXML(), s);
     }
 }

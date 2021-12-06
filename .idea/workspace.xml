@@ -8,30 +8,21 @@
   <component name="ChangeListManager">
     <list default="true" id="b3cb6e01-e85c-476d-a8c3-3d7553fdc473" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SavedGame.xml" beforeDir="false" afterPath="$PROJECT_DIR$/SavedGame.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/MonopolyGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/Model/MonopolyGame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/AIPlayerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/AIPlayerTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/FreeParkingSquareTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/FreeParkingSquareTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/GoSquareTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/GoSquareTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/GoToJailSquareTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/GoToJailSquareTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/MonopolyBoardTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/MonopolyBoardTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/MonopolyGameTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/MonopolyGameTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/PlayerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/PlayerTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/MonopolyGameGUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/MonopolyGameGUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/MonopolyGameGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/MonopolyGameGUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/view/SquareGridGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/view/SquareGridGUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/LandEController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/AIPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/AIPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/MonopolyGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/MonopolyGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/AIPlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/AIPlayerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/JailSquareTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/JailSquareTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/PropertySquareTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/PropertySquareTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tests/FreeParkingSquareTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/FreeParkingSquareTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tests/GoSquareTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/GoSquareTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tests/GoToJailSquareTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/GoToJailSquareTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/MonopolyBoardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/MonopolyBoardTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/MonopolyGameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/MonopolyGameTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/JailSquareTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/JailSquareTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tests/PlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/PlayerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/PropertySquareTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/PropertySquareTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/taxSquareTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/taxSquareTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/MonopolyGameGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MonopolyGameGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/SquareGridGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/SquareGridGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +57,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="JavaMethodFindUsagesOptions.isSearchForBaseMethod" value="false" />
     <property name="Repository.Attach.Annotations" value="false" />
@@ -99,7 +91,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MonopolyGameTest.testExportGameAndLoadGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GoToJailSquareTest.toXML" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Monopoly-Game" />
       <extension name="coverage">
         <pattern>
@@ -108,14 +100,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.MonopolyGameTest" />
-      <option name="METHOD_NAME" value="testExportGameAndLoadGame" />
+      <option name="MAIN_CLASS_NAME" value="tests.GoToJailSquareTest" />
+      <option name="METHOD_NAME" value="toXML" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MonopolyGameTest.testLoadGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="JailSquareTest.toXML" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Monopoly-Game" />
       <extension name="coverage">
         <pattern>
@@ -124,14 +116,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.MonopolyGameTest" />
-      <option name="METHOD_NAME" value="testLoadGame" />
+      <option name="MAIN_CLASS_NAME" value="tests.JailSquareTest" />
+      <option name="METHOD_NAME" value="toXML" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PropertySquareTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PropertySquareTest.toXML" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Monopoly-Game" />
       <extension name="coverage">
         <pattern>
@@ -141,12 +133,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="tests" />
       <option name="MAIN_CLASS_NAME" value="tests.PropertySquareTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="METHOD_NAME" value="toXML" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="taxSquareTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="taxSquareTest.toXML" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Monopoly-Game" />
       <extension name="coverage">
         <pattern>
@@ -156,25 +149,26 @@
       </extension>
       <option name="PACKAGE_NAME" value="tests" />
       <option name="MAIN_CLASS_NAME" value="tests.taxSquareTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="METHOD_NAME" value="toXML" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
+      <item itemvalue="JUnit.JailSquareTest.toXML" />
+      <item itemvalue="JUnit.GoToJailSquareTest.toXML" />
+      <item itemvalue="JUnit.taxSquareTest.toXML" />
+      <item itemvalue="JUnit.PropertySquareTest.toXML" />
       <item itemvalue="Application.Main" />
-      <item itemvalue="JUnit.taxSquareTest" />
-      <item itemvalue="JUnit.PropertySquareTest" />
-      <item itemvalue="JUnit.MonopolyGameTest.testLoadGame" />
-      <item itemvalue="JUnit.MonopolyGameTest.testExportGameAndLoadGame" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.MonopolyGameTest.testExportGameAndLoadGame" />
-        <item itemvalue="JUnit.MonopolyGameTest.testLoadGame" />
-        <item itemvalue="JUnit.PropertySquareTest" />
-        <item itemvalue="JUnit.taxSquareTest" />
+        <item itemvalue="JUnit.PropertySquareTest.toXML" />
+        <item itemvalue="JUnit.taxSquareTest.toXML" />
+        <item itemvalue="JUnit.GoToJailSquareTest.toXML" />
+        <item itemvalue="JUnit.JailSquareTest.toXML" />
       </list>
     </recent_temporary>
   </component>
@@ -216,6 +210,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
