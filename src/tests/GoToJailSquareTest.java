@@ -25,4 +25,14 @@ class GoToJailSquareTest {
         goJail.landOn(p);
         Assertions.assertEquals(jail, p.getCurrentLocation());
     }
+
+    @Test
+    void toXML() {
+        String xml =
+                "<Square type=\"GoToJail\">\n" +
+                        "<Name>go</Name>\n" +
+                        "<Number>0</Number>\n" +
+                        "</Square>\n";
+        Assertions.assertEquals(goJail.toXML(), xml);
+    }
 }

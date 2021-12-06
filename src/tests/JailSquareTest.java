@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class JailSquareTest {
 
-    private final JailSquare s= new JailSquare("go", 0, 100,null);
+    private final JailSquare s= new JailSquare("jail", 0, 100,null);
     private final Player p  = new Player("player1", 500, false, false, null, s, s, null, null);
 
 
@@ -47,4 +47,14 @@ class JailSquareTest {
         Assertions.assertEquals(s.map, s.getMap());
     }
 
+    @Test
+    void toXML() {
+        String xml =
+                "<Square type=\"Jail\">\n" +
+                        "<Name>jail</Name>\n" +
+                        "<Number>0</Number>\n" +
+                        "<Price>100</Price>\n" +
+                        "<JailMap></JailMap>\n"+"</Square>\n";
+        Assertions.assertEquals(s.toXML(), xml);
+    }
 }

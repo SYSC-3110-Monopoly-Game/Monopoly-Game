@@ -46,7 +46,7 @@ public class MonopolyGameGUI extends JFrame {
         //load/export gui
         JPanel lAndE = new JPanel(new GridLayout(1, 2));
         JButton exportCurrentGame = new JButton("Export Current Game");
-        exportCurrentGame.addActionListener(e -> this.game.exportGameToXML("SavedGame.xml"));
+        exportCurrentGame.addActionListener(e -> this.game.exportGameToXML(Constants.SAVED_FILE_PATH));
         lAndE.add(exportCurrentGame);
         this.add(lAndE, BorderLayout.PAGE_START);
 

@@ -20,29 +20,28 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PropertySquareTest {
 
-    private PropertySquare property;
-    private  Player p1;
-    private  Player p2;
-
     private final int playerinitialcash = 500;
+    private PropertySquare property;
+    private Player p1;
+    private Player p2;
 
     @BeforeEach
     void setUp() {
-        property = new PropertySquare("p", 0, 50, 50, Color.BLACK,30,0,50,null);
-        p1= new Player("player1", 500, false, false, null, property, property,new ArrayList<PropertySquare>(), property);
-        p2= new Player("player2", 500, false, false, null, property, property,new ArrayList<PropertySquare>(), property);
+        property = new PropertySquare("p", 0, 50, 50, Color.BLACK, 30, 0, 50, null);
+        p1 = new Player("player1", 500, false, false, null, property, property, new ArrayList<PropertySquare>(), property);
+        p2 = new Player("player2", 500, false, false, null, property, property, new ArrayList<PropertySquare>(), property);
 
     }
 
     @AfterEach
     void tearDown() {
         property = null;
-        p1=null;
-        p2=null;
+        p1 = null;
+        p2 = null;
     }
 
     @Test
-    void getHousePrice(){
+    void getHousePrice() {
         Assertions.assertEquals(30, property.getHousePrice());
     }
 
@@ -122,12 +121,29 @@ class PropertySquareTest {
     @Test
     void landOn() throws ParserConfigurationException, IOException, SAXException {
         new MonopolyGame("NewGame.xml");
-        p1= new Player("player1", 500, false, false, null, property, property,new ArrayList<PropertySquare>(), property);
-        p2= new Player("player2", 500, false, false, null, property, property,new ArrayList<PropertySquare>(), property);
+        p1 = new Player("player1", 500, false, false, null, property, property, new ArrayList<PropertySquare>(), property);
+        p2 = new Player("player2", 500, false, false, null, property, property, new ArrayList<PropertySquare>(), property);
 
         property.setOwner(p1);
         property.landOn(p2);
-        Assertions.assertEquals(playerinitialcash+50, p1.getCash());
-        Assertions.assertEquals(playerinitialcash-50, p2.getCash());
+        Assertions.assertEquals(playerinitialcash + 50, p1.getCash());
+        Assertions.assertEquals(playerinitialcash - 50, p2.getCash());
+    }
+
+    @Test
+    void toXML() {
+        String xml =
+                "<Square type=\"Property\">\n" +
+                        "<Name>p</Name>\n" +
+                        "<Number>0</Number>\n" +
+                        "<Price>50</Price>\n" +
+                        "<RentPrice>50</RentPrice>\n" +
+                        "<Color>-16777216</Color>\n" +
+                        "<HousePrice>30</HousePrice>\n" +
+                        "<HouseAmount>0</HouseAmount>\n" +
+                        "<HotelAmount>0</HotelAmount>\n" +
+                        "<Owner></Owner>\n" +
+                        "</Square>\n";
+        Assertions.assertEquals(property.toXML(), xml);
     }
 }
