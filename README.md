@@ -41,6 +41,7 @@ This is a simplified Monopoly Game.
 The game interface consists of a ‘board game’ section and an ‘information’ section.
 
 Before each game starts, players can choose between "start a new game" or "load a previous game". Players can also "save current game process" and "load a previous game process" during the game.
+To configure the game, you can edit values in the "NewGame.xml" file
 
 Players need to roll dices and move to next square depend on those dices. Different squares have different functions.
 A player wins the game when all other players go bankrupt.
