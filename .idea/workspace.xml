@@ -6,24 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3cb6e01-e85c-476d-a8c3-3d7553fdc473" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/FreeParkingSquareTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/FreeParkingSquareTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/GoSquareTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/GoSquareTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/GoToJailSquareTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/GoToJailSquareTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/JailSquareTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/JailSquareTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/PropertySquareTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Monopoly-Game/tests/PropertySquareTest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/FreeParkingSquareTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/FreeParkingSquareTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/GoSquareTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/GoSquareTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/GoToJailSquareTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/GoToJailSquareTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/JailSquareTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/JailSquareTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/PlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/PlayerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/PropertySquareTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/PropertySquareTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/taxSquareTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/taxSquareTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/MonopolyGameGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MonopolyGameGUI.java" afterDir="false" />
-    </list>
+    <list default="true" id="935d1840-f7e3-487d-b6a7-99f15601c367" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -71,6 +54,11 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\SYSC3110\Monopoly-Game\src\UML and Sequence Diagrams\Milestone4" />
+    </key>
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
