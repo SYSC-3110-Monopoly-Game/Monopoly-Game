@@ -189,7 +189,6 @@ public class MonopolyGame {
         nextSquare.landOn(p);
     }
 
-
     /**
      * return the winner of the game
      */
@@ -201,7 +200,6 @@ public class MonopolyGame {
         else
             return players.get(0);
     }
-
 
     /**
      * do all needed check when rolling dices
@@ -289,6 +287,8 @@ public class MonopolyGame {
 
         if (doubleCounter == 3 || doubleCounter == 0 && playerInTurn instanceof AIPlayer) {
             playerInTurn.setDiceRolled(false);
+        } else if (doubleCounter < 3 && doubleCounter > 0 && dice.hasDoubles()) {
+            playerInTurn.setDiceRolled(false);
         } else if (!(playerInTurn instanceof AIPlayer)) {
             playerInTurn.setDiceRolled(true);
         }
@@ -320,7 +320,8 @@ public class MonopolyGame {
         } else {  // if player not in jail
             if (dice.hasDoubles()) {
                 doubleCounter++;
-                updateViews(playerInTurn, Enums.DOUBLES);
+                movePlayer(playerInTurn, distanceToMove);
+                updateViews(playerInTurn, Enums.ROLL_DICE);
             } else {
                 movePlayer(playerInTurn, distanceToMove);
                 updateViews(playerInTurn, Enums.ROLL_DICE);
