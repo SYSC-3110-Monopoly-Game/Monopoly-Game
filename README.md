@@ -546,7 +546,10 @@ Rebbeca Li
 
 Shizhong Shang
   
-- 
+- implement player.java 
+- implement AIplayer.java
+- refactor some function names in java
+- fix the xml file
 
 Zirui Qiao
 

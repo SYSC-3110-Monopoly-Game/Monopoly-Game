@@ -57,6 +57,7 @@ public class AIPlayer extends Player {
             PropertySquare temp = this.getRandomSquare(this.getSellProperties());
             if (temp != null) {
                 this.sellProperty(temp);
+                System.out.println("A property has been sold");
             } else {
                 System.out.println("No properties");
                 break;
@@ -137,6 +138,8 @@ public class AIPlayer extends Player {
 
         if (!this.isBankrupt()) {
             game.nextTurn();
+        } else {
+            game.updateViews(this, Enums.BANKRUPT);
         }
     }
 

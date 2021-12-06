@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.*;
 
 public class MonopolyGame {
-    public static MonopolyBoard board;
+    public MonopolyBoard board;
     public static Dice dice;
     private final ArrayList<MonopolyGameGUI> views;
     public ArrayList<Player> players;
@@ -278,9 +278,8 @@ public class MonopolyGame {
         handlePlayerJailStatus(inJail, distance);
 
         //check and handle player bankrupt status
-        if (playerInTurn.isBankrupt()) {
+        if (playerInTurn.isBankrupt() && !(playerInTurn instanceof AIPlayer)) {
             updateViews(playerInTurn, Enums.BANKRUPT);
-
         }
 
         //check and handle game winner( if there is any)
@@ -321,7 +320,6 @@ public class MonopolyGame {
         } else {  // if player not in jail
             if (dice.hasDoubles()) {
                 doubleCounter++;
-                movePlayer(playerInTurn, distanceToMove);
                 updateViews(playerInTurn, Enums.DOUBLES);
             } else {
                 movePlayer(playerInTurn, distanceToMove);
