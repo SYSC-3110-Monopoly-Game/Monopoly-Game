@@ -1,7 +1,10 @@
 package Model;
 
+import org.xml.sax.SAXException;
 import view.Enums;
 
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -12,7 +15,6 @@ public class AIPlayer extends Player {
     public AIPlayer(String name, int cash, boolean inJail, boolean diceRolled, Enums decision, Square lastLocation, Square currentLocation, ArrayList<PropertySquare> sOwned, PropertySquare selectedSquare) {
         super(name, cash, inJail, diceRolled, decision, lastLocation, currentLocation, sOwned, selectedSquare);
     }
-
 
     /**
      * get a random boolean
@@ -106,4 +108,36 @@ public class AIPlayer extends Player {
             System.out.println("No houses neither hotels");
         }
     }
+
+    public void AIProcess(MonopolyGame game, int doubleCounter) throws IOException, ParserConfigurationException, SAXException {
+        int temp1 = doubleCounter;
+        game.playRound();
+        int temp2 = game.getDoubleCounter();
+
+        while (!this.isInJail() && temp1 < temp2 && temp1 != 3) {
+            temp1 = temp2;
+            game.playRound();
+        }
+
+        if (this.isInJail() && temp2 == 1) {
+            game.updateViews(this, Enums.NO_DOUBLES);
+        } else if (temp1 == 3) {
+            game.updateViews(this, Enums.DOUBLES);
+        } else {
+            this.buyProperty(this.getCurrentLocation());
+            if (this.buildBuildings()) {
+                game.getViews().get(0).sellBuildBuilding(Enums.BUILD, Enums.HOUSE, this);
+            }
+            while (this.isBankrupt() && !this.hasBuilding().isEmpty()) {
+                this.sellBuildings();
+                game.getViews().get(0).sellBuildBuilding(Enums.SELLH, Enums.HOUSE, this);
+            }
+            this.sellSomeThing();
+        }
+
+        if (!this.isBankrupt()) {
+            game.nextTurn();
+        }
+    }
+
 }
