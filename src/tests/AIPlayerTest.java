@@ -13,6 +13,7 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,13 +25,14 @@ class AIPlayerTest {
     void setUp() throws ParserConfigurationException, IOException, SAXException {
         MonopolyGame game = new MonopolyGame("NewGame.xml");
         ai = new AIPlayer("1", 500, false, false, null, game.board.startingSquare(),
-                game.board.startingSquare(), null, null);
+                game.board.startingSquare(), new ArrayList<PropertySquare>(), null);
 
         }
 
     @AfterEach
     void tearDown() {
         ai = null;
+
     }
 
     @Test
@@ -49,8 +51,6 @@ class AIPlayerTest {
 
     @Test
     void sellSomeThing() {
-        PropertySquare p = new PropertySquare("test", 2, 350, 50, Color.BLACK, 0,0,0,null);
-        ai.buyProperty(p);
         ai.decreaseCash(10);
         ai.sellSomeThing();
         Assertions.assertEquals(0, ai.getProperties().size());

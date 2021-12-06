@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class JailSquareTest {
 
-    private final JailSquare s= new JailSquare("go", 0, 100);
+    private final JailSquare s= new JailSquare("go", 0, 100,null);
     private final Player p  = new Player("player1", 500, false, false, null, s, s, null, null);
 
 

@@ -18,10 +18,9 @@ import java.util.List;
 
 class PlayerTest {
 
+    private final int playerinitialcash = 600;
     private MonopolyGame game;
     private Player player;
-
-    private final int playerinitialcash = 350;
 
     @BeforeEach
     void setUp() throws ParserConfigurationException, IOException, SAXException {
@@ -37,28 +36,30 @@ class PlayerTest {
 
     @Test
     void getName() {
-        Assertions.assertEquals(""+1, player.getName());
+        Assertions.assertEquals("" + 1, player.getName());
     }
 
     @Test
-    void testToString() {}
+    void increaseCash() {
+        player.increaseCash(100);
+        Assertions.assertEquals(playerinitialcash + 100, player.getCash());
+    }
+
+    @Test
+    void decreaseCash() {
+        player.decreaseCash(100);
+        Assertions.assertEquals(playerinitialcash - 100, player.getCash());
+    }
+
+    @Test
+    void testToString() {
+    }
 
     @Test
     void getCash() {
         Assertions.assertEquals(player.getCash(), playerinitialcash);
     }
 
-    @Test
-    void decreaseCash() {
-        player.decreaseCash(100);
-        Assertions.assertEquals(playerinitialcash-100, player.getCash());
-    }
-
-    @Test
-    void increaseCash() {
-        player.increaseCash(100);
-        Assertions.assertEquals(playerinitialcash+100, player.getCash());
-    }
 
     @Test
     void isBankrupt() {
@@ -127,15 +128,15 @@ class PlayerTest {
 
     @Test
     void getPropertyFromName() {
-        PropertySquare p = new PropertySquare("test", 0, 50, 50, Color.BLACK);
+        PropertySquare p = new PropertySquare("test", 0, 50, 50, Color.BLACK, 0, 0, 0, null);
         player.buyProperty(p);
         Assertions.assertEquals(p, player.getPropertyFromName("test"));
     }
 
     @Test
     void hasWholeSet() {
-        PropertySquare p1 = new PropertySquare("test", 0, 50, 50, Color.BLACK);
-        PropertySquare p2 = new PropertySquare("test", 0, 50, 50, Color.BLACK);
+        PropertySquare p1 = new PropertySquare("test", 0, 50, 50, Color.BLACK, 0, 0, 0, null);
+        PropertySquare p2 = new PropertySquare("test", 0, 50, 50, Color.BLACK, 0, 0, 0, null);
         player.buyProperty(p1);
         player.buyProperty(p2);
         ArrayList<PropertySquare> test = new ArrayList<>();
@@ -151,8 +152,8 @@ class PlayerTest {
 
     @Test
     void removeRailroadUtility() {
-        PropertySquare p1 = new PropertySquare("test", 0, 50, 50, Color.BLACK);
-        PropertySquare p2 = new PropertySquare("test", 0, 50, 50, Color.BLUE);
+        PropertySquare p1 = new PropertySquare("test", 0, 50, 50, Color.BLACK, 0, 0, 0, null);
+        PropertySquare p2 = new PropertySquare("test", 0, 50, 50, Color.BLUE, 0, 0, 0, null);
         ArrayList<PropertySquare> test = new ArrayList<>();
         test.add(p1);
         test.add(p2);
@@ -164,8 +165,8 @@ class PlayerTest {
 
     @Test
     void countNumber() {
-        PropertySquare p1 = new PropertySquare("test", 0, 50, 50, Color.BLACK);
-        PropertySquare p2 = new PropertySquare("test", 0, 50, 50, Color.BLACK);
+        PropertySquare p1 = new PropertySquare("test", 0, 50, 50, Color.BLACK, 0, 0, 0, null);
+        PropertySquare p2 = new PropertySquare("test", 0, 50, 50, Color.BLACK, 0, 0, 0, null);
         player.buyProperty(p1);
         player.buyProperty(p2);
         Assertions.assertEquals(2, player.countNumber(Color.BLACK));
@@ -173,8 +174,8 @@ class PlayerTest {
 
     @Test
     void getAvailableProperties() {
-        PropertySquare p1 = new PropertySquare("test", 0, 50, 50, Color.BLACK);
-        PropertySquare p2 = new PropertySquare("test", 0, 50, 50, Color.BLACK);
+        PropertySquare p1 = new PropertySquare("test", 0, 50, 50, Color.BLACK, 0, 0, 0, null);
+        PropertySquare p2 = new PropertySquare("test", 0, 50, 50, Color.BLACK, 0, 0, 0, null);
         ArrayList<PropertySquare> test = new ArrayList<>();
         test.add(p1);
         test.add(p2);
@@ -183,7 +184,7 @@ class PlayerTest {
 
     @Test
     void buildH() {
-        PropertySquare p1 = new PropertySquare("test", 0, 50, 50, Color.BLACK);
+        PropertySquare p1 = new PropertySquare("test", 0, 50, 50, Color.BLACK, 50, 0, 0, null);
         player.buyProperty(p1);
         player.setSelectedSquare(p1);
         Assertions.assertEquals(player.buildH(Enums.HOUSE), 50);
@@ -192,7 +193,7 @@ class PlayerTest {
 
     @Test
     void sellH() {
-        PropertySquare p1 = new PropertySquare("test", 0, 50, 50, Color.BLACK);
+        PropertySquare p1 = new PropertySquare("test", 0, 50, 50, Color.BLACK, 50, 0, 50, null);
         player.buyProperty(p1);
         player.setSelectedSquare(p1);
         player.buildH(Enums.HOUSE);
