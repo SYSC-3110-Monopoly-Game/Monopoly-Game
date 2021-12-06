@@ -156,11 +156,11 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.Main" />
       <item itemvalue="JUnit.JailSquareTest.toXML" />
       <item itemvalue="JUnit.GoToJailSquareTest.toXML" />
       <item itemvalue="JUnit.taxSquareTest.toXML" />
       <item itemvalue="JUnit.PropertySquareTest.toXML" />
-      <item itemvalue="Application.Main" />
     </list>
     <recent_temporary>
       <list>
