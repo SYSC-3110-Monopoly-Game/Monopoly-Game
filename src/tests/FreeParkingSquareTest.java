@@ -10,7 +10,7 @@ import java.io.IOException;
 
 class FreeParkingSquareTest {
 
-    private final MonopolyBoard board = new MonopolyBoard("NewGame.xml");
+    private final MonopolyGame game = new MonopolyGame("NewGame.xml");
 
     FreeParkingSquareTest() throws ParserConfigurationException, IOException, SAXException {
     }
@@ -19,7 +19,8 @@ class FreeParkingSquareTest {
     @Test
     void landOn() {
         FreeParkingSquare freeParking = new FreeParkingSquare("FreeParking", 100);
-        Player p  = new Player("player1", 500, false, false, null, MonopolyGame.board.startingSquare(), MonopolyGame.board.startingSquare(), null, null);
+        Player p  = new Player("player1", 500, false, false, null,
+                game.board.startingSquare(), game.board.startingSquare(), null, null);
         freeParking.landOn(p);
         Assertions.assertEquals(p.getCurrentLocation(), freeParking);
     }

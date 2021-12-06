@@ -6,11 +6,20 @@ import Model.MonopolyGame;
 import Model.Player;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 
 class GoSquareTest {
 
+    MonopolyGame game = new MonopolyGame("NewGame.xml");
     private final GoSquare goSquare = new GoSquare("go", 0, 100);
-    private final Player p  = new Player("player1", 500, false, false, null, MonopolyGame.board.startingSquare(), MonopolyGame.board.startingSquare(), null, null);
+    private final Player p  = new Player("player1", 500, false, false, null,
+            game.board.startingSquare(), game.board.startingSquare(), null, null);
+
+    GoSquareTest() throws ParserConfigurationException, IOException, SAXException {
+    }
 
 
     @Test

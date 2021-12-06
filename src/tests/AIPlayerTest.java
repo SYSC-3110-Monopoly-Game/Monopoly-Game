@@ -23,7 +23,8 @@ class AIPlayerTest {
     @BeforeEach
     void setUp() throws ParserConfigurationException, IOException, SAXException {
         MonopolyGame game = new MonopolyGame("NewGame.xml");
-        ai = new AIPlayer("1", 500, false, false, null, MonopolyGame.board.startingSquare(), MonopolyGame.board.startingSquare(), null, null);
+        ai = new AIPlayer("1", 500, false, false, null, game.board.startingSquare(),
+                game.board.startingSquare(), null, null);
 
         }
 

@@ -32,7 +32,7 @@ public class MonopolyGameGUI extends JFrame {
         this.setLayout(new BorderLayout());
 
         //pass the squares to the view
-        Square[] squares = MonopolyGame.board.getSquares();
+        Square[] squares = game.board.getSquares();
         ArrayList<Player> players = game.players;
 
         //board gui
@@ -141,16 +141,6 @@ public class MonopolyGameGUI extends JFrame {
         //set dice value
         int[] diceValues = MonopolyGame.dice.getDice();
         squareGUI.setDiceImages(diceValues[0], diceValues[1]);
-
-        if (player.isInJail()) {
-            if (MonopolyGame.dice.hasDoubles())
-                JOptionPane.showMessageDialog(squareGUI, "You rolled a double!! You get to get out of jail fo free!\n");
-            else {
-                message.append("You did not roll a double!! You cannot get out of jail fo free!\n");
-                infoDisplayGUI.setNextEnabled(true);
-                infoDisplayGUI.setRollEnabled(false);
-            }
-        }
 
         // refresh location, buy, rent and cash.
         //start here
