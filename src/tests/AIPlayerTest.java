@@ -34,21 +34,21 @@ class AIPlayerTest {
 
     @Test
     void getRandomSquare() {
-        PropertySquare p = new PropertySquare("test", 2, 50, 50, Color.BLACK);
+        PropertySquare p = new PropertySquare("test", 2, 50, 50, Color.BLACK, 0,0,0,null);
         ai.buyProperty(p);
         Assertions.assertEquals(p, ai.getRandomSquare(ai.getProperties()));
     }
 
     @Test
     void getSellProperties() {
-        PropertySquare p = new PropertySquare("test", 2, 50, 50, Color.BLACK);
+        PropertySquare p = new PropertySquare("test", 2, 50, 50, Color.BLACK, 0,0,0,null);
         ai.buyProperty(p);
         Assertions.assertEquals(ai.getProperties(), ai.getSellProperties());
     }
 
     @Test
     void sellSomeThing() {
-        PropertySquare p = new PropertySquare("test", 2, 350, 50, Color.BLACK);
+        PropertySquare p = new PropertySquare("test", 2, 350, 50, Color.BLACK, 0,0,0,null);
         ai.buyProperty(p);
         ai.decreaseCash(10);
         ai.sellSomeThing();
