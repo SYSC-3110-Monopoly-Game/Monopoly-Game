@@ -528,11 +528,12 @@ If player rolls a double and lands on go to jail, the double lets them get out o
 
 * src
     - UML and Sequence Diagrams
-        - Milestone3
+        - Milestone4
     - view
         - Enums
     - model
         - Constants
+
 
 
 ## Team Responsibilities
@@ -573,9 +574,7 @@ Zirui Qiao
 
 ## Detailed Set Up
     
-In this milestone, the main job is to add methods to load/save game from/to XML files and refactor smelly codes. For all classes that their data needed to be saved for next game, a toXML() method was created inside of it. For some important classes, for example, MonopolyGame class. Those classes are responsible for arranging other classes, methods used to analyze XML files and package data into XML files are created. 
-
-## Known Issues/bugs
+In this milestone, the main job is to add methods to load/save game from/to XML files and refactor smelly codes. For all classes that their data needed to be saved for next game, a toXML() method was created inside of it. For some important classes, for example, MonopolyGame class. Those classes are responsible for arranging other classes, methods used to analyze XML files and package data into XML files are created.
 
 
 </details>

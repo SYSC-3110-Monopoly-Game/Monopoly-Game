@@ -87,7 +87,7 @@ public class MonopolyGameGUI extends JFrame {
             case SELL -> handleBuyOrSell(player, players, Enums.SELL);
             case ROLL_DICE -> handleRollDice(currentLocation, lastLocation, player, players);
             case BANKRUPT -> handleBankrupt(currentLocation, player);
-            case NO_DOUBLES -> handleNoDoubles(player);
+            case NO_DOUBLES -> handleNoDoubles(player, players);
             case DOUBLES -> handleDoubles(currentLocation, player);
             case WINNER -> handleWinner(lastLocation, player);
             case BUILD, SELLH -> HotelOrHouse(player, command);
@@ -159,20 +159,35 @@ public class MonopolyGameGUI extends JFrame {
                 message.append(player.getName()).append(" is on Square ").append(player.getCurrentLocation().getName());
         }
 
-        infoDisplayGUI.setNextEnabled(true);
-        infoDisplayGUI.setRollEnabled(false);
         squareGUI.setMessage(message.toString());
+
+        if (MonopolyGame.dice.hasDoubles()) {
+            infoDisplayGUI.setPlayersInfo(players, player);
+            handleDoubles(currentLocation, player);
+        } else {
+            infoDisplayGUI.setNextEnabled(true);
+            infoDisplayGUI.setRollEnabled(false);
+        }
     }
 
     private void handleBankrupt(Square currentLocation, Player player) {
-        int result = JOptionPane.showConfirmDialog(squareGUI, "You are Bankrupt!! Do you want to sell your properties and stay in the game?");
-        switch (result) {
-            case JOptionPane.YES_OPTION -> this.getSellDecision(player.getProperties(), player);
-            case JOptionPane.NO_OPTION, JOptionPane.CLOSED_OPTION, JOptionPane.CANCEL_OPTION -> {
-                squareGUI.removePlayerGUILocation(player, currentLocation.getNumber());
-                game.removeBankruptPlayer(player);
+        if (!player.getProperties().isEmpty()) {
+            int result = JOptionPane.showConfirmDialog(squareGUI, "You are Bankrupt!! Do you want to sell your properties and stay in the game?");
+            switch (result) {
+                case JOptionPane.YES_OPTION -> this.getSellDecision(player.getProperties(), player);
+                case JOptionPane.NO_OPTION, JOptionPane.CLOSED_OPTION, JOptionPane.CANCEL_OPTION -> {
+                    squareGUI.removePlayerGUILocation(player, currentLocation.getNumber());
+                    game.removeBankruptPlayer(player);
+                }
             }
+        } else {
+            infoDisplayGUI.setCash(player.getCash());
+            infoDisplayGUI.setPropertyList(player.getProperties().toString());
+            JOptionPane.showMessageDialog(squareGUI, "You (" + player.getName() + ") are Bankrupt!!");
+            squareGUI.removePlayerGUILocation(player, currentLocation.getNumber());
+            game.removeBankruptPlayer(player);
         }
+
 
         infoDisplayGUI.setBuyEnabled(false);
         infoDisplayGUI.setSellEnabled(false);
@@ -180,11 +195,12 @@ public class MonopolyGameGUI extends JFrame {
         infoDisplayGUI.setRollEnabled(false);
     }
 
-    private void handleNoDoubles(Player player) {
+    private void handleNoDoubles(Player player, ArrayList<Player> players) {
         if(!player.isInJail()){
             JOptionPane.showMessageDialog(squareGUI, "This is your 2nd round in jail, you can leave the jail next round");
             squareGUI.changePlayerGUILocation(player, Constants.JAIL_SQUARE_INDEX, Constants.JAIL_SQUARE_INDEX);
         }
+        infoDisplayGUI.setPlayersInfo(players, player);
         infoDisplayGUI.setNextEnabled(true);
         infoDisplayGUI.setRollEnabled(false);
     }
