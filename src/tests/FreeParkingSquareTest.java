@@ -19,9 +19,20 @@ class FreeParkingSquareTest {
     @Test
     void landOn() {
         FreeParkingSquare freeParking = new FreeParkingSquare("FreeParking", 100);
-        Player p  = new Player("player1", 500, false, false, null,
+        Player p = new Player("player1", 500, false, false, null,
                 game.board.startingSquare(), game.board.startingSquare(), null, null);
         freeParking.landOn(p);
         Assertions.assertEquals(p.getCurrentLocation(), freeParking);
+    }
+
+    @Test
+    void toXML() {
+        FreeParkingSquare freeParking = new FreeParkingSquare("FreeParking", 100);
+        String s =
+                "<Square type=\"FreeParking\">\n" +
+                        "<Name>FreeParking</Name>\n" +
+                        "<Number>100</Number>\n" +
+                        "</Square>\n";
+        Assertions.assertEquals(freeParking.toXML(), s);
     }
 }

@@ -37,7 +37,7 @@ the initial cost of the property.
 
 # User Manual
     
-This is a Simplify Monopoly Game.
+This is a simplified Monopoly Game.
 The game interface consists of a ‘board game’ section and an ‘information’ section.
 
 Before each game starts, players can choose between "start a new game" or "load a previous game". Players can also "save current game process" and "load a previous game process" during the game.
@@ -166,7 +166,7 @@ A player wins the game when all other players go bankrupt.
 </details>
 </details>
 </details>  
-</details>
+
 <br>
 <details><summary>Bankrupt</summary> 
     
@@ -529,13 +529,20 @@ If player rolls a double and lands on go to jail, the double lets them get out o
 * src
     - UML and Sequence Diagrams
         - Milestone4
+    - view
+        - Enums
+    - model
+        - Constants
+
 
 
 ## Team Responsibilities
 
 Liya Abebe
 
-- 
+- fixed issues from M3 by refactoring code in model and view folders
+- fixed and added tests
+- uml and sequence diagrams
 
  
 Rebbeca Li

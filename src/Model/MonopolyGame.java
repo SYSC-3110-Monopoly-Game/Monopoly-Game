@@ -300,7 +300,7 @@ public class MonopolyGame {
      * @param inJail
      * @param distanceToMove
      */
-    public void handlePlayerJailStatus(Boolean inJail, int distanceToMove) {
+    private void handlePlayerJailStatus(Boolean inJail, int distanceToMove) {
         //if player is in jail, only let player out if they rolled a double
         if (inJail) {
             if (dice.hasDoubles()) {
