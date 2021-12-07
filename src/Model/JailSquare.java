@@ -10,12 +10,6 @@ public class JailSquare extends Square {
     public HashMap<Player, Integer> map;
     public HashMap<String, Integer> stringMap;
 
-    public JailSquare(String name, int number, int jailFee) {
-        super(name, number);
-        this.map = new HashMap<>();
-        this.jailFee = jailFee;
-    }
-
     public JailSquare(String name, int number, int jailFee, HashMap<String, Integer> map) {
         super(name, number);
         this.map = new HashMap<>();

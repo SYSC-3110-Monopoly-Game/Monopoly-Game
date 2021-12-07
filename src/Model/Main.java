@@ -26,7 +26,7 @@ public class Main {
         newGame.addActionListener(e -> {
             MonopolyGame game = null;
             try {
-                game = new MonopolyGame("NewGame.xml");
+                game = new MonopolyGame(Constants.NEW_FILE_PATH);
             } catch (ParserConfigurationException | IOException | SAXException ex) {
                 ex.printStackTrace();
             }
@@ -40,7 +40,7 @@ public class Main {
         load.addActionListener(e -> {
             MonopolyGame game = null;
             try {
-                game = new MonopolyGame("SavedGame.xml");
+                game = new MonopolyGame(Constants.SAVED_FILE_PATH);
             } catch (ParserConfigurationException | SAXException | IOException parserConfigurationException) {
                 parserConfigurationException.printStackTrace();
             }

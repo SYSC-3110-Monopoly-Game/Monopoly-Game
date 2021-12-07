@@ -6,10 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b3cb6e01-e85c-476d-a8c3-3d7553fdc473" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-    </list>
+    <list default="true" id="935d1840-f7e3-487d-b6a7-99f15601c367" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -43,6 +40,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="JavaMethodFindUsagesOptions.isSearchForBaseMethod" value="false" />
     <property name="Repository.Attach.Annotations" value="false" />
@@ -52,10 +50,16 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/testUseFile.xml" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\SYSC3110\Monopoly-Game\src\UML and Sequence Diagrams\Milestone4" />
+    </key>
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
@@ -76,7 +80,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MonopolyGameTest.testExportGameAndLoadGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="GoToJailSquareTest.toXML" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Monopoly-Game" />
       <extension name="coverage">
         <pattern>
@@ -85,14 +89,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.MonopolyGameTest" />
-      <option name="METHOD_NAME" value="testExportGameAndLoadGame" />
+      <option name="MAIN_CLASS_NAME" value="tests.GoToJailSquareTest" />
+      <option name="METHOD_NAME" value="toXML" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MonopolyGameTest.testLoadGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="JailSquareTest.toXML" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Monopoly-Game" />
       <extension name="coverage">
         <pattern>
@@ -101,14 +105,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="tests" />
-      <option name="MAIN_CLASS_NAME" value="tests.MonopolyGameTest" />
-      <option name="METHOD_NAME" value="testLoadGame" />
+      <option name="MAIN_CLASS_NAME" value="tests.JailSquareTest" />
+      <option name="METHOD_NAME" value="toXML" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PropertySquareTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PropertySquareTest.toXML" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Monopoly-Game" />
       <extension name="coverage">
         <pattern>
@@ -118,12 +122,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="tests" />
       <option name="MAIN_CLASS_NAME" value="tests.PropertySquareTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="METHOD_NAME" value="toXML" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="taxSquareTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="taxSquareTest.toXML" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Monopoly-Game" />
       <extension name="coverage">
         <pattern>
@@ -133,38 +138,40 @@
       </extension>
       <option name="PACKAGE_NAME" value="tests" />
       <option name="MAIN_CLASS_NAME" value="tests.taxSquareTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="METHOD_NAME" value="toXML" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <list>
       <item itemvalue="Application.Main" />
-      <item itemvalue="JUnit.taxSquareTest" />
-      <item itemvalue="JUnit.PropertySquareTest" />
-      <item itemvalue="JUnit.MonopolyGameTest.testLoadGame" />
-      <item itemvalue="JUnit.MonopolyGameTest.testExportGameAndLoadGame" />
+      <item itemvalue="JUnit.JailSquareTest.toXML" />
+      <item itemvalue="JUnit.GoToJailSquareTest.toXML" />
+      <item itemvalue="JUnit.taxSquareTest.toXML" />
+      <item itemvalue="JUnit.PropertySquareTest.toXML" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.MonopolyGameTest.testExportGameAndLoadGame" />
-        <item itemvalue="JUnit.MonopolyGameTest.testLoadGame" />
-        <item itemvalue="JUnit.PropertySquareTest" />
-        <item itemvalue="JUnit.taxSquareTest" />
+        <item itemvalue="JUnit.PropertySquareTest.toXML" />
+        <item itemvalue="JUnit.taxSquareTest.toXML" />
+        <item itemvalue="JUnit.GoToJailSquareTest.toXML" />
+        <item itemvalue="JUnit.JailSquareTest.toXML" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="b3cb6e01-e85c-476d-a8c3-3d7553fdc473" name="Changes" comment="" />
+      <changelist id="935d1840-f7e3-487d-b6a7-99f15601c367" name="Changes" comment="" />
       <created>1635090572449</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1635090572449</updated>
       <workItem from="1638554440999" duration="5189000" />
       <workItem from="1638644955595" duration="1227000" />
+      <workItem from="1638833505178" duration="217000" />
     </task>
     <servers />
   </component>
@@ -193,6 +200,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
